@@ -1,0 +1,40 @@
+# Copyright (C) 2025 Egens Lab
+# This file is distributed under the GNU General Public License v2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Matrik Core 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/matrik-core\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2025-08-15T09:17:02+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.12.0\n"
+"X-Domain: matrik-core\n"
+
+#. Plugin Name of the plugin
+#: matrik-core.php
+msgid "Matrik Core"
+msgstr ""
+
+#. Plugin URI of the plugin
+#: matrik-core.php
+msgid "https://themeforest.net/user/egenslab/portfolio"
+msgstr ""
+
+#. Description of the plugin
+#: matrik-core.php
+msgid "Matrik core plugin is a elementor widget based plugin."
+msgstr ""
+
+#. Author of the plugin
+#: matrik-core.php
+msgid "Egens Lab"
+msgstr ""
+
+#. Author URI of the plugin
+#: matrik-core.php
+msgid "https://themeforest.net/user/egenslab/"
+msgstr ""

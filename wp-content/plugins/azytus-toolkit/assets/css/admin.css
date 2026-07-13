@@ -1,0 +1,565 @@
+/**
+ * Azytus Toolkit - Admin Styles
+ */
+
+/* Meta Box Styling */
+.azytus-meta-box {
+    padding: 10px 0;
+}
+
+.azytus-meta-box .form-table {
+    margin: 0;
+}
+
+.azytus-meta-box .form-table th {
+    width: 220px;
+    padding: 15px 10px 15px 0;
+    font-weight: 600;
+}
+
+.azytus-meta-box .form-table td {
+    padding: 15px 10px;
+}
+
+.azytus-meta-box .required {
+    color: #dc3232;
+    font-weight: bold;
+}
+
+.azytus-meta-box .description {
+    font-style: italic;
+    color: #666;
+    margin-top: 5px;
+    font-size: 13px;
+}
+
+/* File Upload Styling */
+.azytus-file-upload {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.azytus-file-upload .azytus-upload-button,
+.azytus-file-upload .azytus-remove-button {
+    width: fit-content;
+}
+
+.azytus-file-upload .azytus-remove-button {
+    background: #dc3232;
+    border-color: #dc3232;
+    color: #fff;
+}
+
+.azytus-file-upload .azytus-remove-button:hover {
+    background: #c62828;
+    border-color: #c62828;
+}
+
+.azytus-file-preview {
+    margin-top: 10px;
+}
+
+.azytus-file-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 8px 12px;
+    background: #f0f0f1;
+    border: 1px solid #c3c4c7;
+    border-radius: 3px;
+    text-decoration: none;
+    color: #2271b1;
+    transition: all 0.2s ease;
+}
+
+.azytus-file-link:hover {
+    background: #fff;
+    border-color: #2271b1;
+}
+
+.azytus-file-link .dashicons {
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+}
+
+/* Select2 Customization */
+.azytus-select2 {
+    min-width: 300px;
+}
+
+.select2-container--default .select2-selection--single {
+    height: 36px;
+    border: 1px solid #8c8f94;
+    border-radius: 3px;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    line-height: 34px;
+    padding-left: 10px;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+    height: 34px;
+}
+
+.select2-container--default.select2-container--focus .select2-selection--single {
+    border-color: #2271b1;
+    box-shadow: 0 0 0 1px #2271b1;
+}
+
+/* Admin List Table */
+.wp-list-table .column-cas,
+.wp-list-table .column-hsn,
+.wp-list-table .column-product_code {
+    width: 10%;
+}
+
+.wp-list-table .column-molecular_formula {
+    width: 12%;
+}
+
+.wp-list-table .column-molecular_weight {
+    width: 10%;
+}
+
+.wp-list-table .column-grade,
+.wp-list-table .column-pack_size,
+.wp-list-table .column-batch_no {
+    width: 12%;
+}
+
+.wp-list-table .column-category,
+.wp-list-table .column-subcategory,
+.wp-list-table .column-variation {
+    width: 15%;
+}
+
+.wp-list-table .column-msds,
+.wp-list-table .column-coa {
+    width: 10%;
+    text-align: center;
+}
+
+/* Responsive */
+@media screen and (max-width: 782px) {
+    .azytus-meta-box .form-table th,
+    .azytus-meta-box .form-table td {
+        display: block;
+        width: 100%;
+        padding: 10px 0;
+    }
+    
+    .azytus-meta-box .form-table th {
+        padding-bottom: 5px;
+    }
+    
+    .azytus-select2 {
+        min-width: 100%;
+    }
+}
+
+/* Success/Error Messages */
+.azytus-notice {
+    padding: 12px;
+    margin: 10px 0;
+    border-left: 4px solid;
+    background: #fff;
+}
+
+.azytus-notice.success {
+    border-color: #46b450;
+}
+
+.azytus-notice.error {
+    border-color: #dc3232;
+}
+
+/* Loading State */
+.azytus-loading {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.azytus-spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #2271b1;
+    border-radius: 50%;
+    animation: azytus-spin 1s linear infinite;
+}
+
+@keyframes azytus-spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Repeatable Fields Styling */
+.azytus-repeatable-wrap {
+    margin: 20px 0;
+}
+
+.azytus-grade-row,
+.azytus-batch-row {
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+    position: relative;
+    cursor: move;
+    transition: all 0.2s ease;
+}
+
+.azytus-grade-row:hover,
+.azytus-batch-row:hover {
+    border-color: #5C9541;
+    box-shadow: 0 2px 8px rgba(92, 149, 65, 0.15);
+}
+
+.azytus-grade-row.ui-sortable-helper,
+.azytus-batch-row.ui-sortable-helper {
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+    transform: rotate(1deg);
+}
+
+.azytus-grade-row.ui-sortable-placeholder,
+.azytus-batch-row.ui-sortable-placeholder {
+    border: 2px dashed #5C9541;
+    background: #f0f8ed;
+    visibility: visible !important;
+}
+
+.azytus-grade-header,
+.azytus-batch-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #ddd;
+    cursor: move;
+}
+
+.azytus-grade-drag-handle,
+.azytus-batch-drag-handle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #999;
+    font-size: 14px;
+    cursor: move;
+}
+
+.azytus-grade-drag-handle .dashicons,
+.azytus-batch-drag-handle .dashicons {
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+}
+
+.azytus-grade-header h4,
+.azytus-batch-header h4 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+}
+
+.azytus-remove-grade,
+.azytus-remove-batch {
+    background: #dc3232;
+    border-color: #dc3232;
+    color: #fff;
+    padding: 5px 15px;
+    height: auto;
+    line-height: 1.4;
+}
+
+.azytus-remove-grade:hover,
+.azytus-remove-batch:hover {
+    background: #c62828;
+    border-color: #c62828;
+    color: #fff;
+}
+
+.azytus-add-grade,
+.azytus-add-batch {
+    margin-top: 15px;
+}
+
+/* =============================================
+   PACK SIZES - GRID DESIGN
+   ============================================= */
+
+.azytus-pack-sizes-section {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    padding: 16px;
+    margin-top: 20px;
+}
+
+.azytus-pack-sizes-section > h4 {
+    margin: 0 0 14px 0 !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    color: #555 !important;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* The grid container */
+.azytus-pack-sizes-container {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 12px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    list-style: none !important;
+}
+
+/* Each pack size card */
+div.azytus-pack-size-row {
+    box-sizing: border-box !important;
+    position: relative !important;
+    background: #ffffff !important;
+    border: 1.5px solid #ddd !important;
+    border-radius: 8px !important;
+    padding: 32px 12px 12px 12px !important;
+    min-height: 90px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-end !important;
+    transition: border-color 0.2s, box-shadow 0.2s !important;
+    cursor: default !important;
+    float: none !important;
+    width: auto !important;
+    margin: 0 !important;
+}
+
+div.azytus-pack-size-row:hover {
+    border-color: #5C9541 !important;
+    box-shadow: 0 2px 10px rgba(92,149,65,0.15) !important;
+}
+
+div.azytus-pack-size-row.ui-sortable-helper {
+    box-shadow: 0 8px 24px rgba(0,0,0,0.22) !important;
+    transform: scale(1.03) !important;
+    z-index: 9999 !important;
+    border-color: #5C9541 !important;
+}
+
+div.azytus-pack-size-row.ui-sortable-placeholder {
+    background: #f3fbf0 !important;
+    border: 2px dashed #5C9541 !important;
+    box-shadow: none !important;
+    visibility: visible !important;
+}
+
+/* Buttons in top-right corner */
+div.azytus-pack-size-row .azytus-pack-size-controls {
+    position: absolute !important;
+    top: 7px !important;
+    right: 7px !important;
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 3px !important;
+    z-index: 5 !important;
+    align-items: center !important;
+}
+
+div.azytus-pack-size-row .azytus-pack-size-controls .azytus-pack-control-btn {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 22px !important;
+    height: 22px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: 1px solid #ddd !important;
+    border-radius: 4px !important;
+    background: #fafafa !important;
+    color: #888 !important;
+    cursor: pointer !important;
+    transition: all 0.15s !important;
+    line-height: 1 !important;
+    float: none !important;
+    font-size: 0 !important; /* hide text, show only icon */
+}
+
+div.azytus-pack-size-row .azytus-pack-size-controls .azytus-pack-control-btn .dashicons {
+    font-size: 13px !important;
+    width: 13px !important;
+    height: 13px !important;
+    line-height: 1 !important;
+}
+
+div.azytus-pack-size-row .azytus-pack-size-controls .azytus-pack-control-btn.drag-handle {
+    cursor: move !important;
+}
+
+div.azytus-pack-size-row .azytus-pack-size-controls .azytus-pack-control-btn:hover {
+    background: #eee !important;
+    border-color: #aaa !important;
+    color: #444 !important;
+}
+
+div.azytus-pack-size-row .azytus-pack-size-controls .azytus-pack-control-btn.drag-handle:hover {
+    background: #5C9541 !important;
+    border-color: #5C9541 !important;
+    color: #fff !important;
+}
+
+div.azytus-pack-size-row .azytus-pack-size-controls .azytus-pack-control-btn.remove-btn:hover {
+    background: #e53935 !important;
+    border-color: #e53935 !important;
+    color: #fff !important;
+}
+
+div.azytus-pack-size-row .azytus-pack-size-controls .azytus-pack-control-btn.add-btn:hover {
+    background: #14749B !important;
+    border-color: #14749B !important;
+    color: #fff !important;
+}
+
+/* The text input inside the card */
+div.azytus-pack-size-row input[type="text"] {
+    display: block !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    border: none !important;
+    border-bottom: 1.5px solid #eee !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    padding: 4px 2px !important;
+    margin: 0 !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    color: #333 !important;
+    box-shadow: none !important;
+    outline: none !important;
+    height: auto !important;
+    min-height: unset !important;
+}
+
+div.azytus-pack-size-row input[type="text"]:focus {
+    border-bottom-color: #5C9541 !important;
+    box-shadow: none !important;
+    outline: none !important;
+}
+
+div.azytus-pack-size-row input[type="text"]::placeholder {
+    color: #bbb !important;
+    font-weight: 400 !important;
+    font-style: italic !important;
+}
+
+/* "Add Pack" faded grid card */
+div.azytus-add-pack-button {
+    box-sizing: border-box !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex-direction: column !important;
+    gap: 6px !important;
+    min-height: 90px !important;
+    background: #fafafa !important;
+    border: 1.5px dashed #ccc !important;
+    border-radius: 8px !important;
+    cursor: pointer !important;
+    color: #bbb !important;
+    font-size: 12px !important;
+    font-weight: 500 !important;
+    transition: all 0.2s !important;
+    padding: 12px !important;
+    margin: 0 !important;
+    float: none !important;
+    width: auto !important;
+    text-align: center !important;
+}
+
+div.azytus-add-pack-button::before {
+    content: '+';
+    display: block;
+    font-size: 22px;
+    font-weight: 300;
+    color: #ccc;
+    line-height: 1;
+}
+
+div.azytus-add-pack-button:hover {
+    background: #f0f8ed !important;
+    border-color: #5C9541 !important;
+    color: #5C9541 !important;
+}
+
+div.azytus-add-pack-button:hover::before {
+    color: #5C9541;
+}
+
+/* Batch Row Specific */
+.azytus-batch-row .form-table {
+    background: transparent;
+}
+
+.azytus-batch-row .form-table tr {
+    background: #fff;
+}
+
+.azytus-batch-row .form-table th {
+    background: #f5f5f5;
+}
+
+/* Empty State */
+.azytus-empty-state {
+    text-align: center;
+    padding: 40px;
+    color: #666;
+    font-style: italic;
+}
+
+/* Drag Handle (for future sortable implementation) */
+.azytus-drag-handle {
+    cursor: move;
+    padding: 10px;
+    color: #999;
+}
+
+.azytus-drag-handle:hover {
+    color: #666;
+}
+
+/* Responsive for Repeatable Fields */
+@media screen and (max-width: 1400px) {
+    .azytus-pack-sizes-container {
+        grid-template-columns: repeat(3, 1fr) !important;
+    }
+}
+
+@media screen and (max-width: 1100px) {
+    .azytus-pack-sizes-container {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+}
+
+@media screen and (max-width: 782px) {
+    .azytus-grade-header,
+    .azytus-batch-header {
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;
+    }
+    
+    .azytus-remove-grade,
+    .azytus-remove-batch {
+        width: 100%;
+    }
+    
+    .azytus-pack-sizes-container {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+}

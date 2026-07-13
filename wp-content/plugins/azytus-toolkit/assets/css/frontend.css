@@ -1,0 +1,352 @@
+/**
+ * Azytus Toolkit - Frontend Styles
+ */
+
+/* Product Search */
+.azytus-product-search {
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+}
+
+.azytus-search-filters {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.azytus-filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.azytus-filter-group label {
+    font-weight: 600;
+    font-size: 14px;
+    color: #333;
+}
+
+.azytus-filter-group input[type="text"],
+.azytus-filter-group select {
+    padding: 10px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    transition: border-color 0.3s ease;
+}
+
+.azytus-filter-group input[type="text"]:focus,
+.azytus-filter-group select:focus {
+    outline: none;
+    border-color: #2271b1;
+    box-shadow: 0 0 0 1px #2271b1;
+}
+
+.azytus-filter-group button {
+    padding: 10px 20px;
+    background: #2271b1;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: auto;
+}
+
+.azytus-filter-group button:hover {
+    background: #135e96;
+}
+
+/* Search Results */
+.azytus-search-results {
+    margin-top: 20px;
+}
+
+.azytus-loader,
+.azytus-coa-loader {
+    text-align: center;
+    padding: 40px;
+    font-size: 16px;
+    color: #666;
+}
+
+.azytus-table-wrapper {
+    overflow-x: auto;
+    margin-top: 20px;
+}
+
+.azytus-results-table table,
+.azytus-product-table,
+.azytus-coa-table {
+    width: 100%;
+    min-width: 900px;
+    border-collapse: collapse;
+    background: #fff;
+}
+
+.azytus-results-table th,
+.azytus-results-table td,
+.azytus-product-table th,
+.azytus-product-table td,
+.azytus-coa-table th,
+.azytus-coa-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #e0e0e0;
+    vertical-align: middle;
+}
+
+.azytus-results-table th,
+.azytus-product-table th,
+.azytus-coa-table th {
+    background: #2271b1;
+    color: #fff;
+    font-weight: 600;
+    white-space: nowrap;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.azytus-results-table tr:hover,
+.azytus-product-table tr:hover,
+.azytus-coa-table tr:hover {
+    background: #f9f9f9;
+}
+
+.azytus-results-table .button,
+.azytus-product-table .button,
+.azytus-coa-table .button {
+    padding: 6px 12px;
+    font-size: 13px;
+    text-decoration: none;
+    display: inline-block;
+    white-space: nowrap;
+}
+
+.azytus-results-table .button-small,
+.azytus-product-table .button-small,
+.azytus-coa-table .button-small {
+    padding: 4px 10px;
+    font-size: 12px;
+}
+
+.azytus-no-results {
+    padding: 40px;
+    text-align: center;
+    color: #666;
+    font-size: 16px;
+}
+
+/* COA Lookup */
+.azytus-coa-lookup {
+    padding: 30px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin: 0 auto;
+}
+
+.azytus-coa-lookup h3 {
+    margin: 0 0 15px 0;
+    color: #2271b1;
+    font-size: 24px;
+}
+
+.azytus-coa-form {
+    margin-bottom: 20px;
+}
+
+.azytus-coa-form label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 600;
+    color: #333;
+}
+
+.azytus-coa-input-group {
+    display: flex;
+    gap: 10px;
+}
+
+.azytus-coa-input-group input {
+    flex: 1;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.azytus-coa-input-group button {
+    padding: 12px 24px;
+    background: #2271b1;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    white-space: nowrap;
+}
+
+.azytus-coa-input-group button:hover {
+    background: #135e96;
+}
+
+.azytus-coa-input-group button:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+.azytus-coa-results {
+    margin-top: 30px;
+}
+
+.azytus-coa-results h4 {
+    margin: 0 0 15px 0;
+    color: #333;
+    font-size: 18px;
+}
+
+.azytus-coa-error {
+    padding: 20px;
+    border-radius: 4px;
+    margin-top: 20px;
+    background: #ffebee;
+    border-left: 4px solid #dc3232;
+}
+
+.azytus-error-message {
+    margin: 0;
+    color: #dc3232;
+    font-weight: 600;
+}
+
+/* Product Display */
+.azytus-product-category,
+.azytus-product-subcategory,
+.azytus-product-variation,
+.azytus-product-subvariation {
+    padding: 30px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.azytus-product-category h2,
+.azytus-product-subcategory h2,
+.azytus-product-variation h2,
+.azytus-product-subvariation h2 {
+    margin: 0 0 20px 0;
+    color: #333;
+    border-bottom: 2px solid #2271b1;
+    padding-bottom: 10px;
+}
+
+.azytus-details-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.azytus-details-table th,
+.azytus-details-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.azytus-details-table th {
+    width: 200px;
+    font-weight: 600;
+    color: #555;
+    background: #f9f9f9;
+}
+
+.azytus-details-table td {
+    color: #333;
+}
+
+.azytus-product-description {
+    margin-top: 20px;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 4px;
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+    .azytus-search-filters {
+        grid-template-columns: 1fr;
+    }
+    
+    .azytus-coa-input-group {
+        flex-direction: column;
+    }
+    
+    .azytus-results-table {
+        font-size: 14px;
+    }
+    
+    .azytus-results-table th,
+    .azytus-results-table td {
+        padding: 8px;
+    }
+    
+    .azytus-details-table th,
+    .azytus-details-table td {
+        display: block;
+        width: 100%;
+    }
+    
+    .azytus-details-table th {
+        background: #f5f5f5;
+        padding-bottom: 5px;
+    }
+    
+    .azytus-details-table td {
+        padding-top: 5px;
+        padding-bottom: 15px;
+    }
+}
+
+/* Status Badge */
+.azytus-status-badge {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 3px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.azytus-status-badge.available {
+    background: #d4edda;
+    color: #155724;
+}
+
+.azytus-status-badge.unavailable {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+/* Loading Spinner */
+.azytus-spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #2271b1;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
