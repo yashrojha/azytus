@@ -480,7 +480,7 @@ class Azytus_Frontend {
                             <span class="azytus-header-search-divider" aria-hidden="true"></span>
 
                             <div class="azytus-header-search-query">
-                                <label for="azytus-header-product-input" class="screen-reader-text"><?php esc_html_e('Product name', 'azytus-toolkit'); ?></label>
+                                <label for="azytus-header-product-input" class="screen-reader-text"><?php esc_html_e('Search term', 'azytus-toolkit'); ?></label>
                                 <input
                                     type="search"
                                     id="azytus-header-product-input"
@@ -490,15 +490,26 @@ class Azytus_Frontend {
                                     autocomplete="off"
                                 />
                             </div>
+                        </div>
 
-                            <button type="submit" id="azytus-header-search-submit" class="azytus-header-search-submit" title="<?php esc_attr_e('Search', 'azytus-toolkit'); ?>" aria-label="<?php esc_attr_e('Search', 'azytus-toolkit'); ?>">
+                        <div class="azytus-header-search-actions" role="group" aria-label="<?php esc_attr_e('Search type', 'azytus-toolkit'); ?>">
+                            <button type="button" id="azytus-header-product-btn" class="azytus-header-action-btn azytus-header-product-btn is-active" data-search-type="products" title="<?php esc_attr_e('Search Products', 'azytus-toolkit'); ?>" aria-pressed="true">
                                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                     <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/>
                                     <path d="M20 20L16.5 16.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
                                 </svg>
+                                <span><?php esc_html_e('Products', 'azytus-toolkit'); ?></span>
+                            </button>
+                            <button type="button" id="azytus-header-coa-btn" class="azytus-header-action-btn azytus-header-coa-btn" data-search-type="coa" title="<?php esc_attr_e('Search COA / Batch', 'azytus-toolkit'); ?>" aria-pressed="false">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                    <path d="M14 2H6C5.46957 2 4.96086 2.21071 4.58579 2.58579C4.21071 2.96086 4 3.46957 4 4V20C4 20.5304 4.21071 21.0391 4.58579 21.4142C4.96086 21.7893 5.46957 22 6 22H18C18.5304 22 19.0391 21.7893 19.4142 21.4142C19.7893 21.0391 20 20.5304 20 20V8L14 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M14 2V8H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M8 13H16M8 17H13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                </svg>
+                                <span><?php esc_html_e('COA / Batch', 'azytus-toolkit'); ?></span>
                             </button>
                         </div>
-                        <p class="azytus-header-search-hint"><?php esc_html_e('Select a grade, then search by product name to find matching products and batches.', 'azytus-toolkit'); ?></p>
+                        <p class="azytus-header-search-hint" id="azytus-header-search-hint"><?php esc_html_e('Select a grade, enter a product name, then choose Products or COA/Batch.', 'azytus-toolkit'); ?></p>
                     </form>
 
                     <div class="azytus-header-search-status" id="azytus-header-search-status" hidden></div>
