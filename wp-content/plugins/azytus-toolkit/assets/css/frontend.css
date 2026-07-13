@@ -399,29 +399,6 @@ header.style-1 .nav-right .azytus-header-search-btn.contact-area:hover .icon {
     outline: none;
 }
 
-/* Keep search tucked next to contact without blowing out nav-right gap */
-header.style-1 .nav-right > .azytus-header-search-btn {
-    margin-right: -50px;
-}
-
-@media (min-width: 1200px) and (max-width: 1399px) {
-    header.style-1 .nav-right > .azytus-header-search-btn {
-        margin-right: -30px;
-    }
-}
-
-@media (min-width: 992px) and (max-width: 1199px) {
-    header.style-1 .nav-right > .azytus-header-search-btn {
-        margin-right: -10px;
-    }
-}
-
-@media (max-width: 991px) {
-    header.style-1 .nav-right > .azytus-header-search-btn {
-        margin-right: 0;
-    }
-}
-
 header.style-1.engineering-header .azytus-header-search-btn .icon {
     background-color: rgba(255, 255, 255, 0.12);
     color: var(--white-color, #fff);
