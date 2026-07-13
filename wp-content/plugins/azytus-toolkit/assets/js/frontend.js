@@ -296,11 +296,30 @@
 
             var $gradeSelect = $('#azytus-header-grade-select');
             var $productInput = $('#azytus-header-product-input');
+            var $clearBtn = $('#azytus-header-search-clear');
             var $productBtn = $('#azytus-header-product-btn');
             var $coaBtn = $('#azytus-header-coa-btn');
             var $actionBtns = $productBtn.add($coaBtn);
             var $status = $('#azytus-header-search-status');
             var $results = $('#azytus-header-search-results');
+
+            function syncClearButton() {
+                if (getSearchTerm() || getSelectedGradeId()) {
+                    $clearBtn.removeAttr('hidden');
+                } else {
+                    $clearBtn.attr('hidden', true);
+                }
+            }
+
+            function resetForm() {
+                $productInput.val('');
+                $gradeSelect.val('');
+                if ($gradeSelect.next('.nice-select').length && typeof $gradeSelect.niceSelect === 'function') {
+                    $gradeSelect.niceSelect('update');
+                }
+                clearResults();
+                syncClearButton();
+            }
 
             function openPopup() {
                 $popup.removeAttr('hidden').attr('aria-hidden', 'false').addClass('is-open');
@@ -315,6 +334,7 @@
             }
 
             function closePopup() {
+                resetForm();
                 $popup.attr('hidden', true).attr('aria-hidden', 'true').removeClass('is-open');
                 $('body').removeClass('azytus-search-open');
             }
@@ -363,6 +383,7 @@
             function setSearching(isSearching) {
                 $actionBtns.prop('disabled', isSearching);
                 $productInput.prop('disabled', isSearching);
+                $clearBtn.prop('disabled', isSearching);
             }
 
             function escapeHtml(str) {
@@ -469,7 +490,7 @@
                             showStatus(response.data.length + ' product' + (response.data.length === 1 ? '' : 's') + ' found', 'success');
                             renderProductTable(response.data);
                         } else {
-                            showStatus('No products found for this grade and search.', 'error');
+                            showStatus('No products found matching both grade and search.', 'error');
                             $results.empty();
                         }
                     },
@@ -512,7 +533,7 @@
                         } else {
                             var msg = (response.data && response.data.message)
                                 ? response.data.message
-                                : 'No COA / batch records found for this grade and search.';
+                                : 'No COA / batch records matching both grade and search.';
                             showStatus(msg, 'error');
                             $results.empty();
                         }
@@ -550,6 +571,15 @@
                 searchCOAByGrade();
             });
 
+            $clearBtn.on('click', function(e) {
+                e.preventDefault();
+                resetForm();
+                $productInput.trigger('focus');
+            });
+
+            $productInput.on('input', syncClearButton);
+            $gradeSelect.on('change', syncClearButton);
+
             $('#azytus-header-search-form').on('submit', function(e) {
                 e.preventDefault();
             });
@@ -559,6 +589,8 @@
                     e.preventDefault();
                 }
             });
+
+            syncClearButton();
         }
     });
     

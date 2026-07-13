@@ -489,6 +489,11 @@ class Azytus_Frontend {
                                     placeholder="<?php esc_attr_e('Search by chemistry, function, application and more', 'azytus-toolkit'); ?>"
                                     autocomplete="off"
                                 />
+                                <button type="button" id="azytus-header-search-clear" class="azytus-header-search-clear" hidden title="<?php esc_attr_e('Clear search', 'azytus-toolkit'); ?>" aria-label="<?php esc_attr_e('Clear search', 'azytus-toolkit'); ?>">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                        <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                    </svg>
+                                </button>
                             </div>
 
                             <button type="button" id="azytus-header-product-btn" class="azytus-header-action-btn azytus-header-product-btn" title="<?php esc_attr_e('Search Products', 'azytus-toolkit'); ?>" aria-label="<?php esc_attr_e('Search Products', 'azytus-toolkit'); ?>">

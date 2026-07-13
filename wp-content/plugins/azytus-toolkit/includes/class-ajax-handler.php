@@ -106,6 +106,9 @@ class Azytus_Ajax_Handler {
         $grade_id = isset($_POST['grade_id']) ? intval($_POST['grade_id']) : 0;
         
         $results = array();
+
+        // AND mode: when both filters are present, both must match (no grade-only / term-only results)
+        $require_both = ($grade_id && $search_term !== '');
         
         // Search in products
         $product_args = array(
@@ -145,28 +148,33 @@ class Azytus_Ajax_Handler {
                 $grades = array();
             }
 
-            $title_matched = !$search_term || stripos($product->post_title, $search_term) !== false
+            $term_matched_product = !$search_term || stripos($product->post_title, $search_term) !== false
                 || stripos((string) $cas, $search_term) !== false
-                || stripos((string) $formula, $search_term) !== false;
+                || stripos((string) $formula, $search_term) !== false
+                || stripos((string) $hsn, $search_term) !== false;
             
             foreach ($grades as $grade) {
-                // Filter by grade category (grades CPT) when provided
-                if ($grade_id) {
-                    $grade_category_id = isset($grade['grade_category_id']) ? intval($grade['grade_category_id']) : 0;
-                    if ($grade_category_id !== $grade_id) {
-                        continue;
-                    }
-                }
-
+                $grade_category_id = isset($grade['grade_category_id']) ? intval($grade['grade_category_id']) : 0;
                 $product_code = isset($grade['product_code']) ? $grade['product_code'] : '';
                 $grade_name = isset($grade['grade_name']) ? $grade['grade_name'] : '';
 
-                if ($search_term && !$title_matched) {
-                    $code_matched = stripos($product_code, $search_term) !== false
-                        || stripos($grade_name, $search_term) !== false;
-                    if (!$code_matched) {
-                        continue;
-                    }
+                // Grade filter (required when grade_id is set)
+                $grade_matched = !$grade_id || ($grade_category_id === $grade_id);
+                if (!$grade_matched) {
+                    continue;
+                }
+
+                // Search-term filter against product fields / code only (not grade name)
+                $term_matched = $term_matched_product
+                    || ($search_term && stripos($product_code, $search_term) !== false);
+
+                if ($search_term && !$term_matched) {
+                    continue;
+                }
+
+                // Strict AND: both must match when both were provided
+                if ($require_both && (!$grade_matched || !$term_matched)) {
+                    continue;
                 }
                 
                 $pack_size_list = array();
@@ -183,8 +191,8 @@ class Azytus_Ajax_Handler {
                     'hsn' => $hsn,
                     'molecular_formula' => $formula,
                     'molecular_weight' => $weight,
-                    'product_code' => isset($grade['product_code']) ? $grade['product_code'] : '',
-                    'grade' => isset($grade['grade_name']) ? $grade['grade_name'] : '',
+                    'product_code' => $product_code,
+                    'grade' => $grade_name,
                     'pack_sizes' => implode(', ', $pack_size_list),
                     'msds_url' => $msds_id ? wp_get_attachment_url($msds_id) : '',
                     'has_msds' => !empty($msds_id)
@@ -236,6 +244,9 @@ class Azytus_Ajax_Handler {
         
         $search_term = isset($_POST['search_term']) ? sanitize_text_field($_POST['search_term']) : '';
         $grade_id = isset($_POST['grade_id']) ? intval($_POST['grade_id']) : 0;
+
+        // AND mode: when both are provided, both must match
+        $require_both = ($grade_id && $search_term !== '');
         
         if (empty($search_term) && !$grade_id) {
             wp_send_json_error(array('message' => __('Please enter a batch number or product code, or select a grade', 'azytus-toolkit')));
@@ -276,8 +287,9 @@ class Azytus_Ajax_Handler {
             $grade_name = isset($grade['grade_name']) ? $grade['grade_name'] : '';
             $grade_category_id = isset($grade['grade_category_id']) ? intval($grade['grade_category_id']) : 0;
             
-            // Filter by grade category when provided
-            if ($grade_id && $grade_category_id !== $grade_id) {
+            // Grade must match when grade_id is provided
+            $grade_matched = !$grade_id || ($grade_category_id === $grade_id);
+            if (!$grade_matched) {
                 continue;
             }
             
@@ -300,34 +312,37 @@ class Azytus_Ajax_Handler {
             foreach ($batches as $batch) {
                 $batch_no = isset($batch['batch_no']) ? $batch['batch_no'] : '';
                 
-                // Match search term against batch number, product code, or product name
-                $matches = true;
-                if (!empty($search_term)) {
-                    $matches = (
-                        stripos($batch_no, $search_term) !== false
-                        || stripos($product_code, $search_term) !== false
-                        || stripos($product->post_title, $search_term) !== false
-                        || stripos($grade_name, $search_term) !== false
-                    );
+                // Term match against batch / code / product name only (not grade name)
+                $term_matched = !$search_term || (
+                    stripos($batch_no, $search_term) !== false
+                    || stripos($product_code, $search_term) !== false
+                    || stripos($product->post_title, $search_term) !== false
+                );
+
+                if (!$term_matched) {
+                    continue;
+                }
+
+                // Strict AND when both filters were provided
+                if ($require_both && (!$grade_matched || !$term_matched)) {
+                    continue;
                 }
                 
-                if ($matches) {
-                    $coa_id = isset($batch['coa']) ? $batch['coa'] : 0;
-                    
-                    $results[] = array(
-                        'batch_no' => $batch_no,
-                        'code' => $product_code,
-                        'pack_size' => $pack_size,
-                        'product_name_with_grade' => $product_name_with_grade,
-                        'product_url' => get_permalink($product_id),
-                        'mfg_date' => isset($batch['mfg_date']) ? $batch['mfg_date'] : '',
-                        'expiry_date' => isset($batch['expiry_date']) ? $batch['expiry_date'] : '',
-                        'coa_url' => $coa_id ? wp_get_attachment_url($coa_id) : '',
-                        'has_coa' => !empty($coa_id),
-                        'msds_url' => $msds_id ? wp_get_attachment_url($msds_id) : '',
-                        'has_msds' => !empty($msds_id)
-                    );
-                }
+                $coa_id = isset($batch['coa']) ? $batch['coa'] : 0;
+                
+                $results[] = array(
+                    'batch_no' => $batch_no,
+                    'code' => $product_code,
+                    'pack_size' => $pack_size,
+                    'product_name_with_grade' => $product_name_with_grade,
+                    'product_url' => get_permalink($product_id),
+                    'mfg_date' => isset($batch['mfg_date']) ? $batch['mfg_date'] : '',
+                    'expiry_date' => isset($batch['expiry_date']) ? $batch['expiry_date'] : '',
+                    'coa_url' => $coa_id ? wp_get_attachment_url($coa_id) : '',
+                    'has_coa' => !empty($coa_id),
+                    'msds_url' => $msds_id ? wp_get_attachment_url($msds_id) : '',
+                    'has_msds' => !empty($msds_id)
+                );
             }
         }
         
