@@ -355,9 +355,9 @@
    Header Search Button + Popup
    ========================================================================== */
 
-/* Match .contact-area > .icon from header.style-1 */
+/* Match header .contact-area > .icon (circular grey chip used on live site) */
 .azytus-header-search-btn {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
     padding: 0;
@@ -369,31 +369,37 @@
     line-height: 1;
 }
 
+header.style-1 .nav-right .azytus-header-search-btn.contact-area .icon,
 .azytus-header-search-btn .icon {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 8px;
-    background-color: rgba(var(--black-color-opc, 0, 0, 0), 0.1);
-    border-radius: 5px;
+    width: 42px;
+    height: 42px;
+    padding: 0;
+    background-color: rgba(var(--black-color-opc, 0, 0, 0), 0.08);
+    border-radius: 50%;
     color: var(--title-color, #000);
     transition: background-color 0.35s ease, color 0.35s ease;
 }
 
+header.style-1 .nav-right .azytus-header-search-btn.contact-area .icon svg,
 .azytus-header-search-btn .icon svg {
     display: block;
     width: 18px;
     height: 18px;
+    fill: none;
 }
 
 .azytus-header-search-btn:hover .icon,
-.azytus-header-search-btn:focus-visible .icon {
-    background-color: rgba(var(--primary-color3-opc, 138, 188, 70), 0.2);
+.azytus-header-search-btn:focus-visible .icon,
+header.style-1 .nav-right .azytus-header-search-btn.contact-area:hover .icon {
+    background-color: rgba(var(--primary-color3-opc, 138, 188, 70), 0.22);
     color: var(--primary-color3, #8abc46);
     outline: none;
 }
 
-/* Sit beside .contact-area without stretching the 70px nav-right gap */
+/* Keep search tucked next to contact without blowing out nav-right gap */
 header.style-1 .nav-right > .azytus-header-search-btn {
     margin-right: -50px;
 }
@@ -417,12 +423,12 @@ header.style-1 .nav-right > .azytus-header-search-btn {
 }
 
 header.style-1.engineering-header .azytus-header-search-btn .icon {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.12);
     color: var(--white-color, #fff);
 }
 
 header.style-1.engineering-header .azytus-header-search-btn:hover .icon {
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: rgba(255, 255, 255, 0.22);
     color: var(--white-color, #fff);
 }
 
@@ -441,32 +447,44 @@ header.style-1.engineering-header .azytus-header-search-btn:hover .icon {
 .azytus-header-search-overlay {
     position: absolute;
     inset: 0;
-    background: rgba(255, 255, 255, 0.55);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    background: rgba(20, 28, 24, 0.55);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
 }
 
 .azytus-header-search-dialog {
     position: absolute;
     left: 50%;
-    top: 12%;
+    top: 10%;
     transform: translateX(-50%);
-    width: min(720px, calc(100% - 32px));
-    max-height: 76vh;
+    width: min(640px, calc(100% - 28px));
+    max-height: 80vh;
     z-index: 1;
+    animation: azytusSearchIn 0.28s ease;
+}
+
+@keyframes azytusSearchIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -10px);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, 0);
+    }
 }
 
 .azytus-header-search-dialog-inner {
     background: #fff;
-    border-radius: 12px;
-    box-shadow: 0 18px 50px rgba(0, 0, 0, 0.12);
-    border: 1px solid rgba(0, 0, 0, 0.06);
-    padding: 22px 24px 20px;
+    border-radius: 16px;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.22);
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    padding: 20px 22px 18px;
     font-family: var(--font-manrope, "Manrope", sans-serif);
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    max-height: 76vh;
+    max-height: 80vh;
 }
 
 .azytus-header-search-dialog-head {
@@ -474,7 +492,7 @@ header.style-1.engineering-header .azytus-header-search-btn:hover .icon {
     align-items: center;
     justify-content: space-between;
     gap: 12px;
-    margin-bottom: 16px;
+    margin-bottom: 14px;
 }
 
 .azytus-header-search-dialog-head h3 {
@@ -483,32 +501,33 @@ header.style-1.engineering-header .azytus-header-search-btn:hover .icon {
     font-weight: 700;
     color: var(--title-color, #000);
     line-height: 1.3;
+    font-family: var(--font-manrope, "Manrope", sans-serif);
 }
 
 .azytus-header-search-close {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 34px;
-    height: 34px;
+    width: 36px;
+    height: 36px;
     border: 0;
-    border-radius: 5px;
+    border-radius: 50%;
     background: rgba(var(--black-color-opc, 0, 0, 0), 0.08);
     color: var(--title-color, #000);
     cursor: pointer;
-    font-size: 22px;
+    font-size: 20px;
     line-height: 1;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .azytus-header-search-close:hover {
-    background: rgba(var(--primary-color3-opc, 138, 188, 70), 0.2);
+    background: rgba(var(--primary-color3-opc, 138, 188, 70), 0.22);
     color: var(--primary-color3, #8abc46);
 }
 
 .azytus-header-search-controls {
     display: flex;
-    align-items: stretch;
+    align-items: center;
     gap: 10px;
 }
 
@@ -517,34 +536,44 @@ header.style-1.engineering-header .azytus-header-search-btn:hover .icon {
     min-width: 0;
 }
 
-.azytus-header-grade-select,
-.azytus-header-search-field .select2-container {
-    width: 100% !important;
-}
-
-.azytus-header-grade-select,
-.azytus-header-search-field .select2-container--default .select2-selection--single {
-    height: 48px !important;
-    border: 1px solid rgba(0, 0, 0, 0.12) !important;
-    border-radius: 5px !important;
-    background: #fff !important;
-}
-
-.azytus-header-search-field .select2-container--default .select2-selection--single .select2-selection__rendered {
-    line-height: 46px !important;
-    padding-left: 14px !important;
+/* Native select only — no Select2 (avoids duplicate UI) */
+.azytus-header-grade-select {
+    display: block;
+    width: 100%;
+    height: 48px;
+    padding: 0 40px 0 16px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 50px;
+    background-color: rgba(var(--black-color-opc, 0, 0, 0), 0.04);
+    background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%23222' stroke-width='1.6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
     color: var(--title-color, #000);
+    font-family: var(--font-manrope, "Manrope", sans-serif);
     font-size: 14px;
     font-weight: 500;
+    line-height: 48px;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    cursor: pointer;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
 }
 
-.azytus-header-search-field .select2-container--default .select2-selection--single .select2-selection__arrow {
-    height: 46px !important;
-    right: 8px;
+.azytus-header-grade-select:hover {
+    background-color: rgba(var(--black-color-opc, 0, 0, 0), 0.06);
 }
 
-.azytus-header-search-field .select2-container--default .select2-selection--single .select2-selection__clear {
-    margin-right: 24px;
+.azytus-header-grade-select:focus {
+    outline: none;
+    border-color: var(--primary-color3, #8abc46);
+    box-shadow: 0 0 0 3px rgba(var(--primary-color3-opc, 138, 188, 70), 0.2);
+    background-color: #fff;
+}
+
+/* Hide any leftover Select2 chrome if present */
+.azytus-header-search-field .select2-container {
+    display: none !important;
 }
 
 .azytus-header-action-btn {
@@ -555,8 +584,8 @@ header.style-1.engineering-header .azytus-header-search-btn:hover .icon {
     height: 48px;
     flex-shrink: 0;
     border: 0;
-    border-radius: 5px;
-    background: rgba(var(--black-color-opc, 0, 0, 0), 0.1);
+    border-radius: 50%;
+    background: rgba(var(--black-color-opc, 0, 0, 0), 0.08);
     color: var(--title-color, #000);
     cursor: pointer;
     transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
@@ -564,6 +593,8 @@ header.style-1.engineering-header .azytus-header-search-btn:hover .icon {
 
 .azytus-header-action-btn svg {
     display: block;
+    width: 18px;
+    height: 18px;
 }
 
 .azytus-header-action-btn:hover:not(:disabled),
@@ -573,24 +604,31 @@ header.style-1.engineering-header .azytus-header-search-btn:hover .icon {
     outline: none;
 }
 
+.azytus-header-coa-btn:hover:not(:disabled),
+.azytus-header-coa-btn:focus-visible:not(:disabled) {
+    background: var(--primary-color4, #234f40);
+}
+
 .azytus-header-action-btn:disabled {
     opacity: 0.55;
     cursor: wait;
 }
 
 .azytus-header-search-hint {
-    margin: 10px 0 0;
+    margin: 12px 0 0;
     font-size: 12px;
     color: var(--text-color, #666);
-    line-height: 1.4;
+    line-height: 1.45;
+    font-family: var(--font-manrope, "Manrope", sans-serif);
 }
 
 .azytus-header-search-status {
     margin-top: 14px;
-    padding: 10px 12px;
-    border-radius: 5px;
+    padding: 10px 14px;
+    border-radius: 50px;
     font-size: 13px;
     font-weight: 500;
+    font-family: var(--font-manrope, "Manrope", sans-serif);
 }
 
 .azytus-header-search-status.is-loading {
@@ -599,7 +637,7 @@ header.style-1.engineering-header .azytus-header-search-btn:hover .icon {
 }
 
 .azytus-header-search-status.is-success {
-    background: rgba(var(--primary-color3-opc, 138, 188, 70), 0.15);
+    background: rgba(var(--primary-color3-opc, 138, 188, 70), 0.18);
     color: var(--primary-color4, #234f40);
 }
 
@@ -612,6 +650,7 @@ header.style-1.engineering-header .azytus-header-search-btn:hover .icon {
     margin-top: 14px;
     overflow: auto;
     max-height: min(48vh, 420px);
+    border-radius: 10px;
 }
 
 .azytus-header-search-results .azytus-table-wrapper {
@@ -624,11 +663,18 @@ header.style-1.engineering-header .azytus-header-search-btn:hover .icon {
 
 .azytus-header-results-table th {
     background: var(--primary-color4, #234f40) !important;
+    font-family: var(--font-manrope, "Manrope", sans-serif);
+}
+
+.azytus-header-results-table td {
+    font-family: var(--font-manrope, "Manrope", sans-serif);
+    font-size: 13px;
 }
 
 .azytus-header-results-table a {
     color: var(--primary-color4, #234f40);
     text-decoration: none;
+    font-weight: 600;
 }
 
 .azytus-header-results-table a:hover {
@@ -640,7 +686,10 @@ header.style-1.engineering-header .azytus-header-search-btn:hover .icon {
     background: var(--primary-color3, #8abc46);
     border-color: var(--primary-color3, #8abc46);
     color: #fff;
-    border-radius: 4px;
+    border-radius: 50px;
+    padding: 5px 12px;
+    font-size: 12px;
+    font-weight: 600;
 }
 
 .azytus-header-results-table .button-small {
@@ -671,12 +720,8 @@ body.azytus-search-open {
 }
 
 @media (max-width: 991px) {
-    .azytus-header-search-btn {
-        display: inline-flex;
-    }
-
     .azytus-header-search-dialog {
-        top: 10%;
+        top: 8%;
     }
 
     .azytus-header-search-controls {
@@ -686,15 +731,26 @@ body.azytus-search-open {
     .azytus-header-search-field {
         flex: 1 1 100%;
     }
+
+    .azytus-header-action-btn {
+        width: 46px;
+        height: 46px;
+    }
 }
 
 @media (max-width: 575px) {
     .azytus-header-search-dialog-inner {
         padding: 16px;
+        border-radius: 14px;
     }
 
     .azytus-header-search-dialog-head h3 {
         font-size: 16px;
+    }
+
+    .azytus-header-grade-select {
+        height: 46px;
+        line-height: 46px;
     }
 }
 

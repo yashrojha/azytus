@@ -297,37 +297,18 @@
             var $gradeSelect = $('#azytus-header-grade-select');
             var $status = $('#azytus-header-search-status');
             var $results = $('#azytus-header-search-results');
-            var select2Ready = false;
 
             function openPopup() {
                 $popup.removeAttr('hidden').attr('aria-hidden', 'false').addClass('is-open');
                 $('body').addClass('azytus-search-open');
-
-                if ($.fn.select2 && !select2Ready) {
-                    $gradeSelect.select2({
-                        placeholder: 'Select Grade',
-                        allowClear: true,
-                        width: '100%',
-                        dropdownParent: $popup.find('.azytus-header-search-dialog-inner')
-                    });
-                    select2Ready = true;
-                }
-
                 setTimeout(function() {
-                    if (select2Ready) {
-                        $gradeSelect.select2('open');
-                    } else {
-                        $gradeSelect.trigger('focus');
-                    }
-                }, 80);
+                    $gradeSelect.trigger('focus');
+                }, 50);
             }
 
             function closePopup() {
                 $popup.attr('hidden', true).attr('aria-hidden', 'true').removeClass('is-open');
                 $('body').removeClass('azytus-search-open');
-                if (select2Ready) {
-                    $gradeSelect.select2('close');
-                }
             }
 
             function getSelectedGradeId() {

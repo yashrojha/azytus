@@ -3,7 +3,7 @@
  * Plugin Name: Azytus Toolkit
  * Plugin URI: https://yashrojha.com
  * Description: Custom plugin for Azytus chemical product management with categories, grades, variations, and batch tracking
- * Version: 1.2.1
+ * Version: 1.2.2
  * Author: Yash Ojha
  * Author URI: https://yashrojha.com
  * License: GPL v2 or later
@@ -18,7 +18,7 @@ if (!defined('ABSPATH')) {
 }
 
 // Define plugin constants
-define('AZYTUS_TOOLKIT_VERSION', '1.2.1');
+define('AZYTUS_TOOLKIT_VERSION', '1.2.2');
 define('AZYTUS_TOOLKIT_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('AZYTUS_TOOLKIT_PLUGIN_URL', plugin_dir_url(__FILE__));
 define('AZYTUS_TOOLKIT_PLUGIN_FILE', __FILE__);
