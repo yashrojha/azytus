@@ -686,6 +686,9 @@ header.style-1.engineering-header .azytus-header-search-btn:hover .icon {
     border-radius: 50%;
     cursor: pointer;
     transition: background-color 0.25s ease, color 0.25s ease, filter 0.25s ease;
+    &:not(:last-child) {
+        margin-right: 6px;
+    }
 }
 
 .azytus-header-action-btn svg {
