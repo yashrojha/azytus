@@ -374,8 +374,8 @@ header.style-1 .nav-right .azytus-header-search-btn.contact-area .icon,
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 42px;
-    height: 42px;
+    width: 44px;
+    height: 44px;
     padding: 0;
     background-color: rgba(var(--black-color-opc, 0, 0, 0), 0.08);
     border-radius: 50%;
@@ -386,8 +386,8 @@ header.style-1 .nav-right .azytus-header-search-btn.contact-area .icon,
 header.style-1 .nav-right .azytus-header-search-btn.contact-area .icon svg,
 .azytus-header-search-btn .icon svg {
     display: block;
-    width: 18px;
-    height: 18px;
+    width: 20px;
+    height: 20px;
     fill: none;
 }
 
@@ -534,6 +534,7 @@ header.style-1.engineering-header .azytus-header-search-btn:hover .icon {
 .azytus-header-search-field {
     flex: 1;
     min-width: 0;
+    border-radius: 20px;
 }
 
 /* Native select only — no Select2 (avoids duplicate UI) */
@@ -569,6 +570,10 @@ header.style-1.engineering-header .azytus-header-search-btn:hover .icon {
     border-color: var(--primary-color3, #8abc46);
     box-shadow: 0 0 0 3px rgba(var(--primary-color3-opc, 138, 188, 70), 0.2);
     background-color: #fff;
+}
+
+.azytus-header-search-field .nice-select.azytus-header-grade-select {
+    border-radius: 25px;
 }
 
 /* Hide any leftover Select2 chrome if present */

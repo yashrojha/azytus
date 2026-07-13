@@ -446,7 +446,7 @@ class Azytus_Frontend {
         <template id="azytus-header-search-btn-template">
             <button type="button" class="azytus-header-search-btn contact-area" aria-label="<?php esc_attr_e('Search products and COA', 'azytus-toolkit'); ?>" aria-haspopup="dialog" aria-controls="azytus-header-search-popup">
                 <span class="icon">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                         <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/>
                         <path d="M20 20L16.5 16.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
                     </svg>
