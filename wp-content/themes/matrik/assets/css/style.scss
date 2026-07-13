@@ -2663,16 +2663,8 @@ header.style-1 {
   .nav-right {
     display: flex;
     align-items: center;
-    gap: 70px;
+    gap: 20px;
     position: relative;
-
-    @include xl-device() {
-      gap: 50px;
-    }
-
-    @include lg-device() {
-      gap: 20px;
-    }
 
     @include lg-down-device() {
       gap: 20px;

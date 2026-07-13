@@ -2304,18 +2304,8 @@ header.style-1 .contact-area .content a:hover {
 header.style-1 .nav-right {
   display: flex;
   align-items: center;
-  gap: 70px;
+  gap: 20px;
   position: relative;
-}
-@media (min-width: 1200px) and (max-width: 1399px) {
-  header.style-1 .nav-right {
-    gap: 50px;
-  }
-}
-@media (min-width: 992px) and (max-width: 1199px) {
-  header.style-1 .nav-right {
-    gap: 20px;
-  }
 }
 @media (max-width: 991px) {
   header.style-1 .nav-right {
