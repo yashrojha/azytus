@@ -1,0 +1,58 @@
+
+---Downloaded files---
+The import files for: Main were successfully downloaded!
+Initial max execution time = 360
+Files info:
+Site URL = https://lightsalmon-lapwing-315678.hostingersite.com
+Data file = /home/u855181652/domains/lightsalmon-lapwing-315678.hostingersite.com/public_html/wp-content/uploads/2026/06/demo-content-import-file_2026-06-29__19-10-52.xml
+Widget file = /home/u855181652/domains/lightsalmon-lapwing-315678.hostingersite.com/public_html/wp-content/uploads/2026/06/demo-widgets-import-file_2026-06-29__19-10-52.json
+Customizer file = /home/u855181652/domains/lightsalmon-lapwing-315678.hostingersite.com/public_html/wp-content/uploads/2026/06/demo-customizer-import-file_2026-06-29__19-10-52.dat
+Redux files:
+not defined!
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+---ocdi/before_widgets_import---
+
+
+---Importing widgets---
+Blog Sidebar : 
+
+Block - No Title - Imported
+Egns Blog Category - Category - Imported
+Egns Popular Post - Popular Post - Imported
+Egns Blog Tags (Custom) - New Tags - Imported
+Block - No Title - Imported
+Block - No Title - Imported
+Egns Popular Post - Popular Post - Imported
+Egns Blog Tags (Custom) - New Tags - Imported
+
+
+
+---Importing customizer settings---
+Customizer settings import finished!
+
+---ocdi/after_import---
+
