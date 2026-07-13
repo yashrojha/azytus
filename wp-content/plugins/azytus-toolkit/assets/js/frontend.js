@@ -298,21 +298,9 @@
             var $productInput = $('#azytus-header-product-input');
             var $productBtn = $('#azytus-header-product-btn');
             var $coaBtn = $('#azytus-header-coa-btn');
-            var $actionBtns = $('.azytus-header-action-btn');
-            var $hint = $('#azytus-header-search-hint');
+            var $actionBtns = $productBtn.add($coaBtn);
             var $status = $('#azytus-header-search-status');
             var $results = $('#azytus-header-search-results');
-            var activeSearchType = 'products';
-
-            var hints = {
-                products: 'Select a grade, enter a product name, then click Products.',
-                coa: 'Select a grade, enter a product/batch/code, then click COA / Batch.'
-            };
-
-            var placeholders = {
-                products: 'Search by chemistry, function, application and more',
-                coa: 'Search by product name, batch no. or code'
-            };
 
             function openPopup() {
                 $popup.removeAttr('hidden').attr('aria-hidden', 'false').addClass('is-open');
@@ -349,28 +337,14 @@
                 return gradeId;
             }
 
-            function requireSearchTerm() {
+            function requireSearchTerm(message) {
                 var term = getSearchTerm();
                 if (!term) {
-                    showStatus(activeSearchType === 'coa'
-                        ? 'Please enter a product name, batch number, or code.'
-                        : 'Please enter a product name to search.', 'error');
+                    showStatus(message || 'Please enter a search term.', 'error');
                     $productInput.trigger('focus');
                     return null;
                 }
                 return term;
-            }
-
-            function setActiveSearchType(type) {
-                activeSearchType = type === 'coa' ? 'coa' : 'products';
-                $actionBtns.removeClass('is-active').attr('aria-pressed', 'false');
-                if (activeSearchType === 'coa') {
-                    $coaBtn.addClass('is-active').attr('aria-pressed', 'true');
-                } else {
-                    $productBtn.addClass('is-active').attr('aria-pressed', 'true');
-                }
-                $hint.text(hints[activeSearchType]);
-                $productInput.attr('placeholder', placeholders[activeSearchType]);
             }
 
             function showStatus(message, type) {
@@ -471,7 +445,7 @@
                     return;
                 }
 
-                var searchTerm = requireSearchTerm();
+                var searchTerm = requireSearchTerm('Please enter a product name to search.');
                 if (!searchTerm) {
                     return;
                 }
@@ -512,7 +486,7 @@
                     return;
                 }
 
-                var searchTerm = requireSearchTerm();
+                var searchTerm = requireSearchTerm('Please enter a product name, batch number, or code.');
                 if (!searchTerm) {
                     return;
                 }
@@ -550,14 +524,6 @@
                 });
             }
 
-            function runActiveSearch() {
-                if (activeSearchType === 'coa') {
-                    searchCOAByGrade();
-                } else {
-                    searchProductsByGrade();
-                }
-            }
-
             $(document).on('click', '.azytus-header-search-btn', function(e) {
                 e.preventDefault();
                 openPopup();
@@ -576,29 +542,23 @@
 
             $productBtn.on('click', function(e) {
                 e.preventDefault();
-                setActiveSearchType('products');
                 searchProductsByGrade();
             });
 
             $coaBtn.on('click', function(e) {
                 e.preventDefault();
-                setActiveSearchType('coa');
                 searchCOAByGrade();
             });
 
             $('#azytus-header-search-form').on('submit', function(e) {
                 e.preventDefault();
-                runActiveSearch();
             });
 
             $productInput.on('keydown', function(e) {
                 if (e.key === 'Enter') {
                     e.preventDefault();
-                    runActiveSearch();
                 }
             });
-
-            setActiveSearchType('products');
         }
     });
     
