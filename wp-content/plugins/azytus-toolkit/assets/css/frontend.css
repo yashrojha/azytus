@@ -434,7 +434,7 @@ header.style-1.engineering-header .azytus-header-search-btn:hover .icon {
     left: 50%;
     top: 10%;
     transform: translateX(-50%);
-    width: min(640px, calc(100% - 28px));
+    width: min(720px, calc(100% - 28px));
     max-height: 80vh;
     z-index: 1;
     animation: azytusSearchIn 0.28s ease;
@@ -458,10 +458,10 @@ header.style-1.engineering-header .azytus-header-search-btn:hover .icon {
     border: 1px solid rgba(0, 0, 0, 0.04);
     padding: 20px 22px 18px;
     font-family: var(--font-manrope, "Manrope", sans-serif);
-    overflow: hidden;
     display: flex;
     flex-direction: column;
     max-height: 80vh;
+    min-height: 200px;
 }
 
 .azytus-header-search-dialog-head {
@@ -502,98 +502,177 @@ header.style-1.engineering-header .azytus-header-search-btn:hover .icon {
     color: var(--primary-color3, #8abc46);
 }
 
-.azytus-header-search-controls {
+.azytus-header-search-pill {
     display: flex;
     align-items: center;
-    gap: 10px;
+    width: 100%;
+    min-height: 52px;
+    padding: 4px 6px 4px 4px;
+    background: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 999px;
+    box-shadow: none;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
-.azytus-header-search-field {
-    flex: 1;
-    min-width: 0;
-    border-radius: 20px;
+.azytus-header-search-pill:focus-within {
+    border-color: var(--primary-color3, #8abc46);
+    box-shadow: 0 0 0 3px rgba(var(--primary-color3-opc, 138, 188, 70), 0.18);
 }
 
-/* Native select only — no Select2 (avoids duplicate UI) */
+.azytus-header-search-grade {
+    flex: 0 0 auto;
+    max-width: 42%;
+    min-width: 120px;
+    position: relative;
+}
+
+/* Native select — borderless inside the pill */
 .azytus-header-grade-select {
     display: block;
     width: 100%;
-    height: 48px;
-    padding: 0 40px 0 16px;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    border-radius: 50px;
-    background-color: rgba(var(--black-color-opc, 0, 0, 0), 0.04);
-    background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%23222' stroke-width='1.6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    height: 44px;
+    padding: 0 32px 0 18px;
+    border: 0;
+    border-radius: 999px;
+    background-color: transparent;
+    background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%23555' stroke-width='1.6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
-    background-position: right 16px center;
-    color: var(--title-color, #000);
+    background-position: right 12px center;
+    color: var(--title-color, #222);
     font-family: var(--font-manrope, "Manrope", sans-serif);
     font-size: 14px;
-    font-weight: 500;
-    line-height: 48px;
+    font-weight: 600;
+    line-height: 44px;
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
     cursor: pointer;
-    transition: border-color 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
 }
 
-.azytus-header-grade-select:hover {
-    background-color: rgba(var(--black-color-opc, 0, 0, 0), 0.06);
-}
-
+.azytus-header-grade-select:hover,
 .azytus-header-grade-select:focus {
     outline: none;
-    border-color: var(--primary-color3, #8abc46);
-    box-shadow: 0 0 0 3px rgba(var(--primary-color3-opc, 138, 188, 70), 0.2);
-    background-color: #fff;
+    background-color: transparent;
+    box-shadow: none;
 }
 
-.azytus-header-search-field .nice-select.azytus-header-grade-select {
-    border-radius: 25px;
+/* Theme nice-select (auto-inited on all selects) */
+.azytus-header-search-grade .nice-select.azytus-header-grade-select {
+    float: none;
+    width: 100%;
+    height: 44px;
+    line-height: 44px;
+    padding-left: 18px;
+    padding-right: 32px;
+    border: 0;
+    border-radius: 999px;
+    background-color: transparent;
+    font-family: var(--font-manrope, "Manrope", sans-serif);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--title-color, #222);
+    z-index: 2;
 }
 
-/* Hide any leftover Select2 chrome if present */
-.azytus-header-search-field .select2-container {
-    display: none !important;
+.azytus-header-search-grade .nice-select.azytus-header-grade-select:hover,
+.azytus-header-search-grade .nice-select.azytus-header-grade-select:active,
+.azytus-header-search-grade .nice-select.azytus-header-grade-select.open,
+.azytus-header-search-grade .nice-select.azytus-header-grade-select:focus {
+    border-color: transparent;
 }
 
-.azytus-header-action-btn {
+.azytus-header-search-grade .nice-select.azytus-header-grade-select:after {
+    right: 14px;
+    border-color: #555;
+}
+
+.azytus-header-search-grade .nice-select .list {
+    border-radius: 14px;
+    margin-top: 8px;
+    width: max(100%, 220px);
+    max-height: 260px;
+    overflow-y: auto;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.14);
+}
+
+.azytus-header-search-divider {
+    flex-shrink: 0;
+    width: 1px;
+    height: 24px;
+    background: rgba(0, 0, 0, 0.14);
+    margin: 0 4px;
+}
+
+.azytus-header-search-query {
+    flex: 1;
+    min-width: 0;
+}
+
+.azytus-header-product-input {
+    display: block;
+    width: 100%;
+    height: 44px;
+    padding: 0 8px 0 12px;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    color: var(--title-color, #222);
+    font-family: var(--font-manrope, "Manrope", sans-serif);
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 44px;
+    outline: none;
+    box-shadow: none;
+}
+
+.azytus-header-product-input::placeholder {
+    color: #9a9a9a;
+    font-weight: 400;
+}
+
+.azytus-header-product-input::-webkit-search-decoration,
+.azytus-header-product-input::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+}
+
+.azytus-header-search-submit {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 48px;
-    height: 48px;
+    width: 42px;
+    height: 42px;
     flex-shrink: 0;
+    margin-right: 2px;
     border: 0;
     border-radius: 50%;
-    background: rgba(var(--black-color-opc, 0, 0, 0), 0.08);
-    color: var(--title-color, #000);
+    background: transparent;
+    color: var(--title-color, #222);
     cursor: pointer;
-    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+    transition: background-color 0.25s ease, color 0.25s ease;
 }
 
-.azytus-header-action-btn svg {
+.azytus-header-search-submit svg {
     display: block;
     width: 18px;
     height: 18px;
 }
 
-.azytus-header-action-btn:hover:not(:disabled),
-.azytus-header-action-btn:focus-visible:not(:disabled) {
-    background: var(--primary-color3, #8abc46);
-    color: #fff;
+.azytus-header-search-submit:hover:not(:disabled),
+.azytus-header-search-submit:focus-visible:not(:disabled) {
+    background: rgba(var(--primary-color3-opc, 138, 188, 70), 0.18);
+    color: var(--primary-color3, #8abc46);
     outline: none;
 }
 
-.azytus-header-coa-btn:hover:not(:disabled),
-.azytus-header-coa-btn:focus-visible:not(:disabled) {
-    background: var(--primary-color4, #234f40);
-}
-
-.azytus-header-action-btn:disabled {
+.azytus-header-search-submit:disabled {
     opacity: 0.55;
     cursor: wait;
+}
+
+/* Hide any leftover Select2 chrome if present */
+.azytus-header-search-grade .select2-container {
+    display: none !important;
 }
 
 .azytus-header-search-hint {
@@ -706,17 +785,9 @@ body.azytus-search-open {
         top: 8%;
     }
 
-    .azytus-header-search-controls {
-        flex-wrap: wrap;
-    }
-
-    .azytus-header-search-field {
-        flex: 1 1 100%;
-    }
-
-    .azytus-header-action-btn {
-        width: 46px;
-        height: 46px;
+    .azytus-header-search-grade {
+        max-width: 46%;
+        min-width: 110px;
     }
 }
 
@@ -730,9 +801,44 @@ body.azytus-search-open {
         font-size: 16px;
     }
 
-    .azytus-header-grade-select {
-        height: 46px;
-        line-height: 46px;
+    .azytus-header-search-pill {
+        flex-wrap: wrap;
+        border-radius: 18px;
+        padding: 8px 10px;
+        min-height: 0;
+    }
+
+    .azytus-header-search-grade {
+        flex: 1 1 auto;
+        max-width: none;
+        width: calc(100% - 52px);
+    }
+
+    .azytus-header-search-divider {
+        display: none;
+    }
+
+    .azytus-header-search-query {
+        flex: 1 1 100%;
+        order: 3;
+    }
+
+    .azytus-header-search-submit {
+        order: 2;
+        margin-left: auto;
+    }
+
+    .azytus-header-product-input {
+        padding-left: 8px;
+        height: 40px;
+        line-height: 40px;
+    }
+
+    .azytus-header-grade-select,
+    .azytus-header-search-grade .nice-select.azytus-header-grade-select {
+        height: 40px;
+        line-height: 40px;
+        padding-left: 10px;
     }
 }
 

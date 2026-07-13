@@ -295,6 +295,8 @@
             });
 
             var $gradeSelect = $('#azytus-header-grade-select');
+            var $productInput = $('#azytus-header-product-input');
+            var $searchSubmit = $('#azytus-header-search-submit');
             var $status = $('#azytus-header-search-status');
             var $results = $('#azytus-header-search-results');
 
@@ -302,7 +304,11 @@
                 $popup.removeAttr('hidden').attr('aria-hidden', 'false').addClass('is-open');
                 $('body').addClass('azytus-search-open');
                 setTimeout(function() {
-                    $gradeSelect.trigger('focus');
+                    if ($gradeSelect.val()) {
+                        $productInput.trigger('focus');
+                    } else {
+                        $gradeSelect.trigger('focus');
+                    }
                 }, 50);
             }
 
@@ -315,13 +321,28 @@
                 return ($gradeSelect.val() || '').toString();
             }
 
+            function getSearchTerm() {
+                return ($productInput.val() || '').toString().trim();
+            }
+
             function requireGrade() {
                 var gradeId = getSelectedGradeId();
                 if (!gradeId) {
                     showStatus('Please select a grade first.', 'error');
+                    $gradeSelect.trigger('focus');
                     return null;
                 }
                 return gradeId;
+            }
+
+            function requireSearchTerm() {
+                var term = getSearchTerm();
+                if (!term) {
+                    showStatus('Please enter a product name to search.', 'error');
+                    $productInput.trigger('focus');
+                    return null;
+                }
+                return term;
             }
 
             function showStatus(message, type) {
@@ -335,6 +356,11 @@
             function clearResults() {
                 $results.empty();
                 $status.attr('hidden', true).text('');
+            }
+
+            function setSearching(isSearching) {
+                $searchSubmit.prop('disabled', isSearching);
+                $productInput.prop('disabled', isSearching);
             }
 
             function escapeHtml(str) {
@@ -411,77 +437,77 @@
                 $results.html(html);
             }
 
-            function searchProductsByGrade() {
-                var gradeId = requireGrade();
-                if (!gradeId) {
-                    return;
-                }
-
-                $.ajax({
+            function searchProducts(gradeId, searchTerm) {
+                return $.ajax({
                     url: azytusFrontend.ajax_url,
                     type: 'POST',
                     data: {
                         action: 'azytus_search_products',
                         grade_id: gradeId,
+                        search_term: searchTerm,
                         nonce: azytusFrontend.nonce
-                    },
-                    beforeSend: function() {
-                        clearResults();
-                        showStatus('Searching products…', 'loading');
-                        $('#azytus-header-product-btn, #azytus-header-coa-btn').prop('disabled', true);
-                    },
-                    success: function(response) {
-                        $('#azytus-header-product-btn, #azytus-header-coa-btn').prop('disabled', false);
-                        if (response.success && response.data && response.data.length) {
-                            showStatus(response.data.length + ' product' + (response.data.length === 1 ? '' : 's') + ' found', 'success');
-                            renderProductTable(response.data);
-                        } else {
-                            showStatus('No products found for this grade.', 'error');
-                            $results.empty();
-                        }
-                    },
-                    error: function() {
-                        $('#azytus-header-product-btn, #azytus-header-coa-btn').prop('disabled', false);
-                        showStatus('An error occurred. Please try again.', 'error');
                     }
                 });
             }
 
-            function searchCOAByGrade() {
-                var gradeId = requireGrade();
-                if (!gradeId) {
-                    return;
-                }
-
-                $.ajax({
+            function searchCOA(gradeId, searchTerm) {
+                return $.ajax({
                     url: azytusFrontend.ajax_url,
                     type: 'POST',
                     data: {
                         action: 'azytus_search_coa',
                         grade_id: gradeId,
+                        search_term: searchTerm,
                         nonce: azytusFrontend.nonce
-                    },
-                    beforeSend: function() {
-                        clearResults();
-                        showStatus('Searching COA / batches…', 'loading');
-                        $('#azytus-header-product-btn, #azytus-header-coa-btn').prop('disabled', true);
-                    },
-                    success: function(response) {
-                        $('#azytus-header-product-btn, #azytus-header-coa-btn').prop('disabled', false);
-                        if (response.success && response.data && response.data.length) {
-                            showStatus(response.data.length + ' batch' + (response.data.length === 1 ? '' : 'es') + ' found', 'success');
-                            renderCOATable(response.data);
-                        } else {
-                            var msg = (response.data && response.data.message) ? response.data.message : 'No COA / batch records found for this grade.';
-                            showStatus(msg, 'error');
-                            $results.empty();
-                        }
-                    },
-                    error: function() {
-                        $('#azytus-header-product-btn, #azytus-header-coa-btn').prop('disabled', false);
-                        showStatus('An error occurred. Please try again.', 'error');
                     }
                 });
+            }
+
+            function performHeaderSearch() {
+                var gradeId = requireGrade();
+                if (!gradeId) {
+                    return;
+                }
+
+                var searchTerm = requireSearchTerm();
+                if (!searchTerm) {
+                    return;
+                }
+
+                clearResults();
+                showStatus('Searching…', 'loading');
+                setSearching(true);
+
+                // Prefer batch/COA matches for grade + product name; fall back to products
+                searchCOA(gradeId, searchTerm)
+                    .done(function(coaResponse) {
+                        if (coaResponse.success && coaResponse.data && coaResponse.data.length) {
+                            setSearching(false);
+                            showStatus(coaResponse.data.length + ' batch' + (coaResponse.data.length === 1 ? '' : 'es') + ' found', 'success');
+                            renderCOATable(coaResponse.data);
+                            return;
+                        }
+
+                        searchProducts(gradeId, searchTerm)
+                            .done(function(productResponse) {
+                                setSearching(false);
+                                if (productResponse.success && productResponse.data && productResponse.data.length) {
+                                    showStatus(productResponse.data.length + ' product' + (productResponse.data.length === 1 ? '' : 's') + ' found', 'success');
+                                    renderProductTable(productResponse.data);
+                                } else {
+                                    showStatus('No products or batches found for this grade and search.', 'error');
+                                    $results.empty();
+                                }
+                            })
+                            .fail(function() {
+                                setSearching(false);
+                                showStatus('An error occurred. Please try again.', 'error');
+                            });
+                    })
+                    .fail(function() {
+                        setSearching(false);
+                        showStatus('An error occurred. Please try again.', 'error');
+                    });
             }
 
             $(document).on('click', '.azytus-header-search-btn', function(e) {
@@ -500,14 +526,21 @@
                 }
             });
 
-            $('#azytus-header-coa-btn').on('click', function(e) {
+            $('#azytus-header-search-form').on('submit', function(e) {
                 e.preventDefault();
-                searchCOAByGrade();
+                performHeaderSearch();
             });
 
-            $('#azytus-header-product-btn').on('click', function(e) {
+            $searchSubmit.on('click', function(e) {
                 e.preventDefault();
-                searchProductsByGrade();
+                performHeaderSearch();
+            });
+
+            $productInput.on('keydown', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    performHeaderSearch();
+                }
             });
         }
     });

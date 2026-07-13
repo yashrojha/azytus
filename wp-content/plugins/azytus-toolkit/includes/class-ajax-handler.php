@@ -115,6 +115,7 @@ class Azytus_Ajax_Handler {
         );
         
         if ($search_term) {
+            // Prefer title search, then fall back to meta/code matching in PHP below
             $product_args['s'] = $search_term;
         }
         
@@ -123,6 +124,12 @@ class Azytus_Ajax_Handler {
         }
         
         $products = get_posts($product_args);
+
+        // If WP title search returned nothing, scan all products for code/CAS matches
+        if ($search_term && empty($products)) {
+            unset($product_args['s']);
+            $products = get_posts($product_args);
+        }
         
         foreach ($products as $product) {
             // Get product meta data
@@ -137,12 +144,27 @@ class Azytus_Ajax_Handler {
             if (!is_array($grades)) {
                 $grades = array();
             }
+
+            $title_matched = !$search_term || stripos($product->post_title, $search_term) !== false
+                || stripos((string) $cas, $search_term) !== false
+                || stripos((string) $formula, $search_term) !== false;
             
             foreach ($grades as $grade) {
                 // Filter by grade category (grades CPT) when provided
                 if ($grade_id) {
                     $grade_category_id = isset($grade['grade_category_id']) ? intval($grade['grade_category_id']) : 0;
                     if ($grade_category_id !== $grade_id) {
+                        continue;
+                    }
+                }
+
+                $product_code = isset($grade['product_code']) ? $grade['product_code'] : '';
+                $grade_name = isset($grade['grade_name']) ? $grade['grade_name'] : '';
+
+                if ($search_term && !$title_matched) {
+                    $code_matched = stripos($product_code, $search_term) !== false
+                        || stripos($grade_name, $search_term) !== false;
+                    if (!$code_matched) {
                         continue;
                     }
                 }
@@ -278,10 +300,15 @@ class Azytus_Ajax_Handler {
             foreach ($batches as $batch) {
                 $batch_no = isset($batch['batch_no']) ? $batch['batch_no'] : '';
                 
-                // Match search term against batch number or product code (optional when grade is set)
+                // Match search term against batch number, product code, or product name
                 $matches = true;
                 if (!empty($search_term)) {
-                    $matches = (stripos($batch_no, $search_term) !== false || stripos($product_code, $search_term) !== false);
+                    $matches = (
+                        stripos($batch_no, $search_term) !== false
+                        || stripos($product_code, $search_term) !== false
+                        || stripos($product->post_title, $search_term) !== false
+                        || stripos($grade_name, $search_term) !== false
+                    );
                 }
                 
                 if ($matches) {
