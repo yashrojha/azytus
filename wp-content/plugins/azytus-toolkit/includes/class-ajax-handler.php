@@ -103,6 +103,7 @@ class Azytus_Ajax_Handler {
         
         $search_term = isset($_POST['search_term']) ? sanitize_text_field($_POST['search_term']) : '';
         $product_id = isset($_POST['product_id']) ? intval($_POST['product_id']) : 0;
+        $grade_id = isset($_POST['grade_id']) ? intval($_POST['grade_id']) : 0;
         
         $results = array();
         
@@ -138,6 +139,14 @@ class Azytus_Ajax_Handler {
             }
             
             foreach ($grades as $grade) {
+                // Filter by grade category (grades CPT) when provided
+                if ($grade_id) {
+                    $grade_category_id = isset($grade['grade_category_id']) ? intval($grade['grade_category_id']) : 0;
+                    if ($grade_category_id !== $grade_id) {
+                        continue;
+                    }
+                }
+                
                 $pack_size_list = array();
                 if (isset($grade['pack_sizes']) && is_array($grade['pack_sizes'])) {
                     foreach ($grade['pack_sizes'] as $pack_size) {
@@ -147,6 +156,7 @@ class Azytus_Ajax_Handler {
                 
                 $results[] = array(
                     'product_name' => $product->post_title,
+                    'product_url' => get_permalink($product->ID),
                     'cas' => $cas,
                     'hsn' => $hsn,
                     'molecular_formula' => $formula,
@@ -203,9 +213,10 @@ class Azytus_Ajax_Handler {
         check_ajax_referer('azytus_frontend_nonce', 'nonce');
         
         $search_term = isset($_POST['search_term']) ? sanitize_text_field($_POST['search_term']) : '';
+        $grade_id = isset($_POST['grade_id']) ? intval($_POST['grade_id']) : 0;
         
-        if (empty($search_term)) {
-            wp_send_json_error(array('message' => __('Please enter a batch number or product code', 'azytus-toolkit')));
+        if (empty($search_term) && !$grade_id) {
+            wp_send_json_error(array('message' => __('Please enter a batch number or product code, or select a grade', 'azytus-toolkit')));
         }
         
         $results = array();
@@ -241,6 +252,12 @@ class Azytus_Ajax_Handler {
             $grade = $grades[$grade_index];
             $product_code = isset($grade['product_code']) ? $grade['product_code'] : '';
             $grade_name = isset($grade['grade_name']) ? $grade['grade_name'] : '';
+            $grade_category_id = isset($grade['grade_category_id']) ? intval($grade['grade_category_id']) : 0;
+            
+            // Filter by grade category when provided
+            if ($grade_id && $grade_category_id !== $grade_id) {
+                continue;
+            }
             
             // Get pack size
             $pack_size = '';
@@ -261,8 +278,13 @@ class Azytus_Ajax_Handler {
             foreach ($batches as $batch) {
                 $batch_no = isset($batch['batch_no']) ? $batch['batch_no'] : '';
                 
-                // Check if search term matches batch number or product code
-                if (stripos($batch_no, $search_term) !== false || stripos($product_code, $search_term) !== false) {
+                // Match search term against batch number or product code (optional when grade is set)
+                $matches = true;
+                if (!empty($search_term)) {
+                    $matches = (stripos($batch_no, $search_term) !== false || stripos($product_code, $search_term) !== false);
+                }
+                
+                if ($matches) {
                     $coa_id = isset($batch['coa']) ? $batch['coa'] : 0;
                     
                     $results[] = array(
@@ -270,6 +292,7 @@ class Azytus_Ajax_Handler {
                         'code' => $product_code,
                         'pack_size' => $pack_size,
                         'product_name_with_grade' => $product_name_with_grade,
+                        'product_url' => get_permalink($product_id),
                         'mfg_date' => isset($batch['mfg_date']) ? $batch['mfg_date'] : '',
                         'expiry_date' => isset($batch['expiry_date']) ? $batch['expiry_date'] : '',
                         'coa_url' => $coa_id ? wp_get_attachment_url($coa_id) : '',

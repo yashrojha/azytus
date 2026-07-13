@@ -272,6 +272,263 @@
             
             $('.azytus-coa-results-table').html(html);
         }
+
+        /* ---------------------------------------------
+         * Header grade search popup
+         * --------------------------------------------- */
+        initHeaderSearch();
+
+        function initHeaderSearch() {
+            var $popup = $('#azytus-header-search-popup');
+            var $template = $('#azytus-header-search-btn-template');
+            if (!$popup.length || !$template.length) {
+                return;
+            }
+
+            // Inject search button as first element in every .nav-right
+            var btnHtml = $template.html();
+            $('.nav-right').each(function() {
+                var $nav = $(this);
+                if (!$nav.find('.azytus-header-search-btn').length) {
+                    $nav.prepend(btnHtml);
+                }
+            });
+
+            var $gradeSelect = $('#azytus-header-grade-select');
+            var $status = $('#azytus-header-search-status');
+            var $results = $('#azytus-header-search-results');
+            var select2Ready = false;
+
+            function openPopup() {
+                $popup.removeAttr('hidden').attr('aria-hidden', 'false').addClass('is-open');
+                $('body').addClass('azytus-search-open');
+
+                if ($.fn.select2 && !select2Ready) {
+                    $gradeSelect.select2({
+                        placeholder: 'Select Grade',
+                        allowClear: true,
+                        width: '100%',
+                        dropdownParent: $popup.find('.azytus-header-search-dialog-inner')
+                    });
+                    select2Ready = true;
+                }
+
+                setTimeout(function() {
+                    if (select2Ready) {
+                        $gradeSelect.select2('open');
+                    } else {
+                        $gradeSelect.trigger('focus');
+                    }
+                }, 80);
+            }
+
+            function closePopup() {
+                $popup.attr('hidden', true).attr('aria-hidden', 'true').removeClass('is-open');
+                $('body').removeClass('azytus-search-open');
+                if (select2Ready) {
+                    $gradeSelect.select2('close');
+                }
+            }
+
+            function getSelectedGradeId() {
+                return ($gradeSelect.val() || '').toString();
+            }
+
+            function requireGrade() {
+                var gradeId = getSelectedGradeId();
+                if (!gradeId) {
+                    showStatus('Please select a grade first.', 'error');
+                    return null;
+                }
+                return gradeId;
+            }
+
+            function showStatus(message, type) {
+                $status
+                    .removeAttr('hidden')
+                    .removeClass('is-error is-loading is-success')
+                    .addClass(type === 'error' ? 'is-error' : (type === 'loading' ? 'is-loading' : 'is-success'))
+                    .text(message);
+            }
+
+            function clearResults() {
+                $results.empty();
+                $status.attr('hidden', true).text('');
+            }
+
+            function escapeHtml(str) {
+                return String(str == null ? '' : str)
+                    .replace(/&/g, '&amp;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;')
+                    .replace(/"/g, '&quot;')
+                    .replace(/'/g, '&#039;');
+            }
+
+            function renderProductTable(items) {
+                var html = '<div class="azytus-table-wrapper"><table class="azytus-product-table azytus-header-results-table">';
+                html += '<thead><tr>';
+                html += '<th>Product Name</th><th>Code</th><th>Grade</th><th>Pack Size(s)</th><th>CAS</th><th>MSDS</th>';
+                html += '</tr></thead><tbody>';
+
+                $.each(items, function(i, item) {
+                    var name = escapeHtml(item.product_name);
+                    if (item.product_url) {
+                        name = '<a href="' + escapeHtml(item.product_url) + '">' + name + '</a>';
+                    }
+                    html += '<tr>';
+                    html += '<td><strong>' + name + '</strong></td>';
+                    html += '<td>' + escapeHtml(item.product_code) + '</td>';
+                    html += '<td>' + escapeHtml(item.grade) + '</td>';
+                    html += '<td>' + escapeHtml(item.pack_sizes) + '</td>';
+                    html += '<td>' + escapeHtml(item.cas) + '</td>';
+                    html += '<td>';
+                    if (item.has_msds) {
+                        html += '<a href="' + escapeHtml(item.msds_url) + '" target="_blank" rel="noopener" class="button button-small">View</a>';
+                    } else {
+                        html += '<span class="azytus-na">N/A</span>';
+                    }
+                    html += '</td></tr>';
+                });
+
+                html += '</tbody></table></div>';
+                $results.html(html);
+            }
+
+            function renderCOATable(items) {
+                var html = '<div class="azytus-table-wrapper"><table class="azytus-coa-table azytus-header-results-table">';
+                html += '<thead><tr>';
+                html += '<th>Batch No.</th><th>Code</th><th>Pack Size</th><th>Product</th><th>COA</th><th>MSDS</th>';
+                html += '</tr></thead><tbody>';
+
+                $.each(items, function(i, item) {
+                    var product = escapeHtml(item.product_name_with_grade);
+                    if (item.product_url) {
+                        product = '<a href="' + escapeHtml(item.product_url) + '">' + product + '</a>';
+                    }
+                    html += '<tr>';
+                    html += '<td><strong>' + escapeHtml(item.batch_no) + '</strong></td>';
+                    html += '<td>' + escapeHtml(item.code) + '</td>';
+                    html += '<td>' + escapeHtml(item.pack_size) + '</td>';
+                    html += '<td>' + product + '</td>';
+                    html += '<td>';
+                    if (item.has_coa) {
+                        html += '<a href="' + escapeHtml(item.coa_url) + '" target="_blank" rel="noopener" class="button button-primary button-small">Download</a>';
+                    } else {
+                        html += '<span class="azytus-na">N/A</span>';
+                    }
+                    html += '</td><td>';
+                    if (item.has_msds) {
+                        html += '<a href="' + escapeHtml(item.msds_url) + '" target="_blank" rel="noopener" class="button button-small">View</a>';
+                    } else {
+                        html += '<span class="azytus-na">N/A</span>';
+                    }
+                    html += '</td></tr>';
+                });
+
+                html += '</tbody></table></div>';
+                $results.html(html);
+            }
+
+            function searchProductsByGrade() {
+                var gradeId = requireGrade();
+                if (!gradeId) {
+                    return;
+                }
+
+                $.ajax({
+                    url: azytusFrontend.ajax_url,
+                    type: 'POST',
+                    data: {
+                        action: 'azytus_search_products',
+                        grade_id: gradeId,
+                        nonce: azytusFrontend.nonce
+                    },
+                    beforeSend: function() {
+                        clearResults();
+                        showStatus('Searching products…', 'loading');
+                        $('#azytus-header-product-btn, #azytus-header-coa-btn').prop('disabled', true);
+                    },
+                    success: function(response) {
+                        $('#azytus-header-product-btn, #azytus-header-coa-btn').prop('disabled', false);
+                        if (response.success && response.data && response.data.length) {
+                            showStatus(response.data.length + ' product' + (response.data.length === 1 ? '' : 's') + ' found', 'success');
+                            renderProductTable(response.data);
+                        } else {
+                            showStatus('No products found for this grade.', 'error');
+                            $results.empty();
+                        }
+                    },
+                    error: function() {
+                        $('#azytus-header-product-btn, #azytus-header-coa-btn').prop('disabled', false);
+                        showStatus('An error occurred. Please try again.', 'error');
+                    }
+                });
+            }
+
+            function searchCOAByGrade() {
+                var gradeId = requireGrade();
+                if (!gradeId) {
+                    return;
+                }
+
+                $.ajax({
+                    url: azytusFrontend.ajax_url,
+                    type: 'POST',
+                    data: {
+                        action: 'azytus_search_coa',
+                        grade_id: gradeId,
+                        nonce: azytusFrontend.nonce
+                    },
+                    beforeSend: function() {
+                        clearResults();
+                        showStatus('Searching COA / batches…', 'loading');
+                        $('#azytus-header-product-btn, #azytus-header-coa-btn').prop('disabled', true);
+                    },
+                    success: function(response) {
+                        $('#azytus-header-product-btn, #azytus-header-coa-btn').prop('disabled', false);
+                        if (response.success && response.data && response.data.length) {
+                            showStatus(response.data.length + ' batch' + (response.data.length === 1 ? '' : 'es') + ' found', 'success');
+                            renderCOATable(response.data);
+                        } else {
+                            var msg = (response.data && response.data.message) ? response.data.message : 'No COA / batch records found for this grade.';
+                            showStatus(msg, 'error');
+                            $results.empty();
+                        }
+                    },
+                    error: function() {
+                        $('#azytus-header-product-btn, #azytus-header-coa-btn').prop('disabled', false);
+                        showStatus('An error occurred. Please try again.', 'error');
+                    }
+                });
+            }
+
+            $(document).on('click', '.azytus-header-search-btn', function(e) {
+                e.preventDefault();
+                openPopup();
+            });
+
+            $(document).on('click', '[data-azytus-search-close]', function(e) {
+                e.preventDefault();
+                closePopup();
+            });
+
+            $(document).on('keydown', function(e) {
+                if (e.key === 'Escape' && $popup.hasClass('is-open')) {
+                    closePopup();
+                }
+            });
+
+            $('#azytus-header-coa-btn').on('click', function(e) {
+                e.preventDefault();
+                searchCOAByGrade();
+            });
+
+            $('#azytus-header-product-btn').on('click', function(e) {
+                e.preventDefault();
+                searchProductsByGrade();
+            });
+        }
     });
     
 })(jQuery);
