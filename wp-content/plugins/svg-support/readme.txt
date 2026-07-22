@@ -5,7 +5,7 @@ Tags: svg, vector, safe svg, sanitization, mime type
 Requires at least: 5.8
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 2.5.16
+Stable tag: 2.5.17
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -150,6 +150,17 @@ You need to add the mime type for svg and svgz to: "MLA Settings > Media Library
 
 
 == Changelog ==
+
+= 2.5.17 =
+* **Security Enhancements**:
+    - Fixed a stored XSS sanitization bypass via the .svgz extension - .svgz uploads are now sanitized just like .svg (decompressing the gzip stream first when present), instead of skipping sanitization. This completes the earlier fixes for CVE-2024-10222 / CVE-2023-6708. Thanks to Shivamani Vastrala for the report, and to Erwan Le Rousseau (WPScan, Automattic) for the coordinated disclosure
+    - Browser uploads now run through the same sanitizer configuration as REST and import uploads (custom tag/attribute allow-lists and remote reference removal), keeping all upload paths consistent
+    - Added direct file access protection to the settings page so it can no longer be loaded outside of WordPress
+
+* **Code Improvements**:
+    - Renamed the internal final_output filter to bodhi_svgs_thumbs_final_output so it's properly prefixed and can't clash with other plugins
+    - Removed the redundant load_plugin_textdomain() call - WordPress automatically loads translations for plugins hosted on WordPress.org
+    - Documented the intentional direct database queries used for plugin meta cleanup (no functional change)
 
 = 2.5.16 =
 * **General Updates**:
@@ -510,6 +521,9 @@ You need to add the mime type for svg and svgz to: "MLA Settings > Media Library
 
 
 == Upgrade Notice ==
+
+= 2.5.17 =
+Important security patch. Fixes a stored XSS vulnerability where .svgz uploads bypassed SVG sanitization (CVE-2024-10222 / CVE-2023-6708). Please update immediately.
 
 = 2.5.16 =
 Recommended security update — includes the 2.5.15 fixes (CVE-2026-48973) and WordPress 6.8+/7.0 upload fixes. 2.5.16 adds minor maintenance.
