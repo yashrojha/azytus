@@ -434,13 +434,6 @@ class Azytus_Frontend {
      * Button is injected into .nav-right as the first element via JS.
      */
     public static function render_header_search_popup() {
-        $grades = get_posts(array(
-            'post_type' => 'grades',
-            'posts_per_page' => -1,
-            'post_status' => 'publish',
-            'orderby' => 'title',
-            'order' => 'ASC',
-        ));
         ?>
         <!-- Azytus header search trigger (moved into .nav-right by JS) -->
         <template id="azytus-header-search-btn-template">
@@ -467,17 +460,6 @@ class Azytus_Frontend {
 
                     <form class="azytus-header-search-form" id="azytus-header-search-form" autocomplete="off" onsubmit="return false;">
                         <div class="azytus-header-search-pill" role="search">
-                            <div class="azytus-header-search-grade">
-                                <label for="azytus-header-grade-select" class="screen-reader-text"><?php esc_html_e('Grade', 'azytus-toolkit'); ?></label>
-                                <select id="azytus-header-grade-select" class="azytus-header-grade-select" name="grade_id">
-                                    <?php foreach ($grades as $index => $grade) : ?>
-                                        <option value="<?php echo esc_attr($grade->ID); ?>"<?php selected($index, 0); ?>><?php echo esc_html($grade->post_title); ?></option>
-                                    <?php endforeach; ?>
-                                </select>
-                            </div>
-
-                            <span class="azytus-header-search-divider" aria-hidden="true"></span>
-
                             <div class="azytus-header-search-query">
                                 <label for="azytus-header-product-input" class="screen-reader-text"><?php esc_html_e('Search term', 'azytus-toolkit'); ?></label>
                                 <input
