@@ -304,7 +304,7 @@
             var $results = $('#azytus-header-search-results');
 
             function syncClearButton() {
-                if (getSearchTerm() || getSelectedGradeId()) {
+                if (getSearchTerm()) {
                     $clearBtn.removeAttr('hidden');
                 } else {
                     $clearBtn.attr('hidden', true);
@@ -313,7 +313,8 @@
 
             function resetForm() {
                 $productInput.val('');
-                $gradeSelect.val('');
+                var firstGrade = $gradeSelect.find('option').first().val() || '';
+                $gradeSelect.val(firstGrade);
                 if ($gradeSelect.next('.nice-select').length && typeof $gradeSelect.niceSelect === 'function') {
                     $gradeSelect.niceSelect('update');
                 }

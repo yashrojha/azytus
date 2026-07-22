@@ -434,7 +434,7 @@ header.style-1.engineering-header .azytus-header-search-btn:hover .icon {
     left: 50%;
     top: 10%;
     transform: translateX(-50%);
-    width: min(720px, calc(100% - 28px));
+    width: min(860px, calc(100% - 28px));
     max-height: 80vh;
     z-index: 1;
     animation: azytusSearchIn 0.28s ease;
@@ -677,24 +677,35 @@ header.style-1.engineering-header .azytus-header-search-btn:hover .icon {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 40px;
+    gap: 6px;
     height: 40px;
     flex-shrink: 0;
     margin: 0 2px 0 0;
-    padding: 0;
+    padding: 0 14px;
     border: 0;
-    border-radius: 50%;
+    border-radius: 999px;
     cursor: pointer;
-    transition: background-color 0.25s ease, color 0.25s ease, filter 0.25s ease;
-    &:not(:last-child) {
-        margin-right: 6px;
-    }
+    font-family: var(--font-manrope, "Manrope", sans-serif);
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1;
+    white-space: nowrap;
+    transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+.azytus-header-action-btn:not(:last-child) {
+    margin-right: 6px;
 }
 
 .azytus-header-action-btn svg {
     display: block;
-    width: 18px;
-    height: 18px;
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+}
+
+.azytus-header-action-btn span {
+    display: inline-block;
 }
 
 .azytus-header-product-btn {
@@ -885,8 +896,14 @@ body.azytus-search-open {
     }
 
     .azytus-header-action-btn {
-        width: 38px;
-        height: 38px;
+        height: 36px;
+        padding: 0 10px;
+        font-size: 11px;
+    }
+
+    .azytus-header-action-btn svg {
+        width: 14px;
+        height: 14px;
     }
 }
 
