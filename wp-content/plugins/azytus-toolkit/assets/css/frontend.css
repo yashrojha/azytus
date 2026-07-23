@@ -651,13 +651,10 @@ header.style-1 {
         align-items: center;
         justify-content: center;
         gap: 6px;
-        width: auto;
-        height: 40px;
-        flex: 0 0 auto;
         margin: 0 2px 0 0;
         padding: 4px 14px;
         border: 0;
-        border-radius: 999px;
+        border-radius: 20px;
         overflow: visible;
         cursor: pointer;
         font-family: var(--font-manrope, "Manrope", sans-serif);
