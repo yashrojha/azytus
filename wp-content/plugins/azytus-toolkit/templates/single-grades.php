@@ -1,15 +1,12 @@
 <?php
 /**
  * Template for displaying single Grade Category (grades post type)
+ *
+ * Breadcrumb is forced after header via Azytus_Frontend::render_grades_breadcrumb()
+ * so it also shows when Elementor Theme Builder owns the page.
  */
 
 get_header();
-
-// Matrik theme breadcrumb hero (same as project/single pages).
-// Skipped when an Elementor Theme Builder Single with content is handling the page.
-if (!is_front_page() && class_exists('\Egns\Helper\Egns_Helper')) {
-    \Egns\Helper\Egns_Helper::egns_template_part('breadcrumb', 'templates/breadcrumb-single');
-}
 
 while (have_posts()) :
     the_post();

@@ -84,8 +84,6 @@ class Azytus_Toolkit {
         add_action('admin_enqueue_scripts', array($this, 'enqueue_admin_assets'));
         add_action('wp_enqueue_scripts', array($this, 'enqueue_frontend_assets'));
         add_filter('single_template', array($this, 'load_single_template'));
-        // After Elementor Theme Builder (priority 11) — reclaim grades when its Single is empty.
-        add_filter('template_include', array($this, 'maybe_force_plugin_template'), 99);
         
         // Initialize classes
         Azytus_Post_Types::init();
@@ -97,6 +95,7 @@ class Azytus_Toolkit {
     
     /**
      * Load custom single templates for our post types
+     * (Elementor Theme Builder still wins via template_include when a Single is assigned.)
      */
     public function load_single_template($template) {
         global $post;
@@ -117,90 +116,6 @@ class Azytus_Toolkit {
         }
         
         return $template;
-    }
-
-    /**
-     * Force plugin single template when Elementor Theme Builder claims the page
-     * but its Single template has no widgets (blank grades pages).
-     *
-     * If Theme Builder Single for grades has content, Elementor keeps control —
-     * put [azytus_grade_category] in that template for the product tables.
-     *
-     * @param string $template
-     * @return string
-     */
-    public function maybe_force_plugin_template($template) {
-        if (!is_singular('grades')) {
-            return $template;
-        }
-
-        if ($this->grades_has_usable_elementor_single()) {
-            return $template;
-        }
-
-        $plugin_template = AZYTUS_TOOLKIT_PLUGIN_DIR . 'templates/single-grades.php';
-        if (file_exists($plugin_template)) {
-            return $plugin_template;
-        }
-
-        return $template;
-    }
-
-    /**
-     * True when Elementor Theme Builder Single for this view has real widgets
-     * (empty containers alone do not count — those blanked grades pages).
-     *
-     * @return bool
-     */
-    private function grades_has_usable_elementor_single() {
-        if (!class_exists('\ElementorPro\Modules\ThemeBuilder\Module')) {
-            return false;
-        }
-
-        try {
-            $documents = \ElementorPro\Modules\ThemeBuilder\Module::instance()
-                ->get_conditions_manager()
-                ->get_documents_for_location('single');
-
-            foreach ($documents as $document) {
-                if (!$document || !method_exists($document, 'get_elements_data')) {
-                    continue;
-                }
-                if ($this->elementor_data_has_widgets($document->get_elements_data())) {
-                    return true;
-                }
-            }
-        } catch (\Throwable $e) {
-            return false;
-        }
-
-        return false;
-    }
-
-    /**
-     * Recursively check Elementor elements data for at least one widget.
-     *
-     * @param mixed $data
-     * @return bool
-     */
-    private function elementor_data_has_widgets($data) {
-        if (empty($data) || !is_array($data)) {
-            return false;
-        }
-
-        foreach ($data as $element) {
-            if (!is_array($element)) {
-                continue;
-            }
-            if (!empty($element['widgetType'])) {
-                return true;
-            }
-            if (!empty($element['elements']) && $this->elementor_data_has_widgets($element['elements'])) {
-                return true;
-            }
-        }
-
-        return false;
     }
     
     /**

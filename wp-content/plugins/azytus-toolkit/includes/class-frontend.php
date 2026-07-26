@@ -12,6 +12,13 @@ class Azytus_Frontend {
     /**
      * Initialize
      */
+    /**
+     * Prevent double breadcrumb output in one request.
+     *
+     * @var bool
+     */
+    private static $grades_breadcrumb_rendered = false;
+
     public static function init() {
         // Shortcodes
         add_shortcode('azytus_product_search', array(__CLASS__, 'product_search_shortcode'));
@@ -22,8 +29,142 @@ class Azytus_Frontend {
         // Custom single templates
         add_filter('single_template', array(__CLASS__, 'custom_single_template'));
         
+        // Force Matrik breadcrumb after header on grades (frontend + Elementor edit/preview).
+        add_action('egns_action_page_header_template', array(__CLASS__, 'render_grades_breadcrumb'), 20);
+        add_action('elementor/page_templates/header-footer/before_content', array(__CLASS__, 'render_grades_breadcrumb'));
+        add_action('elementor/page_templates/canvas/before_content', array(__CLASS__, 'render_grades_breadcrumb'));
+
         // Header grade search popup
         add_action('wp_footer', array(__CLASS__, 'render_header_search_popup'));
+    }
+
+    /**
+     * Whether Matrik breadcrumb should print for grades context.
+     *
+     * @return bool
+     */
+    public static function should_render_grades_breadcrumb() {
+        if (is_singular('grades')) {
+            return true;
+        }
+
+        if (!class_exists('\Elementor\Plugin')) {
+            return false;
+        }
+
+        $elementor = \Elementor\Plugin::$instance;
+        $in_editor = false;
+
+        try {
+            $in_editor = ($elementor->editor && $elementor->editor->is_edit_mode())
+                || ($elementor->preview && $elementor->preview->is_preview_mode());
+        } catch (\Throwable $e) {
+            $in_editor = false;
+        }
+
+        if (!$in_editor) {
+            return false;
+        }
+
+        $document = $elementor->documents->get(get_the_ID());
+        if (!$document) {
+            return false;
+        }
+
+        // Theme Builder Single document targeting grades, or previewing a grades post.
+        if (method_exists($document, 'get_location') && $document->get_location() === 'single') {
+            $conditions = get_post_meta(get_the_ID(), '_elementor_conditions', true);
+            if (is_array($conditions)) {
+                foreach ($conditions as $condition) {
+                    if (is_string($condition) && preg_match('#(^|/)grades(/|$)#', $condition)) {
+                        return true;
+                    }
+                }
+            }
+
+            if (method_exists($document, 'get_settings')) {
+                $preview_id = (int) $document->get_settings('preview_id');
+                $preview_type = (string) $document->get_settings('preview_type');
+                if ($preview_id && get_post_type($preview_id) === 'grades') {
+                    return true;
+                }
+                if ($preview_type !== '' && strpos($preview_type, 'grades') !== false) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Print Matrik breadcrumb hero once (after header / before Elementor content).
+     * Switches to a grades post in Elementor edit/preview so title + featured image resolve.
+     */
+    public static function render_grades_breadcrumb() {
+        if (self::$grades_breadcrumb_rendered) {
+            return;
+        }
+
+        if (!self::should_render_grades_breadcrumb()) {
+            return;
+        }
+
+        if (!class_exists('\Egns\Helper\Egns_Helper')) {
+            return;
+        }
+
+        $switched = false;
+        $grades_id = self::get_grades_context_post_id();
+        if ($grades_id && (int) get_the_ID() !== $grades_id) {
+            $grades_post = get_post($grades_id);
+            if ($grades_post) {
+                $GLOBALS['post'] = $grades_post;
+                setup_postdata($grades_post);
+                $switched = true;
+            }
+        }
+
+        self::$grades_breadcrumb_rendered = true;
+        \Egns\Helper\Egns_Helper::egns_template_part('breadcrumb', 'templates/breadcrumb-single');
+
+        if ($switched) {
+            wp_reset_postdata();
+        }
+    }
+
+    /**
+     * Grades post ID for breadcrumb title/image (current singular or Elementor preview).
+     *
+     * @return int
+     */
+    private static function get_grades_context_post_id() {
+        if (is_singular('grades')) {
+            return (int) get_the_ID();
+        }
+
+        if (!class_exists('\Elementor\Plugin')) {
+            return 0;
+        }
+
+        $document = \Elementor\Plugin::$instance->documents->get(get_the_ID());
+        if ($document && method_exists($document, 'get_settings')) {
+            $preview_id = (int) $document->get_settings('preview_id');
+            if ($preview_id && get_post_type($preview_id) === 'grades') {
+                return $preview_id;
+            }
+        }
+
+        $fallback = get_posts(array(
+            'post_type' => 'grades',
+            'post_status' => 'publish',
+            'posts_per_page' => 1,
+            'fields' => 'ids',
+            'orderby' => 'date',
+            'order' => 'DESC',
+        ));
+
+        return !empty($fallback[0]) ? (int) $fallback[0] : 0;
     }
 
     /**
