@@ -651,14 +651,14 @@ header.style-1 {
         align-items: center;
         justify-content: center;
         gap: 6px;
-        margin: 0 2px 0 0;
-        padding: 4px 14px;
+        margin: 0;
+        padding: 12px 14px;
         border: 0;
         border-radius: 20px;
         overflow: visible;
         cursor: pointer;
         font-family: var(--font-manrope, "Manrope", sans-serif);
-        font-size: 12px;
+        font-size: 14px;
         font-weight: 600;
         line-height: 1;
         white-space: nowrap;
@@ -697,24 +697,24 @@ header.style-1 {
     }
 
     .azytus-header-product-btn {
-        background: rgba(var(--primary-color3-opc, 138, 188, 70), 0.2);
-        color: var(--primary-color3, #8abc46);
+        background: rgba(var(--primary-color1-opc, 92, 149, 65), 0.2);
+        color: var(--primary-color1, #5c9541);
 
         &:hover:not(:disabled),
         &:focus-visible:not(:disabled) {
-            background: var(--primary-color3, #8abc46);
+            background: var(--primary-color1, #5c9541);
             color: #fff;
             outline: none;
         }
     }
 
     .azytus-header-coa-btn {
-        background: rgba(35, 79, 64, 0.14);
-        color: var(--primary-color4, #234f40);
+        background: rgba(var( --primary-color2-opc, 20, 116, 155), 0.2);
+        color: var( --primary-color2 );
 
         &:hover:not(:disabled),
         &:focus-visible:not(:disabled) {
-            background: var(--primary-color4, #234f40);
+            background: var( --primary-color2 );
             color: #fff;
             outline: none;
         }
