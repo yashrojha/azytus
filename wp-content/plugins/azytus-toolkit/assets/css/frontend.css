@@ -393,8 +393,8 @@
 
     &:hover .icon,
     &:focus-visible .icon {
-        background-color: rgba(var(--primary-color3-opc, 138, 188, 70), 0.22);
-        color: var(--primary-color3, #8abc46);
+        background-color: var(--primary-color1, #5c9541);
+        color: #fff;
         outline: none;
     }
 }

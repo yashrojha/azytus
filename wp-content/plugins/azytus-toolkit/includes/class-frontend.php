@@ -17,12 +17,39 @@ class Azytus_Frontend {
         add_shortcode('azytus_product_search', array(__CLASS__, 'product_search_shortcode'));
         add_shortcode('azytus_coa_lookup', array(__CLASS__, 'coa_lookup_shortcode'));
         add_shortcode('azytus_product_display', array(__CLASS__, 'product_display_shortcode'));
+        add_shortcode('azytus_grade_category', array(__CLASS__, 'grade_category_shortcode'));
         
         // Custom single templates
         add_filter('single_template', array(__CLASS__, 'custom_single_template'));
         
         // Header grade search popup
         add_action('wp_footer', array(__CLASS__, 'render_header_search_popup'));
+    }
+
+    /**
+     * Grade category layout for Elementor Theme Builder Singles.
+     * Usage: [azytus_grade_category] or [azytus_grade_category id="3799"]
+     *
+     * @param array $atts
+     * @return string
+     */
+    public static function grade_category_shortcode($atts) {
+        $atts = shortcode_atts(array(
+            'id' => 0,
+        ), $atts, 'azytus_grade_category');
+
+        $category_id = absint($atts['id']);
+        if (!$category_id && is_singular('grades')) {
+            $category_id = get_the_ID();
+        }
+
+        if (!$category_id || get_post_type($category_id) !== 'grades') {
+            return '';
+        }
+
+        ob_start();
+        include AZYTUS_TOOLKIT_PLUGIN_DIR . 'templates/parts/grade-category-content.php';
+        return ob_get_clean();
     }
     
     /**
