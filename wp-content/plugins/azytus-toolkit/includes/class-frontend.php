@@ -103,9 +103,9 @@ class Azytus_Frontend {
         <div class="azytus-coa-lookup">
             <div class="azytus-coa-form">
                 <h3><?php _e('COA Search', 'azytus-toolkit'); ?></h3>
-                <label for="azytus-batch-lookup"><?php _e('Enter Batch Number or Product Code', 'azytus-toolkit'); ?></label>
+                <label for="azytus-batch-lookup"><?php _e('Enter Batch Number', 'azytus-toolkit'); ?></label>
                 <div class="azytus-coa-input-group">
-                    <input type="text" id="azytus-batch-lookup" placeholder="<?php _e('Batch number or product code...', 'azytus-toolkit'); ?>" />
+                    <input type="text" id="azytus-batch-lookup" placeholder="<?php _e('Batch number...', 'azytus-toolkit'); ?>" />
                     <button type="button" id="azytus-coa-lookup-btn" class="button"><?php _e('Search', 'azytus-toolkit'); ?></button>
                 </div>
             </div>
@@ -116,7 +116,7 @@ class Azytus_Frontend {
             </div>
             
             <div class="azytus-coa-error" style="display: none;">
-                <p class="azytus-error-message"><?php _e('No results found. Please check the batch number or product code.', 'azytus-toolkit'); ?></p>
+                <p class="azytus-error-message"><?php _e('No results found. Please check the batch number.', 'azytus-toolkit'); ?></p>
             </div>
             
             <div class="azytus-coa-loader" style="display: none;">

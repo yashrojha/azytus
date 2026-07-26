@@ -90,6 +90,10 @@
     background: #fff;
 }
 
+.azytus-product-table {
+    min-width: 1100px;
+}
+
 .azytus-results-table th,
 .azytus-results-table td,
 .azytus-product-table th,
@@ -418,8 +422,8 @@ header.style-1 {
         }
 
         &:hover .icon {
-            background-color: rgba(var(--primary-color3-opc, 138, 188, 70), 0.22);
-            color: var(--primary-color3, #8abc46);
+            background-color: rgba(var(--primary-color1-opc, 92, 149, 65), 0.22);
+            color: var(--primary-color1, #5c9541);
             outline: none;
         }
     }
@@ -528,16 +532,16 @@ header.style-1 {
         height: 36px;
         border: 0;
         border-radius: 50%;
-        background: rgba(var(--black-color-opc, 0, 0, 0), 0.08);
-        color: var(--title-color, #000);
+        background: rgba(var(--primary-color1-opc, 92, 149, 65), 0.08);
+        color: var(--primary-color1, #5c9541);
         cursor: pointer;
         font-size: 20px;
         line-height: 1;
         transition: background-color 0.3s ease, color 0.3s ease;
 
         &:hover {
-            background: rgba(var(--primary-color3-opc, 138, 188, 70), 0.22);
-            color: var(--primary-color3, #8abc46);
+            background: var(--primary-color1, #5c9541);
+            color: #fff;
         }
     }
 
@@ -554,8 +558,7 @@ header.style-1 {
         transition: border-color 0.25s ease, box-shadow 0.25s ease;
 
         &:focus-within {
-            border-color: var(--primary-color3, #8abc46);
-            box-shadow: 0 0 0 3px rgba(var(--primary-color3-opc, 138, 188, 70), 0.18);
+            border-color: #bbb;
         }
 
         @media (max-width: 575px) {
@@ -757,6 +760,10 @@ header.style-1 {
 
     .azytus-header-results-table {
         min-width: 640px;
+
+        &.azytus-product-table {
+            min-width: 1100px;
+        }
 
         th {
             background: var(--primary-color4, #234f40) !important;

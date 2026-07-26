@@ -193,7 +193,7 @@
             var searchTerm = $('#azytus-batch-lookup').val().trim();
             
             if (!searchTerm) {
-                alert('Please enter a batch number or product code');
+                alert('Please enter a batch number');
                 return;
             }
             
@@ -375,7 +375,7 @@
             function renderProductTable(items) {
                 var html = '<div class="azytus-table-wrapper"><table class="azytus-product-table azytus-header-results-table">';
                 html += '<thead><tr>';
-                html += '<th>Product Name</th><th>Code</th><th>Grade</th><th>Pack Size(s)</th><th>CAS</th><th>MSDS</th>';
+                html += '<th>Product Name</th><th>Code</th><th>Grade</th><th>Pack Size(s)</th><th>CAS</th><th>HSN</th><th>Molecular Formula</th><th>Molecular Weight</th><th>MSDS</th>';
                 html += '</tr></thead><tbody>';
 
                 $.each(items, function(i, item) {
@@ -383,12 +383,16 @@
                     if (item.product_url) {
                         name = '<a href="' + escapeHtml(item.product_url) + '">' + name + '</a>';
                     }
+                    var mw = item.molecular_weight ? (escapeHtml(item.molecular_weight) + ' g/mol') : '';
                     html += '<tr>';
                     html += '<td><strong>' + name + '</strong></td>';
-                    html += '<td>' + escapeHtml(item.product_code) + '</td>';
-                    html += '<td>' + escapeHtml(item.grade) + '</td>';
-                    html += '<td>' + escapeHtml(item.pack_sizes) + '</td>';
-                    html += '<td>' + escapeHtml(item.cas) + '</td>';
+                    html += '<td>' + escapeHtml(item.product_code || '') + '</td>';
+                    html += '<td>' + escapeHtml(item.grade || '') + '</td>';
+                    html += '<td>' + escapeHtml(item.pack_sizes || '') + '</td>';
+                    html += '<td>' + escapeHtml(item.cas || '') + '</td>';
+                    html += '<td>' + escapeHtml(item.hsn || '') + '</td>';
+                    html += '<td>' + escapeHtml(item.molecular_formula || '') + '</td>';
+                    html += '<td>' + mw + '</td>';
                     html += '<td>';
                     if (item.has_msds) {
                         html += '<a href="' + escapeHtml(item.msds_url) + '" target="_blank" rel="noopener" class="button button-small">View</a>';
@@ -472,13 +476,8 @@
                 });
             }
 
-            function searchCOAByGrade() {
-                var gradeId = requireGrade();
-                if (!gradeId) {
-                    return;
-                }
-
-                var searchTerm = requireSearchTerm('Please enter a product name, batch number, or code.');
+            function searchCOA() {
+                var searchTerm = requireSearchTerm('Please enter a batch number.');
                 if (!searchTerm) {
                     return;
                 }

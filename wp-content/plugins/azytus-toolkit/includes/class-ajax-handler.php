@@ -249,7 +249,7 @@ class Azytus_Ajax_Handler {
         $require_both = ($grade_id && $search_term !== '');
         
         if (empty($search_term) && !$grade_id) {
-            wp_send_json_error(array('message' => __('Please enter a batch number or product code, or select a grade', 'azytus-toolkit')));
+            wp_send_json_error(array('message' => __('Please enter a batch number, or select a grade', 'azytus-toolkit')));
         }
         
         $results = array();
@@ -302,21 +302,16 @@ class Azytus_Ajax_Handler {
             // Get MSDS from product
             $msds_id = get_post_meta($product_id, '_azytus_msds', true);
             
-            // Product Name with grade
-            $product_name_with_grade = $product->post_title;
-            if ($grade_name) {
-                $product_name_with_grade .= ' - ' . $grade_name;
-            }
+            // Display grade name only (avoids "Acetone - Acetone DrySolv" duplication)
+            $product_name_with_grade = $grade_name ? $grade_name : $product->post_title;
             
             // Check each batch in this record
             foreach ($batches as $batch) {
                 $batch_no = isset($batch['batch_no']) ? $batch['batch_no'] : '';
                 
-                // Term match against batch / code / product name only (not grade name)
+                // COA search: batch number only (not product name/code — competitor protection)
                 $term_matched = !$search_term || (
                     stripos($batch_no, $search_term) !== false
-                    || stripos($product_code, $search_term) !== false
-                    || stripos($product->post_title, $search_term) !== false
                 );
 
                 if (!$term_matched) {

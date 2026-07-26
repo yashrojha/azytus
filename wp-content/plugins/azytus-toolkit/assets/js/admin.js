@@ -308,17 +308,39 @@
         
         // ========== COA/BATCH - DYNAMIC SELECTS ==========
         
+        // Fill WP post title from product/grade selection
+        function setBatchPostTitle(title) {
+            if (!title) {
+                return;
+            }
+            var $title = $('#title');
+            if ($title.length) {
+                $title.val(title).trigger('input').trigger('change');
+                $('#title-prompt-text').addClass('screen-reader-text');
+            }
+            if (typeof wp !== 'undefined' && wp.data && wp.data.dispatch) {
+                try {
+                    wp.data.dispatch('core/editor').editPost({ title: title });
+                } catch (e) {}
+            }
+        }
+
         // Product change handler
         $(document).on('change', '#azytus_product_id.azytus-coa-product-select', function() {
-            var productId = $(this).val();
+            var $select = $(this);
+            var productId = $select.val();
             var gradeSelect = $('#azytus_grade_index');
             var packSizeSelect = $('#azytus_pack_size_index');
+            var productName = $select.find('option:selected').text().trim();
             
             if (!productId) {
                 gradeSelect.html('<option value="">Select a grade...</option>').trigger('change');
                 packSizeSelect.html('<option value="">Select a pack size...</option>').trigger('change');
                 return;
             }
+
+            // Auto-fill batch post title with selected product name
+            setBatchPostTitle(productName);
             
             // Load grades via AJAX
             $.ajax({
@@ -355,10 +377,17 @@
             var productId = $('#azytus_product_id').val();
             var gradeIndex = $(this).val();
             var packSizeSelect = $('#azytus_pack_size_index');
+            var gradeText = $(this).find('option:selected').text().trim();
             
             if (!productId || gradeIndex === '') {
                 packSizeSelect.html('<option value="">Select a pack size...</option>').trigger('change');
                 return;
+            }
+
+            // Prefer grade name in title (strip trailing " (CODE)")
+            var gradeName = gradeText.replace(/\s*\([^)]*\)\s*$/, '').trim();
+            if (gradeName) {
+                setBatchPostTitle(gradeName);
             }
             
             // Load pack sizes via AJAX
