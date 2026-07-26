@@ -3,7 +3,7 @@
  * Plugin Name: Azytus Toolkit
  * Plugin URI: https://yashrojha.com
  * Description: Custom plugin for Azytus chemical product management with categories, grades, variations, and batch tracking
- * Version: 1.2.2
+ * Version: 1.2.3
  * Author: Yash Ojha
  * Author URI: https://yashrojha.com
  * License: GPL v2 or later
@@ -18,10 +18,24 @@ if (!defined('ABSPATH')) {
 }
 
 // Define plugin constants
-define('AZYTUS_TOOLKIT_VERSION', '1.2.2');
+define('AZYTUS_TOOLKIT_VERSION', '1.2.3');
 define('AZYTUS_TOOLKIT_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('AZYTUS_TOOLKIT_PLUGIN_URL', plugin_dir_url(__FILE__));
 define('AZYTUS_TOOLKIT_PLUGIN_FILE', __FILE__);
+
+/**
+ * Cache-busting version for a plugin asset (updates whenever the file changes).
+ *
+ * @param string $relative_path Path relative to the plugin root, e.g. 'assets/css/frontend.css'.
+ * @return string
+ */
+function azytus_toolkit_asset_version($relative_path) {
+    $file = AZYTUS_TOOLKIT_PLUGIN_DIR . ltrim($relative_path, '/');
+    if (file_exists($file)) {
+        return (string) filemtime($file);
+    }
+    return AZYTUS_TOOLKIT_VERSION;
+}
 
 /**
  * Main Azytus Toolkit Class
@@ -126,10 +140,10 @@ class Azytus_Toolkit {
             wp_enqueue_script('select2', 'https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js', array('jquery'), '4.1.0', true);
             
             // Custom admin styles
-            wp_enqueue_style('azytus-admin', AZYTUS_TOOLKIT_PLUGIN_URL . 'assets/css/admin.css', array(), AZYTUS_TOOLKIT_VERSION);
+            wp_enqueue_style('azytus-admin', AZYTUS_TOOLKIT_PLUGIN_URL . 'assets/css/admin.css', array(), azytus_toolkit_asset_version('assets/css/admin.css'));
             
             // Custom admin scripts (with jQuery UI Sortable)
-            wp_enqueue_script('azytus-admin', AZYTUS_TOOLKIT_PLUGIN_URL . 'assets/js/admin.js', array('jquery', 'jquery-ui-sortable', 'select2'), AZYTUS_TOOLKIT_VERSION, true);
+            wp_enqueue_script('azytus-admin', AZYTUS_TOOLKIT_PLUGIN_URL . 'assets/js/admin.js', array('jquery', 'jquery-ui-sortable', 'select2'), azytus_toolkit_asset_version('assets/js/admin.js'), true);
             
             wp_localize_script('azytus-admin', 'azytusAdmin', array(
                 'ajax_url' => admin_url('admin-ajax.php'),
@@ -146,8 +160,8 @@ class Azytus_Toolkit {
         wp_enqueue_style('select2', 'https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css', array(), '4.1.0');
         wp_enqueue_script('select2', 'https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js', array('jquery'), '4.1.0', true);
         
-        wp_enqueue_style('azytus-frontend', AZYTUS_TOOLKIT_PLUGIN_URL . 'assets/css/frontend.css', array('select2'), AZYTUS_TOOLKIT_VERSION);
-        wp_enqueue_script('azytus-frontend', AZYTUS_TOOLKIT_PLUGIN_URL . 'assets/js/frontend.js', array('jquery', 'select2'), AZYTUS_TOOLKIT_VERSION, true);
+        wp_enqueue_style('azytus-frontend', AZYTUS_TOOLKIT_PLUGIN_URL . 'assets/css/frontend.css', array('select2'), azytus_toolkit_asset_version('assets/css/frontend.css'));
+        wp_enqueue_script('azytus-frontend', AZYTUS_TOOLKIT_PLUGIN_URL . 'assets/js/frontend.js', array('jquery', 'select2'), azytus_toolkit_asset_version('assets/js/frontend.js'), true);
         
         wp_localize_script('azytus-frontend', 'azytusFrontend', array(
             'ajax_url' => admin_url('admin-ajax.php'),
