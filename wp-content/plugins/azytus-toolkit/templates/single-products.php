@@ -299,31 +299,6 @@ while (have_posts()) :
                 <?php endif; ?>
             </section>
 
-            <section class="azytus-pp-cta" aria-labelledby="azytus-pp-cta-title">
-                <div class="azytus-pp-cta__copy">
-                    <span class="azytus-pp-eyebrow azytus-pp-eyebrow--light"><?php esc_html_e('Need documentation?', 'azytus-toolkit'); ?></span>
-                    <h2 id="azytus-pp-cta-title"><?php esc_html_e('Looking for COA, bulk supply, or a custom pack size?', 'azytus-toolkit'); ?></h2>
-                    <p><?php esc_html_e('Our team can share batch COA, MSDS, and packing options for your lab or manufacturing need.', 'azytus-toolkit'); ?></p>
-                </div>
-                <div class="azytus-pp-cta__actions">
-                    <a class="primary-btn1 white-bg" href="<?php echo esc_url($contact_url); ?>">
-                        <span><?php esc_html_e('Contact Us', 'azytus-toolkit'); ?></span>
-                        <span><?php esc_html_e('Contact Us', 'azytus-toolkit'); ?></span>
-                        <svg class="arrow" width="23" height="23" viewBox="0 0 23 23" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
-                            <g>
-                                <path d="M0.113861 0H22.9999V4.28425L4.32671 22.9997L0 18.7154L12.7524 6.08815L0.113861 6.20089V0Z"></path>
-                                <path d="M23 22.9996V8.56848L16.8516 14.6566V22.9996H23Z"></path>
-                            </g>
-                        </svg>
-                    </a>
-                    <?php if ($msds_url) : ?>
-                        <a class="azytus-pp-btn azytus-pp-btn--on-dark" href="<?php echo esc_url($msds_url); ?>" target="_blank" rel="noopener noreferrer">
-                            <?php esc_html_e('Download MSDS', 'azytus-toolkit'); ?>
-                        </a>
-                    <?php endif; ?>
-                </div>
-            </section>
-
         </div>
     </div>
 
