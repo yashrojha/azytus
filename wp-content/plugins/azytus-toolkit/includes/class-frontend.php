@@ -25,6 +25,8 @@ class Azytus_Frontend {
         add_shortcode('azytus_coa_lookup', array(__CLASS__, 'coa_lookup_shortcode'));
         add_shortcode('azytus_product_display', array(__CLASS__, 'product_display_shortcode'));
         add_shortcode('azytus_grade_category', array(__CLASS__, 'grade_category_shortcode'));
+        add_shortcode('azytus_grade_table', array(__CLASS__, 'grade_table_shortcode'));
+        add_shortcode('azytus_grade_products_image', array(__CLASS__, 'grade_products_image_shortcode'));
         
         // Custom single templates
         add_filter('single_template', array(__CLASS__, 'custom_single_template'));
@@ -36,6 +38,64 @@ class Azytus_Frontend {
 
         // Header grade search popup
         add_action('wp_footer', array(__CLASS__, 'render_header_search_popup'));
+    }
+
+    /**
+     * Resolve grade category post ID from shortcode attr / singular / Elementor preview.
+     *
+     * @param int|string $id
+     * @return int
+     */
+    public static function resolve_grade_category_id($id = 0) {
+        $category_id = absint($id);
+
+        if (!$category_id && is_singular('grades')) {
+            $category_id = (int) get_the_ID();
+        }
+
+        if (!$category_id) {
+            $category_id = self::get_grades_context_post_id();
+        }
+
+        if (!$category_id || get_post_type($category_id) !== 'grades') {
+            return 0;
+        }
+
+        return $category_id;
+    }
+
+    /**
+     * Sanitize CSS length (px/%/rem/em/vh/vw) or auto.
+     *
+     * @param string $value
+     * @param string $default
+     * @return string
+     */
+    private static function sanitize_css_size($value, $default = '') {
+        $value = trim((string) $value);
+        if ($value === '') {
+            return $default;
+        }
+        if (strtolower($value) === 'auto') {
+            return 'auto';
+        }
+        if (preg_match('/^(\d*\.?\d+)(px|%|rem|em|vh|vw)?$/i', $value, $matches)) {
+            $unit = !empty($matches[2]) ? $matches[2] : 'px';
+            return $matches[1] . $unit;
+        }
+        return $default;
+    }
+
+    /**
+     * Sanitize CSS object-fit value.
+     *
+     * @param string $value
+     * @return string
+     */
+    private static function sanitize_object_fit($value) {
+        $allowed = array('cover', 'contain', 'fill', 'none', 'scale-down');
+        $value = strtolower(trim((string) $value));
+        return in_array($value, $allowed, true) ? $value : 'cover';
     }
 
     /**
@@ -179,18 +239,121 @@ class Azytus_Frontend {
             'id' => 0,
         ), $atts, 'azytus_grade_category');
 
-        $category_id = absint($atts['id']);
-        if (!$category_id && is_singular('grades')) {
-            $category_id = get_the_ID();
-        }
-
-        if (!$category_id || get_post_type($category_id) !== 'grades') {
+        $category_id = self::resolve_grade_category_id($atts['id']);
+        if (!$category_id) {
             return '';
         }
 
         ob_start();
         include AZYTUS_TOOLKIT_PLUGIN_DIR . 'templates/parts/grade-category-content.php';
         return ob_get_clean();
+    }
+
+    /**
+     * Products table for a grade category.
+     *
+     * [azytus_grade_table]
+     * [azytus_grade_table id="3799" columns="2"]
+     *
+     * @param array $atts
+     * @return string
+     */
+    public static function grade_table_shortcode($atts) {
+        $atts = shortcode_atts(array(
+            'id' => 0,
+            'columns' => '2',
+        ), $atts, 'azytus_grade_table');
+
+        $category_id = self::resolve_grade_category_id($atts['id']);
+        if (!$category_id) {
+            return '';
+        }
+
+        $columns = max(1, min(2, absint($atts['columns'])));
+        $grade_items = self::get_grades_for_category($category_id);
+
+        ob_start();
+        include AZYTUS_TOOLKIT_PLUGIN_DIR . 'templates/parts/grade-table.php';
+        return ob_get_clean();
+    }
+
+    /**
+     * Grade category products image (meta _azytus_products_image).
+     *
+     * [azytus_grade_products_image]
+     * [azytus_grade_products_image width="100%" height="420px" object_fit="cover" border_radius="12px"]
+     *
+     * @param array $atts
+     * @return string
+     */
+    public static function grade_products_image_shortcode($atts) {
+        $atts = shortcode_atts(array(
+            'id' => 0,
+            'width' => '100%',
+            'height' => 'auto',
+            'object_fit' => 'cover',
+            'border_radius' => '0',
+            'size' => 'full',
+            'class' => '',
+        ), $atts, 'azytus_grade_products_image');
+
+        $category_id = self::resolve_grade_category_id($atts['id']);
+        if (!$category_id) {
+            return '';
+        }
+
+        $products_image_id = absint(get_post_meta($category_id, '_azytus_products_image', true));
+        if (!$products_image_id) {
+            return '';
+        }
+
+        $width = self::sanitize_css_size($atts['width'], '100%');
+        $height = self::sanitize_css_size($atts['height'], 'auto');
+        $object_fit = self::sanitize_object_fit($atts['object_fit']);
+        $border_radius = self::sanitize_css_size($atts['border_radius'], '0');
+        $size = sanitize_key($atts['size']);
+        if ($size === '') {
+            $size = 'full';
+        }
+
+        $extra_classes = array_filter(array_map(
+            'sanitize_html_class',
+            preg_split('/\s+/', trim((string) $atts['class']))
+        ));
+
+        $img_style = sprintf(
+            'width:%1$s;height:%2$s;object-fit:%3$s;border-radius:%4$s;display:block;',
+            esc_attr($width),
+            esc_attr($height),
+            esc_attr($object_fit),
+            esc_attr($border_radius)
+        );
+
+        $wrapper_classes = array_merge(
+            array('azytus-gc-products-image', 'azytus-gc-products-image--shortcode'),
+            $extra_classes
+        );
+
+        $image_html = wp_get_attachment_image(
+            $products_image_id,
+            $size,
+            false,
+            array(
+                'style' => $img_style,
+                'class' => 'azytus-gc-products-image__img',
+                'alt' => get_the_title($category_id),
+            )
+        );
+
+        if (!$image_html) {
+            return '';
+        }
+
+        return sprintf(
+            '<div class="%1$s" style="width:100%%;max-width:100%%;">%2$s</div>',
+            esc_attr(implode(' ', $wrapper_classes)),
+            $image_html
+        );
     }
     
     /**
