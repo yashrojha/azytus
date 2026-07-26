@@ -305,6 +305,217 @@
                 });
             });
         }
+
+        // ========== COA/BATCH - BATCH NUMBER UNIQUENESS ==========
+
+        var batchNoCheckTimers = {};
+        var batchNoRequests = {};
+        var i18n = (azytusAdmin && azytusAdmin.i18n) ? azytusAdmin.i18n : {};
+
+        function normalizeBatchNo(value) {
+            return String(value || '').trim().toLowerCase();
+        }
+
+        function getBatchNoField($input) {
+            return $input.closest('td').length ? $input.closest('td') : $input.parent();
+        }
+
+        function clearBatchNoError($input) {
+            var $cell = getBatchNoField($input);
+            $input.removeClass('azytus-batch-no-invalid azytus-batch-no-checking');
+            $input.data('batch-no-error', false);
+            $cell.find('.azytus-batch-no-error').prop('hidden', true).removeClass('is-checking').text('');
+            $cell.find('.azytus-batch-no-hint').show();
+        }
+
+        function showBatchNoError($input, message, isChecking) {
+            var $cell = getBatchNoField($input);
+            $input.toggleClass('azytus-batch-no-checking', !!isChecking);
+            $input.toggleClass('azytus-batch-no-invalid', !isChecking);
+            $input.data('batch-no-error', !isChecking);
+            $cell.find('.azytus-batch-no-hint').hide();
+            $cell.find('.azytus-batch-no-error')
+                .text(message)
+                .toggleClass('is-checking', !!isChecking)
+                .prop('hidden', false);
+        }
+
+        function isDuplicateInForm($input) {
+            var value = normalizeBatchNo($input.val());
+            if (!value) {
+                return false;
+            }
+
+            var duplicate = false;
+            $('#azytus-batches-container .azytus-batch-no-field').not($input).each(function() {
+                if (normalizeBatchNo($(this).val()) === value) {
+                    duplicate = true;
+                    return false;
+                }
+            });
+            return duplicate;
+        }
+
+        function revalidateFormDuplicates() {
+            $('#azytus-batches-container .azytus-batch-no-field').each(function() {
+                var $input = $(this);
+                var value = normalizeBatchNo($input.val());
+
+                if (!value) {
+                    clearBatchNoError($input);
+                    return;
+                }
+
+                if (isDuplicateInForm($input)) {
+                    showBatchNoError($input, i18n.duplicateInForm || 'This batch number is entered more than once in this form.');
+                } else if ($input.data('batch-no-site-error')) {
+                    showBatchNoError($input, $input.data('batch-no-site-error'));
+                } else if (!$input.data('batch-no-checking')) {
+                    clearBatchNoError($input);
+                }
+            });
+        }
+
+        function checkBatchNoOnSite($input) {
+            var value = String($input.val() || '').trim();
+            var requestKey = $input.attr('name') || $input.index();
+            var original = normalizeBatchNo($input.attr('data-original-batch-no'));
+
+            if (batchNoRequests[requestKey] && batchNoRequests[requestKey].abort) {
+                batchNoRequests[requestKey].abort();
+            }
+
+            if (!value) {
+                $input.data('batch-no-site-error', '');
+                $input.data('batch-no-checking', false);
+                revalidateFormDuplicates();
+                return;
+            }
+
+            if (isDuplicateInForm($input)) {
+                $input.data('batch-no-site-error', '');
+                $input.data('batch-no-checking', false);
+                showBatchNoError($input, i18n.duplicateInForm || 'This batch number is entered more than once in this form.');
+                return;
+            }
+
+            // Same as originally saved on this row — no site check needed
+            if (original && normalizeBatchNo(value) === original) {
+                $input.data('batch-no-site-error', '');
+                $input.data('batch-no-checking', false);
+                clearBatchNoError($input);
+                return;
+            }
+
+            $input.data('batch-no-checking', true);
+            showBatchNoError($input, i18n.checking || 'Checking batch number...', true);
+
+            batchNoRequests[requestKey] = $.ajax({
+                url: azytusAdmin.ajax_url,
+                type: 'POST',
+                data: {
+                    action: 'azytus_check_batch_no',
+                    nonce: azytusAdmin.nonce,
+                    batch_no: value,
+                    post_id: azytusAdmin.post_id || 0
+                }
+            }).done(function(response) {
+                $input.data('batch-no-checking', false);
+
+                if (!response || !response.success) {
+                    clearBatchNoError($input);
+                    $input.data('batch-no-site-error', '');
+                    return;
+                }
+
+                if (response.data && response.data.exists) {
+                    var message = response.data.message || i18n.duplicateOnSite || 'This batch number already exists on the site.';
+                    $input.data('batch-no-site-error', message);
+                    showBatchNoError($input, message);
+                } else {
+                    $input.data('batch-no-site-error', '');
+                    if (isDuplicateInForm($input)) {
+                        showBatchNoError($input, i18n.duplicateInForm || 'This batch number is entered more than once in this form.');
+                    } else {
+                        clearBatchNoError($input);
+                    }
+                }
+            }).fail(function(xhr, status) {
+                if (status === 'abort') {
+                    return;
+                }
+                $input.data('batch-no-checking', false);
+                $input.data('batch-no-site-error', '');
+                revalidateFormDuplicates();
+            });
+        }
+
+        $(document).on('blur', '#azytus-batches-container .azytus-batch-no-field', function() {
+            var $input = $(this);
+            var requestKey = $input.attr('name') || $input.index();
+
+            if (batchNoCheckTimers[requestKey]) {
+                clearTimeout(batchNoCheckTimers[requestKey]);
+            }
+
+            batchNoCheckTimers[requestKey] = setTimeout(function() {
+                checkBatchNoOnSite($input);
+            }, 150);
+        });
+
+        $(document).on('input', '#azytus-batches-container .azytus-batch-no-field', function() {
+            var $input = $(this);
+            $input.data('batch-no-site-error', '');
+            revalidateFormDuplicates();
+        });
+
+        // Re-check remaining rows after a batch is removed
+        $(document).on('click', '.azytus-remove-batch', function() {
+            setTimeout(revalidateFormDuplicates, 0);
+        });
+
+        // Block save/publish when duplicate batch numbers are present
+        $('#post').on('submit', function(e) {
+            if (!$('#azytus-batches-container').length) {
+                return;
+            }
+
+            var hasError = false;
+            var isChecking = false;
+
+            $('#azytus-batches-container .azytus-batch-no-field').each(function() {
+                var $input = $(this);
+
+                if ($input.data('batch-no-checking')) {
+                    isChecking = true;
+                }
+
+                if (isDuplicateInForm($input) || $input.data('batch-no-site-error')) {
+                    hasError = true;
+                    if (isDuplicateInForm($input)) {
+                        showBatchNoError($input, i18n.duplicateInForm || 'This batch number is entered more than once in this form.');
+                    } else if ($input.data('batch-no-site-error')) {
+                        showBatchNoError($input, $input.data('batch-no-site-error'));
+                    }
+                }
+            });
+
+            if (isChecking || hasError) {
+                e.preventDefault();
+                e.stopPropagation();
+                alert(
+                    isChecking
+                        ? (i18n.checking || 'Checking batch number...')
+                        : (i18n.blockSave || 'Please fix duplicate batch number errors before saving.')
+                );
+                var $firstInvalid = $('#azytus-batches-container .azytus-batch-no-invalid, #azytus-batches-container .azytus-batch-no-checking').first();
+                if ($firstInvalid.length) {
+                    $('html, body').animate({ scrollTop: $firstInvalid.offset().top - 120 }, 200);
+                    $firstInvalid.trigger('focus');
+                }
+                return false;
+            }
+        });
         
         // ========== COA/BATCH - DYNAMIC SELECTS ==========
         

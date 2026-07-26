@@ -18,6 +18,9 @@ class Azytus_Ajax_Handler {
         
         // Admin AJAX - Get grade pack sizes
         add_action('wp_ajax_azytus_get_grade_pack_sizes', array(__CLASS__, 'get_grade_pack_sizes'));
+
+        // Admin AJAX - Check batch number uniqueness
+        add_action('wp_ajax_azytus_check_batch_no', array(__CLASS__, 'check_batch_no'));
         
         // Frontend AJAX - Search products
         add_action('wp_ajax_azytus_search_products', array(__CLASS__, 'search_products'));
@@ -235,6 +238,98 @@ class Azytus_Ajax_Handler {
         wp_send_json_success($results);
     }
     
+    /**
+     * Check if a batch number already exists on the site
+     */
+    public static function check_batch_no() {
+        check_ajax_referer('azytus_admin_nonce', 'nonce');
+
+        if (!current_user_can('edit_posts')) {
+            wp_send_json_error(array('message' => __('Permission denied', 'azytus-toolkit')));
+        }
+
+        $batch_no = isset($_POST['batch_no']) ? sanitize_text_field(wp_unslash($_POST['batch_no'])) : '';
+        $exclude_post_id = isset($_POST['post_id']) ? intval($_POST['post_id']) : 0;
+
+        if ($batch_no === '') {
+            wp_send_json_success(array('exists' => false));
+        }
+
+        $match = self::find_existing_batch_no($batch_no, $exclude_post_id);
+
+        if ($match) {
+            wp_send_json_success(array(
+                'exists' => true,
+                'post_id' => $match['post_id'],
+                'post_title' => $match['post_title'],
+                'edit_url' => $match['edit_url'],
+                'message' => sprintf(
+                    /* translators: 1: batch number, 2: COA/Batch post title */
+                    __('Batch number "%1$s" already exists in "%2$s".', 'azytus-toolkit'),
+                    $batch_no,
+                    $match['post_title']
+                ),
+            ));
+        }
+
+        wp_send_json_success(array('exists' => false));
+    }
+
+    /**
+     * Find an existing batch number across all COA/Batch posts
+     *
+     * @param string $batch_no
+     * @param int    $exclude_post_id Current post ID to skip
+     * @return array|null
+     */
+    public static function find_existing_batch_no($batch_no, $exclude_post_id = 0) {
+        $needle = strtolower(trim($batch_no));
+
+        if ($needle === '') {
+            return null;
+        }
+
+        $records = get_posts(array(
+            'post_type' => 'batches',
+            'posts_per_page' => -1,
+            'post_status' => array('publish', 'draft', 'pending', 'private', 'future'),
+            'fields' => 'ids',
+            'no_found_rows' => true,
+            'update_post_meta_cache' => true,
+            'update_post_term_cache' => false,
+        ));
+
+        foreach ($records as $record_id) {
+            $record_id = (int) $record_id;
+
+            if ($exclude_post_id && $record_id === $exclude_post_id) {
+                continue;
+            }
+
+            $batches = get_post_meta($record_id, '_azytus_batches', true);
+
+            if (!is_array($batches)) {
+                continue;
+            }
+
+            foreach ($batches as $batch) {
+                $existing = isset($batch['batch_no']) ? strtolower(trim((string) $batch['batch_no'])) : '';
+
+                if ($existing !== '' && $existing === $needle) {
+                    $title = get_the_title($record_id);
+
+                    return array(
+                        'post_id' => $record_id,
+                        'post_title' => $title !== '' ? $title : sprintf(__('COA/Batch #%d', 'azytus-toolkit'), $record_id),
+                        'edit_url' => get_edit_post_link($record_id, 'raw'),
+                    );
+                }
+            }
+        }
+
+        return null;
+    }
+
     /**
      * COA Search
      * Returns: Batch No., Code, Pack Size, Product Name with grade, COA, MSDS

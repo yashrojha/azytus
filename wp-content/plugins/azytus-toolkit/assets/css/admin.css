@@ -514,6 +514,31 @@ div.azytus-add-pack-button:hover::before {
     background: #f5f5f5;
 }
 
+.azytus-batch-no-field.azytus-batch-no-invalid {
+    border-color: #d63638;
+    box-shadow: 0 0 0 1px #d63638;
+}
+
+.azytus-batch-no-field.azytus-batch-no-checking {
+    border-color: #dba617;
+    box-shadow: 0 0 0 1px #dba617;
+}
+
+.azytus-batch-no-error {
+    margin: 8px 0 0;
+    color: #d63638;
+    font-weight: 600;
+}
+
+.azytus-batch-no-error.is-checking {
+    color: #9a6700;
+    font-weight: 500;
+}
+
+.azytus-batch-no-error[hidden] {
+    display: none !important;
+}
+
 /* Empty State */
 .azytus-empty-state {
     text-align: center;

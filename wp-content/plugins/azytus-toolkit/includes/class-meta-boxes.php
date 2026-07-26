@@ -15,6 +15,7 @@ class Azytus_Meta_Boxes {
     public static function init() {
         add_action('add_meta_boxes', array(__CLASS__, 'add_meta_boxes'));
         add_action('save_post', array(__CLASS__, 'save_meta_boxes'), 10, 2);
+        add_action('admin_notices', array(__CLASS__, 'maybe_show_batch_no_notice'));
     }
     
     /**
@@ -589,8 +590,9 @@ class Azytus_Meta_Boxes {
                 <tr>
                     <th><label><?php _e('Batch Number', 'azytus-toolkit'); ?> <span class="required">*</span></label></th>
                     <td>
-                        <input type="text" name="azytus_batches[<?php echo esc_attr($index); ?>][batch_no]" value="<?php echo esc_attr($batch_no); ?>" class="regular-text" placeholder="e.g., BATCH-2024-001" required />
-                        <p class="description"><?php _e('Unique batch/lot number', 'azytus-toolkit'); ?></p>
+                        <input type="text" name="azytus_batches[<?php echo esc_attr($index); ?>][batch_no]" value="<?php echo esc_attr($batch_no); ?>" class="regular-text azytus-batch-no-field" placeholder="e.g., BATCH-2024-001" required autocomplete="off" data-original-batch-no="<?php echo esc_attr($batch_no); ?>" />
+                        <p class="description azytus-batch-no-hint"><?php _e('Unique batch/lot number', 'azytus-toolkit'); ?></p>
+                        <p class="azytus-batch-no-error" hidden></p>
                     </td>
                 </tr>
                 
@@ -797,6 +799,19 @@ class Azytus_Meta_Boxes {
         
         // Save batches
         $batches = array();
+        $seen_batch_nos = array();
+        $duplicate_batch_nos = array();
+        $existing_batch_nos = array();
+        $previous_batch_nos = array();
+
+        $previous_batches = get_post_meta($post_id, '_azytus_batches', true);
+        if (is_array($previous_batches)) {
+            foreach ($previous_batches as $previous_batch) {
+                if (!empty($previous_batch['batch_no'])) {
+                    $previous_batch_nos[strtolower(trim($previous_batch['batch_no']))] = true;
+                }
+            }
+        }
         
         if (isset($_POST['azytus_batches']) && is_array($_POST['azytus_batches'])) {
             foreach ($_POST['azytus_batches'] as $batch_data) {
@@ -809,11 +824,69 @@ class Azytus_Meta_Boxes {
                 
                 // Only add batch if it has required fields
                 if (!empty($batch['batch_no'])) {
+                    $normalized = strtolower(trim($batch['batch_no']));
+
+                    if (isset($seen_batch_nos[$normalized])) {
+                        $duplicate_batch_nos[] = $batch['batch_no'];
+                        continue;
+                    }
+
+                    // Allow values already saved on this post; block only newly introduced site-wide duplicates
+                    if (!isset($previous_batch_nos[$normalized]) && class_exists('Azytus_Ajax_Handler')) {
+                        $existing = Azytus_Ajax_Handler::find_existing_batch_no($batch['batch_no'], $post_id);
+                        if ($existing) {
+                            $existing_batch_nos[] = $batch['batch_no'];
+                            continue;
+                        }
+                    }
+
+                    $seen_batch_nos[$normalized] = true;
                     $batches[] = $batch;
                 }
             }
         }
+
+        if (!empty($duplicate_batch_nos) || !empty($existing_batch_nos)) {
+            $messages = array();
+
+            if (!empty($duplicate_batch_nos)) {
+                $messages[] = sprintf(
+                    /* translators: %s: comma-separated batch numbers */
+                    __('Skipped duplicate batch number(s) in this form: %s', 'azytus-toolkit'),
+                    implode(', ', array_unique($duplicate_batch_nos))
+                );
+            }
+
+            if (!empty($existing_batch_nos)) {
+                $messages[] = sprintf(
+                    /* translators: %s: comma-separated batch numbers */
+                    __('Skipped batch number(s) already used elsewhere: %s', 'azytus-toolkit'),
+                    implode(', ', array_unique($existing_batch_nos))
+                );
+            }
+
+            set_transient('azytus_batch_no_notice_' . get_current_user_id(), implode(' ', $messages), 45);
+        }
         
         update_post_meta($post_id, '_azytus_batches', $batches);
+    }
+
+    /**
+     * Show admin notice for skipped duplicate batch numbers
+     */
+    public static function maybe_show_batch_no_notice() {
+        $key = 'azytus_batch_no_notice_' . get_current_user_id();
+        $message = get_transient($key);
+
+        if (!$message) {
+            return;
+        }
+
+        delete_transient($key);
+        ?>
+        <div class="notice notice-error is-dismissible">
+            <p><?php echo esc_html($message); ?></p>
+        </div>
+        <?php
     }
 }

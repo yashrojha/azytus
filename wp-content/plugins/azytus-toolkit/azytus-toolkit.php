@@ -149,6 +149,13 @@ class Azytus_Toolkit {
             wp_localize_script('azytus-admin', 'azytusAdmin', array(
                 'ajax_url' => admin_url('admin-ajax.php'),
                 'nonce' => wp_create_nonce('azytus_admin_nonce'),
+                'post_id' => isset($_GET['post']) ? intval($_GET['post']) : (isset($GLOBALS['post']->ID) ? (int) $GLOBALS['post']->ID : 0),
+                'i18n' => array(
+                    'duplicateInForm' => __('This batch number is entered more than once in this form.', 'azytus-toolkit'),
+                    'duplicateOnSite' => __('This batch number already exists on the site.', 'azytus-toolkit'),
+                    'checking' => __('Checking batch number...', 'azytus-toolkit'),
+                    'blockSave' => __('Please fix duplicate batch number errors before saving.', 'azytus-toolkit'),
+                ),
             ));
         }
     }
