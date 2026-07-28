@@ -919,9 +919,9 @@ class Azytus_Frontend {
                         <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/>
                         <path d="M20 20L16.5 16.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
                     </svg>
-                    <span class="azytus-header-search-eyebrow"><?php esc_html_e('Search', 'azytus-toolkit'); ?></span>
-                    <span class="azytus-header-search-title"><?php esc_html_e('Products & COA', 'azytus-toolkit'); ?></span>
                 </span>
+                <span class="azytus-header-search-eyebrow"><?php esc_html_e('Search', 'azytus-toolkit'); ?></span>
+                <span class="azytus-header-search-title"><?php esc_html_e('Products & COA', 'azytus-toolkit'); ?></span>
             </button>
         </template>
 
