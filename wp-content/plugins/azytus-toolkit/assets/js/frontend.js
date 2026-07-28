@@ -23,11 +23,9 @@
             var $root = $(this);
             var $tabs = $root.find('[data-azytus-grade-tab]');
             var $panels = $root.find('[data-azytus-grade-panel]');
-            var $gradesSection = $('#azytus-pp-grades');
 
-            function activateTab($tab, options) {
+            function activateTab($tab) {
                 var panelId = $tab.attr('aria-controls');
-                options = options || {};
 
                 $tabs.removeClass('is-active').attr({
                     'aria-selected': 'false',
@@ -40,15 +38,6 @@
 
                 $panels.removeClass('is-active').attr('hidden', true);
                 $root.find('#' + panelId).addClass('is-active').removeAttr('hidden');
-
-                if (options.scroll && $gradesSection.length) {
-                    var offset = $gradesSection.offset();
-                    if (offset) {
-                        $('html, body').animate({
-                            scrollTop: Math.max(0, offset.top - 100)
-                        }, 350);
-                    }
-                }
             }
 
             function normalizeGradeKey(value) {
@@ -144,7 +133,7 @@
             if (requestedGrade) {
                 var $requestedTab = findTabForGrade(requestedGrade);
                 if ($requestedTab.length) {
-                    activateTab($requestedTab, { scroll: true });
+                    activateTab($requestedTab);
                 }
             }
         });
