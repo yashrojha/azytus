@@ -23,9 +23,11 @@
             var $root = $(this);
             var $tabs = $root.find('[data-azytus-grade-tab]');
             var $panels = $root.find('[data-azytus-grade-panel]');
+            var $gradesSection = $('#azytus-pp-grades');
 
-            function activateTab($tab) {
+            function activateTab($tab, options) {
                 var panelId = $tab.attr('aria-controls');
+                options = options || {};
 
                 $tabs.removeClass('is-active').attr({
                     'aria-selected': 'false',
@@ -38,11 +40,79 @@
 
                 $panels.removeClass('is-active').attr('hidden', true);
                 $root.find('#' + panelId).addClass('is-active').removeAttr('hidden');
+
+                if (options.scroll && $gradesSection.length) {
+                    var offset = $gradesSection.offset();
+                    if (offset) {
+                        $('html, body').animate({
+                            scrollTop: Math.max(0, offset.top - 100)
+                        }, 350);
+                    }
+                }
+            }
+
+            function normalizeGradeKey(value) {
+                return String(value || '')
+                    .toLowerCase()
+                    .replace(/[^a-z0-9]+/g, '-')
+                    .replace(/^-+|-+$/g, '');
+            }
+
+            function findTabForGrade(rawGrade) {
+                if (!rawGrade) {
+                    return $();
+                }
+
+                var needle = normalizeGradeKey(rawGrade);
+                var $match = $();
+
+                $tabs.each(function() {
+                    var $tab = $(this);
+                    var candidates = [
+                        $tab.data('grade-slug'),
+                        $tab.data('grade-code'),
+                        $tab.data('grade-name'),
+                        $tab.text()
+                    ];
+
+                    for (var i = 0; i < candidates.length; i++) {
+                        if (normalizeGradeKey(candidates[i]) === needle) {
+                            $match = $tab;
+                            return false;
+                        }
+                    }
+                });
+
+                return $match;
+            }
+
+            function getRequestedGrade() {
+                var params = new URLSearchParams(window.location.search);
+                var fromQuery = params.get('grade');
+                if (fromQuery) {
+                    return fromQuery;
+                }
+
+                var hash = window.location.hash || '';
+                var hashMatch = hash.match(/^#grade[=-](.+)$/i);
+                if (hashMatch && hashMatch[1]) {
+                    return decodeURIComponent(hashMatch[1]);
+                }
+
+                return '';
             }
 
             $tabs.on('click', function(e) {
                 e.preventDefault();
-                activateTab($(this));
+                var $tab = $(this);
+                activateTab($tab);
+
+                var slug = $tab.data('grade-slug');
+                if (slug && window.history && window.history.replaceState) {
+                    var url = new URL(window.location.href);
+                    url.searchParams.set('grade', slug);
+                    window.history.replaceState({}, '', url.toString());
+                }
             });
 
             $tabs.on('keydown', function(e) {
@@ -69,6 +139,14 @@
                 activateTab($next);
                 $next.trigger('focus');
             });
+
+            var requestedGrade = getRequestedGrade();
+            if (requestedGrade) {
+                var $requestedTab = findTabForGrade(requestedGrade);
+                if ($requestedTab.length) {
+                    activateTab($requestedTab, { scroll: true });
+                }
+            }
         });
         
         // Product Search

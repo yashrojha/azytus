@@ -232,15 +232,13 @@ while (have_posts()) :
                 <?php endif; ?>
             </div>
 
-            <section class="azytus-pp-section azytus-pp-grades" aria-labelledby="azytus-pp-grades-title">
-                <div class="azytus-pp-section__head azytus-pp-section__head--row">
-                    <div>
-                        <span class="azytus-pp-eyebrow"><?php esc_html_e('Catalog', 'azytus-toolkit'); ?></span>
-                        <h2 id="azytus-pp-grades-title"><?php esc_html_e('Available Grades & Pack Sizes', 'azytus-toolkit'); ?></h2>
-                        <p class="azytus-pp-section__lead">
-                            <?php esc_html_e('Select the purity grade and pack size that match your analytical or process requirement.', 'azytus-toolkit'); ?>
-                        </p>
-                    </div>
+            <div class="azytus-pp-grades" id="azytus-pp-grades">
+                <div class="azytus-pp-grades__intro">
+                    <span class="azytus-pp-eyebrow"><?php esc_html_e('Catalog', 'azytus-toolkit'); ?></span>
+                    <h2 id="azytus-pp-grades-title"><?php esc_html_e('Available Grades & Pack Sizes', 'azytus-toolkit'); ?></h2>
+                    <p class="azytus-pp-section__lead">
+                        <?php esc_html_e('Select the purity grade and pack size that match your analytical or process requirement.', 'azytus-toolkit'); ?>
+                    </p>
                 </div>
 
                 <?php if (!empty($grades)) : ?>
@@ -248,6 +246,8 @@ while (have_posts()) :
                         <div class="azytus-pp-grade-tabs__nav" role="tablist" aria-label="<?php esc_attr_e('Product grades', 'azytus-toolkit'); ?>">
                             <?php foreach ($grades as $index => $grade) :
                                 $grade_name = isset($grade['grade_name']) ? $grade['grade_name'] : '';
+                                $product_code = isset($grade['product_code']) ? $grade['product_code'] : '';
+                                $grade_slug = $grade_name !== '' ? sanitize_title($grade_name) : 'grade-' . $index;
                                 $tab_id = 'azytus-grade-tab-' . $index;
                                 $panel_id = 'azytus-grade-panel-' . $index;
                                 $is_active = $index === 0;
@@ -261,89 +261,99 @@ while (have_posts()) :
                                     aria-controls="<?php echo esc_attr($panel_id); ?>"
                                     tabindex="<?php echo $is_active ? '0' : '-1'; ?>"
                                     data-azytus-grade-tab
+                                    data-grade-slug="<?php echo esc_attr($grade_slug); ?>"
+                                    data-grade-code="<?php echo esc_attr($product_code); ?>"
+                                    data-grade-name="<?php echo esc_attr($grade_name); ?>"
                                 >
                                     <?php echo esc_html($grade_name ? $grade_name : sprintf(__('Grade %d', 'azytus-toolkit'), $index + 1)); ?>
                                 </button>
                             <?php endforeach; ?>
                         </div>
 
-                        <div class="azytus-pp-grade-tabs__panels">
-                            <?php foreach ($grades as $index => $grade) :
-                                $grade_name = isset($grade['grade_name']) ? $grade['grade_name'] : '';
-                                $product_code = isset($grade['product_code']) ? $grade['product_code'] : '';
-                                $grade_spec = isset($grade['product_specification']) ? $grade['product_specification'] : '';
-                                $grade_category_id = !empty($grade['grade_category_id']) ? (int) $grade['grade_category_id'] : 0;
-                                $grade_category_url = ($grade_category_id && get_post_status($grade_category_id) === 'publish')
-                                    ? get_permalink($grade_category_id)
-                                    : '';
-                                $pack_sizes = (!empty($grade['pack_sizes']) && is_array($grade['pack_sizes'])) ? $grade['pack_sizes'] : array();
-                                $pack_sizes = array_values(array_filter($pack_sizes, function ($pack) {
-                                    return !empty($pack['pack_size']);
-                                }));
-                                $tab_id = 'azytus-grade-tab-' . $index;
-                                $panel_id = 'azytus-grade-panel-' . $index;
-                                $is_active = $index === 0;
-                                ?>
-                                <div
-                                    class="azytus-pp-grade-tabs__panel<?php echo $is_active ? ' is-active' : ''; ?>"
-                                    id="<?php echo esc_attr($panel_id); ?>"
-                                    role="tabpanel"
-                                    aria-labelledby="<?php echo esc_attr($tab_id); ?>"
-                                    <?php echo $is_active ? '' : 'hidden'; ?>
-                                    data-azytus-grade-panel
-                                >
-                                    <article class="azytus-pp-grade azytus-pp-grade--tab">
-                                        <header class="azytus-pp-grade__head">
-                                            <div class="azytus-pp-grade__titles">
-                                                <h3 class="azytus-pp-grade__name">
-                                                    <?php if ($grade_category_url) : ?>
-                                                        <a href="<?php echo esc_url($grade_category_url); ?>"><?php echo esc_html($grade_name); ?></a>
-                                                    <?php else : ?>
-                                                        <?php echo esc_html($grade_name); ?>
+                        <div class="azytus-pp-section azytus-pp-grades__content">
+                            <div class="azytus-pp-grade-tabs__panels">
+                                <?php foreach ($grades as $index => $grade) :
+                                    $grade_name = isset($grade['grade_name']) ? $grade['grade_name'] : '';
+                                    $product_code = isset($grade['product_code']) ? $grade['product_code'] : '';
+                                    $grade_spec = isset($grade['product_specification']) ? $grade['product_specification'] : '';
+                                    $grade_slug = $grade_name !== '' ? sanitize_title($grade_name) : 'grade-' . $index;
+                                    $grade_category_id = !empty($grade['grade_category_id']) ? (int) $grade['grade_category_id'] : 0;
+                                    $grade_category_url = ($grade_category_id && get_post_status($grade_category_id) === 'publish')
+                                        ? get_permalink($grade_category_id)
+                                        : '';
+                                    $pack_sizes = (!empty($grade['pack_sizes']) && is_array($grade['pack_sizes'])) ? $grade['pack_sizes'] : array();
+                                    $pack_sizes = array_values(array_filter($pack_sizes, function ($pack) {
+                                        return !empty($pack['pack_size']);
+                                    }));
+                                    $tab_id = 'azytus-grade-tab-' . $index;
+                                    $panel_id = 'azytus-grade-panel-' . $index;
+                                    $is_active = $index === 0;
+                                    ?>
+                                    <div
+                                        class="azytus-pp-grade-tabs__panel<?php echo $is_active ? ' is-active' : ''; ?>"
+                                        id="<?php echo esc_attr($panel_id); ?>"
+                                        role="tabpanel"
+                                        aria-labelledby="<?php echo esc_attr($tab_id); ?>"
+                                        <?php echo $is_active ? '' : 'hidden'; ?>
+                                        data-azytus-grade-panel
+                                        data-grade-slug="<?php echo esc_attr($grade_slug); ?>"
+                                        data-grade-code="<?php echo esc_attr($product_code); ?>"
+                                    >
+                                        <article class="azytus-pp-grade azytus-pp-grade--tab">
+                                            <header class="azytus-pp-grade__head">
+                                                <div class="azytus-pp-grade__titles">
+                                                    <h3 class="azytus-pp-grade__name">
+                                                        <?php if ($grade_category_url) : ?>
+                                                            <a href="<?php echo esc_url($grade_category_url); ?>"><?php echo esc_html($grade_name); ?></a>
+                                                        <?php else : ?>
+                                                            <?php echo esc_html($grade_name); ?>
+                                                        <?php endif; ?>
+                                                    </h3>
+                                                    <?php if ($product_code) : ?>
+                                                        <p class="azytus-pp-grade__code">
+                                                            <span><?php esc_html_e('Product Code', 'azytus-toolkit'); ?></span>
+                                                            <strong><?php echo esc_html($product_code); ?></strong>
+                                                        </p>
                                                     <?php endif; ?>
-                                                </h3>
-                                                <?php if ($product_code) : ?>
-                                                    <p class="azytus-pp-grade__code">
-                                                        <span><?php esc_html_e('Product Code', 'azytus-toolkit'); ?></span>
-                                                        <strong><?php echo esc_html($product_code); ?></strong>
-                                                    </p>
-                                                <?php endif; ?>
-                                            </div>
-                                            <span class="azytus-pp-grade__index" aria-hidden="true"><?php echo esc_html(str_pad((string) ($index + 1), 2, '0', STR_PAD_LEFT)); ?></span>
-                                        </header>
-
-                                        <?php if (!empty($pack_sizes)) : ?>
-                                            <div class="azytus-pp-grade__packs">
-                                                <span class="azytus-pp-grade__packs-label"><?php esc_html_e('Available Pack Sizes', 'azytus-toolkit'); ?></span>
-                                                <ul class="azytus-pp-packs">
-                                                    <?php foreach ($pack_sizes as $pack) : ?>
-                                                        <li><?php echo esc_html($pack['pack_size']); ?></li>
-                                                    <?php endforeach; ?>
-                                                </ul>
-                                            </div>
-                                        <?php else : ?>
-                                            <p class="azytus-pp-grade__empty"><?php esc_html_e('Pack sizes on request.', 'azytus-toolkit'); ?></p>
-                                        <?php endif; ?>
-
-                                        <?php if (!empty($grade_spec)) : ?>
-                                            <div class="azytus-pp-grade__spec">
-                                                <span class="azytus-pp-grade__packs-label"><?php esc_html_e('Product Specification', 'azytus-toolkit'); ?></span>
-                                                <div class="azytus-pp-prose azytus-pp-prose--spec">
-                                                    <?php echo wp_kses_post(wpautop($grade_spec)); ?>
                                                 </div>
-                                            </div>
-                                        <?php endif; ?>
-                                    </article>
-                                </div>
-                            <?php endforeach; ?>
+                                                <span class="azytus-pp-grade__index" aria-hidden="true"><?php echo esc_html(str_pad((string) ($index + 1), 2, '0', STR_PAD_LEFT)); ?></span>
+                                            </header>
+
+                                            <?php if (!empty($pack_sizes)) : ?>
+                                                <div class="azytus-pp-grade__packs">
+                                                    <span class="azytus-pp-grade__packs-label"><?php esc_html_e('Available Pack Sizes', 'azytus-toolkit'); ?></span>
+                                                    <ul class="azytus-pp-packs">
+                                                        <?php foreach ($pack_sizes as $pack) : ?>
+                                                            <li><?php echo esc_html($pack['pack_size']); ?></li>
+                                                        <?php endforeach; ?>
+                                                    </ul>
+                                                </div>
+                                            <?php else : ?>
+                                                <p class="azytus-pp-grade__empty"><?php esc_html_e('Pack sizes on request.', 'azytus-toolkit'); ?></p>
+                                            <?php endif; ?>
+
+                                            <?php if (!empty($grade_spec)) : ?>
+                                                <div class="azytus-pp-grade__spec">
+                                                    <span class="azytus-pp-grade__packs-label"><?php esc_html_e('Product Specification', 'azytus-toolkit'); ?></span>
+                                                    <div class="azytus-pp-prose azytus-pp-prose--spec">
+                                                        <?php echo wp_kses_post(wpautop($grade_spec)); ?>
+                                                    </div>
+                                                </div>
+                                            <?php endif; ?>
+                                        </article>
+                                    </div>
+                                <?php endforeach; ?>
+                            </div>
                         </div>
                     </div>
                 <?php else : ?>
-                    <div class="azytus-pp-empty">
-                        <?php esc_html_e('No grades have been added for this product yet.', 'azytus-toolkit'); ?>
+                    <div class="azytus-pp-section azytus-pp-grades__content">
+                        <div class="azytus-pp-empty">
+                            <?php esc_html_e('No grades have been added for this product yet.', 'azytus-toolkit'); ?>
+                        </div>
                     </div>
                 <?php endif; ?>
-            </section>
+            </div>
 
         </div>
     </div>

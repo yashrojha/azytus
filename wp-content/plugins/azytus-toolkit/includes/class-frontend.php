@@ -880,11 +880,17 @@ class Azytus_Frontend {
                     }
                 }
                 
+                $grade_name = isset($grade['grade_name']) ? $grade['grade_name'] : '';
+                $product_url = get_permalink($product->ID);
+                if ($grade_name !== '') {
+                    $product_url = add_query_arg('grade', sanitize_title($grade_name), $product_url);
+                }
+
                 $items[] = array(
                     'product_id' => $product->ID,
                     'product_name' => $product->post_title,
-                    'product_url' => get_permalink($product->ID),
-                    'grade_name' => isset($grade['grade_name']) ? $grade['grade_name'] : '',
+                    'product_url' => $product_url,
+                    'grade_name' => $grade_name,
                     'product_code' => isset($grade['product_code']) ? $grade['product_code'] : '',
                     'pack_sizes' => $pack_sizes,
                     'pack_sizes_display' => implode(', ', $pack_sizes),

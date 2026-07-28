@@ -186,10 +186,15 @@ class Azytus_Ajax_Handler {
                         $pack_size_list[] = $pack_size['pack_size'];
                     }
                 }
+
+                $product_url = get_permalink($product->ID);
+                if ($grade_name !== '') {
+                    $product_url = add_query_arg('grade', sanitize_title($grade_name), $product_url);
+                }
                 
                 $results[] = array(
                     'product_name' => trim($product->post_title . ($grade_name !== '' ? ' ' . $grade_name : '')),
-                    'product_url' => get_permalink($product->ID),
+                    'product_url' => $product_url,
                     'cas' => $cas,
                     'hsn' => $hsn,
                     'molecular_formula' => $formula,

@@ -1359,9 +1359,30 @@ body.azytus-search-open {
 
     .azytus-pp-grades {
         margin-bottom: 40px;
-        background:
-            linear-gradient(180deg, rgba(244, 247, 245, 0.85), #fff 40%),
-            #fff;
+
+        .azytus-pp-grades__intro {
+            margin-bottom: 18px;
+
+            h2 {
+                margin: 6px 0 0;
+                font-size: clamp(1.45rem, 2vw, 1.85rem);
+                font-weight: 700;
+                color: var(--azytus-ink);
+                line-height: 1.25;
+            }
+
+            .azytus-pp-section__lead {
+                margin: 10px 0 0;
+                max-width: 52ch;
+                color: var(--azytus-muted);
+                font-size: 15px;
+                line-height: 1.6;
+            }
+        }
+
+        .azytus-pp-grades__content {
+            margin-top: 0;
+        }
     }
 
     .azytus-pp-grade-tabs {
@@ -1369,9 +1390,7 @@ body.azytus-search-open {
             display: flex;
             flex-wrap: wrap;
             gap: 8px;
-            margin-bottom: 22px;
-            padding-bottom: 14px;
-            border-bottom: 1px solid var(--azytus-line);
+            margin-bottom: 16px;
         }
 
         .azytus-pp-grade-tabs__tab {
@@ -1424,8 +1443,16 @@ body.azytus-search-open {
         transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
 
         &.azytus-pp-grade--tab {
-            animation: none;
+            padding: 0;
+            border: 0;
+            background: transparent;
             box-shadow: none;
+            overflow: visible;
+            animation: none;
+
+            &::before {
+                display: none;
+            }
 
             &:hover {
                 transform: none;
