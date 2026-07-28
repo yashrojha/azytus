@@ -669,6 +669,9 @@ header.style-1 {
 
         &:not(:last-child) {
             margin-right: 6px;
+            @media screen and (max-width: 575px) {
+                margin-right: 0;
+            }
         }
 
         svg {
