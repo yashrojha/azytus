@@ -113,29 +113,18 @@ class Azytus_Ajax_Handler {
         // AND mode: when both filters are present, both must match (no grade-only / term-only results)
         $require_both = ($grade_id && $search_term !== '');
         
-        // Search in products
+        // Load products and match in PHP so "Acetone DRYSOLV" (title + grade) works
         $product_args = array(
             'post_type' => 'products',
             'posts_per_page' => -1,
             'post_status' => 'publish',
         );
         
-        if ($search_term) {
-            // Prefer title search, then fall back to meta/code matching in PHP below
-            $product_args['s'] = $search_term;
-        }
-        
         if ($product_id) {
             $product_args['post__in'] = array($product_id);
         }
         
         $products = get_posts($product_args);
-
-        // If WP title search returned nothing, scan all products for code/CAS matches
-        if ($search_term && empty($products)) {
-            unset($product_args['s']);
-            $products = get_posts($product_args);
-        }
         
         foreach ($products as $product) {
             // Get product meta data
@@ -150,11 +139,6 @@ class Azytus_Ajax_Handler {
             if (!is_array($grades)) {
                 $grades = array();
             }
-
-            $term_matched_product = !$search_term || stripos($product->post_title, $search_term) !== false
-                || stripos((string) $cas, $search_term) !== false
-                || stripos((string) $formula, $search_term) !== false
-                || stripos((string) $hsn, $search_term) !== false;
             
             foreach ($grades as $grade) {
                 $grade_category_id = isset($grade['grade_category_id']) ? intval($grade['grade_category_id']) : 0;
@@ -167,9 +151,15 @@ class Azytus_Ajax_Handler {
                     continue;
                 }
 
-                // Search-term filter against product fields / code only (not grade name)
-                $term_matched = $term_matched_product
-                    || ($search_term && stripos($product_code, $search_term) !== false);
+                $term_matched = self::product_grade_matches_search(
+                    $product->post_title,
+                    $cas,
+                    $hsn,
+                    $formula,
+                    $product_code,
+                    $grade_name,
+                    $search_term
+                );
 
                 if ($search_term && !$term_matched) {
                     continue;
@@ -209,6 +199,51 @@ class Azytus_Ajax_Handler {
         }
         
         wp_send_json_success($results);
+    }
+
+    /**
+     * Match a product+grade row against a free-text search.
+     *
+     * Supports:
+     * - Full phrase against title, grade, combined "Title Grade", code, CAS, HSN, formula
+     * - Multi-word AND across those fields (e.g. "Acetone DRYSOLV")
+     */
+    private static function product_grade_matches_search($product_title, $cas, $hsn, $formula, $product_code, $grade_name, $search_term) {
+        $search_term = trim((string) $search_term);
+        if ($search_term === '') {
+            return true;
+        }
+
+        $display_name = trim($product_title . ($grade_name !== '' ? ' ' . $grade_name : ''));
+        $haystacks = array(
+            (string) $product_title,
+            (string) $grade_name,
+            $display_name,
+            (string) $product_code,
+            (string) $cas,
+            (string) $hsn,
+            (string) $formula,
+        );
+
+        foreach ($haystacks as $haystack) {
+            if ($haystack !== '' && stripos($haystack, $search_term) !== false) {
+                return true;
+            }
+        }
+
+        $tokens = preg_split('/\s+/', $search_term, -1, PREG_SPLIT_NO_EMPTY);
+        if (count($tokens) < 2) {
+            return false;
+        }
+
+        $combined = strtolower(implode(' ', array_filter($haystacks)));
+        foreach ($tokens as $token) {
+            if ($token === '' || stripos($combined, $token) === false) {
+                return false;
+            }
+        }
+
+        return true;
     }
     
     /**
