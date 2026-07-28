@@ -233,6 +233,14 @@
     visibility: visible !important;
 }
 
+.azytus-grade-row .wp-editor-wrap {
+    max-width: 100%;
+}
+
+.azytus-grade-row .form-table th {
+    width: 160px;
+}
+
 .azytus-grade-header,
 .azytus-batch-header {
     display: flex;

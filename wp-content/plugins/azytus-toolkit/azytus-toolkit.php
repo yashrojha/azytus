@@ -135,6 +135,10 @@ class Azytus_Toolkit {
         
         if (in_array($post_type, $azytus_post_types)) {
             wp_enqueue_media();
+
+            if ($post_type === 'products') {
+                wp_enqueue_editor();
+            }
             
             // Select2 for better dropdowns
             wp_enqueue_style('select2', 'https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css', array(), '4.1.0');

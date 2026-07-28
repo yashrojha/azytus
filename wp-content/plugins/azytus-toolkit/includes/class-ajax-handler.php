@@ -188,7 +188,7 @@ class Azytus_Ajax_Handler {
                 }
                 
                 $results[] = array(
-                    'product_name' => $product->post_title,
+                    'product_name' => trim($product->post_title . ($grade_name !== '' ? ' ' . $grade_name : '')),
                     'product_url' => get_permalink($product->ID),
                     'cas' => $cas,
                     'hsn' => $hsn,

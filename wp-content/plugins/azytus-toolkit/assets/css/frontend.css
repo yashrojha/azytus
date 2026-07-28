@@ -475,7 +475,7 @@ header.style-1 {
         left: 50%;
         top: 10%;
         transform: translateX(-50%);
-        width: min(860px, calc(100% - 28px));
+        width: min(1250px, calc(100% - 28px));
         max-height: 80vh;
         z-index: 1;
         animation: azytusSearchIn 0.28s ease;
@@ -1364,10 +1364,55 @@ body.azytus-search-open {
             #fff;
     }
 
-    .azytus-pp-grade-grid {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 18px;
+    .azytus-pp-grade-tabs {
+        .azytus-pp-grade-tabs__nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 22px;
+            padding-bottom: 14px;
+            border-bottom: 1px solid var(--azytus-line);
+        }
+
+        .azytus-pp-grade-tabs__tab {
+            appearance: none;
+            border: 1px solid var(--azytus-line);
+            background: #fff;
+            color: var(--azytus-ink);
+            padding: 10px 18px;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
+
+            &:hover {
+                border-color: rgba(20, 116, 155, 0.4);
+                color: var(--azytus-blue);
+            }
+
+            &.is-active {
+                background: var(--azytus-blue);
+                border-color: var(--azytus-blue);
+                color: #fff;
+                box-shadow: 0 8px 20px rgba(20, 116, 155, 0.18);
+            }
+
+            &:focus-visible {
+                outline: 2px solid var(--azytus-green);
+                outline-offset: 2px;
+            }
+        }
+
+        .azytus-pp-grade-tabs__panel {
+            display: none;
+
+            &.is-active {
+                display: block;
+                animation: azytus-pp-rise 0.45s ease both;
+            }
+        }
     }
 
     .azytus-pp-grade {
@@ -1377,8 +1422,16 @@ body.azytus-search-open {
         border: 1px solid var(--azytus-line);
         overflow: hidden;
         transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
-        animation: azytus-pp-rise 0.7s ease both;
-        animation-delay: var(--azytus-grade-delay, 0ms);
+
+        &.azytus-pp-grade--tab {
+            animation: none;
+            box-shadow: none;
+
+            &:hover {
+                transform: none;
+                box-shadow: none;
+            }
+        }
 
         &::before {
             content: '';
@@ -1388,12 +1441,6 @@ body.azytus-search-open {
             width: 100%;
             height: 3px;
             background: linear-gradient(90deg, var(--azytus-blue), var(--azytus-green));
-        }
-
-        &:hover {
-            border-color: rgba(20, 116, 155, 0.35);
-            box-shadow: 0 14px 32px rgba(20, 116, 155, 0.1);
-            transform: translateY(-3px);
         }
 
         .azytus-pp-grade__head {
@@ -1469,6 +1516,12 @@ body.azytus-search-open {
             color: var(--azytus-muted);
             font-style: italic;
         }
+
+        .azytus-pp-grade__spec {
+            margin-top: 22px;
+            padding-top: 20px;
+            border-top: 1px solid var(--azytus-line);
+        }
     }
 
     .azytus-pp-packs {
@@ -1533,9 +1586,19 @@ body.azytus-search-open {
         }
 
         .azytus-pp-spec-grid,
-        .azytus-pp-spec-grid--safety,
-        .azytus-pp-grade-grid {
+        .azytus-pp-spec-grid--safety {
             grid-template-columns: 1fr;
+        }
+
+        .azytus-pp-grade-tabs {
+            .azytus-pp-grade-tabs__nav {
+                gap: 6px;
+            }
+
+            .azytus-pp-grade-tabs__tab {
+                padding: 9px 14px;
+                font-size: 12px;
+            }
         }
     }
 }

@@ -279,8 +279,20 @@ class Azytus_Meta_Boxes {
                 <tr>
                     <th><label for="azytus_product_specification"><?php _e('Product Specification', 'azytus-toolkit'); ?></label></th>
                     <td>
-                        <textarea id="azytus_product_specification" name="azytus_product_specification" class="large-text" rows="8"><?php echo esc_textarea($product_specification); ?></textarea>
-                        <p class="description"><?php _e('Long text box for detailed product specification', 'azytus-toolkit'); ?></p>
+                        <?php
+                        wp_editor(
+                            $product_specification,
+                            'azytus_product_specification',
+                            array(
+                                'textarea_name' => 'azytus_product_specification',
+                                'textarea_rows' => 10,
+                                'media_buttons' => true,
+                                'teeny'         => false,
+                                'quicktags'     => true,
+                            )
+                        );
+                        ?>
+                        <p class="description"><?php _e('Product-level specification. Use HTML formatting as needed. Grade-specific details can also be set on each grade below.', 'azytus-toolkit'); ?></p>
                     </td>
                 </tr>
             </table>
@@ -344,8 +356,10 @@ class Azytus_Meta_Boxes {
         $grade_name = isset($data['grade_name']) ? $data['grade_name'] : '';
         $product_code = isset($data['product_code']) ? $data['product_code'] : '';
         $grade_category_id = isset($data['grade_category_id']) ? $data['grade_category_id'] : '';
+        $product_specification = isset($data['product_specification']) ? $data['product_specification'] : '';
         $pack_sizes = isset($data['pack_sizes']) && is_array($data['pack_sizes']) ? $data['pack_sizes'] : array();
         $grade_categories = $is_template ? array() : self::get_grade_categories();
+        $editor_id = 'azytus_grade_spec_' . ($is_template ? '{{INDEX}}' : $index);
         
         // For templates, don't calculate index + 1
         $display_number = $is_template ? '{{INDEX_PLUS_1}}' : ($index + 1);
@@ -397,6 +411,36 @@ class Azytus_Meta_Boxes {
                             <?php endif; ?>
                         </select>
                         <p class="description"><?php _e('Assign this grade to a category (e.g., Dry Solvents). Used on the Grade Category page.', 'azytus-toolkit'); ?></p>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th><label><?php _e('Product Specification', 'azytus-toolkit'); ?></label></th>
+                    <td>
+                        <?php if ($is_template) : ?>
+                            <textarea
+                                id="<?php echo esc_attr($editor_id); ?>"
+                                name="azytus_grades[<?php echo esc_attr($index); ?>][product_specification]"
+                                class="azytus-grade-spec-editor large-text"
+                                rows="8"
+                            ></textarea>
+                        <?php else : ?>
+                            <?php
+                            wp_editor(
+                                $product_specification,
+                                $editor_id,
+                                array(
+                                    'textarea_name' => 'azytus_grades[' . $index . '][product_specification]',
+                                    'textarea_rows' => 8,
+                                    'media_buttons' => true,
+                                    'teeny'         => false,
+                                    'quicktags'     => true,
+                                    'editor_class'  => 'azytus-grade-spec-editor',
+                                )
+                            );
+                            ?>
+                        <?php endif; ?>
+                        <p class="description"><?php _e('Grade-specific product details. HTML formatting is allowed.', 'azytus-toolkit'); ?></p>
                     </td>
                 </tr>
             </table>
@@ -729,9 +773,13 @@ class Azytus_Meta_Boxes {
         foreach ($fields as $field) {
             $key = 'azytus_' . $field;
             if (isset($_POST[$key])) {
-                $value = in_array($field, array('transport_info', 'product_specification')) 
-                    ? sanitize_textarea_field($_POST[$key]) 
-                    : sanitize_text_field($_POST[$key]);
+                if ($field === 'product_specification') {
+                    $value = wp_kses_post(wp_unslash($_POST[$key]));
+                } elseif ($field === 'transport_info') {
+                    $value = sanitize_textarea_field($_POST[$key]);
+                } else {
+                    $value = sanitize_text_field($_POST[$key]);
+                }
                 update_post_meta($post_id, '_' . $key, $value);
             }
         }
@@ -753,6 +801,9 @@ class Azytus_Meta_Boxes {
                     'grade_name' => isset($grade_data['grade_name']) ? sanitize_text_field($grade_data['grade_name']) : '',
                     'product_code' => isset($grade_data['product_code']) ? sanitize_text_field($grade_data['product_code']) : '',
                     'grade_category_id' => isset($grade_data['grade_category_id']) ? intval($grade_data['grade_category_id']) : 0,
+                    'product_specification' => isset($grade_data['product_specification'])
+                        ? wp_kses_post(wp_unslash($grade_data['product_specification']))
+                        : '',
                     'pack_sizes' => array()
                 );
                 

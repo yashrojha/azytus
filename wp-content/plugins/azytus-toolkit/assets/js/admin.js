@@ -100,6 +100,11 @@
         });
         
         // ========== PRODUCT GRADES - REPEATABLE FIELDS ==========
+
+        // Keep TinyMCE content in sync before save / reindex
+        $('#post').on('submit', function() {
+            syncGradeEditors();
+        });
         
         // Add Grade
         $(document).on('click', '.azytus-add-grade', function(e) {
@@ -108,8 +113,13 @@
             var container = $('#azytus-grades-container');
             var template = $('#azytus-grade-template').html();
             var index = container.find('.azytus-grade-row').length;
+            var editorId = 'azytus_grade_spec_' + Date.now();
             
-            var newRow = template.replace(/{{INDEX}}/g, index).replace(/{{INDEX_PLUS_1}}/g, (index + 1));
+            var newRow = template
+                .replace(/{{INDEX}}/g, index)
+                .replace(/{{INDEX_PLUS_1}}/g, (index + 1))
+                .replace(/id="azytus_grade_spec_\d+"/, 'id="' + editorId + '"')
+                .replace(/id="azytus_grade_spec_\{\{INDEX\}\}"/, 'id="' + editorId + '"');
             container.append(newRow);
             
             // Initialize sortable for the new grade's pack sizes
@@ -125,6 +135,12 @@
                     width: '100%'
                 });
             }
+
+            var $spec = newGrade.find('textarea.azytus-grade-spec-editor, textarea[id^="azytus_grade_spec_"]');
+            if ($spec.length) {
+                $spec.attr('id', editorId);
+                initGradeSpecEditor(editorId);
+            }
             
             updateGradeNumbers();
         });
@@ -136,6 +152,7 @@
             var gradeRow = $(this).closest('.azytus-grade-row');
             
             if ($('#azytus-grades-container .azytus-grade-row').length > 1) {
+                removeGradeSpecEditor(gradeRow);
                 gradeRow.remove();
                 updateGradeNumbers();
                 reindexGrades();
@@ -200,25 +217,31 @@
             });
         }
         
-        // Reindex grades after removal
+        // Reindex grades after removal / sort (names only — keep TinyMCE IDs stable)
         function reindexGrades() {
+            syncGradeEditors();
+
             $('#azytus-grades-container .azytus-grade-row').each(function(gradeIndex) {
-                $(this).attr('data-index', gradeIndex);
+                var $row = $(this);
+                $row.attr('data-index', gradeIndex);
                 
                 // Update grade field names
-                $(this).find('input[name*="azytus_grades"], select[name*="azytus_grades"]').each(function() {
+                $row.find('input[name*="azytus_grades"], select[name*="azytus_grades"], textarea[name*="azytus_grades"]').each(function() {
                     var name = $(this).attr('name');
+                    if (!name) {
+                        return;
+                    }
                     name = name.replace(/azytus_grades\[\d+\]/, 'azytus_grades[' + gradeIndex + ']');
                     $(this).attr('name', name);
                 });
                 
                 // Update pack size container index
-                var packSizeContainer = $(this).find('.azytus-pack-sizes-container');
+                var packSizeContainer = $row.find('.azytus-pack-sizes-container');
                 packSizeContainer.attr('data-grade-index', gradeIndex);
                 
                 // Update add pack button data-grade-index
-                $(this).find('.azytus-add-pack-button').attr('data-grade-index', gradeIndex);
-                $(this).find('.azytus-add-pack-inline').attr('data-grade-index', gradeIndex);
+                $row.find('.azytus-add-pack-button').attr('data-grade-index', gradeIndex);
+                $row.find('.azytus-add-pack-inline').attr('data-grade-index', gradeIndex);
                 
                 // Reindex pack sizes within this grade
                 reindexPackSizes(packSizeContainer);
@@ -663,6 +686,54 @@
     // ========== SORTABLE INITIALIZATION ==========
     
     /**
+     * Sync TinyMCE content into textareas
+     */
+    function syncGradeEditors() {
+        if (typeof tinymce !== 'undefined') {
+            tinymce.triggerSave();
+        }
+    }
+
+    /**
+     * Initialize a grade product-specification editor
+     */
+    function initGradeSpecEditor(editorId) {
+        if (typeof wp === 'undefined' || !wp.editor || !wp.editor.initialize) {
+            return;
+        }
+
+        if (typeof tinymce !== 'undefined' && tinymce.get(editorId)) {
+            return;
+        }
+
+        wp.editor.remove(editorId);
+        wp.editor.initialize(editorId, {
+            tinymce: {
+                wpautop: true,
+                plugins: 'charmap colorpicker hr lists paste tabfocus textcolor fullscreen wordpress wpautoresize wpeditimage wpemoji wpgallery wplink wptextpattern',
+                toolbar1: 'formatselect,bold,italic,bullist,numlist,blockquote,alignleft,aligncenter,alignright,link,unlink,wp_adv',
+                toolbar2: 'strikethrough,hr,forecolor,pastetext,removeformat,charmap,outdent,indent,undo,redo,wp_help'
+            },
+            quicktags: true,
+            mediaButtons: true
+        });
+    }
+
+    /**
+     * Remove TinyMCE instance for a grade row
+     */
+    function removeGradeSpecEditor($row) {
+        var $textarea = $row.find('textarea[id^="azytus_grade_spec_"]');
+        if (!$textarea.length) {
+            return;
+        }
+        var editorId = $textarea.attr('id');
+        if (editorId && typeof wp !== 'undefined' && wp.editor && wp.editor.remove) {
+            wp.editor.remove(editorId);
+        }
+    }
+
+    /**
      * Initialize sortable for grades
      */
     function initGradesSortable() {
@@ -674,6 +745,9 @@
                 opacity: 0.8,
                 cursor: 'move',
                 tolerance: 'pointer',
+                start: function() {
+                    syncGradeEditors();
+                },
                 stop: function(event, ui) {
                     reindexGrades();
                     updateGradeNumbers();

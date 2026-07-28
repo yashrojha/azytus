@@ -17,6 +17,59 @@
                 width: '100%'
             });
         }
+
+        // Product page: grade tabs under Available Grades & Pack Sizes
+        $('[data-azytus-grade-tabs]').each(function() {
+            var $root = $(this);
+            var $tabs = $root.find('[data-azytus-grade-tab]');
+            var $panels = $root.find('[data-azytus-grade-panel]');
+
+            function activateTab($tab) {
+                var panelId = $tab.attr('aria-controls');
+
+                $tabs.removeClass('is-active').attr({
+                    'aria-selected': 'false',
+                    tabindex: '-1'
+                });
+                $tab.addClass('is-active').attr({
+                    'aria-selected': 'true',
+                    tabindex: '0'
+                });
+
+                $panels.removeClass('is-active').attr('hidden', true);
+                $root.find('#' + panelId).addClass('is-active').removeAttr('hidden');
+            }
+
+            $tabs.on('click', function(e) {
+                e.preventDefault();
+                activateTab($(this));
+            });
+
+            $tabs.on('keydown', function(e) {
+                var keys = ['ArrowLeft', 'ArrowRight', 'Home', 'End'];
+                if (keys.indexOf(e.key) === -1) {
+                    return;
+                }
+
+                e.preventDefault();
+                var index = $tabs.index(this);
+                var next = index;
+
+                if (e.key === 'ArrowRight') {
+                    next = (index + 1) % $tabs.length;
+                } else if (e.key === 'ArrowLeft') {
+                    next = (index - 1 + $tabs.length) % $tabs.length;
+                } else if (e.key === 'Home') {
+                    next = 0;
+                } else if (e.key === 'End') {
+                    next = $tabs.length - 1;
+                }
+
+                var $next = $tabs.eq(next);
+                activateTab($next);
+                $next.trigger('focus');
+            });
+        });
         
         // Product Search
         $('#azytus-search-btn').on('click', function() {
@@ -145,7 +198,6 @@
             html += '<th>Molecular Formula</th>';
             html += '<th>Molecular Weight</th>';
             html += '<th>Product Code</th>';
-            html += '<th>Grade</th>';
             html += '<th>Pack Size(s)</th>';
             html += '<th>MSDS</th>';
             html += '</tr></thead>';
@@ -159,7 +211,6 @@
                 html += '<td>' + item.molecular_formula + '</td>';
                 html += '<td>' + item.molecular_weight + ' g/mol</td>';
                 html += '<td>' + item.product_code + '</td>';
-                html += '<td>' + item.grade + '</td>';
                 html += '<td>' + item.pack_sizes + '</td>';
                 html += '<td>';
                 if (item.has_msds) {
@@ -375,7 +426,7 @@
             function renderProductTable(items) {
                 var html = '<div class="azytus-table-wrapper"><table class="azytus-product-table azytus-header-results-table">';
                 html += '<thead><tr>';
-                html += '<th>Product Name</th><th>Code</th><th>Grade</th><th>Pack Size(s)</th><th>CAS</th><th>HSN</th><th>Molecular Formula</th><th>Molecular Weight</th><th>MSDS</th>';
+                html += '<th>Product Name</th><th>Code</th><th>Pack Size(s)</th><th>CAS</th><th>HSN</th><th>Molecular Formula</th><th>Molecular Weight</th><th>MSDS</th>';
                 html += '</tr></thead><tbody>';
 
                 $.each(items, function(i, item) {
@@ -387,7 +438,6 @@
                     html += '<tr>';
                     html += '<td><strong>' + name + '</strong></td>';
                     html += '<td>' + escapeHtml(item.product_code || '') + '</td>';
-                    html += '<td>' + escapeHtml(item.grade || '') + '</td>';
                     html += '<td>' + escapeHtml(item.pack_sizes || '') + '</td>';
                     html += '<td>' + escapeHtml(item.cas || '') + '</td>';
                     html += '<td>' + escapeHtml(item.hsn || '') + '</td>';
