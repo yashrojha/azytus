@@ -437,8 +437,11 @@ class Azytus_Ajax_Handler {
             // Get MSDS from product
             $msds_id = get_post_meta($product_id, '_azytus_msds', true);
             
-            // Display grade name only (avoids "Acetone - Acetone DrySolv" duplication)
-            $product_name_with_grade = $grade_name ? $grade_name : $product->post_title;
+            // Product name + grade concatenated
+            $product_name_with_grade = $product->post_title;
+            if ($grade_name) {
+                $product_name_with_grade .= ' - ' . $grade_name;
+            }
             
             // Check each batch in this record
             foreach ($batches as $batch) {

@@ -158,8 +158,13 @@ class Azytus_Meta_Boxes {
                 <tr>
                     <th><label for="azytus_molecular_formula"><?php _e('Molecular Formula', 'azytus-toolkit'); ?> <span class="required">*</span></label></th>
                     <td>
-                        <input type="text" id="azytus_molecular_formula" name="azytus_molecular_formula" value="<?php echo esc_attr($molecular_formula); ?>" class="regular-text" required />
-                        <p class="description"><?php _e('e.g., CH3COOH, C2H6O', 'azytus-toolkit'); ?></p>
+                        <div class="azytus-formula-field">
+                            <input type="text" id="azytus_molecular_formula" name="azytus_molecular_formula" value="<?php echo esc_attr($molecular_formula); ?>" class="regular-text" required />
+                            <button type="button" class="button azytus-formula-subscript-btn" id="azytus-formula-subscript-btn" title="<?php esc_attr_e('Convert numbers after elements to subscript', 'azytus-toolkit'); ?>">
+                                <?php _e('Subscript numbers', 'azytus-toolkit'); ?>
+                            </button>
+                        </div>
+                        <p class="description"><?php _e('e.g., CH3COOH → CH₃COOH. Click “Subscript numbers” to convert (leading coefficients stay normal).', 'azytus-toolkit'); ?></p>
                     </td>
                 </tr>
                 

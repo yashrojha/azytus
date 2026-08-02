@@ -17,6 +17,50 @@
                 width: '100%'
             });
         }
+
+        // Molecular formula: convert counts after elements to Unicode subscripts
+        // 2H2SO4 → 2H₂SO₄ | CH3COOH → CH₃COOH | La(NO3)3 · 6H2O → La(NO₃)₃ ⋅ 6H₂O
+        var SUBSCRIPT_DIGITS = {
+            '0': '₀', '1': '₁', '2': '₂', '3': '₃', '4': '₄',
+            '5': '₅', '6': '₆', '7': '₇', '8': '₈', '9': '₉'
+        };
+
+        function toSubscriptDigits(digits) {
+            return String(digits).replace(/[0-9]/g, function(d) {
+                return SUBSCRIPT_DIGITS[d] || d;
+            });
+        }
+
+        function formatMolecularFormula(formula) {
+            if (!formula) {
+                return formula;
+            }
+
+            var result = String(formula);
+
+            // Normalize middle-dot variants (· •) to ⋅ (U+22C5); leave bare "." alone
+            result = result.replace(/\s*[·•]\s*/g, ' ⋅ ');
+
+            // Digits immediately after a letter or ")" → subscript (not leading coefficients)
+            result = result.replace(/([A-Za-z)])(\d+)/g, function(_, prefix, digits) {
+                return prefix + toSubscriptDigits(digits);
+            });
+
+            return result.replace(/\s+/g, ' ').trim();
+        }
+
+        $(document).on('click', '#azytus-formula-subscript-btn', function(e) {
+            e.preventDefault();
+            var $input = $('#azytus_molecular_formula');
+            if (!$input.length) {
+                return;
+            }
+            var current = $input.val();
+            var formatted = formatMolecularFormula(current);
+            if (formatted !== current) {
+                $input.val(formatted).trigger('change');
+            }
+        });
         
         // Initialize Sortable for Grades
         initGradesSortable();
@@ -542,7 +586,7 @@
         
         // ========== COA/BATCH - DYNAMIC SELECTS ==========
         
-        // Fill WP post title from product/grade selection
+        // Fill WP post title from product + grade + pack size
         function setBatchPostTitle(title) {
             if (!title) {
                 return;
@@ -559,13 +603,44 @@
             }
         }
 
+        function cleanGradeLabel(text) {
+            return String(text || '')
+                .replace(/\s*\([^)]*\)\s*$/, '') // strip product code e.g. (20026)
+                .replace(/-/g, ' ')
+                .replace(/\s+/g, ' ')
+                .trim();
+        }
+
+        function buildBatchPostTitle() {
+            var $product = $('#azytus_product_id');
+            var $grade = $('#azytus_grade_index');
+            var $pack = $('#azytus_pack_size_index');
+
+            var productName = $product.val()
+                ? $product.find('option:selected').text().trim()
+                : '';
+            var gradeName = ($grade.val() !== '' && $grade.val() != null)
+                ? cleanGradeLabel($grade.find('option:selected').text())
+                : '';
+            var packSize = ($pack.val() !== '' && $pack.val() != null)
+                ? $pack.find('option:selected').text().trim()
+                : '';
+
+            var parts = [productName, gradeName, packSize].filter(function(part) {
+                return !!part;
+            });
+
+            if (parts.length) {
+                setBatchPostTitle(parts.join(' '));
+            }
+        }
+
         // Product change handler
         $(document).on('change', '#azytus_product_id.azytus-coa-product-select', function() {
             var $select = $(this);
             var productId = $select.val();
             var gradeSelect = $('#azytus_grade_index');
             var packSizeSelect = $('#azytus_pack_size_index');
-            var productName = $select.find('option:selected').text().trim();
             
             if (!productId) {
                 gradeSelect.html('<option value="">Select a grade...</option>').trigger('change');
@@ -573,8 +648,8 @@
                 return;
             }
 
-            // Auto-fill batch post title with selected product name
-            setBatchPostTitle(productName);
+            // Title: product for now; grade/pack update it further
+            buildBatchPostTitle();
             
             // Load grades via AJAX
             $.ajax({
@@ -611,18 +686,14 @@
             var productId = $('#azytus_product_id').val();
             var gradeIndex = $(this).val();
             var packSizeSelect = $('#azytus_pack_size_index');
-            var gradeText = $(this).find('option:selected').text().trim();
             
             if (!productId || gradeIndex === '') {
                 packSizeSelect.html('<option value="">Select a pack size...</option>').trigger('change');
+                buildBatchPostTitle();
                 return;
             }
 
-            // Prefer grade name in title (strip trailing " (CODE)")
-            var gradeName = gradeText.replace(/\s*\([^)]*\)\s*$/, '').trim();
-            if (gradeName) {
-                setBatchPostTitle(gradeName);
-            }
+            buildBatchPostTitle();
             
             // Load pack sizes via AJAX
             $.ajax({
@@ -650,6 +721,11 @@
                     packSizeSelect.prop('disabled', false);
                 }
             });
+        });
+
+        // Pack size change — complete Product + Grade + Pack Size title
+        $(document).on('change', '#azytus_pack_size_index.azytus-coa-pack-size-select', function() {
+            buildBatchPostTitle();
         });
         
         // Form validation

@@ -33,6 +33,21 @@
     font-size: 13px;
 }
 
+.azytus-formula-field {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+}
+
+.azytus-formula-field .regular-text {
+    max-width: 25em;
+}
+
+.azytus-formula-subscript-btn {
+    white-space: nowrap;
+}
+
 /* File Upload Styling */
 .azytus-file-upload {
     display: flex;
