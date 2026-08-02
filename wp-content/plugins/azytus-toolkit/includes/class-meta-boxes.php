@@ -213,22 +213,48 @@ class Azytus_Meta_Boxes {
         wp_nonce_field('azytus_product_additional_meta_box', 'azytus_product_additional_meta_box_nonce');
         
         // Get additional fields
-        $pictograms_ghs = get_post_meta($post->ID, '_azytus_pictograms_ghs', true);
         $signal_words = get_post_meta($post->ID, '_azytus_signal_words', true);
         $un_number = get_post_meta($post->ID, '_azytus_un_number', true);
         $transport_info = get_post_meta($post->ID, '_azytus_transport_info', true);
         $transport_hazard_class = get_post_meta($post->ID, '_azytus_transport_hazard_class', true);
         $packing_group = get_post_meta($post->ID, '_azytus_packing_group', true);
         $product_specification = get_post_meta($post->ID, '_azytus_product_specification', true);
+
+        $pictogram_options = Azytus_Taxonomy_Pictogram::get_pictograms_for_dropdown();
+        $selected_pictograms = wp_get_post_terms($post->ID, Azytus_Taxonomy_Pictogram::TAXONOMY, array('fields' => 'ids'));
+        if (is_wp_error($selected_pictograms)) {
+            $selected_pictograms = array();
+        }
+        $selected_pictograms = array_map('intval', $selected_pictograms);
         
         ?>
         <div class="azytus-meta-box">
             <table class="form-table">
                 <tr>
-                    <th><label for="azytus_pictograms_ghs"><?php _e('Pictograms/GHS Symbols', 'azytus-toolkit'); ?></label></th>
+                    <th><label for="azytus_pictograms"><?php _e('Pictograms', 'azytus-toolkit'); ?></label></th>
                     <td>
-                        <input type="text" id="azytus_pictograms_ghs" name="azytus_pictograms_ghs" value="<?php echo esc_attr($pictograms_ghs); ?>" class="large-text" />
-                        <p class="description"><?php _e('e.g., GHS02, GHS07, GHS08', 'azytus-toolkit'); ?></p>
+                        <select id="azytus_pictograms" name="azytus_pictograms[]" class="azytus-select2 azytus-pictogram-select" multiple="multiple" data-placeholder="<?php esc_attr_e('Select pictograms…', 'azytus-toolkit'); ?>" style="width:100%;">
+                            <?php foreach ($pictogram_options as $option) : ?>
+                                <option
+                                    value="<?php echo esc_attr($option['id']); ?>"
+                                    data-image="<?php echo esc_url($option['image_url']); ?>"
+                                    <?php selected(in_array($option['id'], $selected_pictograms, true)); ?>
+                                >
+                                    <?php echo esc_html($option['name']); ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                        <p class="description">
+                            <?php
+                            echo wp_kses_post(
+                                sprintf(
+                                    /* translators: %s: link to Pictograms admin screen */
+                                    __('Select GHS pictograms to show on the product page. Manage options under <a href="%s">Products → Pictograms</a>.', 'azytus-toolkit'),
+                                    esc_url(admin_url('edit-tags.php?taxonomy=' . Azytus_Taxonomy_Pictogram::TAXONOMY . '&post_type=products'))
+                                )
+                            );
+                            ?>
+                        </p>
                     </td>
                 </tr>
                 
@@ -764,9 +790,16 @@ class Azytus_Meta_Boxes {
             return;
         }
         
-        // Additional fields (not displayed)
+        // Pictogram taxonomy (multi-select)
+        $pictogram_ids = array();
+        if (isset($_POST['azytus_pictograms']) && is_array($_POST['azytus_pictograms'])) {
+            $pictogram_ids = array_map('absint', $_POST['azytus_pictograms']);
+            $pictogram_ids = array_filter($pictogram_ids);
+        }
+        wp_set_object_terms($post_id, $pictogram_ids, Azytus_Taxonomy_Pictogram::TAXONOMY, false);
+
+        // Additional fields
         $fields = array(
-            'pictograms_ghs',
             'signal_words',
             'un_number',
             'transport_info',

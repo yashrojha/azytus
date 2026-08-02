@@ -9,12 +9,39 @@
         
         // Initialize Select2
         if ($.fn.select2) {
-            $('.azytus-select2').select2({
+            $('.azytus-select2').not('.azytus-pictogram-select').select2({
                 placeholder: function() {
                     return $(this).find('option:first').text();
                 },
                 allowClear: true,
                 width: '100%'
+            });
+
+            function formatPictogramOption(option) {
+                if (!option.id) {
+                    return option.text;
+                }
+                var $el = $(option.element);
+                var imageUrl = $el.data('image');
+                var $wrap = $('<span class="azytus-pictogram-option"></span>');
+                if (imageUrl) {
+                    $wrap.append($('<img class="azytus-pictogram-option__img" alt="" />').attr('src', imageUrl));
+                }
+                $wrap.append($('<span class="azytus-pictogram-option__label"></span>').text(option.text));
+                return $wrap;
+            }
+
+            $('.azytus-pictogram-select').select2({
+                placeholder: (typeof azytusAdmin !== 'undefined' && azytusAdmin.i18n && azytusAdmin.i18n.selectPictogram)
+                    ? azytusAdmin.i18n.selectPictogram
+                    : 'Select pictograms…',
+                allowClear: true,
+                width: '100%',
+                templateResult: formatPictogramOption,
+                templateSelection: formatPictogramOption,
+                escapeMarkup: function(markup) {
+                    return markup;
+                }
             });
         }
 
@@ -141,6 +168,20 @@
             fileUpload.find('input[type="hidden"]').val('');
             fileUpload.find('.azytus-file-preview').html('');
             button.hide();
+        });
+
+        // Require pictogram image on Add Term form
+        $('#addtag').on('submit', function(e) {
+            var $imageField = $('#azytus_pictogram_image');
+            if (!$imageField.length) {
+                return;
+            }
+            if (!$imageField.val()) {
+                e.preventDefault();
+                e.stopImmediatePropagation();
+                window.alert('A pictogram image is required.');
+                return false;
+            }
         });
         
         // ========== PRODUCT GRADES - REPEATABLE FIELDS ==========

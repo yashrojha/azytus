@@ -19,7 +19,7 @@ while (have_posts()) :
     $molecular_weight = get_post_meta($product_id, '_azytus_molecular_weight', true);
     $msds_id = get_post_meta($product_id, '_azytus_msds', true);
 
-    $pictograms_ghs = get_post_meta($product_id, '_azytus_pictograms_ghs', true);
+    $pictograms = Azytus_Taxonomy_Pictogram::get_product_pictograms($product_id);
     $signal_words = get_post_meta($product_id, '_azytus_signal_words', true);
     $un_number = get_post_meta($product_id, '_azytus_un_number', true);
     $transport_info = get_post_meta($product_id, '_azytus_transport_info', true);
@@ -44,7 +44,7 @@ while (have_posts()) :
         $mw_display .= ' g/mol';
     }
 
-    $has_safety_data = !empty($pictograms_ghs) || !empty($signal_words) || !empty($un_number)
+    $has_safety_data = !empty($pictograms) || !empty($signal_words) || !empty($un_number)
         || !empty($transport_info) || !empty($transport_hazard_class) || !empty($packing_group);
 
     $contact_page = get_page_by_path('contact-us');
@@ -184,10 +184,19 @@ while (have_posts()) :
                                     </div>
                                 <?php endif; ?>
 
-                                <?php if (!empty($pictograms_ghs)) : ?>
-                                    <div class="azytus-pp-spec">
+                                <?php if (!empty($pictograms)) : ?>
+                                    <div class="azytus-pp-spec azytus-pp-spec--wide azytus-pp-spec--pictograms">
                                         <dt><?php esc_html_e('GHS Pictograms', 'azytus-toolkit'); ?></dt>
-                                        <dd><?php echo esc_html($pictograms_ghs); ?></dd>
+                                        <dd>
+                                            <ul class="azytus-pp-pictograms">
+                                                <?php foreach ($pictograms as $pictogram) : ?>
+                                                    <li class="azytus-pp-pictogram">
+                                                        <?php echo $pictogram['image_html']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+                                                        <span class="azytus-pp-pictogram__name"><?php echo esc_html($pictogram['name']); ?></span>
+                                                    </li>
+                                                <?php endforeach; ?>
+                                            </ul>
+                                        </dd>
                                     </div>
                                 <?php endif; ?>
 

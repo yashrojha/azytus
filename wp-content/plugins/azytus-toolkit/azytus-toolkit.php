@@ -70,6 +70,7 @@ class Azytus_Toolkit {
      */
     private function includes() {
         require_once AZYTUS_TOOLKIT_PLUGIN_DIR . 'includes/class-post-types.php';
+        require_once AZYTUS_TOOLKIT_PLUGIN_DIR . 'includes/class-taxonomy-pictogram.php';
         require_once AZYTUS_TOOLKIT_PLUGIN_DIR . 'includes/class-meta-boxes.php';
         require_once AZYTUS_TOOLKIT_PLUGIN_DIR . 'includes/class-ajax-handler.php';
         require_once AZYTUS_TOOLKIT_PLUGIN_DIR . 'includes/class-frontend.php';
@@ -87,6 +88,7 @@ class Azytus_Toolkit {
         
         // Initialize classes
         Azytus_Post_Types::init();
+        Azytus_Taxonomy_Pictogram::init();
         Azytus_Meta_Boxes::init();
         Azytus_Ajax_Handler::init();
         Azytus_Frontend::init();
@@ -130,38 +132,44 @@ class Azytus_Toolkit {
      */
     public function enqueue_admin_assets($hook) {
         global $post_type;
-        
-        $azytus_post_types = array('products', 'batches', 'grades');
-        
-        if (in_array($post_type, $azytus_post_types)) {
-            wp_enqueue_media();
 
-            if ($post_type === 'products') {
-                wp_enqueue_editor();
-            }
-            
-            // Select2 for better dropdowns
-            wp_enqueue_style('select2', 'https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css', array(), '4.1.0');
-            wp_enqueue_script('select2', 'https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js', array('jquery'), '4.1.0', true);
-            
-            // Custom admin styles
-            wp_enqueue_style('azytus-admin', AZYTUS_TOOLKIT_PLUGIN_URL . 'assets/css/admin.css', array(), azytus_toolkit_asset_version('assets/css/admin.css'));
-            
-            // Custom admin scripts (with jQuery UI Sortable)
-            wp_enqueue_script('azytus-admin', AZYTUS_TOOLKIT_PLUGIN_URL . 'assets/js/admin.js', array('jquery', 'jquery-ui-sortable', 'select2'), azytus_toolkit_asset_version('assets/js/admin.js'), true);
-            
-            wp_localize_script('azytus-admin', 'azytusAdmin', array(
-                'ajax_url' => admin_url('admin-ajax.php'),
-                'nonce' => wp_create_nonce('azytus_admin_nonce'),
-                'post_id' => isset($_GET['post']) ? intval($_GET['post']) : (isset($GLOBALS['post']->ID) ? (int) $GLOBALS['post']->ID : 0),
-                'i18n' => array(
-                    'duplicateInForm' => __('This batch number is entered more than once in this form.', 'azytus-toolkit'),
-                    'duplicateOnSite' => __('This batch number already exists on the site.', 'azytus-toolkit'),
-                    'checking' => __('Checking batch number...', 'azytus-toolkit'),
-                    'blockSave' => __('Please fix duplicate batch number errors before saving.', 'azytus-toolkit'),
-                ),
-            ));
+        $azytus_post_types = array('products', 'batches', 'grades');
+        $is_pictogram_screen = ($hook === 'edit-tags.php' || $hook === 'term.php')
+            && isset($_GET['taxonomy'])
+            && $_GET['taxonomy'] === Azytus_Taxonomy_Pictogram::TAXONOMY;
+
+        if (!in_array($post_type, $azytus_post_types, true) && !$is_pictogram_screen) {
+            return;
         }
+
+        wp_enqueue_media();
+
+        if ($post_type === 'products') {
+            wp_enqueue_editor();
+        }
+
+        // Select2 for better dropdowns
+        wp_enqueue_style('select2', 'https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css', array(), '4.1.0');
+        wp_enqueue_script('select2', 'https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js', array('jquery'), '4.1.0', true);
+
+        // Custom admin styles
+        wp_enqueue_style('azytus-admin', AZYTUS_TOOLKIT_PLUGIN_URL . 'assets/css/admin.css', array(), azytus_toolkit_asset_version('assets/css/admin.css'));
+
+        // Custom admin scripts (with jQuery UI Sortable)
+        wp_enqueue_script('azytus-admin', AZYTUS_TOOLKIT_PLUGIN_URL . 'assets/js/admin.js', array('jquery', 'jquery-ui-sortable', 'select2'), azytus_toolkit_asset_version('assets/js/admin.js'), true);
+
+        wp_localize_script('azytus-admin', 'azytusAdmin', array(
+            'ajax_url' => admin_url('admin-ajax.php'),
+            'nonce' => wp_create_nonce('azytus_admin_nonce'),
+            'post_id' => isset($_GET['post']) ? intval($_GET['post']) : (isset($GLOBALS['post']->ID) ? (int) $GLOBALS['post']->ID : 0),
+            'i18n' => array(
+                'duplicateInForm' => __('This batch number is entered more than once in this form.', 'azytus-toolkit'),
+                'duplicateOnSite' => __('This batch number already exists on the site.', 'azytus-toolkit'),
+                'checking' => __('Checking batch number...', 'azytus-toolkit'),
+                'blockSave' => __('Please fix duplicate batch number errors before saving.', 'azytus-toolkit'),
+                'selectPictogram' => __('Select pictograms…', 'azytus-toolkit'),
+            ),
+        ));
     }
     
     /**
@@ -196,15 +204,17 @@ add_action('plugins_loaded', 'azytus_toolkit_init');
  * Activation hook
  */
 function azytus_toolkit_activate() {
-    // Include the post types class
+    // Include the post types + taxonomy classes
     require_once AZYTUS_TOOLKIT_PLUGIN_DIR . 'includes/class-post-types.php';
-    
+    require_once AZYTUS_TOOLKIT_PLUGIN_DIR . 'includes/class-taxonomy-pictogram.php';
+
     // Migrate legacy post type handles
     Azytus_Post_Types::migrate_legacy_post_types();
-    
-    // Register post types
+
+    // Register post types and taxonomies
     Azytus_Post_Types::register_post_types();
-    
+    Azytus_Taxonomy_Pictogram::register_taxonomy();
+
     // Flush rewrite rules
     flush_rewrite_rules();
 }
