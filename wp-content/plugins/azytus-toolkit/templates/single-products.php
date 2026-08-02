@@ -186,7 +186,7 @@ while (have_posts()) :
 
                                 <?php if (!empty($pictograms)) : ?>
                                     <div class="azytus-pp-spec azytus-pp-spec--wide azytus-pp-spec--pictograms">
-                                        <dt><?php esc_html_e('GHS Pictograms', 'azytus-toolkit'); ?></dt>
+                                        <dt><?php esc_html_e('Pictograms', 'azytus-toolkit'); ?></dt>
                                         <dd>
                                             <ul class="azytus-pp-pictograms">
                                                 <?php foreach ($pictograms as $pictogram) : ?>
