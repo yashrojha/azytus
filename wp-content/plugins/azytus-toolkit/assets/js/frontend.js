@@ -4,6 +4,57 @@
 
 (function($) {
     'use strict';
+
+    /**
+     * True when a cell value is present (not empty / N/A placeholder).
+     */
+    function azytusHasColumnValue(value) {
+        if (value === true) {
+            return true;
+        }
+        if (value === false || value == null) {
+            return false;
+        }
+        return String(value).trim() !== '';
+    }
+
+    /**
+     * Build a results table, omitting columns with no values in the current result set.
+     *
+     * @param {Array} items
+     * @param {Array<{label:string, hasValue:Function, cell:Function}>} columns
+     * @param {string} tableClass
+     * @returns {string}
+     */
+    function azytusBuildResultsTable(items, columns, tableClass) {
+        var visible = columns.filter(function(column) {
+            return items.some(function(item) {
+                return azytusHasColumnValue(column.hasValue(item));
+            });
+        });
+
+        if (!visible.length) {
+            return '<div class="azytus-no-results">No data to display.</div>';
+        }
+
+        var html = '<div class="azytus-table-wrapper"><table class="' + tableClass + '">';
+        html += '<thead><tr>';
+        visible.forEach(function(column) {
+            html += '<th>' + column.label + '</th>';
+        });
+        html += '</tr></thead><tbody>';
+
+        items.forEach(function(item) {
+            html += '<tr>';
+            visible.forEach(function(column) {
+                html += '<td>' + column.cell(item) + '</td>';
+            });
+            html += '</tr>';
+        });
+
+        html += '</tbody></table></div>';
+        return html;
+    }
     
     $(document).ready(function() {
         
@@ -257,40 +308,56 @@
         }
         
         function displayProductResults(results) {
-            var html = '<div class="azytus-table-wrapper"><table class="azytus-product-table">';
-            html += '<thead><tr>';
-            html += '<th>Product Name</th>';
-            html += '<th>CAS Number</th>';
-            html += '<th>HSN Code</th>';
-            html += '<th>Molecular Formula</th>';
-            html += '<th>Molecular Weight</th>';
-            html += '<th>Product Code</th>';
-            html += '<th>Pack Size(s)</th>';
-            html += '<th>MSDS</th>';
-            html += '</tr></thead>';
-            html += '<tbody>';
-            
-            $.each(results, function(index, item) {
-                html += '<tr>';
-                html += '<td><strong>' + item.product_name + '</strong></td>';
-                html += '<td>' + item.cas + '</td>';
-                html += '<td>' + item.hsn + '</td>';
-                html += '<td>' + item.molecular_formula + '</td>';
-                html += '<td>' + item.molecular_weight + ' g/mol</td>';
-                html += '<td>' + item.product_code + '</td>';
-                html += '<td>' + item.pack_sizes + '</td>';
-                html += '<td>';
-                if (item.has_msds) {
-                    html += '<a href="' + item.msds_url + '" target="_blank" class="button button-small">View</a>';
-                } else {
-                    html += '<span style="color: #999;">N/A</span>';
+            var html = azytusBuildResultsTable(results, [
+                {
+                    label: 'Product Name',
+                    hasValue: function(item) { return item.product_name; },
+                    cell: function(item) { return '<strong>' + (item.product_name || '') + '</strong>'; }
+                },
+                {
+                    label: 'CAS Number',
+                    hasValue: function(item) { return item.cas; },
+                    cell: function(item) { return item.cas || ''; }
+                },
+                {
+                    label: 'HSN Code',
+                    hasValue: function(item) { return item.hsn; },
+                    cell: function(item) { return item.hsn || ''; }
+                },
+                {
+                    label: 'Molecular Formula',
+                    hasValue: function(item) { return item.molecular_formula; },
+                    cell: function(item) { return item.molecular_formula || ''; }
+                },
+                {
+                    label: 'Molecular Weight',
+                    hasValue: function(item) { return item.molecular_weight; },
+                    cell: function(item) {
+                        return item.molecular_weight ? (item.molecular_weight + ' g/mol') : '';
+                    }
+                },
+                {
+                    label: 'Product Code',
+                    hasValue: function(item) { return item.product_code; },
+                    cell: function(item) { return item.product_code || ''; }
+                },
+                {
+                    label: 'Pack Size(s)',
+                    hasValue: function(item) { return item.pack_sizes; },
+                    cell: function(item) { return item.pack_sizes || ''; }
+                },
+                {
+                    label: 'MSDS',
+                    hasValue: function(item) { return !!item.has_msds; },
+                    cell: function(item) {
+                        if (item.has_msds) {
+                            return '<a href="' + item.msds_url + '" target="_blank" class="button button-small">View</a>';
+                        }
+                        return '<span style="color: #999;">N/A</span>';
+                    }
                 }
-                html += '</td>';
-                html += '</tr>';
-            });
-            
-            html += '</tbody></table></div>';
-            
+            ], 'azytus-product-table');
+
             $('.azytus-results-table').html(html);
         }
         
@@ -352,42 +419,49 @@
         }
         
         function displayCOAResults(results) {
-            var html = '<div class="azytus-table-wrapper"><table class="azytus-coa-table">';
-            html += '<thead><tr>';
-            html += '<th>Batch No.</th>';
-            html += '<th>Code</th>';
-            html += '<th>Pack Size</th>';
-            html += '<th>Product Name with Grade</th>';
-            html += '<th>COA</th>';
-            html += '<th>MSDS</th>';
-            html += '</tr></thead>';
-            html += '<tbody>';
-            
-            $.each(results, function(index, item) {
-                html += '<tr>';
-                html += '<td><strong>' + item.batch_no + '</strong></td>';
-                html += '<td>' + item.code + '</td>';
-                html += '<td>' + item.pack_size + '</td>';
-                html += '<td>' + item.product_name_with_grade + '</td>';
-                html += '<td>';
-                if (item.has_coa) {
-                    html += '<a href="' + item.coa_url + '" target="_blank" class="button button-primary button-small">Download</a>';
-                } else {
-                    html += '<span style="color: #999;">Not available</span>';
+            var html = azytusBuildResultsTable(results, [
+                {
+                    label: 'Batch No.',
+                    hasValue: function(item) { return item.batch_no; },
+                    cell: function(item) { return '<strong>' + (item.batch_no || '') + '</strong>'; }
+                },
+                {
+                    label: 'Code',
+                    hasValue: function(item) { return item.code; },
+                    cell: function(item) { return item.code || ''; }
+                },
+                {
+                    label: 'Pack Size',
+                    hasValue: function(item) { return item.pack_size; },
+                    cell: function(item) { return item.pack_size || ''; }
+                },
+                {
+                    label: 'Product Name with Grade',
+                    hasValue: function(item) { return item.product_name_with_grade; },
+                    cell: function(item) { return item.product_name_with_grade || ''; }
+                },
+                {
+                    label: 'COA',
+                    hasValue: function(item) { return !!item.has_coa; },
+                    cell: function(item) {
+                        if (item.has_coa) {
+                            return '<a href="' + item.coa_url + '" target="_blank" class="button button-primary button-small">Download</a>';
+                        }
+                        return '<span style="color: #999;">Not available</span>';
+                    }
+                },
+                {
+                    label: 'MSDS',
+                    hasValue: function(item) { return !!item.has_msds; },
+                    cell: function(item) {
+                        if (item.has_msds) {
+                            return '<a href="' + item.msds_url + '" target="_blank" class="button button-small">View</a>';
+                        }
+                        return '<span style="color: #999;">N/A</span>';
+                    }
                 }
-                html += '</td>';
-                html += '<td>';
-                if (item.has_msds) {
-                    html += '<a href="' + item.msds_url + '" target="_blank" class="button button-small">View</a>';
-                } else {
-                    html += '<span style="color: #999;">N/A</span>';
-                }
-                html += '</td>';
-                html += '</tr>';
-            });
-            
-            html += '</tbody></table></div>';
-            
+            ], 'azytus-coa-table');
+
             $('.azytus-coa-results-table').html(html);
         }
 
@@ -491,70 +565,115 @@
             }
 
             function renderProductTable(items) {
-                var html = '<div class="azytus-table-wrapper"><table class="azytus-product-table azytus-header-results-table">';
-                html += '<thead><tr>';
-                html += '<th>Product Name</th><th>Code</th><th>Pack Size(s)</th><th>CAS</th><th>HSN</th><th>Molecular Formula</th><th>Molecular Weight</th><th>MSDS</th>';
-                html += '</tr></thead><tbody>';
-
-                $.each(items, function(i, item) {
-                    var name = escapeHtml(item.product_name);
-                    if (item.product_url) {
-                        name = '<a href="' + escapeHtml(item.product_url) + '">' + name + '</a>';
+                var html = azytusBuildResultsTable(items, [
+                    {
+                        label: 'Product Name',
+                        hasValue: function(item) { return item.product_name; },
+                        cell: function(item) {
+                            var name = escapeHtml(item.product_name);
+                            if (item.product_url) {
+                                name = '<a href="' + escapeHtml(item.product_url) + '">' + name + '</a>';
+                            }
+                            return '<strong>' + name + '</strong>';
+                        }
+                    },
+                    {
+                        label: 'Code',
+                        hasValue: function(item) { return item.product_code; },
+                        cell: function(item) { return escapeHtml(item.product_code || ''); }
+                    },
+                    {
+                        label: 'Pack Size(s)',
+                        hasValue: function(item) { return item.pack_sizes; },
+                        cell: function(item) { return escapeHtml(item.pack_sizes || ''); }
+                    },
+                    {
+                        label: 'CAS',
+                        hasValue: function(item) { return item.cas; },
+                        cell: function(item) { return escapeHtml(item.cas || ''); }
+                    },
+                    {
+                        label: 'HSN',
+                        hasValue: function(item) { return item.hsn; },
+                        cell: function(item) { return escapeHtml(item.hsn || ''); }
+                    },
+                    {
+                        label: 'Molecular Formula',
+                        hasValue: function(item) { return item.molecular_formula; },
+                        cell: function(item) { return escapeHtml(item.molecular_formula || ''); }
+                    },
+                    {
+                        label: 'Molecular Weight',
+                        hasValue: function(item) { return item.molecular_weight; },
+                        cell: function(item) {
+                            return item.molecular_weight ? (escapeHtml(item.molecular_weight) + ' g/mol') : '';
+                        }
+                    },
+                    {
+                        label: 'MSDS',
+                        hasValue: function(item) { return !!item.has_msds; },
+                        cell: function(item) {
+                            if (item.has_msds) {
+                                return '<a href="' + escapeHtml(item.msds_url) + '" target="_blank" rel="noopener" class="button button-small">View</a>';
+                            }
+                            return '<span class="azytus-na">N/A</span>';
+                        }
                     }
-                    var mw = item.molecular_weight ? (escapeHtml(item.molecular_weight) + ' g/mol') : '';
-                    html += '<tr>';
-                    html += '<td><strong>' + name + '</strong></td>';
-                    html += '<td>' + escapeHtml(item.product_code || '') + '</td>';
-                    html += '<td>' + escapeHtml(item.pack_sizes || '') + '</td>';
-                    html += '<td>' + escapeHtml(item.cas || '') + '</td>';
-                    html += '<td>' + escapeHtml(item.hsn || '') + '</td>';
-                    html += '<td>' + escapeHtml(item.molecular_formula || '') + '</td>';
-                    html += '<td>' + mw + '</td>';
-                    html += '<td>';
-                    if (item.has_msds) {
-                        html += '<a href="' + escapeHtml(item.msds_url) + '" target="_blank" rel="noopener" class="button button-small">View</a>';
-                    } else {
-                        html += '<span class="azytus-na">N/A</span>';
-                    }
-                    html += '</td></tr>';
-                });
+                ], 'azytus-product-table azytus-header-results-table');
 
-                html += '</tbody></table></div>';
                 $results.html(html);
             }
 
             function renderCOATable(items) {
-                var html = '<div class="azytus-table-wrapper"><table class="azytus-coa-table azytus-header-results-table">';
-                html += '<thead><tr>';
-                html += '<th>Batch No.</th><th>Code</th><th>Pack Size</th><th>Product</th><th>COA</th><th>MSDS</th>';
-                html += '</tr></thead><tbody>';
+                var html = azytusBuildResultsTable(items, [
+                    {
+                        label: 'Batch No.',
+                        hasValue: function(item) { return item.batch_no; },
+                        cell: function(item) { return '<strong>' + escapeHtml(item.batch_no) + '</strong>'; }
+                    },
+                    {
+                        label: 'Code',
+                        hasValue: function(item) { return item.code; },
+                        cell: function(item) { return escapeHtml(item.code); }
+                    },
+                    {
+                        label: 'Pack Size',
+                        hasValue: function(item) { return item.pack_size; },
+                        cell: function(item) { return escapeHtml(item.pack_size); }
+                    },
+                    {
+                        label: 'Product',
+                        hasValue: function(item) { return item.product_name_with_grade; },
+                        cell: function(item) {
+                            var product = escapeHtml(item.product_name_with_grade);
+                            if (item.product_url) {
+                                product = '<a href="' + escapeHtml(item.product_url) + '">' + product + '</a>';
+                            }
+                            return product;
+                        }
+                    },
+                    {
+                        label: 'COA',
+                        hasValue: function(item) { return !!item.has_coa; },
+                        cell: function(item) {
+                            if (item.has_coa) {
+                                return '<a href="' + escapeHtml(item.coa_url) + '" target="_blank" rel="noopener" class="button button-primary button-small">Download</a>';
+                            }
+                            return '<span class="azytus-na">N/A</span>';
+                        }
+                    },
+                    {
+                        label: 'MSDS',
+                        hasValue: function(item) { return !!item.has_msds; },
+                        cell: function(item) {
+                            if (item.has_msds) {
+                                return '<a href="' + escapeHtml(item.msds_url) + '" target="_blank" rel="noopener" class="button button-small">View</a>';
+                            }
+                            return '<span class="azytus-na">N/A</span>';
+                        }
+                    }
+                ], 'azytus-coa-table azytus-header-results-table');
 
-                $.each(items, function(i, item) {
-                    var product = escapeHtml(item.product_name_with_grade);
-                    if (item.product_url) {
-                        product = '<a href="' + escapeHtml(item.product_url) + '">' + product + '</a>';
-                    }
-                    html += '<tr>';
-                    html += '<td><strong>' + escapeHtml(item.batch_no) + '</strong></td>';
-                    html += '<td>' + escapeHtml(item.code) + '</td>';
-                    html += '<td>' + escapeHtml(item.pack_size) + '</td>';
-                    html += '<td>' + product + '</td>';
-                    html += '<td>';
-                    if (item.has_coa) {
-                        html += '<a href="' + escapeHtml(item.coa_url) + '" target="_blank" rel="noopener" class="button button-primary button-small">Download</a>';
-                    } else {
-                        html += '<span class="azytus-na">N/A</span>';
-                    }
-                    html += '</td><td>';
-                    if (item.has_msds) {
-                        html += '<a href="' + escapeHtml(item.msds_url) + '" target="_blank" rel="noopener" class="button button-small">View</a>';
-                    } else {
-                        html += '<span class="azytus-na">N/A</span>';
-                    }
-                    html += '</td></tr>';
-                });
-
-                html += '</tbody></table></div>';
                 $results.html(html);
             }
 

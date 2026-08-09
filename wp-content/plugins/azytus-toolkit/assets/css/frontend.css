@@ -475,7 +475,7 @@ header.style-1 {
         left: 50%;
         top: 10%;
         transform: translateX(-50%);
-        width: min(1250px, calc(100% - 28px));
+        width: min(1320px, calc(100% - 28px));
         max-height: 80vh;
         z-index: 1;
         animation: azytusSearchIn 0.28s ease;
@@ -775,7 +775,7 @@ header.style-1 {
 
         td {
             font-family: var(--font-manrope, "Manrope", sans-serif);
-            font-size: 13px;
+            font-size: 18px;
         }
 
         a {
