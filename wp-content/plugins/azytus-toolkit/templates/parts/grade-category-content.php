@@ -19,7 +19,7 @@ $grade_items = Azytus_Frontend::get_grades_for_category($category_id);
 $banner_image = get_the_post_thumbnail_url($category_id, 'large');
 $title = get_the_title($category_id);
 $content = get_post_field('post_content', $category_id);
-$columns = 2;
+$columns = 1;
 ?>
 
 <article id="post-<?php echo esc_attr($category_id); ?>" <?php post_class('azytus-grade-category-page', $category_id); ?>>

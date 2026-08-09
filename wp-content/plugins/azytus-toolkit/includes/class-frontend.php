@@ -400,7 +400,7 @@ class Azytus_Frontend {
     public static function grade_table_shortcode($atts) {
         $atts = shortcode_atts(array(
             'id' => 0,
-            'columns' => '2',
+            'columns' => '1',
         ), $atts, 'azytus_grade_table');
 
         $category_id = self::resolve_grade_category_id($atts['id']);
@@ -864,6 +864,10 @@ class Azytus_Frontend {
             if (!is_array($grades)) {
                 continue;
             }
+
+            $cas = get_post_meta($product->ID, '_azytus_cas', true);
+            $hsn = get_post_meta($product->ID, '_azytus_hsn', true);
+            $molecular_formula = get_post_meta($product->ID, '_azytus_molecular_formula', true);
             
             foreach ($grades as $grade) {
                 $grade_category_id = isset($grade['grade_category_id']) ? intval($grade['grade_category_id']) : 0;
@@ -892,6 +896,9 @@ class Azytus_Frontend {
                     'product_url' => $product_url,
                     'grade_name' => $grade_name,
                     'product_code' => isset($grade['product_code']) ? $grade['product_code'] : '',
+                    'cas' => $cas,
+                    'hsn' => $hsn,
+                    'molecular_formula' => $molecular_formula,
                     'pack_sizes' => $pack_sizes,
                     'pack_sizes_display' => implode(', ', $pack_sizes),
                 );

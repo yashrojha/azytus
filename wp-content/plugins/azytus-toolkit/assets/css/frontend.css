@@ -1145,30 +1145,17 @@ body.azytus-search-open {
             }
         }
 
+        .azytus-gc-table__cas,
+        .azytus-gc-table__hsn {
+            white-space: nowrap;
+        }
+
+        td.azytus-gc-table__formula {
+            font-weight: 700;
+        }
+
         .azytus-gc-table__packs {
             min-width: 140px;
-        }
-    }
-
-    .azytus-gc-code {
-        display: inline-flex;
-        align-items: center;
-        padding: 5px 10px;
-        background: linear-gradient(135deg, rgba(20, 116, 155, 0.1), rgba(92, 149, 65, 0.1));
-        border: 1px solid rgba(20, 116, 155, 0.18);
-        border-radius: 8px;
-        color: var(--azytus-blue, #14749B);
-        font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
-        font-size: 0.88rem;
-        font-weight: 700;
-        letter-spacing: 0.02em;
-        line-height: 1.2;
-
-        &.azytus-gc-code--empty {
-            background: var(--azytus-soft, #f4f7f5);
-            border-color: transparent;
-            color: var(--azytus-muted, #5a6b73);
-            font-weight: 500;
         }
     }
 

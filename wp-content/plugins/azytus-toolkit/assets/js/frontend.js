@@ -819,13 +819,16 @@
 
             $productInput.on('input', syncClearButton);
 
+            // Enter searches products by default
             $('#azytus-header-search-form').on('submit', function(e) {
                 e.preventDefault();
+                searchProducts();
             });
 
             $productInput.on('keydown', function(e) {
                 if (e.key === 'Enter') {
                     e.preventDefault();
+                    searchProducts();
                 }
             });
 

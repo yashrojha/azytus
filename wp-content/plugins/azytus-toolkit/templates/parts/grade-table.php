@@ -11,7 +11,7 @@ if (!defined('ABSPATH')) {
 
 $category_id = !empty($category_id) ? (int) $category_id : 0;
 $grade_items = isset($grade_items) && is_array($grade_items) ? $grade_items : array();
-$columns = isset($columns) ? max(1, min(2, (int) $columns)) : 2;
+$columns = isset($columns) ? max(1, min(2, (int) $columns)) : 1;
 
 if (!$category_id) {
     return;
@@ -30,6 +30,22 @@ $product_count = count($grade_items);
 $chunks = ($columns === 1)
     ? array($grade_items)
     : array_chunk($grade_items, (int) ceil($product_count / 2));
+
+// Hide optional columns when no row has a value for them.
+$has_cas = false;
+$has_formula = false;
+$has_hsn = false;
+foreach ($grade_items as $item) {
+    if (!empty($item['cas'])) {
+        $has_cas = true;
+    }
+    if (!empty($item['molecular_formula'])) {
+        $has_formula = true;
+    }
+    if (!empty($item['hsn'])) {
+        $has_hsn = true;
+    }
+}
 ?>
 
 <section class="azytus-gc-catalog" aria-labelledby="azytus-gc-catalog-title">
@@ -60,6 +76,15 @@ $chunks = ($columns === 1)
                         <tr>
                             <th scope="col" class="azytus-gc-table__code"><?php esc_html_e('Code', 'azytus-toolkit'); ?></th>
                             <th scope="col" class="azytus-gc-table__name"><?php esc_html_e('Product', 'azytus-toolkit'); ?></th>
+                            <?php if ($has_cas) : ?>
+                                <th scope="col" class="azytus-gc-table__cas"><?php esc_html_e('CAS', 'azytus-toolkit'); ?></th>
+                            <?php endif; ?>
+                            <?php if ($has_formula) : ?>
+                                <th scope="col" class="azytus-gc-table__formula"><?php esc_html_e('Molecular Formula', 'azytus-toolkit'); ?></th>
+                            <?php endif; ?>
+                            <?php if ($has_hsn) : ?>
+                                <th scope="col" class="azytus-gc-table__hsn"><?php esc_html_e('HSN', 'azytus-toolkit'); ?></th>
+                            <?php endif; ?>
                             <th scope="col" class="azytus-gc-table__packs"><?php esc_html_e('Pack Sizes', 'azytus-toolkit'); ?></th>
                         </tr>
                     </thead>
@@ -72,17 +97,28 @@ $chunks = ($columns === 1)
                             ?>
                             <tr>
                                 <td class="azytus-gc-table__code" data-label="<?php esc_attr_e('Code', 'azytus-toolkit'); ?>">
-                                    <?php if (!empty($item['product_code'])) : ?>
-                                        <span class="azytus-gc-code"><?php echo esc_html($item['product_code']); ?></span>
-                                    <?php else : ?>
-                                        <span class="azytus-gc-code azytus-gc-code--empty">—</span>
-                                    <?php endif; ?>
+                                    <?php echo !empty($item['product_code']) ? esc_html($item['product_code']) : '—'; ?>
                                 </td>
                                 <td class="azytus-gc-table__name" data-label="<?php esc_attr_e('Product', 'azytus-toolkit'); ?>">
                                     <a href="<?php echo esc_url($item['product_url']); ?>">
                                         <?php echo esc_html($item['product_name']); ?>
                                     </a>
                                 </td>
+                                <?php if ($has_cas) : ?>
+                                    <td class="azytus-gc-table__cas" data-label="<?php esc_attr_e('CAS', 'azytus-toolkit'); ?>">
+                                        <?php echo !empty($item['cas']) ? esc_html($item['cas']) : '—'; ?>
+                                    </td>
+                                <?php endif; ?>
+                                <?php if ($has_formula) : ?>
+                                    <td class="azytus-gc-table__formula" data-label="<?php esc_attr_e('Molecular Formula', 'azytus-toolkit'); ?>">
+                                        <?php echo !empty($item['molecular_formula']) ? esc_html($item['molecular_formula']) : '—'; ?>
+                                    </td>
+                                <?php endif; ?>
+                                <?php if ($has_hsn) : ?>
+                                    <td class="azytus-gc-table__hsn" data-label="<?php esc_attr_e('HSN', 'azytus-toolkit'); ?>">
+                                        <?php echo !empty($item['hsn']) ? esc_html($item['hsn']) : '—'; ?>
+                                    </td>
+                                <?php endif; ?>
                                 <td class="azytus-gc-table__packs" data-label="<?php esc_attr_e('Pack Sizes', 'azytus-toolkit'); ?>">
                                     <?php if (!empty($pack_sizes)) : ?>
                                         <ul class="azytus-gc-packs">
