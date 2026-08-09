@@ -22,7 +22,7 @@
      * Build a results table, omitting columns with no values in the current result set.
      *
      * @param {Array} items
-     * @param {Array<{label:string, hasValue:Function, cell:Function}>} columns
+     * @param {Array<{label:string, hasValue:Function, cell:Function, className?:string}>} columns
      * @param {string} tableClass
      * @returns {string}
      */
@@ -40,20 +40,49 @@
         var html = '<div class="azytus-table-wrapper"><table class="' + tableClass + '">';
         html += '<thead><tr>';
         visible.forEach(function(column) {
-            html += '<th>' + column.label + '</th>';
+            var thClass = column.className ? ' class="' + column.className + '"' : '';
+            html += '<th' + thClass + '>' + column.label + '</th>';
         });
         html += '</tr></thead><tbody>';
 
         items.forEach(function(item) {
             html += '<tr>';
             visible.forEach(function(column) {
-                html += '<td>' + column.cell(item) + '</td>';
+                var tdClass = column.className ? ' class="' + column.className + '"' : '';
+                html += '<td' + tdClass + '>' + column.cell(item) + '</td>';
             });
             html += '</tr>';
         });
 
         html += '</tbody></table></div>';
         return html;
+    }
+
+    /**
+     * Render pack size string(s) as pill chips.
+     *
+     * @param {string} value Comma-separated or single pack size.
+     * @param {Function} [escapeFn] Optional HTML escaper.
+     * @returns {string}
+     */
+    function azytusFormatPackSizePills(value, escapeFn) {
+        var raw = String(value == null ? '' : value).trim();
+        if (!raw) {
+            return '';
+        }
+
+        var parts = raw.split(',').map(function(part) {
+            return part.trim();
+        }).filter(Boolean);
+
+        if (!parts.length) {
+            return '';
+        }
+
+        return '<span class="azytus-pack-pills">' + parts.map(function(part) {
+            var label = typeof escapeFn === 'function' ? escapeFn(part) : part;
+            return '<span class="azytus-pack-pill">' + label + '</span>';
+        }).join('') + '</span>';
     }
     
     $(document).ready(function() {
@@ -326,6 +355,7 @@
                 },
                 {
                     label: 'Molecular Formula',
+                    className: 'azytus-col-formula',
                     hasValue: function(item) { return item.molecular_formula; },
                     cell: function(item) { return item.molecular_formula || ''; }
                 },
@@ -343,8 +373,9 @@
                 },
                 {
                     label: 'Pack Size(s)',
+                    className: 'azytus-col-pack-sizes',
                     hasValue: function(item) { return item.pack_sizes; },
-                    cell: function(item) { return item.pack_sizes || ''; }
+                    cell: function(item) { return azytusFormatPackSizePills(item.pack_sizes); }
                 },
                 {
                     label: 'MSDS',
@@ -432,8 +463,9 @@
                 },
                 {
                     label: 'Pack Size',
+                    className: 'azytus-col-pack-sizes',
                     hasValue: function(item) { return item.pack_size; },
-                    cell: function(item) { return item.pack_size || ''; }
+                    cell: function(item) { return azytusFormatPackSizePills(item.pack_size); }
                 },
                 {
                     label: 'Product Name with Grade',
@@ -584,8 +616,9 @@
                     },
                     {
                         label: 'Pack Size(s)',
+                        className: 'azytus-col-pack-sizes',
                         hasValue: function(item) { return item.pack_sizes; },
-                        cell: function(item) { return escapeHtml(item.pack_sizes || ''); }
+                        cell: function(item) { return azytusFormatPackSizePills(item.pack_sizes, escapeHtml); }
                     },
                     {
                         label: 'CAS',
@@ -599,6 +632,7 @@
                     },
                     {
                         label: 'Molecular Formula',
+                        className: 'azytus-col-formula',
                         hasValue: function(item) { return item.molecular_formula; },
                         cell: function(item) { return escapeHtml(item.molecular_formula || ''); }
                     },
@@ -638,8 +672,9 @@
                     },
                     {
                         label: 'Pack Size',
+                        className: 'azytus-col-pack-sizes',
                         hasValue: function(item) { return item.pack_size; },
-                        cell: function(item) { return escapeHtml(item.pack_size); }
+                        cell: function(item) { return azytusFormatPackSizePills(item.pack_size, escapeHtml); }
                     },
                     {
                         label: 'Product',
