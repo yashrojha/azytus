@@ -903,6 +903,7 @@ body.azytus-search-open {
         align-items: stretch;
         min-height: 220px;
         overflow: hidden;
+        border-radius: 16px;
         box-shadow: 0 10px 30px rgba(20, 116, 155, 0.08);
     }
 
@@ -962,6 +963,7 @@ body.azytus-search-open {
         background: rgba(255, 255, 255, 0.9);
         border: 1px solid var(--azytus-line);
         border-left: 3px solid var(--azytus-green);
+        border-radius: 14px;
         box-shadow: 0 10px 30px rgba(20, 116, 155, 0.05);
 
         h2 {
@@ -1017,6 +1019,7 @@ body.azytus-search-open {
     max-width: 100%;
     text-align: center;
     overflow: hidden;
+    border-radius: 14px;
 
     .azytus-gc-products-image__img,
     img {
@@ -1085,13 +1088,9 @@ body.azytus-search-open {
         overflow: hidden;
         background: #fff;
         border: 1px solid var(--azytus-line, rgba(20, 116, 155, 0.12));
-        border-left: 3px solid var(--azytus-green, #5C9541);
+        border-radius: 14px;
         box-shadow: 0 10px 30px rgba(20, 116, 155, 0.05);
         animation: azytus-pp-rise 0.7s ease both;
-
-        &:nth-child(even) {
-            border-left-color: var(--azytus-blue, #14749B);
-        }
     }
 
     .azytus-gc-table {
@@ -1100,16 +1099,14 @@ body.azytus-search-open {
         font-size: 0.95rem;
 
         thead th {
-            padding: 14px 16px;
+            padding: 13px 16px;
             text-align: left;
             border: none;
-            border-bottom: 1px solid var(--azytus-line, rgba(20, 116, 155, 0.12));
-            background: var(--azytus-soft, #f4f7f5);
-            color: var(--azytus-muted, #5a6b73);
-            font-size: 11px;
-            font-weight: 700;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
+            background: var(--primary-color4, #234f40);
+            color: #fff;
+            font-family: var(--font-manrope, "Manrope", sans-serif);
+            font-size: 15px;
+            font-weight: 600;
             white-space: nowrap;
         }
 
@@ -1159,6 +1156,7 @@ body.azytus-search-open {
         padding: 5px 10px;
         background: linear-gradient(135deg, rgba(20, 116, 155, 0.1), rgba(92, 149, 65, 0.1));
         border: 1px solid rgba(20, 116, 155, 0.18);
+        border-radius: 8px;
         color: var(--azytus-blue, #14749B);
         font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
         font-size: 0.88rem;
@@ -1188,6 +1186,7 @@ body.azytus-search-open {
             padding: 4px 12px;
             background: var(--azytus-soft, #f4f7f5);
             border: 1px solid rgba(20, 116, 155, 0.22);
+            border-radius: 999px;
             color: var(--azytus-blue, #14749B);
             font-size: 13px;
             font-weight: 700;
@@ -1259,6 +1258,7 @@ body.azytus-search-open {
     color: var(--azytus-muted, #5a6b73);
     background: var(--azytus-soft, #f4f7f5);
     border: 1px dashed rgba(20, 116, 155, 0.25);
+    border-radius: 14px;
     font-family: var(--font-manrope, "Manrope", sans-serif);
 }
 
@@ -1308,6 +1308,7 @@ body.azytus-search-open {
         background: rgba(255, 255, 255, 0.88);
         border: 1px solid var(--azytus-line);
         border-left: 4px solid var(--azytus-green);
+        border-radius: 16px;
         box-shadow: 0 10px 30px rgba(20, 116, 155, 0.06);
         animation: azytus-pp-rise 0.7s ease both;
     }
@@ -1331,6 +1332,7 @@ body.azytus-search-open {
         padding: 10px 14px;
         background: var(--azytus-soft);
         border: 1px solid transparent;
+        border-radius: 12px;
         color: var(--azytus-ink);
         line-height: 1.2;
 
@@ -1376,6 +1378,7 @@ body.azytus-search-open {
         text-transform: uppercase;
         text-decoration: none;
         line-height: 1;
+        border-radius: 50px;
         transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
 
         svg {
@@ -1432,6 +1435,7 @@ body.azytus-search-open {
         padding: 32px 34px;
         background: #fff;
         border: 1px solid var(--azytus-line);
+        border-radius: 16px;
         box-shadow: 0 8px 28px rgba(28, 26, 30, 0.04);
         animation: azytus-pp-rise 0.75s ease both;
 
@@ -1481,6 +1485,7 @@ body.azytus-search-open {
         padding: 18px 18px 18px 20px;
         background: var(--azytus-soft);
         border-left: 3px solid var(--azytus-green);
+        border-radius: 10px;
         transition: background-color 0.3s ease, transform 0.3s ease;
 
         &:hover {
@@ -1522,7 +1527,8 @@ body.azytus-search-open {
 
     .azytus-pp-signal {
         display: inline-block;
-        padding: 4px 10px;
+        padding: 4px 12px;
+        border-radius: 999px;
         font-size: 0.85em;
         letter-spacing: 0.04em;
         text-transform: uppercase;
@@ -1587,6 +1593,7 @@ body.azytus-search-open {
             background: var(--azytus-cream);
             padding: 20px 22px;
             border: 1px solid rgba(0, 0, 0, 0.05);
+            border-radius: 12px;
         }
     }
 
@@ -1599,6 +1606,7 @@ body.azytus-search-open {
         .azytus-pp-media__frame {
             overflow: hidden;
             border: 1px solid var(--azytus-line);
+            border-radius: 16px;
             background: var(--azytus-soft);
             box-shadow: 0 16px 40px rgba(20, 116, 155, 0.1);
         }
@@ -1652,6 +1660,7 @@ body.azytus-search-open {
             background: #fff;
             color: var(--azytus-ink);
             padding: 8px 20px;
+            border-radius: 50px;
             font-size: 13px;
             font-weight: 700;
             letter-spacing: 0.04em;
@@ -1692,6 +1701,7 @@ body.azytus-search-open {
         padding: 26px 24px 24px;
         background: #fff;
         border: 1px solid var(--azytus-line);
+        border-radius: 14px;
         overflow: hidden;
         transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
 
@@ -1764,9 +1774,10 @@ body.azytus-search-open {
 
             strong {
                 display: inline-block;
-                padding: 0 12px;
+                padding: 2px 12px;
                 background: var(--azytus-blue);
                 color: #fff;
+                border-radius: 999px;
                 font-size: 13px;
                 font-weight: 700;
                 letter-spacing: 0.04em;
@@ -1816,6 +1827,7 @@ body.azytus-search-open {
             padding: 4px 14px;
             background: var(--azytus-soft);
             border: 1px solid rgba(20, 116, 155, 0.22);
+            border-radius: 999px;
             color: var(--azytus-blue);
             font-size: 13px;
             font-weight: 700;
@@ -1836,6 +1848,7 @@ body.azytus-search-open {
         color: var(--azytus-muted);
         background: var(--azytus-soft);
         border: 1px dashed rgba(20, 116, 155, 0.25);
+        border-radius: 14px;
     }
 
     @media (max-width: 991px) {
