@@ -398,14 +398,14 @@ class Matrik_Counter_Widget extends Widget_Base
                                     <div class="single-countdown">
                                         <div class="number">
                                             <?php if (!empty($data['matrik_counter_genaral_counter_number'])) : ?>
-                                                <h2 class="counter"><?php echo esc_html($data['matrik_counter_genaral_counter_number']); ?></h2>
+                                                <h2 class="counter"><?php echo wp_kses_post($data['matrik_counter_genaral_counter_number']); ?></h2>
                                             <?php endif; ?>
                                             <?php if (!empty($data['matrik_counter_genaral_counter_sign'])) : ?>
-                                                <span><?php echo esc_html($data['matrik_counter_genaral_counter_sign']); ?></span>
+                                                <span><?php echo wp_kses_post($data['matrik_counter_genaral_counter_sign']); ?></span>
                                             <?php endif; ?>
                                         </div>
                                         <?php if (!empty($data['matrik_counter_genaral_counter_title'])) : ?>
-                                            <span><?php echo esc_html($data['matrik_counter_genaral_counter_title']); ?></span>
+                                            <span><?php echo wp_kses_post($data['matrik_counter_genaral_counter_title']); ?></span>
                                         <?php endif; ?>
                                     </div>
                                 </div>
@@ -430,14 +430,14 @@ class Matrik_Counter_Widget extends Widget_Base
                                     <div class="single-countdown">
                                         <div class="number">
                                             <?php if (!empty($data['matrik_counter_genaral_counter_number'])) : ?>
-                                                <h2 class="counter"><?php echo esc_html($data['matrik_counter_genaral_counter_number']); ?></h2>
+                                                <h2 class="counter"><?php echo wp_kses_post($data['matrik_counter_genaral_counter_number']); ?></h2>
                                             <?php endif; ?>
                                             <?php if (!empty($data['matrik_counter_genaral_counter_sign'])) : ?>
-                                                <span><?php echo esc_html($data['matrik_counter_genaral_counter_sign']); ?></span>
+                                                <span><?php echo wp_kses_post($data['matrik_counter_genaral_counter_sign']); ?></span>
                                             <?php endif; ?>
                                         </div>
                                         <?php if (!empty($data['matrik_counter_genaral_counter_title'])) : ?>
-                                            <span><?php echo esc_html($data['matrik_counter_genaral_counter_title']); ?></span>
+                                            <span><?php echo wp_kses_post($data['matrik_counter_genaral_counter_title']); ?></span>
                                         <?php endif; ?>
                                     </div>
                                 </div>

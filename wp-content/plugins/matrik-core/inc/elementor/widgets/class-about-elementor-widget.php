@@ -2746,10 +2746,10 @@ class Matrik_About_Widget extends Widget_Base
                                 <div class="about-title-area">
                                     <div class="section-title">
                                         <?php if (!empty($settings['matrik_about_genaral_subtitle'])) : ?>
-                                            <span><?php echo esc_html($settings['matrik_about_genaral_subtitle']); ?></span>
+                                            <span><?php echo wp_kses_post($settings['matrik_about_genaral_subtitle']); ?></span>
                                         <?php endif; ?>
                                         <?php if (!empty($settings['matrik_about_genaral_title'])) : ?>
-                                            <h2><?php echo esc_html($settings['matrik_about_genaral_title']); ?></h2>
+                                            <h2><?php echo wp_kses_post($settings['matrik_about_genaral_title']); ?></h2>
                                         <?php endif; ?>
                                     </div>
                                     <div class="video-and-content">
@@ -2771,7 +2771,7 @@ class Matrik_About_Widget extends Widget_Base
                                         </a>
                                         <?php if (!empty($settings['matrik_about_genaral_video_area_description'])) : ?>
                                             <div class="content">
-                                                <p><?php echo esc_html($settings['matrik_about_genaral_video_area_description']); ?></p>
+                                                <p><?php echo wp_kses_post($settings['matrik_about_genaral_video_area_description']); ?></p>
                                             </div>
                                         <?php endif; ?>
                                     </div>
@@ -2790,7 +2790,7 @@ class Matrik_About_Widget extends Widget_Base
                                             </svg>
                                         </div>
                                         <div class="about-btn">
-                                            <?php echo esc_html($settings['matrik_about_genaral_header_button']); ?>
+                                            <?php echo wp_kses_post($settings['matrik_about_genaral_header_button']); ?>
                                             <svg viewBox="0 0 13 20">
                                                 <polyline points="0.5 19.5 3 19.5 12.5 10 3 0.5"></polyline>
                                             </svg>
@@ -2805,17 +2805,17 @@ class Matrik_About_Widget extends Widget_Base
                         <div class="col-lg-5 wow animate fadeInLeft" data-wow-delay="200ms" data-wow-duration="1500ms">
                             <div class="about-content">
                                 <?php if (!empty($settings['matrik_about_genaral_content_area_description'])) : ?>
-                                    <p><?php echo esc_html($settings['matrik_about_genaral_content_area_description']); ?></p>
+                                    <p><?php echo wp_kses_post($settings['matrik_about_genaral_content_area_description']); ?></p>
                                 <?php endif; ?>
                                 <ul>
 
                                     <?php foreach ($settings['matrik_about_genaral_content_area_content_list'] as $data) : ?>
                                         <li>
                                             <?php if (!empty($data['matrik_about_genaral_content_area_content_title'])) : ?>
-                                                <h6><?php echo esc_html($data['matrik_about_genaral_content_area_content_title']); ?></h6>
+                                                <h6><?php echo wp_kses_post($data['matrik_about_genaral_content_area_content_title']); ?></h6>
                                             <?php endif; ?>
                                             <?php if (!empty($data['matrik_about_genaral_content_area_content_description'])) : ?>
-                                                <p><?php echo esc_html($data['matrik_about_genaral_content_area_content_description']); ?></p>
+                                                <p><?php echo wp_kses_post($data['matrik_about_genaral_content_area_content_description']); ?></p>
                                             <?php endif; ?>
                                         </li>
                                     <?php endforeach; ?>
@@ -2842,15 +2842,15 @@ class Matrik_About_Widget extends Widget_Base
                             <div class="about-title-area">
                                 <div class="section-title two">
                                     <?php if (!empty($settings['matrik_about_genaral_subtitle'])) : ?>
-                                        <span><?php echo esc_html($settings['matrik_about_genaral_subtitle']); ?></span>
+                                        <span><?php echo wp_kses_post($settings['matrik_about_genaral_subtitle']); ?></span>
                                     <?php endif; ?>
                                     <?php if (!empty($settings['matrik_about_genaral_title'])) : ?>
-                                        <h2><?php echo esc_html($settings['matrik_about_genaral_title']); ?></h2>
+                                        <h2><?php echo wp_kses_post($settings['matrik_about_genaral_title']); ?></h2>
                                     <?php endif; ?>
                                 </div>
                                 <?php if (!empty($settings['matrik_about_genaral_header_description'])) : ?>
                                     <div class="content">
-                                        <p><?php echo esc_html($settings['matrik_about_genaral_header_description']); ?></p>
+                                        <p><?php echo wp_kses_post($settings['matrik_about_genaral_header_description']); ?></p>
                                     </div>
                                 <?php endif; ?>
                             </div>
@@ -2867,7 +2867,7 @@ class Matrik_About_Widget extends Widget_Base
                                         </svg>
                                     </div>
                                     <div class="primary-btn2">
-                                        <span><?php echo esc_html($settings['matrik_about_genaral_header_button']); ?></span>
+                                        <span><?php echo wp_kses_post($settings['matrik_about_genaral_header_button']); ?></span>
                                         <svg class="arrow" width="23" height="23" viewBox="0 0 23 23" xmlns="http://www.w3.org/2000/svg">
                                             <g>
                                                 <path d="M0.113861 0H22.9999V4.28425L4.32671 22.9997L0 18.7154L12.7524 6.08815L0.113861 6.20089V0Z"></path>
@@ -2884,15 +2884,15 @@ class Matrik_About_Widget extends Widget_Base
                             <div class="about-content-wrapper">
                                 <div class="about-content">
                                     <?php if (!empty($settings['matrik_about_genaral_content_area_title'])) : ?>
-                                        <h5><?php echo esc_html($settings['matrik_about_genaral_content_area_title']); ?></h5>
+                                        <h5><?php echo wp_kses_post($settings['matrik_about_genaral_content_area_title']); ?></h5>
                                     <?php endif; ?>
                                     <?php if (!empty($settings['matrik_about_genaral_content_area_description'])) : ?>
-                                        <p><?php echo esc_html($settings['matrik_about_genaral_content_area_description']); ?></p>
+                                        <p><?php echo wp_kses_post($settings['matrik_about_genaral_content_area_description']); ?></p>
                                     <?php endif; ?>
                                 </div>
                                 <div class="founder-area">
                                     <?php if (!empty($settings['matrik_about_genaral_founder_area_description'])) : ?>
-                                        <p><?php echo esc_html($settings['matrik_about_genaral_founder_area_description']); ?></p>
+                                        <p><?php echo wp_kses_post($settings['matrik_about_genaral_founder_area_description']); ?></p>
                                     <?php endif; ?>
                                     <div class="founder-profile">
                                         <?php if (!empty($settings['matrik_about_genaral_founder_area_image']['url'])) : ?>
@@ -2902,17 +2902,17 @@ class Matrik_About_Widget extends Widget_Base
                                         <?php endif; ?>
                                         <div class="profile-content">
                                             <?php if (!empty($settings['matrik_about_genaral_founder_area_name'])) : ?>
-                                                <h6><?php echo esc_html($settings['matrik_about_genaral_founder_area_name']); ?></h6>
+                                                <h6><?php echo wp_kses_post($settings['matrik_about_genaral_founder_area_name']); ?></h6>
                                             <?php endif; ?>
                                             <?php if (!empty($settings['matrik_about_genaral_founder_area_designation'])) : ?>
-                                                <span><?php echo esc_html($settings['matrik_about_genaral_founder_area_designation']); ?></span>
+                                                <span><?php echo wp_kses_post($settings['matrik_about_genaral_founder_area_designation']); ?></span>
                                             <?php endif; ?>
                                         </div>
                                     </div>
                                     <?php if (!empty($settings['matrik_about_genaral_founder_area_contact_button'])) : ?>
                                         <div class="contact-btn">
                                             <a href="<?php echo esc_url($settings['matrik_about_genaral_founder_area_contact_button_url']['url']); ?>">
-                                                <?php echo esc_html($settings['matrik_about_genaral_founder_area_contact_button']); ?>
+                                                <?php echo wp_kses_post($settings['matrik_about_genaral_founder_area_contact_button']); ?>
                                                 <svg width="17" height="17" viewBox="0 0 17 17" xmlns="http://www.w3.org/2000/svg">
                                                     <g>
                                                         <path
@@ -2949,10 +2949,10 @@ class Matrik_About_Widget extends Widget_Base
                             <div class="about-content-wrap">
                                 <div class="section-title two">
                                     <?php if (!empty($settings['matrik_about_genaral_title'])) : ?>
-                                        <h2><?php echo esc_html($settings['matrik_about_genaral_title']); ?></h2>
+                                        <h2><?php echo wp_kses_post($settings['matrik_about_genaral_title']); ?></h2>
                                     <?php endif; ?>
                                     <?php if (!empty($settings['matrik_about_genaral_header_description'])) : ?>
-                                        <p><?php echo esc_html($settings['matrik_about_genaral_header_description']); ?></p>
+                                        <p><?php echo wp_kses_post($settings['matrik_about_genaral_header_description']); ?></p>
                                     <?php endif; ?>
                                 </div>
                                 <ul>
@@ -2968,10 +2968,10 @@ class Matrik_About_Widget extends Widget_Base
                                             <?php endif; ?>
                                             <div class="single-content">
                                                 <?php if (!empty($data['matrik_about_genaral_content_area_content_title'])) : ?>
-                                                    <h6><?php echo esc_html($data['matrik_about_genaral_content_area_content_title']); ?></h6>
+                                                    <h6><?php echo wp_kses_post($data['matrik_about_genaral_content_area_content_title']); ?></h6>
                                                 <?php endif; ?>
                                                 <?php if (!empty($data['matrik_about_genaral_content_area_content_description'])) : ?>
-                                                    <p><?php echo esc_html($data['matrik_about_genaral_content_area_content_description']); ?></p>
+                                                    <p><?php echo wp_kses_post($data['matrik_about_genaral_content_area_content_description']); ?></p>
                                                 <?php endif; ?>
                                             </div>
 
@@ -2992,9 +2992,9 @@ class Matrik_About_Widget extends Widget_Base
                                 <?php if (!empty($settings['matrik_about_genaral_three_about_us_button'])) : ?>
                                     <div class="about-btn">
                                         <a class="primary-btn3" href="<?php echo esc_url($settings['matrik_about_genaral_three_about_us_button_url']['url']); ?>">
-                                            <span><?php echo esc_html($settings['matrik_about_genaral_three_about_us_button']); ?>
+                                            <span><?php echo wp_kses_post($settings['matrik_about_genaral_three_about_us_button']); ?>
                                             </span>
-                                            <span><?php echo esc_html($settings['matrik_about_genaral_three_about_us_button']); ?>
+                                            <span><?php echo wp_kses_post($settings['matrik_about_genaral_three_about_us_button']); ?>
                                             </span>
                                             <svg class="arrow" width="23" height="23" viewBox="0 0 23 23" xmlns="http://www.w3.org/2000/svg">
                                                 <g>
@@ -3018,7 +3018,7 @@ class Matrik_About_Widget extends Widget_Base
                 <div class="container">
                     <div class="about-title-area wow animate fadeInDown" data-wow-delay="200ms" data-wow-duration="1500ms">
                         <?php if (!empty($settings['matrik_about_genaral_subtitle'])) : ?>
-                            <span><?php echo esc_html($settings['matrik_about_genaral_subtitle']); ?></span>
+                            <span><?php echo wp_kses_post($settings['matrik_about_genaral_subtitle']); ?></span>
                         <?php endif; ?>
                         <?php if (!empty($settings['matrik_about_genaral_title'])) : ?>
                             <h2><?php echo wp_kses($settings['matrik_about_genaral_title'], wp_kses_allowed_html('post'));  ?></h2>
@@ -3035,16 +3035,16 @@ class Matrik_About_Widget extends Widget_Base
                         <div class="col-lg-6 wow animate fadeInRight" data-wow-delay="200ms" data-wow-duration="1500ms">
                             <div class="about-content">
                                 <?php if (!empty($settings['matrik_about_genaral_header_description'])) : ?>
-                                    <p><?php echo esc_html($settings['matrik_about_genaral_header_description']); ?></p>
+                                    <p><?php echo wp_kses_post($settings['matrik_about_genaral_header_description']); ?></p>
                                 <?php endif; ?>
                                 <ul>
                                     <?php foreach ($settings['matrik_about_genaral_content_area_content_list'] as $data) : ?>
                                         <li>
                                             <?php if ($data['matrik_about_genaral_content_area_content_title']) : ?>
-                                                <h6><?php echo esc_html($data['matrik_about_genaral_content_area_content_title']); ?></h6>
+                                                <h6><?php echo wp_kses_post($data['matrik_about_genaral_content_area_content_title']); ?></h6>
                                             <?php endif; ?>
                                             <?php if (!empty($data['matrik_about_genaral_content_area_content_description'])) : ?>
-                                                <p><?php echo esc_html($data['matrik_about_genaral_content_area_content_description']); ?></p>
+                                                <p><?php echo wp_kses_post($data['matrik_about_genaral_content_area_content_description']); ?></p>
                                             <?php endif; ?>
                                         </li>
                                     <?php endforeach; ?>
@@ -3064,11 +3064,11 @@ class Matrik_About_Widget extends Widget_Base
                             <div class="about-content-wrap">
                                 <?php if (!empty($settings['matrik_about_genaral_title'])) : ?>
                                     <div class="section-title four white">
-                                        <h2><?php echo esc_html($settings['matrik_about_genaral_title']); ?></h2>
+                                        <h2><?php echo wp_kses_post($settings['matrik_about_genaral_title']); ?></h2>
                                     </div>
                                 <?php endif; ?>
                                 <?php if (!empty($settings['matrik_about_genaral_header_description'])) : ?>
-                                    <p><?php echo esc_html($settings['matrik_about_genaral_header_description']); ?></p>
+                                    <p><?php echo wp_kses_post($settings['matrik_about_genaral_header_description']); ?></p>
                                 <?php endif; ?>
                                 <?php if (!empty($settings['matrik_about_genaral_five_banner_image_two']['url'])) : ?>
                                     <img src="<?php echo esc_url($settings['matrik_about_genaral_five_banner_image_two']['url']); ?>" alt="<?php echo esc_attr__('banner-image', 'matrik-core'); ?>">
@@ -3082,15 +3082,15 @@ class Matrik_About_Widget extends Widget_Base
                                         <li class="single-counter">
                                             <div class="number">
                                                 <?php if (!empty($data['matrik_about_counter_genaral_counter_number'])) : ?>
-                                                    <h2 class="counter"><?php echo esc_html($data['matrik_about_counter_genaral_counter_number']); ?></h2>
+                                                    <h2 class="counter"><?php echo wp_kses_post($data['matrik_about_counter_genaral_counter_number']); ?></h2>
                                                 <?php endif; ?>
                                                 <?php if (!empty($data['matrik_about_counter_genaral_counter_sign'])) : ?>
-                                                    <span><?php echo esc_html($data['matrik_about_counter_genaral_counter_sign']); ?></span>
+                                                    <span><?php echo wp_kses_post($data['matrik_about_counter_genaral_counter_sign']); ?></span>
                                                 <?php endif; ?>
                                             </div>
                                             <?php if (!empty($data['matrik_about_counter_genaral_counter_title'])) : ?>
                                                 <div class="content">
-                                                    <p><?php echo esc_html($data['matrik_about_counter_genaral_counter_title']); ?></p>
+                                                    <p><?php echo wp_kses_post($data['matrik_about_counter_genaral_counter_title']); ?></p>
                                                 </div>
                                             <?php endif; ?>
                                         </li>
@@ -3105,7 +3105,7 @@ class Matrik_About_Widget extends Widget_Base
                             <div class="logo-wrap">
                                 <?php if (!empty($settings['matrik_about_partner_logo_genaral_title'])) : ?>
                                     <div class="logo-title">
-                                        <h6><?php echo esc_html($settings['matrik_about_partner_logo_genaral_title']); ?></h6>
+                                        <h6><?php echo wp_kses_post($settings['matrik_about_partner_logo_genaral_title']); ?></h6>
                                     </div>
                                 <?php endif; ?>
                                 <div class="marquee">
@@ -3136,19 +3136,19 @@ class Matrik_About_Widget extends Widget_Base
                             <div class="about-content">
                                 <div class="section-title five">
                                     <?php if (!empty($settings['matrik_about_genaral_subtitle'])) : ?>
-                                        <span><?php echo esc_html($settings['matrik_about_genaral_subtitle']); ?></span>
+                                        <span><?php echo wp_kses_post($settings['matrik_about_genaral_subtitle']); ?></span>
                                     <?php endif; ?>
                                     <?php if (!empty($settings['matrik_about_genaral_title'])): ?>
                                         <h2><?php echo wp_kses($settings['matrik_about_genaral_title'], wp_kses_allowed_html('post')); ?></h2>
                                     <?php endif; ?>
                                     <?php if (!empty($settings['matrik_about_genaral_header_description'])): ?>
-                                        <p><?php echo esc_html($settings['matrik_about_genaral_header_description']); ?></p>
+                                        <p><?php echo wp_kses_post($settings['matrik_about_genaral_header_description']); ?></p>
                                     <?php endif; ?>
                                 </div>
                                 <?php if (!empty($settings['matrik_about_genaral_header_experience_year'])): ?>
                                     <div class="experience-area">
-                                        <h2><?php echo esc_html($settings['matrik_about_genaral_header_experience_year']); ?></h2>
-                                        <span><?php echo esc_html($settings['matrik_about_genaral_header_experience_year_text']); ?></span>
+                                        <h2><?php echo wp_kses_post($settings['matrik_about_genaral_header_experience_year']); ?></h2>
+                                        <span><?php echo wp_kses_post($settings['matrik_about_genaral_header_experience_year_text']); ?></span>
                                     </div>
                                 <?php endif; ?>
                             </div>
@@ -3161,11 +3161,11 @@ class Matrik_About_Widget extends Widget_Base
                                             <img src="<?php echo esc_url($settings['matrik_about_genaral_header_magnatic_item_image']['url']); ?>" alt="<?php echo esc_html__('about-us-image', 'matrik-core'); ?>">
                                         <?php endif; ?>
                                         <?php if (!empty($settings['matrik_about_genaral_header_magnatic_item_title'])): ?>
-                                            <a class="about-btn" href="<?php echo esc_url($settings['matrik_about_genaral_header_magnatic_item_link']['url']); ?>"><?php echo esc_html($settings['matrik_about_genaral_header_magnatic_item_title']); ?></a>
+                                            <a class="about-btn" href="<?php echo esc_url($settings['matrik_about_genaral_header_magnatic_item_link']['url']); ?>"><?php echo wp_kses_post($settings['matrik_about_genaral_header_magnatic_item_title']); ?></a>
                                         <?php endif; ?>
                                     </div>
                                     <?php if (!empty($settings['matrik_about_genaral_header_magnatic_item_desc'])) : ?>
-                                        <p><?php echo esc_html($settings['matrik_about_genaral_header_magnatic_item_desc']); ?></p>
+                                        <p><?php echo wp_kses_post($settings['matrik_about_genaral_header_magnatic_item_desc']); ?></p>
                                     <?php endif; ?>
                                 </div>
                             </div>
@@ -3180,13 +3180,13 @@ class Matrik_About_Widget extends Widget_Base
                                             <div class="col-lg-3 col-md-4 col-sm-6 d-flex justify-content-center divider">
                                                 <div class="single-countdown">
                                                     <div class="number">
-                                                        <h2 class="counter"><?php echo esc_html($counter['matrik_about_header_genaral_counter_number']); ?></h2>
+                                                        <h2 class="counter"><?php echo wp_kses_post($counter['matrik_about_header_genaral_counter_number']); ?></h2>
                                                         <?php if (!empty($counter['matrik_about_header_genaral_counter_number_letter'])) : ?>
-                                                            <span><?php echo esc_html($counter['matrik_about_header_genaral_counter_number_letter']); ?></span>
+                                                            <span><?php echo wp_kses_post($counter['matrik_about_header_genaral_counter_number_letter']); ?></span>
                                                         <?php endif; ?>
                                                     </div>
                                                     <?php if (!empty($counter['matrik_about_header_genaral_counter_text'])) : ?>
-                                                        <span><?php echo esc_html($counter['matrik_about_header_genaral_counter_text']); ?></span>
+                                                        <span><?php echo wp_kses_post($counter['matrik_about_header_genaral_counter_text']); ?></span>
                                                     <?php endif; ?>
                                                 </div>
                                             </div>

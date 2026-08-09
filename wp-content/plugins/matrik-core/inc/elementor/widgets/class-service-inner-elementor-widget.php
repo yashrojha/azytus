@@ -704,13 +704,13 @@ class Matrik_Service_Inner_Widget extends Widget_Base
                                         <a href="<?php echo esc_url($data['matrik_service_inner_genaral_title_url']['url']); ?>" class="service-img"><img src="<?php echo esc_url($data['matrik_service_inner_genaral_service_image']['url']); ?>" alt="<?php echo esc_attr__('service-image', 'matrik-core'); ?>"></a>
                                     <?php endif; ?>
                                     <?php if (!empty($data['matrik_service_inner_genaral_description'])) : ?>
-                                        <p><?php echo esc_html($data['matrik_service_inner_genaral_description']); ?></p>
+                                        <p><?php echo wp_kses_post($data['matrik_service_inner_genaral_description']); ?></p>
                                     <?php endif; ?>
                                     <?php if (!empty($data['matrik_service_inner_genaral_service_button_text'])) : ?>
                                         <a class="primary-btn3 transparent" href="<?php echo esc_url($data['matrik_service_inner_genaral_service_button_text_url']['url']); ?>">
-                                            <span><?php echo esc_html($data['matrik_service_inner_genaral_service_button_text']); ?>
+                                            <span><?php echo wp_kses_post($data['matrik_service_inner_genaral_service_button_text']); ?>
                                             </span>
-                                            <span><?php echo esc_html($data['matrik_service_inner_genaral_service_button_text']); ?>
+                                            <span><?php echo wp_kses_post($data['matrik_service_inner_genaral_service_button_text']); ?>
                                             </span>
                                             <svg class="arrow" width="17" height="17" viewBox="0 0 17 17" xmlns="http://www.w3.org/2000/svg">
                                                 <g>
@@ -749,7 +749,7 @@ class Matrik_Service_Inner_Widget extends Widget_Base
                                             <h4><a href="<?php echo esc_url($data['matrik_service_inner_genaral_title_two_url']['url']); ?>"><?php echo wp_kses($data['matrik_service_inner_genaral_two_title'], wp_kses_allowed_html('post')); ?></a></h4>
                                         <?php endif; ?>
                                         <?php if (!empty($data['matrik_service_inner_genaral_service_button_two_text'])) : ?>
-                                            <a href="<?php echo esc_url($data['matrik_service_inner_genaral_service_button_text_two_url']['url']); ?>" class="details-btn"><?php echo esc_html($data['matrik_service_inner_genaral_service_button_two_text']); ?>
+                                            <a href="<?php echo esc_url($data['matrik_service_inner_genaral_service_button_text_two_url']['url']); ?>" class="details-btn"><?php echo wp_kses_post($data['matrik_service_inner_genaral_service_button_two_text']); ?>
                                                 <svg class="arrow" width="17" height="17" viewBox="0 0 17 17" xmlns="http://www.w3.org/2000/svg">
                                                     <g>
                                                         <path d="M0.0841592 0H17.0002V3.16667L3.19805 17L0 13.8333L9.42583 4.5L0.0841592 4.58333V0Z" />

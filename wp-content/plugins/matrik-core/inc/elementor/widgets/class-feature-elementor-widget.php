@@ -896,17 +896,17 @@ class Matrik_Feature_Widget extends Widget_Base
                             <div class="col-lg-6 wow animate fadeInLeft" data-wow-delay="200ms" data-wow-duration="1500ms">
                                 <div class="section-title">
                                     <?php if (!empty($settings['matrik_feature_genaral_subtitle'])) : ?>
-                                        <span><?php echo esc_html($settings['matrik_feature_genaral_subtitle']); ?></span>
+                                        <span><?php echo wp_kses_post($settings['matrik_feature_genaral_subtitle']); ?></span>
                                     <?php endif; ?>
                                     <?php if (!empty($settings['matrik_feature_genaral_title'])) : ?>
-                                        <h2><?php echo esc_html($settings['matrik_feature_genaral_title']); ?></h2>
+                                        <h2><?php echo wp_kses_post($settings['matrik_feature_genaral_title']); ?></h2>
                                     <?php endif; ?>
                                 </div>
                             </div>
                             <?php if (!empty($settings['matrik_feature_genaral_header_button'])) : ?>
                                 <div class="col-lg-3 d-flex justify-content-lg-end wow animate fadeInRight" data-wow-delay="200ms" data-wow-duration="1500ms">
                                     <a class="primary-btn2" href="<?php echo esc_url($settings['matrik_feature_genaral_header_button_url']['url']); ?>">
-                                        <span><?php echo esc_html($settings['matrik_feature_genaral_header_button']); ?>
+                                        <span><?php echo wp_kses_post($settings['matrik_feature_genaral_header_button']); ?>
                                         </span>
                                         <svg class="arrow" width="23" height="23" viewBox="0 0 23 23" xmlns="http://www.w3.org/2000/svg">
                                             <g>
@@ -974,7 +974,7 @@ class Matrik_Feature_Widget extends Widget_Base
                                                 <h5><?php echo wp_kses($data['matrik_feature_genaral_content_title'], wp_kses_allowed_html('post')); ?></h5>
                                             <?php endif; ?>
                                             <?php if (!empty($data['matrik_feature_genaral_content_description'])) : ?>
-                                                <p><?php echo esc_html($data['matrik_feature_genaral_content_description']); ?></p>
+                                                <p><?php echo wp_kses_post($data['matrik_feature_genaral_content_description']); ?></p>
                                             <?php endif; ?>
                                         </div>
                                     </div>
@@ -994,7 +994,7 @@ class Matrik_Feature_Widget extends Widget_Base
                             <?php if (!empty($settings['matrik_feature_genaral_title'])) : ?>
                                 <div class="section-title five">
                                     <?php if (!empty($settings['matrik_feature_genaral_subtitle'])) : ?>
-                                        <span><?php echo esc_html($settings['matrik_feature_genaral_subtitle']); ?></span>
+                                        <span><?php echo wp_kses_post($settings['matrik_feature_genaral_subtitle']); ?></span>
                                     <?php endif; ?>
                                     <h2><?php echo wp_kses($settings['matrik_feature_genaral_title'], wp_kses_allowed_html('post')); ?></h2>
                                 </div>
@@ -1012,7 +1012,7 @@ class Matrik_Feature_Widget extends Widget_Base
                                         </svg>
                                     </div>
                                     <div class="primary-btn2">
-                                        <span><?php echo esc_html($settings['matrik_feature_genaral_header_button']); ?></span>
+                                        <span><?php echo wp_kses_post($settings['matrik_feature_genaral_header_button']); ?></span>
                                         <svg class="arrow" width="23" height="23" viewBox="0 0 23 23" xmlns="http://www.w3.org/2000/svg">
                                             <g>
                                                 <path d="M0.113861 0H22.9999V4.28425L4.32671 22.9997L0 18.7154L12.7524 6.08815L0.113861 6.20089V0Z"></path>
@@ -1031,10 +1031,10 @@ class Matrik_Feature_Widget extends Widget_Base
                                     <?php foreach ($settings['matrik_feature_six_genaral_content_list'] as $item) : ?>
                                         <li class="single-feature wow animate fadeInDown" data-wow-delay="200ms" data-wow-duration="1500ms" style="visibility: visible; animation-duration: 1500ms; animation-delay: 200ms;">
                                             <?php if (!empty($item['matrik_feature_six_genaral_content_title'])) : ?>
-                                                <h3><?php echo esc_html($item['matrik_feature_six_genaral_content_title']); ?></h3>
+                                                <h3><?php echo wp_kses_post($item['matrik_feature_six_genaral_content_title']); ?></h3>
                                             <?php endif; ?>
                                             <?php if (!empty($item['matrik_feature_six_genaral_content_desc'])) : ?>
-                                                <p><?php echo esc_html($item['matrik_feature_six_genaral_content_desc']); ?></p>
+                                                <p><?php echo wp_kses_post($item['matrik_feature_six_genaral_content_desc']); ?></p>
                                             <?php endif; ?>
                                         </li>
                                     <?php endforeach; ?>

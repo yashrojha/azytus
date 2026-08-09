@@ -680,7 +680,7 @@ class Matrik_Hero_Banner_Six_Widget extends Widget_Base
                                             <a class="primary-btn6 <?php if ($btn['matrik_hero_banner_six_genaral_button_style'] == 'style_two') {
                                                                         echo ' transparent';
                                                                     } ?>" href="<?php echo esc_url($btn['matrik_hero_banner_six_genaral_button_text_url']['url']); ?>">
-                                                <?php echo esc_html($btn['matrik_hero_banner_six_genaral_button_text']); ?>
+                                                <?php echo wp_kses_post($btn['matrik_hero_banner_six_genaral_button_text']); ?>
                                                 <svg width="28" height="28" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg">
                                                     <g>
                                                         <path d="M14.1952 0.936056L27.5226 14.2634L25.0277 16.7583L3.25495 16.7829L3.23022 11.7684L18.0098 11.8413L10.5842 4.54707L14.1952 0.936056Z"></path>
@@ -702,21 +702,21 @@ class Matrik_Hero_Banner_Six_Widget extends Widget_Base
                                                 <h2 class="counter">
                                                     <?php
                                                     if (!empty($counter['matrik_hero_banner_six_genaral_counter_number'])) {
-                                                        echo esc_html($counter['matrik_hero_banner_six_genaral_counter_number']);
+                                                        echo wp_kses_post($counter['matrik_hero_banner_six_genaral_counter_number']);
                                                     }
                                                     ?>
                                                 </h2>
                                                 <span>
                                                     <?php
                                                     if (!empty($counter['matrik_hero_banner_six_genaral_counter_number_letter'])) {
-                                                        echo esc_html($counter['matrik_hero_banner_six_genaral_counter_number_letter']);
+                                                        echo wp_kses_post($counter['matrik_hero_banner_six_genaral_counter_number_letter']);
                                                     }
                                                     ?>
                                                 </span>
                                             </div>
                                             <?php if (!empty($counter['matrik_hero_banner_six_genaral_counter_text'])) : ?>
                                                 <div class="content">
-                                                    <p><?php echo esc_html($counter['matrik_hero_banner_six_genaral_counter_text']); ?></p>
+                                                    <p><?php echo wp_kses_post($counter['matrik_hero_banner_six_genaral_counter_text']); ?></p>
                                                 </div>
                                             <?php endif; ?>
                                         </li>

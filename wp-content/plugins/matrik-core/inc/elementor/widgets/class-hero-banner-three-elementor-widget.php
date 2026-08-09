@@ -614,7 +614,7 @@ class Matrik_Hero_Banner_Three_Widget extends Widget_Base
                     <?php endif; ?>
                     <div class="banner-content">
                         <?php if (!empty($settings['matrik_hero_banner_three_genaral_header_subtitle'])) : ?>
-                            <span><?php echo esc_html($settings['matrik_hero_banner_three_genaral_header_subtitle']); ?></span>
+                            <span><?php echo wp_kses_post($settings['matrik_hero_banner_three_genaral_header_subtitle']); ?></span>
                         <?php endif; ?>
                         <?php if (!empty($settings['matrik_hero_banner_three_genaral_header_title'])) : ?>
                             <h1><?php echo wp_kses($settings['matrik_hero_banner_three_genaral_header_title'], wp_kses_allowed_html('post'))  ?></h1>
@@ -640,7 +640,7 @@ class Matrik_Hero_Banner_Three_Widget extends Widget_Base
                             <?php endif; ?>
                             <?php if (!empty($settings['matrik_hero_banner_three_genaral_video_description'])) : ?>
                                 <div class="content">
-                                    <p><?php echo esc_html($settings['matrik_hero_banner_three_genaral_video_description']); ?></p>
+                                    <p><?php echo wp_kses_post($settings['matrik_hero_banner_three_genaral_video_description']); ?></p>
                                 </div>
                             <?php endif; ?>
                         </div>
@@ -648,9 +648,9 @@ class Matrik_Hero_Banner_Three_Widget extends Widget_Base
                             <?php foreach ($settings['matrik_hero_banner_three_genaral_button_list'] as $data) : ?>
                                 <?php if (!empty($data['matrik_hero_banner_three_genaral_button_text'])) : ?>
                                     <a class="<?php if ($data['matrik_hero_banner_three_genaral_button_switcher'] == 'yes') : ?>  primary-btn3 black-bg<?php else : ?>primary-btn3 transparent<?php endif; ?>" href="<?php echo esc_url($data['matrik_hero_banner_three_genaral_button_text_url']['url']); ?>">
-                                        <span><?php echo esc_html($data['matrik_hero_banner_three_genaral_button_text']); ?>
+                                        <span><?php echo wp_kses_post($data['matrik_hero_banner_three_genaral_button_text']); ?>
                                         </span>
-                                        <span><?php echo esc_html($data['matrik_hero_banner_three_genaral_button_text']); ?>
+                                        <span><?php echo wp_kses_post($data['matrik_hero_banner_three_genaral_button_text']); ?>
                                         </span>
                                         <svg class="arrow" width="23" height="23" viewBox="0 0 23 23" xmlns="http://www.w3.org/2000/svg">
                                             <g>

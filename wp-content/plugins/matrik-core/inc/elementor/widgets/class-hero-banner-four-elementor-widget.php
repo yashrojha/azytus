@@ -284,7 +284,7 @@ class Matrik_Hero_Banner_Four_Widget extends Widget_Base
 
         <div class="home4-banner-section">
             <?php if (!empty($settings['matrik_hero_banner_four_genaral_title'])) : ?>
-                <h1><?php echo esc_html($settings['matrik_hero_banner_four_genaral_title']); ?></h1>
+                <h1><?php echo wp_kses_post($settings['matrik_hero_banner_four_genaral_title']); ?></h1>
             <?php endif; ?>
             <div class="banner-video-area">
                 <div class="video-area">
@@ -305,7 +305,7 @@ class Matrik_Hero_Banner_Four_Widget extends Widget_Base
                             <?php if (!empty($settings['matrik_hero_banner_four_genaral_circular_text_area_text'])) : ?>
                                 <div class="text">
                                     <span>
-                                        <?php echo esc_html($settings['matrik_hero_banner_four_genaral_circular_text_area_text']); ?>
+                                        <?php echo wp_kses_post($settings['matrik_hero_banner_four_genaral_circular_text_area_text']); ?>
                                     </span>
                                 </div>
                             <?php endif; ?>

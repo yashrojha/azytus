@@ -391,7 +391,7 @@ class Matrik_Heading_Widget extends Widget_Base
             <div class="section-title">
                 <?php if ($settings['matrik_header_genaral_show_subtitle_switcher'] == 'yes') : ?>
                     <?php if (!empty($settings['matrik_header_genaral_subtitle'])) : ?>
-                        <span><?php echo esc_html($settings['matrik_header_genaral_subtitle']); ?></span>
+                        <span><?php echo wp_kses_post($settings['matrik_header_genaral_subtitle']); ?></span>
                     <?php endif; ?>
                 <?php endif; ?>
                 <?php if (!empty($settings['matrik_header_genaral_title'])) : ?>
@@ -404,7 +404,7 @@ class Matrik_Heading_Widget extends Widget_Base
             <div class="section-title two">
                 <?php if ($settings['matrik_header_genaral_show_subtitle_switcher'] == 'yes') : ?>
                     <?php if (!empty($settings['matrik_header_genaral_subtitle'])) : ?>
-                        <span><?php echo esc_html($settings['matrik_header_genaral_subtitle']); ?></span>
+                        <span><?php echo wp_kses_post($settings['matrik_header_genaral_subtitle']); ?></span>
                     <?php endif; ?>
                 <?php endif; ?>
                 <?php if (!empty($settings['matrik_header_genaral_title'])) : ?>
@@ -420,7 +420,7 @@ class Matrik_Heading_Widget extends Widget_Base
                         <span><svg width="12" height="12" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M0.0594065 0H12.0001V2.2353L2.25745 12L0 9.76471L6.65353 3.17647L0.0594065 3.2353V0Z"></path>
                                 <path d="M11.9999 11.9999V4.47046L8.79199 7.64693V11.9999H11.9999Z"></path>
-                            </svg> <?php echo esc_html($settings['matrik_header_genaral_subtitle']); ?></span>
+                            </svg> <?php echo wp_kses_post($settings['matrik_header_genaral_subtitle']); ?></span>
                     <?php endif; ?>
                 <?php endif; ?>
                 <?php if (!empty($settings['matrik_header_genaral_title'])) : ?>

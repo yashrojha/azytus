@@ -2318,10 +2318,10 @@ class Matrik_Project_Widget extends Widget_Base
                             <div class="col-xl-6 col-lg-7 col-md-8">
                                 <div class="section-title white text-center wow animate fadeInDown" data-wow-delay="200ms" data-wow-duration="1500ms">
                                     <?php if (!empty($settings['matrik_project_genaral_subtitle'])) : ?>
-                                        <span><?php echo esc_html($settings['matrik_project_genaral_subtitle']); ?></span>
+                                        <span><?php echo wp_kses_post($settings['matrik_project_genaral_subtitle']); ?></span>
                                     <?php endif; ?>
                                     <?php if (!empty($settings['matrik_project_genaral_title'])) : ?>
-                                        <h2><?php echo esc_html($settings['matrik_project_genaral_title']); ?></h2>
+                                        <h2><?php echo wp_kses_post($settings['matrik_project_genaral_title']); ?></h2>
                                     <?php endif; ?>
                                 </div>
                             </div>
@@ -2350,7 +2350,7 @@ class Matrik_Project_Widget extends Widget_Base
                                                             <span><?php
                                                                     $data = Egns_Helper::egns_project_value('project_info_list');
                                                                     if (!empty($data) && isset($data[0]['project_label_text']) && isset($data[0]['project_content_text'])) { ?>
-                                                                    <?php echo esc_html($data[0]['project_label_text']); ?> <?php echo esc_html($data[0]['project_content_text']); ?>
+                                                                    <?php echo wp_kses_post($data[0]['project_label_text']); ?> <?php echo wp_kses_post($data[0]['project_content_text']); ?>
                                                                 <?php }
                                                                 ?></span>
                                                             <h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
@@ -2381,9 +2381,9 @@ class Matrik_Project_Widget extends Widget_Base
                     <div class="row">
                         <div class="col-lg-12 d-flex justify-content-center bounce_up">
                             <a class="primary-btn1 white-bg" href="<?php echo esc_url($settings['matrik_project_genaral_button_text_url']['url']); ?>">
-                                <span><?php echo esc_html($settings['matrik_project_genaral_button_text']); ?>
+                                <span><?php echo wp_kses_post($settings['matrik_project_genaral_button_text']); ?>
                                 </span>
-                                <span><?php echo esc_html($settings['matrik_project_genaral_button_text']); ?>
+                                <span><?php echo wp_kses_post($settings['matrik_project_genaral_button_text']); ?>
                                 </span>
                                 <svg class="arrow" width="23" height="23" viewBox="0 0 23 23" xmlns="http://www.w3.org/2000/svg">
                                     <g>
@@ -2405,17 +2405,17 @@ class Matrik_Project_Widget extends Widget_Base
                         <div class="col-lg-5 wow animate fadeInLeft" data-wow-delay="200ms" data-wow-duration="1500ms">
                             <div class="section-title two white">
                                 <?php if (!empty($settings['matrik_project_genaral_subtitle'])) : ?>
-                                    <span><?php echo esc_html($settings['matrik_project_genaral_subtitle']); ?></span>
+                                    <span><?php echo wp_kses_post($settings['matrik_project_genaral_subtitle']); ?></span>
                                 <?php endif; ?>
                                 <?php if (!empty($settings['matrik_project_genaral_title'])) : ?>
-                                    <h2><?php echo esc_html($settings['matrik_project_genaral_title']); ?></h2>
+                                    <h2><?php echo wp_kses_post($settings['matrik_project_genaral_title']); ?></h2>
                                 <?php endif; ?>
                             </div>
                         </div>
                         <?php if (!empty($settings['matrik_project_genaral_button_text'])) : ?>
                             <div class="col-lg-3 d-flex justify-content-lg-end btn_wrapper">
                                 <a class="primary-btn2 two white" href="<?php echo esc_url($settings['matrik_project_genaral_button_text_url']['url']); ?>">
-                                    <span><?php echo esc_html($settings['matrik_project_genaral_button_text']); ?></span>
+                                    <span><?php echo wp_kses_post($settings['matrik_project_genaral_button_text']); ?></span>
                                     <svg class="arrow" width="23" height="23" viewBox="0 0 23 23" xmlns="http://www.w3.org/2000/svg">
                                         <g>
                                             <path d="M0.113861 0H22.9999V4.28425L4.32671 22.9997L0 18.7154L12.7524 6.08815L0.113861 6.20089V0Z" />
@@ -2445,7 +2445,7 @@ class Matrik_Project_Widget extends Widget_Base
                                         <span><?php
                                                 $data = Egns_Helper::egns_project_value('project_info_list');
                                                 if (!empty($data) && isset($data[0]['project_label_text']) && isset($data[0]['project_content_text'])) { ?>
-                                                <?php echo esc_html($data[0]['project_label_text']); ?> <?php echo esc_html($data[0]['project_content_text']); ?>
+                                                <?php echo wp_kses_post($data[0]['project_label_text']); ?> <?php echo wp_kses_post($data[0]['project_content_text']); ?>
                                             <?php }
                                             ?></span>
                                         <h4><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h4>
@@ -2474,7 +2474,7 @@ class Matrik_Project_Widget extends Widget_Base
                                         <span><?php
                                                 $data = Egns_Helper::egns_project_value('project_info_list');
                                                 if (!empty($data) && isset($data[0]['project_label_text']) && isset($data[0]['project_content_text'])) { ?>
-                                                <?php echo esc_html($data[0]['project_label_text']); ?> <?php echo esc_html($data[0]['project_content_text']); ?>
+                                                <?php echo wp_kses_post($data[0]['project_label_text']); ?> <?php echo wp_kses_post($data[0]['project_content_text']); ?>
                                             <?php }
                                             ?></span>
                                         <h4><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h4>
@@ -2496,7 +2496,7 @@ class Matrik_Project_Widget extends Widget_Base
                         <div class="row justify-content-center mb-70 wow animate fadeInDown" data-wow-delay="200ms" data-wow-duration="1500ms">
                             <div class="col-xl-5 col-lg-6">
                                 <div class="section-title two">
-                                    <h2><?php echo esc_html($settings['matrik_project_genaral_title']); ?></h2>
+                                    <h2><?php echo wp_kses_post($settings['matrik_project_genaral_title']); ?></h2>
                                 </div>
                             </div>
                         </div>
@@ -2536,9 +2536,9 @@ class Matrik_Project_Widget extends Widget_Base
                         <div class="row wow animate fadeInUp" data-wow-delay="200ms" data-wow-duration="1500ms">
                             <div class="col-lg-12 d-flex justify-content-center">
                                 <a class="primary-btn3 black-bg" href="<?php echo esc_url($settings['matrik_project_genaral_button_text_url']['url']); ?>">
-                                    <span><?php echo esc_html($settings['matrik_project_genaral_button_text']); ?>
+                                    <span><?php echo wp_kses_post($settings['matrik_project_genaral_button_text']); ?>
                                     </span>
-                                    <span><?php echo esc_html($settings['matrik_project_genaral_button_text']); ?>
+                                    <span><?php echo wp_kses_post($settings['matrik_project_genaral_button_text']); ?>
                                     </span>
                                     <svg class="arrow" width="23" height="23" viewBox="0 0 23 23" xmlns="http://www.w3.org/2000/svg">
                                         <g>
@@ -2577,7 +2577,7 @@ class Matrik_Project_Widget extends Widget_Base
                             <?php if (!empty($settings['matrik_project_genaral_title'])) : ?>
                                 <div class="col-lg-5">
                                     <div class="section-title three">
-                                        <h2><?php echo esc_html($settings['matrik_project_genaral_title']); ?></h2>
+                                        <h2><?php echo wp_kses_post($settings['matrik_project_genaral_title']); ?></h2>
                                     </div>
                                 </div>
                             <?php endif; ?>
@@ -2675,7 +2675,7 @@ class Matrik_Project_Widget extends Widget_Base
 
                                                 <?php if (!empty($settings['matrik_project_genaral_button_text'])) : ?>
                                                     <a class="primary-btn4 btn-hover transparent" href="<?php echo esc_url($settings['matrik_project_genaral_button_text_url']['url']); ?>">
-                                                        <?php echo esc_html($settings['matrik_project_genaral_button_text']); ?>
+                                                        <?php echo wp_kses_post($settings['matrik_project_genaral_button_text']); ?>
                                                         <svg class="arrow" width="23" height="23" viewBox="0 0 23 23" xmlns="http://www.w3.org/2000/svg">
                                                             <g>
                                                                 <path d="M0.113861 0H22.9999V4.28425L4.32671 22.9997L0 18.7154L12.7524 6.08815L0.113861 6.20089V0Z"></path>
@@ -2711,16 +2711,16 @@ class Matrik_Project_Widget extends Widget_Base
                                                 <path d="M0.0594065 0H12.0001V2.2353L2.25745 12L0 9.76471L6.65353 3.17647L0.0594065 3.2353V0Z" />
                                                 <path d="M11.9999 11.9999V4.47046L8.79199 7.64693V11.9999H11.9999Z" />
                                             </svg>
-                                            <?php echo esc_html($settings['matrik_project_genaral_subtitle']); ?>
+                                            <?php echo wp_kses_post($settings['matrik_project_genaral_subtitle']); ?>
                                         </span>
                                     <?php endif; ?>
                                     <?php if (!empty($settings['matrik_project_genaral_title'])) : ?>
-                                        <h2><?php echo esc_html($settings['matrik_project_genaral_title']); ?></h2>
+                                        <h2><?php echo wp_kses_post($settings['matrik_project_genaral_title']); ?></h2>
                                     <?php endif; ?>
                                 </div>
                                 <?php if (!empty($settings['matrik_project_genaral_button_text'])) : ?>
                                     <a class="primary-btn5 btn-hover" href="<?php echo esc_url($settings['matrik_project_genaral_button_text_url']['url']); ?>">
-                                        <?php echo esc_html($settings['matrik_project_genaral_button_text']); ?>
+                                        <?php echo wp_kses_post($settings['matrik_project_genaral_button_text']); ?>
                                         <svg class="arrow" width="23" height="23" viewBox="0 0 23 23" xmlns="http://www.w3.org/2000/svg">
                                             <g>
                                                 <path d="M0.113861 0H22.9999V4.28425L4.32671 22.9997L0 18.7154L12.7524 6.08815L0.113861 6.20089V0Z"></path>
@@ -2752,7 +2752,7 @@ class Matrik_Project_Widget extends Widget_Base
                                                     <span><?php
                                                             $data = Egns_Helper::egns_project_value('project_info_list');
                                                             if (!empty($data) && isset($data[0]['project_label_text']) && isset($data[0]['project_content_text'])) { ?>
-                                                            <?php echo esc_html($data[0]['project_label_text']); ?> <?php echo esc_html($data[0]['project_content_text']); ?>
+                                                            <?php echo wp_kses_post($data[0]['project_label_text']); ?> <?php echo wp_kses_post($data[0]['project_content_text']); ?>
                                                         <?php }
                                                         ?></span>
                                                     <h4><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h4>
@@ -2779,13 +2779,13 @@ class Matrik_Project_Widget extends Widget_Base
                             <div class="col-lg-8">
                                 <div class="section-title five text-center">
                                     <?php if (!empty($settings['matrik_project_genaral_subtitle'])) : ?>
-                                        <span><?php echo esc_html($settings['matrik_project_genaral_subtitle']); ?></span>
+                                        <span><?php echo wp_kses_post($settings['matrik_project_genaral_subtitle']); ?></span>
                                     <?php endif; ?>
                                     <?php if (!empty($settings['matrik_project_genaral_title'])) : ?>
-                                        <h2><?php echo esc_html($settings['matrik_project_genaral_title']); ?></h2>
+                                        <h2><?php echo wp_kses_post($settings['matrik_project_genaral_title']); ?></h2>
                                     <?php endif; ?>
                                     <?php if (!empty($settings['matrik_project_genaral_description'])) : ?>
-                                        <p><?php echo esc_html($settings['matrik_project_genaral_description']); ?></p>
+                                        <p><?php echo wp_kses_post($settings['matrik_project_genaral_description']); ?></p>
                                     <?php endif; ?>
                                 </div>
                             </div>
@@ -2853,7 +2853,7 @@ class Matrik_Project_Widget extends Widget_Base
 
                         <?php if (!empty($settings['matrik_project_genaral_button_text'])) : ?>
                             <a class="primary-btn6" href="<?php echo esc_url($settings['matrik_project_genaral_button_text_url']['url']); ?>">
-                                <?php echo esc_html($settings['matrik_project_genaral_button_text']); ?>
+                                <?php echo wp_kses_post($settings['matrik_project_genaral_button_text']); ?>
                                 <svg width="28" height="28" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg">
                                     <g>
                                         <path

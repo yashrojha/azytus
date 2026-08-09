@@ -260,7 +260,7 @@ class Matrik_Certification_Widget extends Widget_Base
             <div class="container">
                 <?php if (!empty($settings['matrik_certification_genaral_title'])) : ?>
                     <div class="section-title two text-center mb-60 wow animate fadeInDown" data-wow-delay="200ms" data-wow-duration="1500ms">
-                        <h2><?php echo esc_html($settings['matrik_certification_genaral_title']); ?></h2>
+                        <h2><?php echo wp_kses_post($settings['matrik_certification_genaral_title']); ?></h2>
                     </div>
                 <?php endif; ?>
                 <div class="row g-4">
@@ -273,10 +273,10 @@ class Matrik_Certification_Widget extends Widget_Base
                                     </div>
                                 <?php endif; ?>
                                 <?php if (!empty($data['matrik_certification_genaral_content_title'])) : ?>
-                                    <h6><?php echo esc_html($data['matrik_certification_genaral_content_title']); ?></h6>
+                                    <h6><?php echo wp_kses_post($data['matrik_certification_genaral_content_title']); ?></h6>
                                 <?php endif; ?>
                                 <?php if (!empty($data['matrik_certification_genaral_tag_text'])) : ?>
-                                    <span class="tag"><?php echo esc_html($data['matrik_certification_genaral_tag_text']); ?></span>
+                                    <span class="tag"><?php echo wp_kses_post($data['matrik_certification_genaral_tag_text']); ?></span>
                                 <?php endif; ?>
 
                                 <?php

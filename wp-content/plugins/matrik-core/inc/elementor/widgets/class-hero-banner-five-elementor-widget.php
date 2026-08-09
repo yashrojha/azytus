@@ -723,7 +723,7 @@ class Matrik_Hero_Banner_Five_Widget extends Widget_Base
                     <?php endif; ?>
                     <div class="banner-content wow animate fadeInRight" data-wow-delay="200ms" data-wow-duration="1500ms">
                         <?php if (!empty($settings['matrik_hero_banner_five_genaral_description'])) : ?>
-                            <p><?php echo esc_html($settings['matrik_hero_banner_five_genaral_description']); ?></p>
+                            <p><?php echo wp_kses_post($settings['matrik_hero_banner_five_genaral_description']); ?></p>
                         <?php endif; ?>
                         <div class="btn-area">
                             <ul class="img-grp">
@@ -732,7 +732,7 @@ class Matrik_Hero_Banner_Five_Widget extends Widget_Base
                                 <?php endforeach; ?>
                             </ul>
                             <?php if (!empty($settings['matrik_hero_banner_five_genaral_button'])) : ?>
-                                <a href="<?php echo esc_url($settings['matrik_hero_banner_five_genaral_button_url']['url']); ?>"><?php echo esc_html($settings['matrik_hero_banner_five_genaral_button']); ?></a>
+                                <a href="<?php echo esc_url($settings['matrik_hero_banner_five_genaral_button_url']['url']); ?>"><?php echo wp_kses_post($settings['matrik_hero_banner_five_genaral_button']); ?></a>
                             <?php endif; ?>
                         </div>
                     </div>
@@ -763,10 +763,10 @@ class Matrik_Hero_Banner_Five_Widget extends Widget_Base
                                             </div>
                                             <div class="content">
                                                 <?php if (!empty($data['matrik_hero_banner_five_featured_section_content_title'])) : ?>
-                                                    <h5><?php echo esc_html($data['matrik_hero_banner_five_featured_section_content_title']); ?></h5>
+                                                    <h5><?php echo wp_kses_post($data['matrik_hero_banner_five_featured_section_content_title']); ?></h5>
                                                 <?php endif; ?>
                                                 <?php if (!empty($data['matrik_hero_banner_five_featured_section_content_description'])) : ?>
-                                                    <p><?php echo esc_html($data['matrik_hero_banner_five_featured_section_content_description']); ?></p>
+                                                    <p><?php echo wp_kses_post($data['matrik_hero_banner_five_featured_section_content_description']); ?></p>
                                                 <?php endif; ?>
                                             </div>
                                         </div>
@@ -786,7 +786,7 @@ class Matrik_Hero_Banner_Five_Widget extends Widget_Base
                     <?php if (!empty($settings['matrik_hero_banner_five_genaral_circular_text'])) : ?>
                         <div class="text">
                             <span>
-                                <?php echo esc_html($settings['matrik_hero_banner_five_genaral_circular_text']); ?>
+                                <?php echo wp_kses_post($settings['matrik_hero_banner_five_genaral_circular_text']); ?>
                             </span>
                         </div>
                     <?php endif; ?>

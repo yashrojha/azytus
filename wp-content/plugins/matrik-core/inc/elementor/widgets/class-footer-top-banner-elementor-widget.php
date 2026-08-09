@@ -1097,18 +1097,18 @@ class Matrik_Footer_Top_Banner_Widget extends Widget_Base
                     <div class="footer-top-banner-wrap">
                         <div class="section-title white wow animate fadeInLeft" data-wow-delay="200ms" data-wow-duration="1500ms">
                             <?php if (!empty($settings['matrik_footer_top_banner_genaral_subtitle'])) : ?>
-                                <span><?php echo esc_html($settings['matrik_footer_top_banner_genaral_subtitle']); ?></span>
+                                <span><?php echo wp_kses_post($settings['matrik_footer_top_banner_genaral_subtitle']); ?></span>
                             <?php endif; ?>
                             <?php if (!empty($settings['matrik_footer_top_banner_genaral_title'])) : ?>
-                                <h2><?php echo esc_html($settings['matrik_footer_top_banner_genaral_title']); ?></h2>
+                                <h2><?php echo wp_kses_post($settings['matrik_footer_top_banner_genaral_title']); ?></h2>
                             <?php endif; ?>
                         </div>
                         <div class="btn-grp wow animate fadeInRight" data-wow-delay="200ms" data-wow-duration="1500ms">
                             <?php if (!empty($settings['matrik_footer_top_banner_genaral_button_one_text'])) : ?>
                                 <a class="primary-btn1 white-bg" href="<?php echo esc_url($settings['matrik_footer_top_banner_genaral_button_one_text_url']['url']); ?>">
-                                    <span><?php echo esc_html($settings['matrik_footer_top_banner_genaral_button_one_text']); ?>
+                                    <span><?php echo wp_kses_post($settings['matrik_footer_top_banner_genaral_button_one_text']); ?>
                                     </span>
-                                    <span><?php echo esc_html($settings['matrik_footer_top_banner_genaral_button_one_text']); ?>
+                                    <span><?php echo wp_kses_post($settings['matrik_footer_top_banner_genaral_button_one_text']); ?>
                                     </span>
                                     <svg class="arrow" width="23" height="23" viewBox="0 0 23 23" xmlns="http://www.w3.org/2000/svg">
                                         <g>
@@ -1120,7 +1120,7 @@ class Matrik_Footer_Top_Banner_Widget extends Widget_Base
                             <?php endif; ?>
                             <?php if (!empty($settings['matrik_footer_top_banner_genaral_button_two_text'])) : ?>
                                 <a class="discuss-btn" href="<?php echo esc_url($settings['matrik_footer_top_banner_genaral_button_two_text_url']['url']); ?>">
-                                    <?php echo esc_html($settings['matrik_footer_top_banner_genaral_button_two_text']); ?>
+                                    <?php echo wp_kses_post($settings['matrik_footer_top_banner_genaral_button_two_text']); ?>
                                     <svg width="9" height="9" viewBox="0 0 9 9" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M0.0445549 0H9.00008V1.67647L1.69308 9L0 7.32353L4.99014 2.38235L0.0445549 2.42647V0Z" />
                                         <path d="M9.0002 8.99999V3.35294L6.59424 5.73529V8.99999H9.0002Z" />
@@ -1149,18 +1149,18 @@ class Matrik_Footer_Top_Banner_Widget extends Widget_Base
                             <div class="col-xl-8 col-lg-10">
                                 <div class="section-title wow animate fadeInDown" data-wow-delay="200ms" data-wow-duration="1500ms">
                                     <?php if (!empty($settings['matrik_footer_top_banner_genaral_subtitle'])) : ?>
-                                        <span><?php echo esc_html($settings['matrik_footer_top_banner_genaral_subtitle']); ?></span>
+                                        <span><?php echo wp_kses_post($settings['matrik_footer_top_banner_genaral_subtitle']); ?></span>
                                     <?php endif; ?>
                                     <?php if (!empty($settings['matrik_footer_top_banner_genaral_title'])) : ?>
-                                        <h2><?php echo esc_html($settings['matrik_footer_top_banner_genaral_title']); ?></h2>
+                                        <h2><?php echo wp_kses_post($settings['matrik_footer_top_banner_genaral_title']); ?></h2>
                                     <?php endif; ?>
                                 </div>
                                 <div class="btn-grp wow animate fadeInUp" data-wow-delay="200ms" data-wow-duration="1500ms">
                                     <?php if (!empty($settings['matrik_footer_top_banner_genaral_button_one_text'])) : ?>
                                         <a class="primary-btn3 black-bg" href="<?php echo esc_url($settings['matrik_footer_top_banner_genaral_button_one_text_url']['url']); ?>">
-                                            <span><?php echo esc_html($settings['matrik_footer_top_banner_genaral_button_one_text']); ?>
+                                            <span><?php echo wp_kses_post($settings['matrik_footer_top_banner_genaral_button_one_text']); ?>
                                             </span>
-                                            <span><?php echo esc_html($settings['matrik_footer_top_banner_genaral_button_one_text']); ?>
+                                            <span><?php echo wp_kses_post($settings['matrik_footer_top_banner_genaral_button_one_text']); ?>
                                             </span>
                                             <svg class="arrow" width="23" height="23" viewBox="0 0 23 23" xmlns="http://www.w3.org/2000/svg">
                                                 <g>
@@ -1172,7 +1172,7 @@ class Matrik_Footer_Top_Banner_Widget extends Widget_Base
                                     <?php endif; ?>
                                     <?php if (!empty($settings['matrik_footer_top_banner_genaral_button_two_text'])) : ?>
                                         <a class="discuss-btn" href="<?php echo esc_url($settings['matrik_footer_top_banner_genaral_button_two_text_url']['url']); ?>">
-                                            <?php echo esc_html($settings['matrik_footer_top_banner_genaral_button_two_text']); ?>
+                                            <?php echo wp_kses_post($settings['matrik_footer_top_banner_genaral_button_two_text']); ?>
                                             <svg width="9" height="9" viewBox="0 0 9 9" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M0.0445549 0H9.00008V1.67647L1.69308 9L0 7.32353L4.99014 2.38235L0.0445549 2.42647V0Z" />
                                                 <path d="M9.0002 8.99999V3.35294L6.59424 5.73529V8.99999H9.0002Z" />
@@ -1198,16 +1198,16 @@ class Matrik_Footer_Top_Banner_Widget extends Widget_Base
                                         <img src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr__('expert-images', 'matrik-core'); ?>">
                                     <?php endforeach; ?>
                                     <?php if ($settings['matrik_footer_top_banner_genaral_title']) : ?>
-                                        <?php echo esc_html($settings['matrik_footer_top_banner_genaral_title']); ?>
+                                        <?php echo wp_kses_post($settings['matrik_footer_top_banner_genaral_title']); ?>
                                     <?php endif; ?>
                                 </h2>
                             </div>
                             <div class="btn-grp">
                                 <?php if (!empty($settings['matrik_footer_top_banner_genaral_button_one_text'])) : ?>
                                     <a class="primary-btn1 white-bg" href="<?php echo esc_url($settings['matrik_footer_top_banner_genaral_button_one_text_url']['url']); ?>">
-                                        <span><?php echo esc_html($settings['matrik_footer_top_banner_genaral_button_one_text']); ?>
+                                        <span><?php echo wp_kses_post($settings['matrik_footer_top_banner_genaral_button_one_text']); ?>
                                         </span>
-                                        <span><?php echo esc_html($settings['matrik_footer_top_banner_genaral_button_one_text']); ?>
+                                        <span><?php echo wp_kses_post($settings['matrik_footer_top_banner_genaral_button_one_text']); ?>
                                         </span>
                                         <svg class="arrow" width="23" height="23" viewBox="0 0 23 23" xmlns="http://www.w3.org/2000/svg">
                                             <g>
@@ -1219,7 +1219,7 @@ class Matrik_Footer_Top_Banner_Widget extends Widget_Base
                                 <?php endif; ?>
                                 <?php if (!empty($settings['matrik_footer_top_banner_genaral_button_two_text'])) : ?>
                                     <a class="discuss-btn" href="<?php echo esc_url($settings['matrik_footer_top_banner_genaral_button_two_text_url']['url']); ?>">
-                                        <?php echo esc_html($settings['matrik_footer_top_banner_genaral_button_two_text']); ?>
+                                        <?php echo wp_kses_post($settings['matrik_footer_top_banner_genaral_button_two_text']); ?>
                                         <svg width="9" height="9" viewBox="0 0 9 9" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M0.0445549 0H9.00008V1.67647L1.69308 9L0 7.32353L4.99014 2.38235L0.0445549 2.42647V0Z" />
                                             <path d="M9.0002 8.99999V3.35294L6.59424 5.73529V8.99999H9.0002Z" />
@@ -1234,10 +1234,10 @@ class Matrik_Footer_Top_Banner_Widget extends Widget_Base
                                     <li class="single-item wow animate fadeInDown" data-wow-delay="200ms" data-wow-duration="1500ms">
                                         <div class="content">
                                             <?php if (!empty($data['matrik_footer_top_banner_three_genaral_content_title'])) : ?>
-                                                <h5><?php echo esc_html($data['matrik_footer_top_banner_three_genaral_content_title']); ?></h5>
+                                                <h5><?php echo wp_kses_post($data['matrik_footer_top_banner_three_genaral_content_title']); ?></h5>
                                             <?php endif; ?>
                                             <?php if (!empty($data['matrik_footer_top_banner_three_genaral_content_description'])) : ?>
-                                                <p><?php echo esc_html($data['matrik_footer_top_banner_three_genaral_content_description']); ?></p>
+                                                <p><?php echo wp_kses_post($data['matrik_footer_top_banner_three_genaral_content_description']); ?></p>
                                             <?php endif; ?>
                                         </div>
                                         <?php if (!empty($data['matrik_footer_top_banner_three_genaral_content_url']['url'])) : ?>

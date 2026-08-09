@@ -3618,13 +3618,13 @@ class Matrik_Testimonial_Widget extends Widget_Base
                             <div class="testimonial-title-area wow animate fadeInLeft" data-wow-delay="200ms" data-wow-duration="1500ms">
                                 <div class="section-title">
                                     <?php if (!empty($settings['matrik_testimonial_genaral_subtitle'])): ?>
-                                        <span><?php echo esc_html($settings['matrik_testimonial_genaral_subtitle']); ?></span>
+                                        <span><?php echo wp_kses_post($settings['matrik_testimonial_genaral_subtitle']); ?></span>
                                     <?php endif; ?>
                                     <?php if (!empty($settings['matrik_testimonial_genaral_title'])): ?>
-                                        <h2><?php echo esc_html($settings['matrik_testimonial_genaral_title']); ?></h2>
+                                        <h2><?php echo wp_kses_post($settings['matrik_testimonial_genaral_title']); ?></h2>
                                     <?php endif; ?>
                                     <?php if (!empty($settings['matrik_testimonial_genaral_description'])): ?>
-                                        <p><?php echo esc_html($settings['matrik_testimonial_genaral_description']); ?></p>
+                                        <p><?php echo wp_kses_post($settings['matrik_testimonial_genaral_description']); ?></p>
                                     <?php endif; ?>
                                 </div>
                                 <ul class="rating-list">
@@ -3634,7 +3634,7 @@ class Matrik_Testimonial_Widget extends Widget_Base
                                             <a href="<?php echo esc_url($data['matrik_testimonial_genaral_review_area_review_link']['url']); ?>" class="single-rating <?php if ($data['matrik_hero_banner_one_genaral_button_style'] == 'google') : ?>google<?php else: ?><?php endif; ?> ">
                                                 <div class="review">
                                                     <?php if (!empty($data['matrik_testimonial_genaral_review_area_review_title'])): ?>
-                                                        <span><?php echo esc_html($data['matrik_testimonial_genaral_review_area_review_title']); ?></span>
+                                                        <span><?php echo wp_kses_post($data['matrik_testimonial_genaral_review_area_review_title']); ?></span>
                                                     <?php endif; ?>
                                                     <?php if (!empty($data['matrik_testimonial_genaral_review_area_review_logo']['url'])): ?>
                                                         <img src="<?php echo esc_url($data['matrik_testimonial_genaral_review_area_review_logo']['url']); ?>" alt="<?php echo esc_attr__('company-logo', 'matrik-core'); ?>">
@@ -3651,7 +3651,7 @@ class Matrik_Testimonial_Widget extends Widget_Base
                                                         <?php endfor; ?>
                                                     </ul>
                                                     <?php if (!empty($data['matrik_testimonial_genaral_review_area_review_total_review'])): ?>
-                                                        <span><?php echo esc_html($data['matrik_testimonial_genaral_review_area_review_total_review']); ?></span>
+                                                        <span><?php echo wp_kses_post($data['matrik_testimonial_genaral_review_area_review_total_review']); ?></span>
                                                     <?php endif; ?>
                                                 </div>
                                             </a>
@@ -3673,10 +3673,10 @@ class Matrik_Testimonial_Widget extends Widget_Base
                                                         d="M45.3074 22.4375C45.0109 24.7824 44.4898 27.0555 43.9059 28.5469C41.8664 33.7848 37.2574 38.277 31.2109 40.9184C30.0789 41.4125 29.0098 41.2418 28.3719 40.4691C28.2281 40.2895 27.6441 39.1754 27.0781 38.0074L27.0711 37.9928C26.0628 35.8959 26.0449 35.8587 26.0449 35.2402C26.0539 34.0902 26.4133 33.668 28.0664 32.8773C31.2738 31.332 33.1606 29.5801 34.4004 26.9746C34.9844 25.7438 35.2809 24.8543 35.5594 23.4707C35.7391 22.5723 35.9727 20.5867 35.9727 19.9129C35.9727 19.7422 35.8738 19.7422 32.2172 19.7422L28.4617 19.7422L27.9945 19.5086C27.734 19.3828 27.4016 19.1313 27.2578 18.9516C27.187 18.8658 27.1253 18.7941 27.0716 18.7167C26.7034 18.1862 26.7132 17.3932 26.7367 10.0301L26.7368 10.0223C26.7637 2.37538 26.7637 2.3573 26.9523 1.99805C27.2219 1.50391 27.5813 1.15352 28.0664 0.928908C28.4707 0.740236 28.5336 0.740236 36.2871 0.740235L44.1035 0.740235L44.4719 0.937891C44.948 1.18945 45.3344 1.57578 45.55 2.01602C45.7117 2.33945 45.7207 2.68086 45.7207 10.2188C45.7207 18.3945 45.6848 19.4996 45.3074 22.4375ZM43.8522 1.74023L36.2871 1.74024C32.4019 1.74024 30.4643 1.74031 29.4436 1.76356C28.9249 1.77537 28.6915 1.79262 28.5739 1.80958C28.5437 1.81394 28.5342 1.81503 28.5254 1.81814C28.5175 1.82092 28.5102 1.82531 28.4893 1.8351L28.4865 1.83637C28.2145 1.96232 28.008 2.15202 27.8317 2.47421C27.8317 2.47587 27.8315 2.47868 27.8308 2.48319C27.815 2.58363 27.7971 2.79935 27.7835 3.3051C27.757 4.29626 27.7502 6.19753 27.7367 10.0336L27.7356 10.3707C27.7228 14.3836 27.7166 16.3201 27.7766 17.3432C27.8078 17.8752 27.8532 18.0523 27.8758 18.1135C27.8766 18.1157 27.8771 18.1175 27.8776 18.1192C27.8816 18.1328 27.8833 18.1387 28.0286 18.3144L28.0337 18.3206L28.0367 18.3244C28.0368 18.3244 28.0473 18.3363 28.0726 18.3595C28.1018 18.3863 28.1403 18.4185 28.1856 18.4527C28.2814 18.5252 28.3731 18.5809 28.4293 18.608L28.6978 18.7422L32.2856 18.7422C34.0533 18.7422 35.0064 18.7422 35.5104 18.7645C35.7221 18.7739 36.0056 18.789 36.2401 18.8738C36.3866 18.9267 36.6434 19.0511 36.8178 19.3404C36.9744 19.6004 36.973 19.8548 36.9727 19.9079C36.9727 19.9098 36.9727 19.9115 36.9727 19.9129C36.9727 20.6739 36.7276 22.7288 36.54 23.6668L36.5397 23.668C36.2453 25.1304 35.9233 26.0976 35.3039 27.4033L35.3034 27.4043C33.9437 30.2617 31.8623 32.1585 28.5005 33.7782L28.4979 33.7795C27.6632 34.1787 27.3434 34.4051 27.1992 34.5738C27.1208 34.6656 27.0489 34.7815 27.0449 35.2443C27.045 35.4018 27.0475 35.4529 27.0537 35.4966C27.0583 35.529 27.0691 35.5852 27.1171 35.7134C27.2283 36.0099 27.4587 36.4913 27.9787 37.5726C28.2575 38.1481 28.5399 38.7083 28.7687 39.144C28.8835 39.3625 28.9822 39.5449 29.0588 39.6801C29.1241 39.7954 29.1556 39.8442 29.1603 39.8528C29.4413 40.1748 29.981 40.364 30.8106 40.002C36.659 37.4471 41.0477 33.1312 42.974 28.184L42.9747 28.1823C43.5179 26.7949 44.0248 24.6102 44.3153 22.3121L44.3156 22.3101C44.6836 19.445 44.7207 18.4017 44.7207 10.2188C44.7207 6.44338 44.7184 4.48759 44.6962 3.43299C44.685 2.89883 44.6691 2.63484 44.6521 2.49403C44.6492 2.46982 44.6466 2.45272 44.6447 2.4414C44.5291 2.21446 44.3069 1.98169 44.0048 1.82208L43.8522 1.74023Z" />
                                                 </svg>
                                                 <?php if (!empty($data['matrik_testimonial_section_genaral_author_title'])): ?>
-                                                    <span><?php echo esc_html($data['matrik_testimonial_section_genaral_author_title']); ?></span>
+                                                    <span><?php echo wp_kses_post($data['matrik_testimonial_section_genaral_author_title']); ?></span>
                                                 <?php endif; ?>
                                                 <?php if (!empty($data['matrik_testimonial_section_genaral_description'])): ?>
-                                                    <p><?php echo esc_html($data['matrik_testimonial_section_genaral_description']); ?></p>
+                                                    <p><?php echo wp_kses_post($data['matrik_testimonial_section_genaral_description']); ?></p>
                                                 <?php endif; ?>
                                                 <div class="author-area">
                                                     <?php if (!empty($data['matrik_testimonial_section_genaral_author_image']['url'])): ?>
@@ -3686,10 +3686,10 @@ class Matrik_Testimonial_Widget extends Widget_Base
                                                     <?php endif; ?>
                                                     <div class="author-content">
                                                         <?php if (!empty($data['matrik_testimonial_section_genaral_author_name'])): ?>
-                                                            <h5><?php echo esc_html($data['matrik_testimonial_section_genaral_author_name']); ?></h5>
+                                                            <h5><?php echo wp_kses_post($data['matrik_testimonial_section_genaral_author_name']); ?></h5>
                                                         <?php endif; ?>
                                                         <?php if (!empty($data['matrik_testimonial_section_genaral_author_designation'])): ?>
-                                                            <span><?php echo esc_html($data['matrik_testimonial_section_genaral_author_designation']); ?></span>
+                                                            <span><?php echo wp_kses_post($data['matrik_testimonial_section_genaral_author_designation']); ?></span>
                                                         <?php endif; ?>
                                                     </div>
                                                 </div>
@@ -3722,13 +3722,13 @@ class Matrik_Testimonial_Widget extends Widget_Base
                             <div class="testimonial-title-area wow animate fadeInLeft" data-wow-delay="200ms" data-wow-duration="1500ms">
                                 <div class="section-title">
                                     <?php if (!empty($settings['matrik_testimonial_genaral_subtitle'])): ?>
-                                        <span><?php echo esc_html($settings['matrik_testimonial_genaral_subtitle']); ?></span>
+                                        <span><?php echo wp_kses_post($settings['matrik_testimonial_genaral_subtitle']); ?></span>
                                     <?php endif; ?>
                                     <?php if (!empty($settings['matrik_testimonial_genaral_title'])): ?>
-                                        <h2><?php echo esc_html($settings['matrik_testimonial_genaral_title']); ?></h2>
+                                        <h2><?php echo wp_kses_post($settings['matrik_testimonial_genaral_title']); ?></h2>
                                     <?php endif; ?>
                                     <?php if (!empty($settings['matrik_testimonial_genaral_description'])): ?>
-                                        <p><?php echo esc_html($settings['matrik_testimonial_genaral_description']); ?></p>
+                                        <p><?php echo wp_kses_post($settings['matrik_testimonial_genaral_description']); ?></p>
                                     <?php endif; ?>
                                 </div>
                                 <ul class="rating-list">
@@ -3736,14 +3736,14 @@ class Matrik_Testimonial_Widget extends Widget_Base
                                         <li>
                                             <a href="<?php echo esc_url($data['matrik_testimonial_two_genaral_review_area_review_rating_text_link']['url']); ?>" class="single-rating">
                                                 <?php if (!empty($data['matrik_testimonial_two_genaral_review_area_review_rating_text'])): ?>
-                                                    <h6><?php echo esc_html($data['matrik_testimonial_two_genaral_review_area_review_rating_text']); ?></h6>
+                                                    <h6><?php echo wp_kses_post($data['matrik_testimonial_two_genaral_review_area_review_rating_text']); ?></h6>
                                                 <?php endif; ?>
                                                 <div class="review">
                                                     <?php if (!empty($data['matrik_testimonial_two_genaral_review_area_review_logo']['url'])): ?>
                                                         <div class="logo"><img src="<?php echo esc_url($data['matrik_testimonial_two_genaral_review_area_review_logo']['url']); ?>" alt="<?php echo esc_attr__('logo-image', 'matrik-core'); ?>"></div>
                                                     <?php endif; ?>
                                                     <?php if (!empty($data['matrik_testimonial_two_genaral_review_area_review_title'])): ?>
-                                                        <span><?php echo esc_html($data['matrik_testimonial_two_genaral_review_area_review_title']); ?></span>
+                                                        <span><?php echo wp_kses_post($data['matrik_testimonial_two_genaral_review_area_review_title']); ?></span>
                                                     <?php endif; ?>
                                                 </div>
                                             </a>
@@ -3765,10 +3765,10 @@ class Matrik_Testimonial_Widget extends Widget_Base
                                                         <path fill-rule="evenodd" clip-rule="evenodd"
                                                             d="M45.3074 22.4375C45.0109 24.7824 44.4898 27.0555 43.9059 28.5469C41.8664 33.7848 37.2574 38.277 31.2109 40.9184C30.0789 41.4125 29.0098 41.2418 28.3719 40.4691C28.2281 40.2895 27.6441 39.1754 27.0781 38.0074L27.0711 37.9928C26.0628 35.8959 26.0449 35.8587 26.0449 35.2402C26.0539 34.0902 26.4133 33.668 28.0664 32.8773C31.2738 31.332 33.1606 29.5801 34.4004 26.9746C34.9844 25.7438 35.2809 24.8543 35.5594 23.4707C35.7391 22.5723 35.9727 20.5867 35.9727 19.9129C35.9727 19.7422 35.8738 19.7422 32.2172 19.7422L28.4617 19.7422L27.9945 19.5086C27.734 19.3828 27.4016 19.1313 27.2578 18.9516C27.187 18.8658 27.1253 18.7941 27.0716 18.7167C26.7034 18.1862 26.7132 17.3932 26.7367 10.0301L26.7368 10.0223C26.7637 2.37538 26.7637 2.3573 26.9523 1.99805C27.2219 1.50391 27.5813 1.15352 28.0664 0.928908C28.4707 0.740236 28.5336 0.740236 36.2871 0.740235L44.1035 0.740235L44.4719 0.937891C44.948 1.18945 45.3344 1.57578 45.55 2.01602C45.7117 2.33945 45.7207 2.68086 45.7207 10.2188C45.7207 18.3945 45.6848 19.4996 45.3074 22.4375ZM43.8522 1.74023L36.2871 1.74024C32.4019 1.74024 30.4643 1.74031 29.4436 1.76356C28.9249 1.77537 28.6915 1.79262 28.5739 1.80958C28.5437 1.81394 28.5342 1.81503 28.5254 1.81814C28.5175 1.82092 28.5102 1.82531 28.4893 1.8351L28.4865 1.83637C28.2145 1.96232 28.008 2.15202 27.8317 2.47421C27.8317 2.47587 27.8315 2.47868 27.8308 2.48319C27.815 2.58363 27.7971 2.79935 27.7835 3.3051C27.757 4.29626 27.7502 6.19753 27.7367 10.0336L27.7356 10.3707C27.7228 14.3836 27.7166 16.3201 27.7766 17.3432C27.8078 17.8752 27.8532 18.0523 27.8758 18.1135C27.8766 18.1157 27.8771 18.1175 27.8776 18.1192C27.8816 18.1328 27.8833 18.1387 28.0286 18.3144L28.0337 18.3206L28.0367 18.3244C28.0368 18.3244 28.0473 18.3363 28.0726 18.3595C28.1018 18.3863 28.1403 18.4185 28.1856 18.4527C28.2814 18.5252 28.3731 18.5809 28.4293 18.608L28.6978 18.7422L32.2856 18.7422C34.0533 18.7422 35.0064 18.7422 35.5104 18.7645C35.7221 18.7739 36.0056 18.789 36.2401 18.8738C36.3866 18.9267 36.6434 19.0511 36.8178 19.3404C36.9744 19.6004 36.973 19.8548 36.9727 19.9079C36.9727 19.9098 36.9727 19.9115 36.9727 19.9129C36.9727 20.6739 36.7276 22.7288 36.54 23.6668L36.5397 23.668C36.2453 25.1304 35.9233 26.0976 35.3039 27.4033L35.3034 27.4043C33.9437 30.2617 31.8623 32.1585 28.5005 33.7782L28.4979 33.7795C27.6632 34.1787 27.3434 34.4051 27.1992 34.5738C27.1208 34.6656 27.0489 34.7815 27.0449 35.2443C27.045 35.4018 27.0475 35.4529 27.0537 35.4966C27.0583 35.529 27.0691 35.5852 27.1171 35.7134C27.2283 36.0099 27.4587 36.4913 27.9787 37.5726C28.2575 38.1481 28.5399 38.7083 28.7687 39.144C28.8835 39.3625 28.9822 39.5449 29.0588 39.6801C29.1241 39.7954 29.1556 39.8442 29.1603 39.8528C29.4413 40.1748 29.981 40.364 30.8106 40.002C36.659 37.4471 41.0477 33.1312 42.974 28.184L42.9747 28.1823C43.5179 26.7949 44.0248 24.6102 44.3153 22.3121L44.3156 22.3101C44.6836 19.445 44.7207 18.4017 44.7207 10.2188C44.7207 6.44338 44.7184 4.48759 44.6962 3.43299C44.685 2.89883 44.6691 2.63484 44.6521 2.49403C44.6492 2.46982 44.6466 2.45272 44.6447 2.4414C44.5291 2.21446 44.3069 1.98169 44.0048 1.82208L43.8522 1.74023Z" />
                                                     </svg>
-                                                    <span><?php echo esc_html($data['matrik_testimonial_section_genaral_author_title']); ?></span>
+                                                    <span><?php echo wp_kses_post($data['matrik_testimonial_section_genaral_author_title']); ?></span>
                                                 <?php endif; ?>
                                                 <?php if (!empty($data['matrik_testimonial_section_genaral_description'])): ?>
-                                                    <p><?php echo esc_html($data['matrik_testimonial_section_genaral_description']); ?></p>
+                                                    <p><?php echo wp_kses_post($data['matrik_testimonial_section_genaral_description']); ?></p>
                                                 <?php endif; ?>
                                                 <svg class="arrow-down" width="6" height="67" viewBox="0 0 6 67" xmlns="http://www.w3.org/2000/svg">
                                                     <path
@@ -3782,10 +3782,10 @@ class Matrik_Testimonial_Widget extends Widget_Base
                                                     <?php endif; ?>
                                                     <div class="author-content">
                                                         <?php if (!empty($data['matrik_testimonial_section_genaral_author_name'])): ?>
-                                                            <h5><?php echo esc_html($data['matrik_testimonial_section_genaral_author_name']); ?></h5>
+                                                            <h5><?php echo wp_kses_post($data['matrik_testimonial_section_genaral_author_name']); ?></h5>
                                                         <?php endif; ?>
                                                         <?php if (!empty($data['matrik_testimonial_section_genaral_author_designation'])): ?>
-                                                            <span><?php echo esc_html($data['matrik_testimonial_section_genaral_author_designation']); ?></span>
+                                                            <span><?php echo wp_kses_post($data['matrik_testimonial_section_genaral_author_designation']); ?></span>
                                                         <?php endif; ?>
                                                     </div>
                                                 </div>
@@ -3819,7 +3819,7 @@ class Matrik_Testimonial_Widget extends Widget_Base
                             <?php if (!empty($settings['matrik_testimonial_genaral_three_title'])): ?>
                                 <div class="col-lg-5">
                                     <div class="section-title two white">
-                                        <h2><?php echo esc_html($settings['matrik_testimonial_genaral_three_title']); ?></h2>
+                                        <h2><?php echo wp_kses_post($settings['matrik_testimonial_genaral_three_title']); ?></h2>
                                     </div>
                                 </div>
                             <?php endif; ?>
@@ -3866,10 +3866,10 @@ class Matrik_Testimonial_Widget extends Widget_Base
                                                                         d="M45.3074 22.4375C45.0109 24.7824 44.4898 27.0555 43.9059 28.5469C41.8664 33.7848 37.2574 38.277 31.2109 40.9184C30.0789 41.4125 29.0098 41.2418 28.3719 40.4691C28.2281 40.2895 27.6441 39.1754 27.0781 38.0074L27.0711 37.9928C26.0628 35.8959 26.0449 35.8587 26.0449 35.2402C26.0539 34.0902 26.4133 33.668 28.0664 32.8773C31.2738 31.332 33.1606 29.5801 34.4004 26.9746C34.9844 25.7438 35.2809 24.8543 35.5594 23.4707C35.7391 22.5723 35.9727 20.5867 35.9727 19.9129C35.9727 19.7422 35.8738 19.7422 32.2172 19.7422L28.4617 19.7422L27.9945 19.5086C27.734 19.3828 27.4016 19.1313 27.2578 18.9516C27.187 18.8658 27.1253 18.7941 27.0716 18.7167C26.7034 18.1862 26.7132 17.3932 26.7367 10.0301L26.7368 10.0223C26.7637 2.37538 26.7637 2.3573 26.9523 1.99805C27.2219 1.50391 27.5813 1.15352 28.0664 0.928908C28.4707 0.740236 28.5336 0.740236 36.2871 0.740235L44.1035 0.740235L44.4719 0.937891C44.948 1.18945 45.3344 1.57578 45.55 2.01602C45.7117 2.33945 45.7207 2.68086 45.7207 10.2188C45.7207 18.3945 45.6848 19.4996 45.3074 22.4375ZM43.8522 1.74023L36.2871 1.74024C32.4019 1.74024 30.4643 1.74031 29.4436 1.76356C28.9249 1.77537 28.6915 1.79262 28.5739 1.80958C28.5437 1.81394 28.5342 1.81503 28.5254 1.81814C28.5175 1.82092 28.5102 1.82531 28.4893 1.8351L28.4865 1.83637C28.2145 1.96232 28.008 2.15202 27.8317 2.47421C27.8317 2.47587 27.8315 2.47868 27.8308 2.48319C27.815 2.58363 27.7971 2.79935 27.7835 3.3051C27.757 4.29626 27.7502 6.19753 27.7367 10.0336L27.7356 10.3707C27.7228 14.3836 27.7166 16.3201 27.7766 17.3432C27.8078 17.8752 27.8532 18.0523 27.8758 18.1135C27.8766 18.1157 27.8771 18.1175 27.8776 18.1192C27.8816 18.1328 27.8833 18.1387 28.0286 18.3144L28.0337 18.3206L28.0367 18.3244C28.0368 18.3244 28.0473 18.3363 28.0726 18.3595C28.1018 18.3863 28.1403 18.4185 28.1856 18.4527C28.2814 18.5252 28.3731 18.5809 28.4293 18.608L28.6978 18.7422L32.2856 18.7422C34.0533 18.7422 35.0064 18.7422 35.5104 18.7645C35.7221 18.7739 36.0056 18.789 36.2401 18.8738C36.3866 18.9267 36.6434 19.0511 36.8178 19.3404C36.9744 19.6004 36.973 19.8548 36.9727 19.9079C36.9727 19.9098 36.9727 19.9115 36.9727 19.9129C36.9727 20.6739 36.7276 22.7288 36.54 23.6668L36.5397 23.668C36.2453 25.1304 35.9233 26.0976 35.3039 27.4033L35.3034 27.4043C33.9437 30.2617 31.8623 32.1585 28.5005 33.7782L28.4979 33.7795C27.6632 34.1787 27.3434 34.4051 27.1992 34.5738C27.1208 34.6656 27.0489 34.7815 27.0449 35.2443C27.045 35.4018 27.0475 35.4529 27.0537 35.4966C27.0583 35.529 27.0691 35.5852 27.1171 35.7134C27.2283 36.0099 27.4587 36.4913 27.9787 37.5726C28.2575 38.1481 28.5399 38.7083 28.7687 39.144C28.8835 39.3625 28.9822 39.5449 29.0588 39.6801C29.1241 39.7954 29.1556 39.8442 29.1603 39.8528C29.4413 40.1748 29.981 40.364 30.8106 40.002C36.659 37.4471 41.0477 33.1312 42.974 28.184L42.9747 28.1823C43.5179 26.7949 44.0248 24.6102 44.3153 22.3121L44.3156 22.3101C44.6836 19.445 44.7207 18.4017 44.7207 10.2188C44.7207 6.44338 44.7184 4.48759 44.6962 3.43299C44.685 2.89883 44.6691 2.63484 44.6521 2.49403C44.6492 2.46982 44.6466 2.45272 44.6447 2.4414C44.5291 2.21446 44.3069 1.98169 44.0048 1.82208L43.8522 1.74023Z" />
                                                                 </svg>
                                                                 <?php if (!empty($data['matrik_testimonial_section_three_genaral_author_title'])): ?>
-                                                                    <span><?php echo esc_html($data['matrik_testimonial_section_three_genaral_author_title']); ?></span>
+                                                                    <span><?php echo wp_kses_post($data['matrik_testimonial_section_three_genaral_author_title']); ?></span>
                                                                 <?php endif; ?>
                                                                 <?php if (!empty($data['matrik_testimonial_section_three_genaral_author_description'])): ?>
-                                                                    <p><?php echo esc_html($data['matrik_testimonial_section_three_genaral_author_description']); ?></p>
+                                                                    <p><?php echo wp_kses_post($data['matrik_testimonial_section_three_genaral_author_description']); ?></p>
                                                                 <?php endif; ?>
                                                                 <div class="author-and-social-area">
                                                                     <div class="author-area">
@@ -3880,10 +3880,10 @@ class Matrik_Testimonial_Widget extends Widget_Base
                                                                         <?php endif; ?>
                                                                         <div class="author-content">
                                                                             <?php if (!empty($data['matrik_testimonial_section_three_genaral_author_name'])): ?>
-                                                                                <h5><?php echo esc_html($data['matrik_testimonial_section_three_genaral_author_name']); ?></h5>
+                                                                                <h5><?php echo wp_kses_post($data['matrik_testimonial_section_three_genaral_author_name']); ?></h5>
                                                                             <?php endif; ?>
                                                                             <?php if ($data['matrik_testimonial_section_three_genaral_author_designation']): ?>
-                                                                                <span><?php echo esc_html($data['matrik_testimonial_section_three_genaral_author_designation']); ?></span>
+                                                                                <span><?php echo wp_kses_post($data['matrik_testimonial_section_three_genaral_author_designation']); ?></span>
                                                                             <?php endif; ?>
                                                                         </div>
                                                                     </div>
@@ -3923,14 +3923,14 @@ class Matrik_Testimonial_Widget extends Widget_Base
                                         <div class="single-countdown">
                                             <div class="number">
                                                 <?php if (!empty($data['matrik_testimonial_counter_section_three_genaral_counter_number'])): ?>
-                                                    <h2 class="counter"><?php echo esc_html($data['matrik_testimonial_counter_section_three_genaral_counter_number']); ?></h2>
+                                                    <h2 class="counter"><?php echo wp_kses_post($data['matrik_testimonial_counter_section_three_genaral_counter_number']); ?></h2>
                                                 <?php endif; ?>
                                                 <?php if (!empty($data['matrik_testimonial_counter_section_three_genaral_counter_sign'])): ?>
-                                                    <span><?php echo esc_html($data['matrik_testimonial_counter_section_three_genaral_counter_sign']); ?></span>
+                                                    <span><?php echo wp_kses_post($data['matrik_testimonial_counter_section_three_genaral_counter_sign']); ?></span>
                                                 <?php endif; ?>
                                             </div>
                                             <?php if (!empty($data['matrik_testimonial_counter_section_three_genaral_counter_title'])): ?>
-                                                <span><?php echo esc_html($data['matrik_testimonial_counter_section_three_genaral_counter_title']); ?></span>
+                                                <span><?php echo wp_kses_post($data['matrik_testimonial_counter_section_three_genaral_counter_title']); ?></span>
                                             <?php endif; ?>
                                         </div>
                                     </div>
@@ -3947,7 +3947,7 @@ class Matrik_Testimonial_Widget extends Widget_Base
                 <div class="container-fluid">
                     <?php if (!empty($settings['matrik_testimonial_genaral_three_title'])): ?>
                         <div class="section-title three text-center mb-70 wow animate fadeInDown" data-wow-delay="200ms" data-wow-duration="1500ms">
-                            <h2><?php echo esc_html($settings['matrik_testimonial_genaral_three_title']); ?></h2>
+                            <h2><?php echo wp_kses_post($settings['matrik_testimonial_genaral_three_title']); ?></h2>
                         </div>
                     <?php endif; ?>
                     <div class="row mb-50">
@@ -3964,10 +3964,10 @@ class Matrik_Testimonial_Widget extends Widget_Base
                                                         d="M6.11719 48.3154C13.2152 45.1572 18.6258 39.7861 21.0199 33.5234C21.7055 31.7402 22.3172 29.0225 22.6652 26.2188C23.1082 22.7061 23.1504 21.3848 23.1504 11.6094C23.1504 2.59668 23.1398 2.18848 22.95 1.80176C22.6969 1.27539 22.2434 0.813477 21.6844 0.512695L21.252 0.276367L12.0762 0.276368C2.97422 0.276369 2.90039 0.276369 2.42578 0.501955C1.85625 0.77051 1.43438 1.18946 1.11797 1.78028C0.896486 2.20996 0.896486 2.23145 0.864846 11.3838C0.833206 21.4707 0.82266 21.2451 1.47657 22.0508C1.64532 22.2656 2.03555 22.5664 2.34141 22.7168L2.88985 22.9961L7.29844 22.9961C11.591 22.9961 11.707 22.9961 11.707 23.2002C11.707 24.0059 11.4328 26.3799 11.2219 27.4541C10.8949 29.1084 10.5469 30.1719 9.86133 31.6436C8.40586 34.7588 6.19102 36.8535 2.42579 38.7012C0.48516 39.6465 0.0632855 40.1514 0.0527399 41.5264C0.05274 42.2676 0.0738333 42.3106 1.26563 44.835C1.93008 46.2315 2.61563 47.5635 2.78438 47.7783C3.53321 48.7022 4.78829 48.9063 6.11719 48.3154Z" />
                                                 </svg>
                                                 <?php if (!empty($data['matrik_testimonial_section_four_genaral_author_title'])): ?>
-                                                    <span><?php echo esc_html($data['matrik_testimonial_section_four_genaral_author_title']); ?></span>
+                                                    <span><?php echo wp_kses_post($data['matrik_testimonial_section_four_genaral_author_title']); ?></span>
                                                 <?php endif; ?>
                                                 <?php if (!empty($data['matrik_testimonial_section_four_genaral_author_description'])): ?>
-                                                    <p><?php echo esc_html($data['matrik_testimonial_section_four_genaral_author_description']); ?></p>
+                                                    <p><?php echo wp_kses_post($data['matrik_testimonial_section_four_genaral_author_description']); ?></p>
                                                 <?php endif; ?>
                                                 <div class="author-and-social-area">
                                                     <div class="author-area">
@@ -3978,10 +3978,10 @@ class Matrik_Testimonial_Widget extends Widget_Base
                                                         <?php endif; ?>
                                                         <div class="author-content">
                                                             <?php if (!empty($data['matrik_testimonial_section_four_genaral_author_name'])): ?>
-                                                                <h5><?php echo esc_html($data['matrik_testimonial_section_four_genaral_author_name']); ?></h5>
+                                                                <h5><?php echo wp_kses_post($data['matrik_testimonial_section_four_genaral_author_name']); ?></h5>
                                                             <?php endif; ?>
                                                             <?php if (!empty($data['matrik_testimonial_section_four_genaral_author_designation'])): ?>
-                                                                <span><?php echo esc_html($data['matrik_testimonial_section_four_genaral_author_designation']); ?></span>
+                                                                <span><?php echo wp_kses_post($data['matrik_testimonial_section_four_genaral_author_designation']); ?></span>
                                                             <?php endif; ?>
                                                         </div>
                                                     </div>
@@ -4031,11 +4031,11 @@ class Matrik_Testimonial_Widget extends Widget_Base
                                             <path d="M0.0594065 0H12.0001V2.2353L2.25745 12L0 9.76471L6.65353 3.17647L0.0594065 3.2353V0Z" />
                                             <path d="M11.9999 11.9999V4.47046L8.79199 7.64693V11.9999H11.9999Z" />
                                         </svg>
-                                        <?php echo esc_html($settings['matrik_testimonial_genaral_subtitle']); ?>
+                                        <?php echo wp_kses_post($settings['matrik_testimonial_genaral_subtitle']); ?>
                                     </span>
                                 <?php endif; ?>
                                 <?php if (!empty($settings['matrik_testimonial_genaral_three_title'])): ?>
-                                    <h2><?php echo esc_html($settings['matrik_testimonial_genaral_three_title']); ?></h2>
+                                    <h2><?php echo wp_kses_post($settings['matrik_testimonial_genaral_three_title']); ?></h2>
                                 <?php endif; ?>
                             </div>
                         </div>
@@ -4062,17 +4062,17 @@ class Matrik_Testimonial_Widget extends Widget_Base
                                                         </div>
                                                     <?php endif; ?>
                                                     <?php if (!empty($data['matrik_testimonial_section_genaral_author_title'])): ?>
-                                                        <span><?php echo esc_html($data['matrik_testimonial_section_genaral_author_title']); ?></span>
+                                                        <span><?php echo wp_kses_post($data['matrik_testimonial_section_genaral_author_title']); ?></span>
                                                     <?php endif; ?>
                                                     <?php if (!empty($data['matrik_testimonial_section_genaral_description'])): ?>
-                                                        <p><?php echo esc_html($data['matrik_testimonial_section_genaral_description']); ?></p>
+                                                        <p><?php echo wp_kses_post($data['matrik_testimonial_section_genaral_description']); ?></p>
                                                     <?php endif; ?>
                                                     <div class="author-area">
                                                         <?php if (!empty($data['matrik_testimonial_section_genaral_author_name'])): ?>
-                                                            <h5><?php echo esc_html($data['matrik_testimonial_section_genaral_author_name']); ?></h5>
+                                                            <h5><?php echo wp_kses_post($data['matrik_testimonial_section_genaral_author_name']); ?></h5>
                                                         <?php endif; ?>
                                                         <?php if (!empty($data['matrik_testimonial_section_genaral_author_designation'])): ?>
-                                                            <span><?php echo esc_html($data['matrik_testimonial_section_genaral_author_designation']); ?></span>
+                                                            <span><?php echo wp_kses_post($data['matrik_testimonial_section_genaral_author_designation']); ?></span>
                                                         <?php endif; ?>
                                                     </div>
                                                 </div>
@@ -4088,7 +4088,7 @@ class Matrik_Testimonial_Widget extends Widget_Base
                                     </ul>
                                     <?php if (!empty($settings['matrik_testimonial_five_contact_area_button_text'])): ?>
                                         <a class="contact-btn" href="<?php echo esc_url($settings['matrik_testimonial_five_contact_area_button_text_url']['url']); ?>">
-                                            <?php echo esc_html($settings['matrik_testimonial_five_contact_area_button_text']); ?>
+                                            <?php echo wp_kses_post($settings['matrik_testimonial_five_contact_area_button_text']); ?>
                                             <svg viewBox="0 0 13 20">
                                                 <polyline points="0.5 19.5 3 19.5 12.5 10 3 0.5"></polyline>
                                             </svg>
@@ -4105,7 +4105,7 @@ class Matrik_Testimonial_Widget extends Widget_Base
                                     <a href="<?php echo esc_url($data['matrik_testimonial_genaral_review_area_review_link']['url']); ?>" class="single-rating <?php if ($data['matrik_hero_banner_one_genaral_button_style'] == 'google') : ?>google<?php endif; ?>">
                                         <div class="review">
                                             <?php if (!empty($data['matrik_testimonial_genaral_review_area_review_title'])): ?>
-                                                <span><?php echo esc_html($data['matrik_testimonial_genaral_review_area_review_title']); ?></span>
+                                                <span><?php echo wp_kses_post($data['matrik_testimonial_genaral_review_area_review_title']); ?></span>
                                             <?php endif; ?>
                                             <?php if (!empty($data['matrik_testimonial_genaral_review_area_review_logo']['url'])): ?>
                                                 <img src="<?php echo esc_url($data['matrik_testimonial_genaral_review_area_review_logo']['url']); ?>" alt="<?php echo esc_attr__('logo-image', 'matrik-core'); ?>">
@@ -4122,7 +4122,7 @@ class Matrik_Testimonial_Widget extends Widget_Base
                                                 <?php endfor; ?>
                                             </ul>
                                             <?php if (!empty($data['matrik_testimonial_genaral_review_area_review_total_review'])): ?>
-                                                <span><?php echo esc_html($data['matrik_testimonial_genaral_review_area_review_total_review']); ?></span>
+                                                <span><?php echo wp_kses_post($data['matrik_testimonial_genaral_review_area_review_total_review']); ?></span>
                                             <?php endif; ?>
                                         </div>
                                     </a>
@@ -4159,17 +4159,17 @@ class Matrik_Testimonial_Widget extends Widget_Base
                                                         <path d="M19.6777 0.801759C12.257 0.80176 8.52711 0.802201 6.55371 0.847659C5.56283 0.870484 5.039 0.903754 4.7207 0.950198C4.50492 0.981702 4.39254 1.01693 4.28027 1.06543L4.16504 1.11914L4.16309 1.11914C3.44452 1.45559 2.88647 1.95519 2.44336 2.65821L2.25977 2.97266C2.1871 3.11254 2.14437 3.19409 2.10449 3.45117C2.05844 3.74835 2.02288 4.25128 1.99707 5.22559C1.97139 6.19529 1.95525 7.6059 1.94238 9.7002L1.90723 18.2773C1.88141 26.45 1.86505 30.4165 1.98633 32.5088C2.04717 33.558 2.14098 34.0831 2.26172 34.4141C2.34659 34.6465 2.44597 34.7924 2.60742 34.9941L2.79102 35.2207L2.79688 35.2266C2.9882 35.4683 3.44864 35.8383 3.86035 36.0732L4.03321 36.165L4.03907 36.168L4.82618 36.5664L11.8916 36.5664C15.3808 36.5664 17.1937 36.5665 18.1299 36.6084C18.5759 36.6284 18.8976 36.6589 19.1094 36.7363C19.2305 36.7807 19.3842 36.8642 19.4844 37.0322C19.5777 37.1893 19.5762 37.3464 19.5762 37.3965C19.5762 38.575 19.2297 41.69 18.9102 43.6279L18.7764 44.377L18.7764 44.3779C18.3034 46.7543 17.8003 48.3985 16.9219 50.3926L16.5215 51.2715L16.5205 51.2725C14.1655 56.2775 10.6142 59.6838 4.74512 62.6445L4.16993 62.9297L4.16895 62.9307C2.58407 63.6973 1.71272 64.2449 1.21973 64.8281C0.816228 65.3056 0.638356 65.8424 0.594732 66.6787L0.58399 67.0557C0.584015 67.356 0.587347 67.5512 0.61524 67.75C0.642468 67.9439 0.695537 68.1572 0.812506 68.4727C0.933266 68.7983 1.11412 69.2142 1.38672 69.8057L2.51173 72.1895C3.05117 73.3152 3.59876 74.4141 4.04493 75.2734C4.26816 75.7034 4.46433 76.0716 4.6211 76.3516C4.78442 76.6432 4.88755 76.8051 4.92774 76.8564C5.90289 78.0467 7.52649 78.4248 9.38868 77.7334L9.76466 77.5801C20.8734 72.6721 29.3929 64.4459 33.4111 54.8545L33.7861 53.9219L33.7861 53.9209L33.9912 53.3721C34.9384 50.7308 35.7879 46.9908 36.3272 43.0635L36.4375 42.2188L36.6777 40.2324C37.1715 35.8289 37.2246 32.4848 37.2246 18.6406C37.2246 11.3455 37.2206 7.54121 37.1777 5.48145C37.1396 3.6464 37.0669 3.26457 36.9854 3.06836L36.9502 2.99219L36.9482 2.98828C36.6313 2.33387 36.0864 1.73677 35.4014 1.30176L35.0996 1.125L35.0967 1.12402L34.5039 0.801758L19.6777 0.801759Z"></path>
                                                     </svg>
                                                     <?php if (!empty($data['matrik_testimonial_section_four_genaral_author_title'])): ?>
-                                                        <span><?php echo esc_html($data['matrik_testimonial_section_four_genaral_author_title']); ?></span>
+                                                        <span><?php echo wp_kses_post($data['matrik_testimonial_section_four_genaral_author_title']); ?></span>
                                                     <?php endif; ?>
                                                     <?php if (!empty($data['matrik_testimonial_section_four_genaral_author_description'])): ?>
-                                                        <p><?php echo esc_html($data['matrik_testimonial_section_four_genaral_author_description']); ?></p>
+                                                        <p><?php echo wp_kses_post($data['matrik_testimonial_section_four_genaral_author_description']); ?></p>
                                                     <?php endif; ?>
                                                     <div class="author-area">
                                                         <?php if (!empty($data['matrik_testimonial_section_four_genaral_author_name'])): ?>
-                                                            <h5><?php echo esc_html($data['matrik_testimonial_section_four_genaral_author_name']); ?></h5>
+                                                            <h5><?php echo wp_kses_post($data['matrik_testimonial_section_four_genaral_author_name']); ?></h5>
                                                         <?php endif; ?>
                                                         <?php if (!empty($data['matrik_testimonial_section_four_genaral_author_designation'])): ?>
-                                                            <span><?php echo esc_html($data['matrik_testimonial_section_four_genaral_author_designation']); ?></span>
+                                                            <span><?php echo wp_kses_post($data['matrik_testimonial_section_four_genaral_author_designation']); ?></span>
                                                         <?php endif; ?>
                                                         <ul class="img-grp" style="display: none;">
                                                             <?php foreach ($settings['matrik_testimonial_section_four_testimonial_list'] as $image): ?>
@@ -4190,7 +4190,7 @@ class Matrik_Testimonial_Widget extends Widget_Base
                                     </ul>
                                     <?php if (!empty($settings['matrik_testimonial_five_contact_area_button_text'])): ?>
                                         <a class="contact-btn" href="<?php echo esc_url($settings['matrik_testimonial_five_contact_area_button_text_url']['url']); ?>">
-                                            <?php echo esc_html($settings['matrik_testimonial_five_contact_area_button_text']); ?>
+                                            <?php echo wp_kses_post($settings['matrik_testimonial_five_contact_area_button_text']); ?>
                                             <svg viewBox="0 0 13 20">
                                                 <polyline points="0.5 19.5 3 19.5 12.5 10 3 0.5"></polyline>
                                             </svg>

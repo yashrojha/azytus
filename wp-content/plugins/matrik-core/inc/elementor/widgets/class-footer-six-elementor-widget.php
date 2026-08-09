@@ -1089,16 +1089,16 @@ class Matrik_Footer_Six_Widget extends Widget_Base
                                 <?php foreach ($settings['matrik_footer_six_genaral_address_area_list'] as $data) : ?>
                                     <li class="single-address">
                                         <?php if (!empty($data['matrik_footer_six_genaral_address_area_title'])) : ?>
-                                            <span><?php echo esc_html($data['matrik_footer_six_genaral_address_area_title']); ?></span>
+                                            <span><?php echo wp_kses_post($data['matrik_footer_six_genaral_address_area_title']); ?></span>
                                         <?php endif; ?>
                                         <?php if (!empty($data['matrik_footer_six_genaral_address_area_address_text'])) : ?>
-                                            <a href="<?php echo esc_url($data['matrik_footer_six_genaral_address_area_address_text_url']['url']); ?>"><?php echo esc_html($data['matrik_footer_six_genaral_address_area_address_text']); ?></a>
+                                            <a href="<?php echo esc_url($data['matrik_footer_six_genaral_address_area_address_text_url']['url']); ?>"><?php echo wp_kses_post($data['matrik_footer_six_genaral_address_area_address_text']); ?></a>
                                         <?php endif; ?>
                                     </li>
                                 <?php endforeach; ?>
                             </ul>
                             <?php if (!empty($settings['matrik_footer_six_genaral_address_area_button_text'])) : ?>
-                                <a href="<?php echo esc_url($settings['matrik_footer_six_genaral_address_area_button_text_url']['url']); ?>" class="location-btn"><?php echo esc_html($settings['matrik_footer_six_genaral_address_area_button_text']); ?></a>
+                                <a href="<?php echo esc_url($settings['matrik_footer_six_genaral_address_area_button_text_url']['url']); ?>" class="location-btn"><?php echo wp_kses_post($settings['matrik_footer_six_genaral_address_area_button_text']); ?></a>
                             <?php endif; ?>
                         </div>
                     </div>
@@ -1111,7 +1111,7 @@ class Matrik_Footer_Six_Widget extends Widget_Base
                                     <div class="footer-widget">
                                         <?php if (!empty($settings['matrik_footer_six_genaral_menu_one_area_menu_title'])) : ?>
                                             <div class="widget-title">
-                                                <h5><?php echo esc_html($settings['matrik_footer_six_genaral_menu_one_area_menu_title']); ?></h5>
+                                                <h5><?php echo wp_kses_post($settings['matrik_footer_six_genaral_menu_one_area_menu_title']); ?></h5>
                                             </div>
                                         <?php endif; ?>
                                         <div class="menu-container">
@@ -1120,7 +1120,7 @@ class Matrik_Footer_Six_Widget extends Widget_Base
                                                     <?php if (!empty($data['matrik_footer_six_genaral_menu_one_area_menu_content_title'])) : ?>
                                                         <li>
                                                             <a href="<?php echo esc_url($data['matrik_footer_six_genaral_menu_one_area_menu_content_title_url']['url']); ?>">
-                                                                <?php echo esc_html($data['matrik_footer_six_genaral_menu_one_area_menu_content_title']); ?>
+                                                                <?php echo wp_kses_post($data['matrik_footer_six_genaral_menu_one_area_menu_content_title']); ?>
                                                                 <svg width="9" height="9" viewBox="0 0 9 9" xmlns="http://www.w3.org/2000/svg">
                                                                     <path d="M0.0445549 0H9.00008V1.67647L1.69308 9L0 7.32353L4.99014 2.38235L0.0445549 2.42647V0Z" />
                                                                     <path d="M9.0002 8.9996V3.35254L6.59424 5.73489V8.9996H9.0002Z" />
@@ -1135,7 +1135,7 @@ class Matrik_Footer_Six_Widget extends Widget_Base
                                     <div class="footer-widget">
                                         <?php if (!empty($settings['matrik_footer_six_genaral_menu_two_area_menu_title'])) : ?>
                                             <div class="widget-title">
-                                                <h5><?php echo esc_html($settings['matrik_footer_six_genaral_menu_two_area_menu_title']); ?></h5>
+                                                <h5><?php echo wp_kses_post($settings['matrik_footer_six_genaral_menu_two_area_menu_title']); ?></h5>
                                             </div>
                                         <?php endif; ?>
                                         <div class="menu-container">
@@ -1144,7 +1144,7 @@ class Matrik_Footer_Six_Widget extends Widget_Base
                                                     <?php if (!empty($data['matrik_footer_six_genaral_menu_two_area_menu_content_title'])) : ?>
                                                         <li>
                                                             <a href="<?php echo esc_url($data['matrik_footer_six_genaral_menu_two_area_menu_content_title_url']['url']); ?>">
-                                                                <?php echo esc_html($data['matrik_footer_six_genaral_menu_two_area_menu_content_title']); ?>
+                                                                <?php echo wp_kses_post($data['matrik_footer_six_genaral_menu_two_area_menu_content_title']); ?>
                                                                 <svg width="9" height="9" viewBox="0 0 9 9" xmlns="http://www.w3.org/2000/svg">
                                                                     <path d="M0.0445549 0H9.00008V1.67647L1.69308 9L0 7.32353L4.99014 2.38235L0.0445549 2.42647V0Z" />
                                                                     <path d="M9.0002 8.9996V3.35254L6.59424 5.73489V8.9996H9.0002Z" />
@@ -1166,11 +1166,11 @@ class Matrik_Footer_Six_Widget extends Widget_Base
                                         </a>
                                     <?php endif; ?>
                                     <?php if (!empty($settings['matrik_footer_six_genaral_description'])) : ?>
-                                        <p><?php echo esc_html($settings['matrik_footer_six_genaral_description']); ?></p>
+                                        <p><?php echo wp_kses_post($settings['matrik_footer_six_genaral_description']); ?></p>
                                     <?php endif; ?>
                                     <?php if (!empty($settings['matrik_footer_six_genaral_title_text'])) : ?>
                                         <div class="established">
-                                            <h2><?php echo esc_html($settings['matrik_footer_six_genaral_title_text']); ?></h2>
+                                            <h2><?php echo wp_kses_post($settings['matrik_footer_six_genaral_title_text']); ?></h2>
                                         </div>
                                     <?php endif; ?>
                                 </div>
@@ -1180,7 +1180,7 @@ class Matrik_Footer_Six_Widget extends Widget_Base
                                     <div class="footer-widget">
                                         <?php if (!empty($settings['matrik_footer_six_genaral_contact_and_social_heading_title'])) : ?>
                                             <div class="widget-title">
-                                                <h5><?php echo esc_html($settings['matrik_footer_six_genaral_contact_and_social_heading_title']); ?></h5>
+                                                <h5><?php echo wp_kses_post($settings['matrik_footer_six_genaral_contact_and_social_heading_title']); ?></h5>
                                             </div>
                                         <?php endif; ?>
                                         <ul class="social-area">
@@ -1193,7 +1193,7 @@ class Matrik_Footer_Six_Widget extends Widget_Base
                                                             <i class="<?php echo esc_attr($icon['value']); ?>"></i>
                                                         <?php endif; ?>
                                                         <?php if (!empty($data['matrik_footer_six_genaral_contact_and_social_title'])) : ?>
-                                                            <?php echo esc_html($data['matrik_footer_six_genaral_contact_and_social_title']); ?>
+                                                            <?php echo wp_kses_post($data['matrik_footer_six_genaral_contact_and_social_title']); ?>
                                                         <?php endif; ?>
                                                     </a>
                                                 </li>
@@ -1227,8 +1227,8 @@ class Matrik_Footer_Six_Widget extends Widget_Base
                                                         ?>
                                                     </div>
                                                     <div class="content">
-                                                        <span><?php echo esc_html($data['matrik_footer_six_genaral_contact_title']); ?></span>
-                                                        <h6><a href="<?php if ($data['matrik_footer_six_genaral_contact_type'] == 'phone') : ?> tel:<?php echo preg_replace('/[^0-9]/', '', $data['matrik_footer_six_genaral_contact_phone_number']); ?><?php elseif ($data['matrik_footer_six_genaral_contact_type'] == 'email') : ?>mailto:<?php echo esc_html($data['matrik_footer_six_genaral_contact_email']); ?><?php elseif ($data['matrik_footer_six_genaral_contact_type'] == 'custom') : ?><?php echo esc_html($data['matrik_footer_six_genaral_contact_custom_url']['url']); ?><?php endif; ?>"><?php if ($data['matrik_footer_six_genaral_contact_type'] == 'phone') : ?><?php echo esc_html($data['matrik_footer_six_genaral_contact_phone_number']); ?><?php elseif ($data['matrik_footer_six_genaral_contact_type'] == 'email') : ?><?php echo esc_html($data['matrik_footer_six_genaral_contact_email']); ?><?php elseif ($data['matrik_footer_six_genaral_contact_type'] == 'custom') : ?><?php echo esc_html($data['matrik_footer_six_genaral_contact_custom']); ?><?php endif; ?></a></h6>
+                                                        <span><?php echo wp_kses_post($data['matrik_footer_six_genaral_contact_title']); ?></span>
+                                                        <h6><a href="<?php if ($data['matrik_footer_six_genaral_contact_type'] == 'phone') : ?> tel:<?php echo preg_replace('/[^0-9]/', '', $data['matrik_footer_six_genaral_contact_phone_number']); ?><?php elseif ($data['matrik_footer_six_genaral_contact_type'] == 'email') : ?>mailto:<?php echo wp_kses_post($data['matrik_footer_six_genaral_contact_email']); ?><?php elseif ($data['matrik_footer_six_genaral_contact_type'] == 'custom') : ?><?php echo wp_kses_post($data['matrik_footer_six_genaral_contact_custom_url']['url']); ?><?php endif; ?>"><?php if ($data['matrik_footer_six_genaral_contact_type'] == 'phone') : ?><?php echo wp_kses_post($data['matrik_footer_six_genaral_contact_phone_number']); ?><?php elseif ($data['matrik_footer_six_genaral_contact_type'] == 'email') : ?><?php echo wp_kses_post($data['matrik_footer_six_genaral_contact_email']); ?><?php elseif ($data['matrik_footer_six_genaral_contact_type'] == 'custom') : ?><?php echo wp_kses_post($data['matrik_footer_six_genaral_contact_custom']); ?><?php endif; ?></a></h6>
                                                     </div>
                                                 </div>
                                                 <?php if ($index < $total_items) : ?>

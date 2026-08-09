@@ -2309,10 +2309,10 @@ class Matrik_Team_Widget extends Widget_Base
                         <div class="col-xl-4 col-lg-5 col-md-8">
                             <div class="section-title text-center">
                                 <?php if (!empty($settings['matrik_team_genaral_subtitle'])) : ?>
-                                    <span><?php echo esc_html($settings['matrik_team_genaral_subtitle']); ?></span>
+                                    <span><?php echo wp_kses_post($settings['matrik_team_genaral_subtitle']); ?></span>
                                 <?php endif; ?>
                                 <?php if (!empty($settings['matrik_team_genaral_title'])) : ?>
-                                    <h2><?php echo esc_html($settings['matrik_team_genaral_title']); ?></h2>
+                                    <h2><?php echo wp_kses_post($settings['matrik_team_genaral_title']); ?></h2>
                                 <?php endif; ?>
                             </div>
                         </div>
@@ -2322,10 +2322,10 @@ class Matrik_Team_Widget extends Widget_Base
                             <li class="single-item wow animate fadeInDown" data-wow-delay="200ms" data-wow-duration="1500ms">
                                 <div class="team-name-and-desig">
                                     <?php if (!empty($data['matrik_team_genaral_author_designation'])) : ?>
-                                        <span><?php echo esc_html($data['matrik_team_genaral_author_designation']); ?></span>
+                                        <span><?php echo wp_kses_post($data['matrik_team_genaral_author_designation']); ?></span>
                                     <?php endif; ?>
                                     <?php if (!empty($data['matrik_team_genaral_author_name'])) : ?>
-                                        <h4><?php echo esc_html($data['matrik_team_genaral_author_name']); ?></h4>
+                                        <h4><?php echo wp_kses_post($data['matrik_team_genaral_author_name']); ?></h4>
                                     <?php endif; ?>
                                 </div>
                                 <?php if (!empty($data['matrik_team_genaral_author_image']['url'])) : ?>
@@ -2341,7 +2341,7 @@ class Matrik_Team_Widget extends Widget_Base
                                         </div>
                                     <?php endif; ?>
                                     <?php if (!empty($data['matrik_team_genaral_author_social_title'])) : ?>
-                                        <span><?php echo esc_html($data['matrik_team_genaral_author_social_title']); ?></span>
+                                        <span><?php echo wp_kses_post($data['matrik_team_genaral_author_social_title']); ?></span>
                                     <?php endif; ?>
                                 </a>
                             </li>
@@ -2358,10 +2358,10 @@ class Matrik_Team_Widget extends Widget_Base
                         <div class="col-lg-6">
                             <div class="section-title two text-center">
                                 <?php if (!empty($settings['matrik_team_genaral_subtitle'])) : ?>
-                                    <span><?php echo esc_html($settings['matrik_team_genaral_subtitle']); ?></span>
+                                    <span><?php echo wp_kses_post($settings['matrik_team_genaral_subtitle']); ?></span>
                                 <?php endif; ?>
                                 <?php if (!empty($settings['matrik_team_genaral_title'])) : ?>
-                                    <h2><?php echo esc_html($settings['matrik_team_genaral_title']); ?></h2>
+                                    <h2><?php echo wp_kses_post($settings['matrik_team_genaral_title']); ?></h2>
                                 <?php endif; ?>
                             </div>
                         </div>
@@ -2379,10 +2379,10 @@ class Matrik_Team_Widget extends Widget_Base
                                                 <div class="team-content-wrap">
                                                     <div class="team-content">
                                                         <?php if (!empty($data['matrik_team_genaral_author_designation'])) : ?>
-                                                            <span><?php echo esc_html($data['matrik_team_genaral_author_designation']); ?></span>
+                                                            <span><?php echo wp_kses_post($data['matrik_team_genaral_author_designation']); ?></span>
                                                         <?php endif; ?>
                                                         <?php if (!empty($data['matrik_team_genaral_author_name'])) : ?>
-                                                            <h5><?php echo esc_html($data['matrik_team_genaral_author_name']); ?></h5>
+                                                            <h5><?php echo wp_kses_post($data['matrik_team_genaral_author_name']); ?></h5>
                                                         <?php endif; ?>
                                                     </div>
                                                     <div class="social-btn">
@@ -2396,7 +2396,7 @@ class Matrik_Team_Widget extends Widget_Base
                                                                 </div>
                                                             <?php endif; ?>
                                                             <?php if (!empty($data['matrik_team_genaral_author_social_title'])) : ?>
-                                                                <span><?php echo esc_html($data['matrik_team_genaral_author_social_title']); ?></span>
+                                                                <span><?php echo wp_kses_post($data['matrik_team_genaral_author_social_title']); ?></span>
                                                             <?php endif; ?>
                                                         </a>
                                                     </div>
@@ -2429,14 +2429,14 @@ class Matrik_Team_Widget extends Widget_Base
                             <?php if (!empty($settings['matrik_team_genaral_title'])) : ?>
                                 <div class="col-lg-6 wow animate fadeInLeft" data-wow-delay="200ms" data-wow-duration="1500ms">
                                     <div class="section-title two">
-                                        <h2><?php echo esc_html($settings['matrik_team_genaral_title']); ?></h2>
+                                        <h2><?php echo wp_kses_post($settings['matrik_team_genaral_title']); ?></h2>
                                     </div>
                                 </div>
                             <?php endif; ?>
                             <?php if (!empty($settings['matrik_team_three_genaral_button_text'])) : ?>
                                 <div class="col-lg-3 d-flex justify-content-lg-end btn_wrapper">
                                     <a class="primary-btn2 two" href="<?php echo esc_url($settings['matrik_team_three_genaral_button_text_url']['url']); ?>">
-                                        <span><?php echo esc_html($settings['matrik_team_three_genaral_button_text']); ?></span>
+                                        <span><?php echo wp_kses_post($settings['matrik_team_three_genaral_button_text']); ?></span>
                                         <svg class="arrow" width="23" height="23" viewBox="0 0 23 23" xmlns="http://www.w3.org/2000/svg">
                                             <g>
                                                 <path d="M0.113861 0H22.9999V4.28425L4.32671 22.9997L0 18.7154L12.7524 6.08815L0.113861 6.20089V0Z"></path>
@@ -2467,17 +2467,17 @@ class Matrik_Team_Widget extends Widget_Base
                                                                 </div>
                                                             <?php endif; ?>
                                                             <?php if (!empty($data['matrik_team_genaral_author_social_title'])) : ?>
-                                                                <span><?php echo esc_html($data['matrik_team_genaral_author_social_title']); ?></span>
+                                                                <span><?php echo wp_kses_post($data['matrik_team_genaral_author_social_title']); ?></span>
                                                             <?php endif; ?>
                                                         </a>
                                                     </div>
                                                 </div>
                                                 <div class="team-content">
                                                     <?php if (!empty($data['matrik_team_genaral_author_designation'])) : ?>
-                                                        <span><?php echo esc_html($data['matrik_team_genaral_author_designation']); ?></span>
+                                                        <span><?php echo wp_kses_post($data['matrik_team_genaral_author_designation']); ?></span>
                                                     <?php endif; ?>
                                                     <?php if (!empty($data['matrik_team_genaral_author_name'])) : ?>
-                                                        <h5><?php echo esc_html($data['matrik_team_genaral_author_name']); ?></h5>
+                                                        <h5><?php echo wp_kses_post($data['matrik_team_genaral_author_name']); ?></h5>
                                                     <?php endif; ?>
                                                 </div>
                                             </div>
@@ -2503,13 +2503,13 @@ class Matrik_Team_Widget extends Widget_Base
                         <div class="col-lg-8">
                             <div class="section-title five text-center">
                                 <?php if (!empty($settings['matrik_team_genaral_subtitle'])) : ?>
-                                    <span><?php echo esc_html($settings['matrik_team_genaral_subtitle']); ?></span>
+                                    <span><?php echo wp_kses_post($settings['matrik_team_genaral_subtitle']); ?></span>
                                 <?php endif; ?>
                                 <?php if (!empty($settings['matrik_team_genaral_title'])) : ?>
-                                    <h2><?php echo esc_html($settings['matrik_team_genaral_title']); ?></h2>
+                                    <h2><?php echo wp_kses_post($settings['matrik_team_genaral_title']); ?></h2>
                                 <?php endif; ?>
                                 <?php if (!empty($settings['matrik_team_genaral_description'])) : ?>
-                                    <p><?php echo esc_html($settings['matrik_team_genaral_description']); ?></p>
+                                    <p><?php echo wp_kses_post($settings['matrik_team_genaral_description']); ?></p>
                                 <?php endif; ?>
                             </div>
                         </div>
@@ -2526,8 +2526,8 @@ class Matrik_Team_Widget extends Widget_Base
                                                         <img src="<?php echo esc_url($data['matrik_team_genaral_author_image']['url']); ?>" alt="">
                                                         <div class="team-content-wrap">
                                                             <div class="team-content">
-                                                                <span><?php echo esc_html($data['matrik_team_genaral_author_designation']); ?></span>
-                                                                <h5><?php echo esc_html($data['matrik_team_genaral_author_name']); ?></h5>
+                                                                <span><?php echo wp_kses_post($data['matrik_team_genaral_author_designation']); ?></span>
+                                                                <h5><?php echo wp_kses_post($data['matrik_team_genaral_author_name']); ?></h5>
                                                             </div>
                                                         </div>
                                                         <div class="social-btn">
@@ -2535,7 +2535,7 @@ class Matrik_Team_Widget extends Widget_Base
                                                                 <i class="bi bi-plus"></i>
                                                             </div>
                                                             <a href="<?php echo esc_url($data['matrik_team_genaral_author_social_title_link']['url']); ?>" class="social-area">
-                                                                <span><?php echo esc_html($data['matrik_team_genaral_author_social_title']); ?></span>
+                                                                <span><?php echo wp_kses_post($data['matrik_team_genaral_author_social_title']); ?></span>
                                                                 <div class="icon">
                                                                     <span><?php \Elementor\Icons_Manager::render_icon($data['matrik_team_genaral_author_social_icon'], ['aria-hidden' => 'true']); ?></span>
                                                                 </div>
@@ -2580,10 +2580,10 @@ class Matrik_Team_Widget extends Widget_Base
                                     <div class="team-content-wrap">
                                         <div class="team-content">
                                             <?php if (!empty($data['matrik_team_genaral_author_designation'])) : ?>
-                                                <span><?php echo esc_html($data['matrik_team_genaral_author_designation']); ?></span>
+                                                <span><?php echo wp_kses_post($data['matrik_team_genaral_author_designation']); ?></span>
                                             <?php endif; ?>
                                             <?php if (!empty($data['matrik_team_genaral_author_name'])) : ?>
-                                                <h5><?php echo esc_html($data['matrik_team_genaral_author_name']); ?></h5>
+                                                <h5><?php echo wp_kses_post($data['matrik_team_genaral_author_name']); ?></h5>
                                             <?php endif; ?>
                                         </div>
                                         <div class="social-btn">
@@ -2592,7 +2592,7 @@ class Matrik_Team_Widget extends Widget_Base
                                             </div>
                                             <a href="<?php echo esc_url($data['matrik_team_genaral_author_social_title_link']['url']); ?>" class="social-area">
                                                 <?php if (!empty($data['matrik_team_genaral_author_social_title'])) : ?>
-                                                    <span><?php echo esc_html($data['matrik_team_genaral_author_social_title']); ?></span>
+                                                    <span><?php echo wp_kses_post($data['matrik_team_genaral_author_social_title']); ?></span>
                                                 <?php endif; ?>
                                                 <?php if (!empty($data['matrik_team_genaral_author_social_icon'])) : ?>
                                                     <div class="icon">

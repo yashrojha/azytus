@@ -266,7 +266,7 @@ class Matrik_Career_Gallery_Widget extends Widget_Base
                     <div class="col-xl-10">
                         <div class="section-title three text-center wow animate fadeInDown" data-wow-delay="200ms" data-wow-duration="1500ms">
                             <?php if (!empty($settings['matrik_career_gallery_genaral_header_title'])) : ?>
-                                <h2><?php echo esc_html($settings['matrik_career_gallery_genaral_header_title']); ?></h2>
+                                <h2><?php echo wp_kses_post($settings['matrik_career_gallery_genaral_header_title']); ?></h2>
                             <?php endif; ?>
                             <?php if (!empty($settings['matrik_career_gallery_genaral_header_description'])) : ?>
                                 <p><?php echo wp_kses($settings['matrik_career_gallery_genaral_header_description'], wp_kses_allowed_html('post')); ?></p>

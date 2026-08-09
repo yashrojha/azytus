@@ -319,7 +319,7 @@ class Matrik_Industry_Location_Widget extends Widget_Base
             <div class="container">
                 <?php if (!empty($settings['matrik_industry_location_genaral_title'])) : ?>
                     <div class="section-title two text-center mb-80 wow animate fadeInDown" data-wow-delay="200ms" data-wow-duration="1500ms">
-                        <h2><?php echo esc_html($settings['matrik_industry_location_genaral_title']); ?></h2>
+                        <h2><?php echo wp_kses_post($settings['matrik_industry_location_genaral_title']); ?></h2>
                     </div>
                 <?php endif; ?>
                 <div class="industry-location-wrapper" <?php if (!empty($settings['matrik_industry_location_genaral_background_image']['url'])) : ?>style="background-image: url(<?php echo esc_url($settings['matrik_industry_location_genaral_background_image']['url']); ?>);" <?php endif; ?>>
@@ -345,7 +345,7 @@ class Matrik_Industry_Location_Widget extends Widget_Base
                                             </div>
                                         <?php endif; ?>
                                         <?php if (!empty($data['matrik_industry_location_flag_country_name'])) : ?>
-                                            <span><?php echo esc_html($data['matrik_industry_location_flag_country_name']); ?></span>
+                                            <span><?php echo wp_kses_post($data['matrik_industry_location_flag_country_name']); ?></span>
                                         <?php endif; ?>
                                     </div>
                                 </li>

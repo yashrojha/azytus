@@ -298,7 +298,7 @@ class Matrik_Partner_Logo_Widget extends Widget_Base
                     <div class="logo-wrap">
                         <?php if (!empty($settings['matrik_partner_logo_genaral_title'])) : ?>
                             <div class="logo-title">
-                                <h6><?php echo esc_html($settings['matrik_partner_logo_genaral_title']); ?></h6>
+                                <h6><?php echo wp_kses_post($settings['matrik_partner_logo_genaral_title']); ?></h6>
                             </div>
                         <?php endif; ?>
                         <div class="marquee">
@@ -325,7 +325,7 @@ class Matrik_Partner_Logo_Widget extends Widget_Base
                     <div class="logo-wrap">
                         <?php if (!empty($settings['matrik_partner_logo_genaral_title'])) : ?>
                             <div class="logo-title">
-                                <h6><?php echo esc_html($settings['matrik_partner_logo_genaral_title']); ?></h6>
+                                <h6><?php echo wp_kses_post($settings['matrik_partner_logo_genaral_title']); ?></h6>
                             </div>
                         <?php endif; ?>
                         <div class="marquee">

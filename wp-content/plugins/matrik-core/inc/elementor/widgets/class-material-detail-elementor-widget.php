@@ -160,7 +160,7 @@ class Matrik_Material_Detail_Widget extends Widget_Base
                     <div class="col-lg-8 wow animate fadeInLeft" data-wow-delay="200ms" data-wow-duration="1500ms">
                         <div class="details-content">
                             <?php if (!empty($settings['matrik_material_detail_title'])) : ?>
-                                <h2><?php echo esc_html($settings['matrik_material_detail_title']); ?></h2>
+                                <h2><?php echo wp_kses_post($settings['matrik_material_detail_title']); ?></h2>
                             <?php endif; ?>
                             <?php if (!empty($settings['matrik_material_detail_description'])) : ?>
                                 <?php echo wp_kses($settings['matrik_material_detail_description'], wp_kses_allowed_html('post')); ?>

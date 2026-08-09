@@ -210,7 +210,7 @@ class Matrik_Scroll_Text_Widget extends Widget_Base
                         ?>
 
                         <?php if (!empty($data['matrik_scroll_text_genaral_scroll_text_title'])) : ?>
-                            <h6><?php echo esc_html($data['matrik_scroll_text_genaral_scroll_text_title']); ?></h6>
+                            <h6><?php echo wp_kses_post($data['matrik_scroll_text_genaral_scroll_text_title']); ?></h6>
                         <?php endif; ?>
                     <?php endforeach; ?>
 
@@ -281,7 +281,7 @@ class Matrik_Scroll_Text_Widget extends Widget_Base
                         }
                         ?>
                         <?php if (!empty($data['matrik_scroll_text_genaral_scroll_text_title'])) : ?>
-                            <h6><?php echo esc_html($data['matrik_scroll_text_genaral_scroll_text_title']); ?></h6>
+                            <h6><?php echo wp_kses_post($data['matrik_scroll_text_genaral_scroll_text_title']); ?></h6>
                         <?php endif; ?>
                     <?php endforeach; ?>
                 </div>
@@ -312,7 +312,7 @@ class Matrik_Scroll_Text_Widget extends Widget_Base
                         }
                         ?>
                         <?php if (!empty($data['matrik_scroll_text_genaral_scroll_text_title'])) : ?>
-                            <h6><?php echo esc_html($data['matrik_scroll_text_genaral_scroll_text_title']); ?></h6>
+                            <h6><?php echo wp_kses_post($data['matrik_scroll_text_genaral_scroll_text_title']); ?></h6>
                         <?php endif; ?>
                     <?php endforeach; ?>
 
@@ -337,7 +337,7 @@ class Matrik_Scroll_Text_Widget extends Widget_Base
                         }
                         ?>
                         <?php if (!empty($data['matrik_scroll_text_genaral_scroll_text_title'])) : ?>
-                            <h6><?php echo esc_html($data['matrik_scroll_text_genaral_scroll_text_title']); ?></h6>
+                            <h6><?php echo wp_kses_post($data['matrik_scroll_text_genaral_scroll_text_title']); ?></h6>
                         <?php endif; ?>
                     <?php endforeach; ?>
                 </div>

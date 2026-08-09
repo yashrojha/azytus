@@ -276,7 +276,7 @@ class Matrik_Subscription_Widget extends Widget_Base
                     <?php endif; ?>
                     <div class="subscribe-content">
                         <?php if (!empty($settings['matrik_subscription_genaral_title'])): ?>
-                            <h4><?php echo esc_html($settings['matrik_subscription_genaral_title']); ?></h4>
+                            <h4><?php echo wp_kses_post($settings['matrik_subscription_genaral_title']); ?></h4>
                         <?php endif; ?>
                         <?php if (!empty($settings['matrik_subscription_genaral_shortcode'])) : ?>
                             <?php echo do_shortcode($settings['matrik_subscription_genaral_shortcode']); ?>

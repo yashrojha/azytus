@@ -2137,10 +2137,10 @@ class Matrik_Contact_Widget extends Widget_Base
                         <div class="col-lg-5">
                             <div class="section-title two mb-70 wow animate fadeInDown" data-wow-delay="200ms" data-wow-duration="1500ms">
                                 <?php if (!empty($settings['matrik_contact_genaral_subtitle'])): ?>
-                                    <span><?php echo esc_html($settings['matrik_contact_genaral_subtitle']); ?></span>
+                                    <span><?php echo wp_kses_post($settings['matrik_contact_genaral_subtitle']); ?></span>
                                 <?php endif; ?>
                                 <?php if (!empty($settings['matrik_contact_genaral_title'])): ?>
-                                    <h2><?php echo esc_html($settings['matrik_contact_genaral_title']); ?></h2>
+                                    <h2><?php echo wp_kses_post($settings['matrik_contact_genaral_title']); ?></h2>
                                 <?php endif; ?>
                             </div>
                             <div class="faq-wrap">
@@ -2149,13 +2149,13 @@ class Matrik_Contact_Widget extends Widget_Base
                                         <div class="accordion-item wow animate fadeInDown" data-wow-delay="200ms" data-wow-duration="1500ms">
                                             <h2 class="accordion-header" id="flush-heading-<?php echo esc_attr($index); ?>">
                                                 <button class="accordion-button <?php echo ($index == 0) ? '' : 'collapsed'; ?>" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse-<?php echo esc_attr($index); ?>" aria-expanded="<?php echo ($index == 0) ? 'true' : 'false'; ?>" aria-controls="flush-collapse-<?php echo esc_attr($index); ?>">
-                                                    <?php echo esc_html($faq['matrik_contact_genaral_faq_question']); ?>
+                                                    <?php echo wp_kses_post($faq['matrik_contact_genaral_faq_question']); ?>
                                                 </button>
                                             </h2>
                                             <div id="flush-collapse-<?php echo esc_attr($index); ?>" class="accordion-collapse collapse <?php echo ($index == 0) ? 'show' : ''; ?>" aria-labelledby="flush-heading-<?php echo esc_attr($index); ?>" data-bs-parent="#accordionExample">
                                                 <?php if (!empty($faq['matrik_contact_genaral_faq_answer'])): ?>
                                                     <div class="accordion-body">
-                                                        <?php echo esc_html($faq['matrik_contact_genaral_faq_answer']); ?>
+                                                        <?php echo wp_kses_post($faq['matrik_contact_genaral_faq_answer']); ?>
                                                     </div>
                                                 <?php endif; ?>
                                             </div>
@@ -2184,7 +2184,7 @@ class Matrik_Contact_Widget extends Widget_Base
                             <div class="contact-content">
                                 <?php if (!empty($settings['matrik_contact_genaral_two_title'])): ?>
                                     <div class="section-title three">
-                                        <h2><?php echo esc_html($settings['matrik_contact_genaral_two_title']); ?></h2>
+                                        <h2><?php echo wp_kses_post($settings['matrik_contact_genaral_two_title']); ?></h2>
                                     </div>
                                 <?php endif; ?>
                                 <div class="vector-and-content">
@@ -2193,7 +2193,7 @@ class Matrik_Contact_Widget extends Widget_Base
                                             d="M4.33349 3.05273C4.33349 4.52549 5.5274 5.7194 7.00015 5.7194C8.47291 5.7194 9.66682 4.52549 9.66682 3.05273C9.66682 1.57997 8.47291 0.386067 7.00015 0.386067C5.5274 0.386067 4.33349 1.57997 4.33349 3.05273ZM6.86257 201.533C7.12805 201.609 7.40487 201.456 7.48086 201.19L8.71922 196.864C8.79521 196.599 8.6416 196.322 8.37612 196.246C8.11064 196.17 7.83382 196.323 7.75783 196.589L6.65706 200.434L2.81151 199.334C2.54603 199.258 2.26921 199.411 2.19322 199.677C2.11722 199.942 2.27083 200.219 2.53632 200.295L6.86257 201.533ZM7.00015 3.05273C6.81154 3.5158 6.81187 3.51593 6.81264 3.51624C6.81349 3.51659 6.81471 3.51709 6.81641 3.51778C6.81982 3.51918 6.82501 3.5213 6.83197 3.52415C6.84588 3.52985 6.86684 3.53846 6.8947 3.54996C6.95042 3.57295 7.03376 3.60748 7.14353 3.65338C7.36307 3.74516 7.68832 3.88238 8.10983 4.06357C8.95287 4.42593 10.1809 4.96412 11.7182 5.66635C14.793 7.0709 19.1043 9.13126 24.0471 11.7532C33.9379 16.9999 46.3358 24.484 56.418 33.4498C66.5165 42.4303 74.2006 52.8165 74.8448 63.8583C75.4861 74.8493 69.155 86.6962 50.7283 98.6331L51.272 99.4724C69.8454 87.4405 76.5143 75.3031 75.8431 63.8C75.1749 52.3477 67.2339 41.73 57.0825 32.7026C46.9146 23.6606 34.4375 16.133 24.5157 10.8698C19.5523 8.23693 15.2229 6.16788 12.1337 4.75675C10.589 4.05115 9.35408 3.50992 8.50474 3.14484C8.08006 2.9623 7.75174 2.82378 7.52926 2.73077C7.41803 2.68426 7.33324 2.64912 7.2761 2.62555C7.24753 2.61376 7.22586 2.60486 7.21126 2.59887C7.20396 2.59588 7.19842 2.59361 7.19466 2.59208C7.19279 2.59131 7.19131 2.59071 7.19037 2.59033C7.18934 2.58991 7.18876 2.58967 7.00015 3.05273ZM50.7283 98.6331C13.6176 122.673 2.51766 148.303 0.7521 167.985C-0.129487 177.812 1.31876 186.13 2.988 191.993C3.82271 194.925 4.7131 197.244 5.39628 198.834C5.73789 199.628 6.02779 200.24 6.23315 200.656C6.33583 200.863 6.41739 201.021 6.47372 201.129C6.50189 201.182 6.52375 201.223 6.53879 201.251C6.54632 201.265 6.55214 201.276 6.55618 201.283C6.55821 201.287 6.55979 201.29 6.56093 201.292C6.56149 201.293 6.562 201.294 6.56229 201.294C6.56268 201.295 6.56297 201.295 7.00016 201.053C7.43736 200.81 7.43741 200.81 7.43736 200.81C7.43718 200.81 7.43701 200.809 7.43667 200.809C7.43599 200.808 7.43486 200.806 7.43328 200.803C7.43014 200.797 7.42522 200.788 7.41861 200.776C7.40538 200.751 7.38534 200.714 7.359 200.664C7.30632 200.563 7.22846 200.412 7.12948 200.212C6.93151 199.812 6.64914 199.216 6.31497 198.439C5.64658 196.884 4.77133 194.605 3.94978 191.72C2.30649 185.948 0.87971 177.754 1.7481 168.074C3.4825 148.74 14.3825 123.369 51.272 99.4724L50.7283 98.6331Z" />
                                     </svg>
                                     <?php if (!empty($settings['matrik_contact_genaral_two_description'])): ?>
-                                        <p><?php echo esc_html($settings['matrik_contact_genaral_two_description']); ?></p>
+                                        <p><?php echo wp_kses_post($settings['matrik_contact_genaral_two_description']); ?></p>
                                     <?php endif; ?>
                                 </div>
                                 <div class="contact-wrap">
@@ -2205,19 +2205,19 @@ class Matrik_Contact_Widget extends Widget_Base
                                                 </div>
                                                 <div class="content">
                                                     <?php if (!empty($data['matrik_contact_genaral_two_contact_title'])): ?>
-                                                        <span><?php echo esc_html($data['matrik_contact_genaral_two_contact_title']); ?></span>
+                                                        <span><?php echo wp_kses_post($data['matrik_contact_genaral_two_contact_title']); ?></span>
                                                     <?php endif; ?>
-                                                    <h6><a href="<?php if ($data['matrik_contact_genaral_two_contact_type'] == 'phone'): ?>tel:<?php echo preg_replace('/[^0-9]/', '', $data['matrik_contact_genaral_two_contact_phone']); ?><?php elseif ($data['matrik_contact_genaral_two_contact_type'] == 'email') : ?>mailto:<?php echo esc_html($data['matrik_contact_genaral_two_contact_email']); ?><?php endif; ?>"><?php if ($data['matrik_contact_genaral_two_contact_type'] == 'phone'): ?><?php echo esc_html($data['matrik_contact_genaral_two_contact_phone']); ?><?php elseif ($data['matrik_contact_genaral_two_contact_type'] == 'email') : ?><?php echo esc_html($data['matrik_contact_genaral_two_contact_email']); ?><?php endif; ?></a></h6>
+                                                    <h6><a href="<?php if ($data['matrik_contact_genaral_two_contact_type'] == 'phone'): ?>tel:<?php echo preg_replace('/[^0-9]/', '', $data['matrik_contact_genaral_two_contact_phone']); ?><?php elseif ($data['matrik_contact_genaral_two_contact_type'] == 'email') : ?>mailto:<?php echo wp_kses_post($data['matrik_contact_genaral_two_contact_email']); ?><?php endif; ?>"><?php if ($data['matrik_contact_genaral_two_contact_type'] == 'phone'): ?><?php echo wp_kses_post($data['matrik_contact_genaral_two_contact_phone']); ?><?php elseif ($data['matrik_contact_genaral_two_contact_type'] == 'email') : ?><?php echo wp_kses_post($data['matrik_contact_genaral_two_contact_email']); ?><?php endif; ?></a></h6>
                                                 </div>
                                             </li>
                                         <?php endforeach; ?>
                                     </ul>
                                     <div class="address-area">
                                         <?php if (!empty($settings['matrik_contact_genaral_location_area_title'])): ?>
-                                            <span><?php echo esc_html($settings['matrik_contact_genaral_location_area_title']); ?></span>
+                                            <span><?php echo wp_kses_post($settings['matrik_contact_genaral_location_area_title']); ?></span>
                                         <?php endif; ?>
                                         <?php if (!empty($settings['matrik_contact_genaral_location_area_location'])): ?>
-                                            <a href="<?php echo esc_url($settings['matrik_contact_genaral_location_area_location_url']['url']); ?>"><?php echo esc_html($settings['matrik_contact_genaral_location_area_location']); ?></a>
+                                            <a href="<?php echo esc_url($settings['matrik_contact_genaral_location_area_location_url']['url']); ?>"><?php echo wp_kses_post($settings['matrik_contact_genaral_location_area_location']); ?></a>
                                         <?php endif; ?>
                                     </div>
                                 </div>
@@ -2247,11 +2247,11 @@ class Matrik_Contact_Widget extends Widget_Base
                                             <path d="M0.0594065 0H12.0001V2.2353L2.25745 12L0 9.76471L6.65353 3.17647L0.0594065 3.2353V0Z" />
                                             <path d="M11.9999 11.9999V4.47046L8.79199 7.64693V11.9999H11.9999Z" />
                                         </svg>
-                                        <?php echo esc_html($settings['matrik_contact_genaral_subtitle']); ?>
+                                        <?php echo wp_kses_post($settings['matrik_contact_genaral_subtitle']); ?>
                                     </span>
                                 <?php endif; ?>
                                 <?php if (!empty($settings['matrik_contact_genaral_title'])): ?>
-                                    <h2><?php echo esc_html($settings['matrik_contact_genaral_title']); ?></h2>
+                                    <h2><?php echo wp_kses_post($settings['matrik_contact_genaral_title']); ?></h2>
                                 <?php endif; ?>
                             </div>
                             <div class="faq-wrap two">
@@ -2260,13 +2260,13 @@ class Matrik_Contact_Widget extends Widget_Base
                                         <div class="accordion-item wow animate fadeInDown" data-wow-delay="200ms" data-wow-duration="1500ms">
                                             <h2 class="accordion-header" id="flush-heading-<?php echo esc_attr($index); ?>">
                                                 <button class="accordion-button <?php echo ($index == 0) ? '' : 'collapsed'; ?>" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse-<?php echo esc_attr($index); ?>" aria-expanded="<?php echo ($index == 0) ? 'true' : 'false'; ?>" aria-controls="flush-collapse-<?php echo esc_attr($index); ?>">
-                                                    <?php echo esc_html($faq['matrik_contact_genaral_faq_question']); ?>
+                                                    <?php echo wp_kses_post($faq['matrik_contact_genaral_faq_question']); ?>
                                                 </button>
                                             </h2>
                                             <div id="flush-collapse-<?php echo esc_attr($index); ?>" class="accordion-collapse collapse <?php echo ($index == 0) ? 'show' : ''; ?>" aria-labelledby="flush-heading-<?php echo esc_attr($index); ?>" data-bs-parent="#accordionExample">
                                                 <?php if (!empty($faq['matrik_contact_genaral_faq_answer'])): ?>
                                                     <div class="accordion-body">
-                                                        <?php echo esc_html($faq['matrik_contact_genaral_faq_answer']); ?>
+                                                        <?php echo wp_kses_post($faq['matrik_contact_genaral_faq_answer']); ?>
                                                     </div>
                                                 <?php endif; ?>
                                             </div>
@@ -2325,11 +2325,11 @@ class Matrik_Contact_Widget extends Widget_Base
                                                 <path
                                                     d="M8.98296 6.85403C8.95783 6.74844 8.90581 6.65097 8.83186 6.57091C8.7579 6.49085 8.66448 6.43086 8.56049 6.39665L5.40652 5.35573L7.64645 0.92109C7.78706 0.642066 7.70293 0.302757 7.44742 0.120036C7.19067 -0.0620481 6.83912 -0.0346848 6.61687 0.186515L0.188418 6.55014C0.11097 6.62683 0.0545794 6.72182 0.024588 6.82611C-0.00540343 6.9304 -0.008003 7.04055 0.0170357 7.14612C0.042173 7.25171 0.0941932 7.34917 0.168144 7.42923C0.242096 7.50929 0.335517 7.56928 0.439513 7.60349L3.59348 8.64441L1.35355 13.0791C1.21294 13.3581 1.29707 13.6974 1.55258 13.8801C1.80847 14.0616 2.15934 14.0351 2.38313 13.8136L8.81158 7.45C8.88903 7.37332 8.94542 7.27833 8.97541 7.17403C9.0054 7.06974 9.008 6.95959 8.98296 6.85403Z" />
                                             </svg>
-                                            <?php echo esc_html($settings['matrik_contact_genaral_subtitle']); ?>
+                                            <?php echo wp_kses_post($settings['matrik_contact_genaral_subtitle']); ?>
                                         </span>
                                     <?php endif; ?>
                                     <?php if (!empty($settings['matrik_contact_genaral_title'])): ?>
-                                        <h2><?php echo esc_html($settings['matrik_contact_genaral_title']); ?></h2>
+                                        <h2><?php echo wp_kses_post($settings['matrik_contact_genaral_title']); ?></h2>
                                     <?php endif; ?>
                                 </div>
                                 <svg class="arrow-vector" width="8" height="143" viewBox="0 0 8 143" xmlns="http://www.w3.org/2000/svg">
@@ -2344,9 +2344,9 @@ class Matrik_Contact_Widget extends Widget_Base
                                             </div>
                                             <div class="content">
                                                 <?php if (!empty($data['matrik_contact_genaral_two_contact_title'])): ?>
-                                                    <span><?php echo esc_html($data['matrik_contact_genaral_two_contact_title']); ?></span>
+                                                    <span><?php echo wp_kses_post($data['matrik_contact_genaral_two_contact_title']); ?></span>
                                                 <?php endif; ?>
-                                                <h6><a href="<?php if ($data['matrik_contact_genaral_two_contact_type'] == 'phone'): ?>tel:<?php echo preg_replace('/[^0-9]/', '', $data['matrik_contact_genaral_two_contact_phone']); ?><?php elseif ($data['matrik_contact_genaral_two_contact_type'] == 'email') : ?>mailto:<?php echo esc_html($data['matrik_contact_genaral_two_contact_email']); ?><?php endif; ?>"><?php if ($data['matrik_contact_genaral_two_contact_type'] == 'phone'): ?><?php echo esc_html($data['matrik_contact_genaral_two_contact_phone']); ?><?php elseif ($data['matrik_contact_genaral_two_contact_type'] == 'email') : ?><?php echo esc_html($data['matrik_contact_genaral_two_contact_email']); ?><?php endif; ?></a></h6>
+                                                <h6><a href="<?php if ($data['matrik_contact_genaral_two_contact_type'] == 'phone'): ?>tel:<?php echo preg_replace('/[^0-9]/', '', $data['matrik_contact_genaral_two_contact_phone']); ?><?php elseif ($data['matrik_contact_genaral_two_contact_type'] == 'email') : ?>mailto:<?php echo wp_kses_post($data['matrik_contact_genaral_two_contact_email']); ?><?php endif; ?>"><?php if ($data['matrik_contact_genaral_two_contact_type'] == 'phone'): ?><?php echo wp_kses_post($data['matrik_contact_genaral_two_contact_phone']); ?><?php elseif ($data['matrik_contact_genaral_two_contact_type'] == 'email') : ?><?php echo wp_kses_post($data['matrik_contact_genaral_two_contact_email']); ?><?php endif; ?></a></h6>
                                             </div>
                                         </li>
                                     <?php endforeach; ?>
@@ -2379,11 +2379,11 @@ class Matrik_Contact_Widget extends Widget_Base
                                                     <path
                                                         d="M8.98296 6.85403C8.95783 6.74844 8.90581 6.65097 8.83186 6.57091C8.7579 6.49085 8.66448 6.43086 8.56049 6.39665L5.40652 5.35573L7.64645 0.92109C7.78706 0.642066 7.70293 0.302757 7.44742 0.120036C7.19067 -0.0620481 6.83912 -0.0346848 6.61687 0.186515L0.188418 6.55014C0.11097 6.62683 0.0545794 6.72182 0.024588 6.82611C-0.00540343 6.9304 -0.008003 7.04055 0.0170357 7.14612C0.042173 7.25171 0.0941932 7.34917 0.168144 7.42923C0.242096 7.50929 0.335517 7.56928 0.439513 7.60349L3.59348 8.64441L1.35355 13.0791C1.21294 13.3581 1.29707 13.6974 1.55258 13.8801C1.80847 14.0616 2.15934 14.0351 2.38313 13.8136L8.81158 7.45C8.88903 7.37332 8.94542 7.27833 8.97541 7.17403C9.0054 7.06974 9.008 6.95959 8.98296 6.85403Z" />
                                                 </svg>
-                                                <?php echo esc_html($settings['matrik_contact_genaral_subtitle']); ?>
+                                                <?php echo wp_kses_post($settings['matrik_contact_genaral_subtitle']); ?>
                                             </span>
                                         <?php endif; ?>
                                         <?php if (!empty($settings['matrik_contact_genaral_title'])): ?>
-                                            <h2><?php echo esc_html($settings['matrik_contact_genaral_title']); ?></h2>
+                                            <h2><?php echo wp_kses_post($settings['matrik_contact_genaral_title']); ?></h2>
                                         <?php endif; ?>
                                     </div>
                                     <svg class="arrow-vector" width="8" height="143" viewBox="0 0 8 143" xmlns="http://www.w3.org/2000/svg">
@@ -2399,9 +2399,9 @@ class Matrik_Contact_Widget extends Widget_Base
                                                 </div>
                                                 <div class="content">
                                                     <?php if (!empty($data['matrik_contact_genaral_two_contact_title'])): ?>
-                                                        <span><?php echo esc_html($data['matrik_contact_genaral_two_contact_title']); ?></span>
+                                                        <span><?php echo wp_kses_post($data['matrik_contact_genaral_two_contact_title']); ?></span>
                                                     <?php endif; ?>
-                                                    <h6><a href="<?php if ($data['matrik_contact_genaral_two_contact_type'] == 'phone'): ?>tel:<?php echo preg_replace('/[^0-9]/', '', $data['matrik_contact_genaral_two_contact_phone']); ?><?php elseif ($data['matrik_contact_genaral_two_contact_type'] == 'email') : ?>mailto:<?php echo esc_html($data['matrik_contact_genaral_two_contact_email']); ?><?php endif; ?>"><?php if ($data['matrik_contact_genaral_two_contact_type'] == 'phone'): ?><?php echo esc_html($data['matrik_contact_genaral_two_contact_phone']); ?><?php elseif ($data['matrik_contact_genaral_two_contact_type'] == 'email') : ?><?php echo esc_html($data['matrik_contact_genaral_two_contact_email']); ?><?php endif; ?></a></h6>
+                                                    <h6><a href="<?php if ($data['matrik_contact_genaral_two_contact_type'] == 'phone'): ?>tel:<?php echo preg_replace('/[^0-9]/', '', $data['matrik_contact_genaral_two_contact_phone']); ?><?php elseif ($data['matrik_contact_genaral_two_contact_type'] == 'email') : ?>mailto:<?php echo wp_kses_post($data['matrik_contact_genaral_two_contact_email']); ?><?php endif; ?>"><?php if ($data['matrik_contact_genaral_two_contact_type'] == 'phone'): ?><?php echo wp_kses_post($data['matrik_contact_genaral_two_contact_phone']); ?><?php elseif ($data['matrik_contact_genaral_two_contact_type'] == 'email') : ?><?php echo wp_kses_post($data['matrik_contact_genaral_two_contact_email']); ?><?php endif; ?></a></h6>
                                                 </div>
                                             </li>
                                         <?php endforeach; ?>
@@ -2426,16 +2426,16 @@ class Matrik_Contact_Widget extends Widget_Base
             <div class="contact-page-address-section">
                 <div class="container">
                     <?php if (!empty($settings['matrik_contact_seven_location_button_text'])): ?>
-                        <h6><a href="<?php echo esc_url($settings['matrik_contact_seven_location_button_text_url']['url']); ?>"><?php echo esc_html($settings['matrik_contact_seven_location_button_text']); ?></a></h6>
+                        <h6><a href="<?php echo esc_url($settings['matrik_contact_seven_location_button_text_url']['url']); ?>"><?php echo wp_kses_post($settings['matrik_contact_seven_location_button_text']); ?></a></h6>
                     <?php endif; ?>
                     <ul class="address-list">
                         <?php foreach ($settings['matrik_contact_seven_content_list'] as $data): ?>
                             <li class="single-address">
                                 <?php if (!empty($data['matrik_contact_seven_location_title'])): ?>
-                                    <span><?php echo esc_html($data['matrik_contact_seven_location_title']); ?></span>
+                                    <span><?php echo wp_kses_post($data['matrik_contact_seven_location_title']); ?></span>
                                 <?php endif; ?>
                                 <?php if (!empty($data['matrik_contact_seven_location'])): ?>
-                                    <a href="<?php echo esc_url($data['matrik_contact_seven_location_text_url']['url']); ?>"><?php echo esc_html($data['matrik_contact_seven_location']); ?></a>
+                                    <a href="<?php echo esc_url($data['matrik_contact_seven_location_text_url']['url']); ?>"><?php echo wp_kses_post($data['matrik_contact_seven_location']); ?></a>
                                 <?php endif; ?>
                             </li>
                         <?php endforeach; ?>

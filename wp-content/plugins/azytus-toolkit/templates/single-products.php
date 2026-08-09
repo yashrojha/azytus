@@ -183,7 +183,6 @@ while (have_posts()) :
                                         </dd>
                                     </div>
                                 <?php endif; ?>
-
                                 <?php if (!empty($pictograms)) : ?>
                                     <div class="azytus-pp-spec azytus-pp-spec--wide azytus-pp-spec--pictograms">
                                         <dt><?php esc_html_e('Pictograms', 'azytus-toolkit'); ?></dt>
@@ -199,7 +198,6 @@ while (have_posts()) :
                                         </dd>
                                     </div>
                                 <?php endif; ?>
-
                                 <?php if (!empty($un_number)) : ?>
                                     <div class="azytus-pp-spec">
                                         <dt><?php esc_html_e('UN Number', 'azytus-toolkit'); ?></dt>

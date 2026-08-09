@@ -3417,10 +3417,10 @@ class Matrik_Service_Widget extends Widget_Base
                             <div class="col-lg-6 wow animate fadeInLeft" data-wow-delay="200ms" data-wow-duration="1500ms">
                                 <div class="section-title">
                                     <?php if (!empty($settings['matrik_service_genaral_subtitle'])) : ?>
-                                        <span><?php echo esc_html($settings['matrik_service_genaral_subtitle']); ?></span>
+                                        <span><?php echo wp_kses_post($settings['matrik_service_genaral_subtitle']); ?></span>
                                     <?php endif; ?>
                                     <?php if (!empty($settings['matrik_service_genaral_title'])) : ?>
-                                        <h2><?php echo esc_html($settings['matrik_service_genaral_title']); ?></h2>
+                                        <h2><?php echo wp_kses_post($settings['matrik_service_genaral_title']); ?></h2>
                                     <?php endif; ?>
                                 </div>
                             </div>
@@ -3428,9 +3428,9 @@ class Matrik_Service_Widget extends Widget_Base
                             <?php if (!empty($settings['matrik_service_genaral_header_button'])) : ?>
                                 <div class="col-lg-3 d-flex justify-content-lg-end btn_wrapper">
                                     <a class="primary-btn1 transparent" href="<?php echo esc_url($settings['matrik_service_genaral_header_button_url']['url']); ?>">
-                                        <span><?php echo esc_html($settings['matrik_service_genaral_header_button']); ?>
+                                        <span><?php echo wp_kses_post($settings['matrik_service_genaral_header_button']); ?>
                                         </span>
-                                        <span><?php echo esc_html($settings['matrik_service_genaral_header_button']); ?>
+                                        <span><?php echo wp_kses_post($settings['matrik_service_genaral_header_button']); ?>
                                         </span>
                                         <svg class="arrow" width="23" height="23" viewBox="0 0 23 23" xmlns="http://www.w3.org/2000/svg">
                                             <g>
@@ -3460,7 +3460,7 @@ class Matrik_Service_Widget extends Widget_Base
                                 <li>
                                     <?php if (!empty($data['matrik_service_genaral_contenet_title'])) : ?>
                                         <a href="<?php echo esc_url($data['matrik_service_genaral_contenet_title_url']['url']); ?>">
-                                            <?php echo esc_html($data['matrik_service_genaral_contenet_title']); ?>
+                                            <?php echo wp_kses_post($data['matrik_service_genaral_contenet_title']); ?>
                                             <svg width="15" height="15" viewBox="0 0 15 15" xmlns="http://www.w3.org/2000/svg">
                                                 <g>
                                                     <path d="M0.0742581 0H15.0001V2.79412L2.82181 15L0 12.2059L8.3169 3.97059L0.0742581 4.04412V0Z" />
@@ -3484,19 +3484,19 @@ class Matrik_Service_Widget extends Widget_Base
                         <div class="col-lg-6 wow animate fadeInLeft" data-wow-delay="200ms" data-wow-duration="1500ms">
                             <div class="section-title two">
                                 <?php if (!empty($settings['matrik_service_genaral_subtitle'])) : ?>
-                                    <span><?php echo esc_html($settings['matrik_service_genaral_subtitle']); ?></span>
+                                    <span><?php echo wp_kses_post($settings['matrik_service_genaral_subtitle']); ?></span>
                                 <?php endif; ?>
                                 <?php if (!empty($settings['matrik_service_genaral_title'])) : ?>
-                                    <h2><?php echo esc_html($settings['matrik_service_genaral_title']); ?></h2>
+                                    <h2><?php echo wp_kses_post($settings['matrik_service_genaral_title']); ?></h2>
                                 <?php endif; ?>
                             </div>
                         </div>
                         <?php if (!empty($settings['matrik_service_genaral_header_button'])) : ?>
                             <div class="col-lg-3 d-flex justify-content-lg-end btn_wrapper">
                                 <a class="primary-btn3 transparent" href="<?php echo esc_url($settings['matrik_service_genaral_header_button_url']['url']); ?>">
-                                    <span><?php echo esc_html($settings['matrik_service_genaral_header_button']); ?>
+                                    <span><?php echo wp_kses_post($settings['matrik_service_genaral_header_button']); ?>
                                     </span>
-                                    <span><?php echo esc_html($settings['matrik_service_genaral_header_button']); ?>
+                                    <span><?php echo wp_kses_post($settings['matrik_service_genaral_header_button']); ?>
                                     </span>
                                     <svg class="arrow" width="23" height="23" viewBox="0 0 23 23" xmlns="http://www.w3.org/2000/svg">
                                         <g>
@@ -3523,13 +3523,13 @@ class Matrik_Service_Widget extends Widget_Base
                                                         </a>
                                                     <?php endif; ?>
                                                     <?php if (!empty($data['matrik_service_style_two_genaral_contenet_description'])) : ?>
-                                                        <p><?php echo esc_html($data['matrik_service_style_two_genaral_contenet_description']); ?></p>
+                                                        <p><?php echo wp_kses_post($data['matrik_service_style_two_genaral_contenet_description']); ?></p>
                                                     <?php endif; ?>
                                                     <?php if (!empty($data['matrik_service_style_two_genaral_content_button_text'])) : ?>
                                                         <a class="primary-btn3 transparent" href="<?php echo esc_url($data['matrik_service_style_two_genaral_content_button_url']['url']); ?>">
-                                                            <span><?php echo esc_html($data['matrik_service_style_two_genaral_content_button_text']); ?>
+                                                            <span><?php echo wp_kses_post($data['matrik_service_style_two_genaral_content_button_text']); ?>
                                                             </span>
-                                                            <span><?php echo esc_html($data['matrik_service_style_two_genaral_content_button_text']); ?>
+                                                            <span><?php echo wp_kses_post($data['matrik_service_style_two_genaral_content_button_text']); ?>
                                                             </span>
                                                             <svg class="arrow" width="17" height="17" viewBox="0 0 17 17" xmlns="http://www.w3.org/2000/svg">
                                                                 <g>
@@ -3579,16 +3579,16 @@ class Matrik_Service_Widget extends Widget_Base
                                 <?php if (!empty($settings['matrik_service_genaral_title'])) : ?>
                                     <div class="col-lg-6 wow animate fadeInLeft" data-wow-delay="200ms" data-wow-duration="1500ms">
                                         <div class="section-title two white">
-                                            <h2><?php echo esc_html($settings['matrik_service_genaral_title']); ?></h2>
+                                            <h2><?php echo wp_kses_post($settings['matrik_service_genaral_title']); ?></h2>
                                         </div>
                                     </div>
                                 <?php endif; ?>
                                 <?php if (!empty($settings['matrik_service_genaral_header_button'])) : ?>
                                     <div class="col-lg-3 d-flex justify-content-lg-end btn_wrapper">
                                         <a class="primary-btn3 white-bg" href="<?php echo esc_url($settings['matrik_service_genaral_header_button_url']['url']); ?>">
-                                            <span><?php echo esc_html($settings['matrik_service_genaral_header_button']); ?>
+                                            <span><?php echo wp_kses_post($settings['matrik_service_genaral_header_button']); ?>
                                             </span>
-                                            <span><?php echo esc_html($settings['matrik_service_genaral_header_button']); ?>
+                                            <span><?php echo wp_kses_post($settings['matrik_service_genaral_header_button']); ?>
                                             </span>
                                             <svg class="arrow" width="23" height="23" viewBox="0 0 23 23" xmlns="http://www.w3.org/2000/svg">
                                                 <g>
@@ -3606,7 +3606,7 @@ class Matrik_Service_Widget extends Widget_Base
                             <div class="row justify-content-center mb-70">
                                 <div class="col-lg-6 wow animate fadeInDown" data-wow-delay="200ms" data-wow-duration="1500ms" style="visibility: visible; animation-duration: 1500ms; animation-delay: 200ms;">
                                     <div class="section-title two white text-center">
-                                        <h2><?php echo esc_html($settings['matrik_service_genaral_title']); ?></h2>
+                                        <h2><?php echo wp_kses_post($settings['matrik_service_genaral_title']); ?></h2>
                                     </div>
                                 </div>
                             </div>
@@ -3617,7 +3617,7 @@ class Matrik_Service_Widget extends Widget_Base
                             <li class="single-services wow animate fadeInDown" data-wow-delay="200ms" data-wow-duration="1500ms">
                                 <div class="number-and-icon-area">
                                     <?php if (!empty($data['matrik_service_three_genaral_content_coun_number'])) : ?>
-                                        <span><?php echo esc_html($data['matrik_service_three_genaral_content_coun_number']); ?></span>
+                                        <span><?php echo wp_kses_post($data['matrik_service_three_genaral_content_coun_number']); ?></span>
                                     <?php endif; ?>
                                     <div class="icon">
                                         <?php
@@ -3692,12 +3692,12 @@ class Matrik_Service_Widget extends Widget_Base
                                 <?php endif; ?>
                                 <?php if (!empty($data['matrik_service_three_genaral_content_service_title'])) : ?>
                                     <div class="content">
-                                        <p><?php echo esc_html($data['matrik_service_three_genaral_content_service_title']); ?></p>
+                                        <p><?php echo wp_kses_post($data['matrik_service_three_genaral_content_service_title']); ?></p>
                                     </div>
                                 <?php endif; ?>
                                 <?php if (!empty($data['matrik_service_three_genaral_content_button_text'])) : ?>
                                     <a href="<?php echo esc_url($data['matrik_service_three_genaral_content_button_text_url']['url']); ?>" class="details-btn">
-                                        <span><?php echo esc_html($data['matrik_service_three_genaral_content_button_text']); ?></span>
+                                        <span><?php echo wp_kses_post($data['matrik_service_three_genaral_content_button_text']); ?></span>
                                         <div class="icon">
                                             <svg width="24" height="23" viewBox="0 0 24 23" xmlns="http://www.w3.org/2000/svg">
                                                 <g>
@@ -3721,7 +3721,7 @@ class Matrik_Service_Widget extends Widget_Base
                 <div class="container-fluid">
                     <?php if ($settings['matrik_service_genaral_title']) : ?>
                         <div class="section-title three text-center white mb-70 wow animate fadeInDown" data-wow-delay="200ms" data-wow-duration="1500ms">
-                            <h2><?php echo esc_html($settings['matrik_service_genaral_title']); ?></h2>
+                            <h2><?php echo wp_kses_post($settings['matrik_service_genaral_title']); ?></h2>
                         </div>
                     <?php endif; ?>
                     <ul class="service-wrapper">
@@ -3746,17 +3746,17 @@ class Matrik_Service_Widget extends Widget_Base
                                             ?>
                                         </ul>
                                         <?php if (!empty($data['matrik_service_four_genaral_contenet_title'])) : ?>
-                                            <h2><a href="<?php echo esc_url($data['matrik_service_four_genaral_contenet_title_url']['url']); ?>"><?php echo esc_html($data['matrik_service_four_genaral_contenet_title']); ?></a></h2>
+                                            <h2><a href="<?php echo esc_url($data['matrik_service_four_genaral_contenet_title_url']['url']); ?>"><?php echo wp_kses_post($data['matrik_service_four_genaral_contenet_title']); ?></a></h2>
                                         <?php endif; ?>
                                     </div>
                                 </div>
                                 <div class="service-content">
                                     <?php if (!empty($data['matrik_service_four_genaral_contenet_description'])) : ?>
-                                        <p><?php echo esc_html($data['matrik_service_four_genaral_contenet_description']); ?></p>
+                                        <p><?php echo wp_kses_post($data['matrik_service_four_genaral_contenet_description']); ?></p>
                                     <?php endif; ?>
                                     <?php if (!empty($data['matrik_service_four_genaral_content_button_text'])) : ?>
                                         <a href="<?php echo esc_url($data['matrik_service_four_genaral_content_button_text_url']['url']); ?>" class="details-btn">
-                                            <span><?php echo esc_html($data['matrik_service_four_genaral_content_button_text']); ?></span>
+                                            <span><?php echo wp_kses_post($data['matrik_service_four_genaral_content_button_text']); ?></span>
                                             <div class="icon">
                                                 <svg width="24" height="23" viewBox="0 0 24 23" xmlns="http://www.w3.org/2000/svg">
                                                     <g>
@@ -3776,7 +3776,7 @@ class Matrik_Service_Widget extends Widget_Base
                         <div class="row pt-50 bounce_up">
                             <div class="col-lg-12 d-flex justify-content-center">
                                 <a class="primary-btn2 two white" href="<?php echo esc_url($settings['matrik_service_four_genaral_content_bottom_button_text_url']['url']); ?>">
-                                    <span><?php echo esc_html($settings['matrik_service_four_genaral_content_bottom_button_text']); ?></span>
+                                    <span><?php echo wp_kses_post($settings['matrik_service_four_genaral_content_bottom_button_text']); ?></span>
                                     <svg class="arrow" width="23" height="23" viewBox="0 0 23 23" xmlns="http://www.w3.org/2000/svg">
                                         <g>
                                             <path d="M0.113861 0H22.9999V4.28425L4.32671 22.9997L0 18.7154L12.7524 6.08815L0.113861 6.20089V0Z" />
@@ -3804,18 +3804,18 @@ class Matrik_Service_Widget extends Widget_Base
                                                 <path d="M0.0594065 0H12.0001V2.2353L2.25745 12L0 9.76471L6.65353 3.17647L0.0594065 3.2353V0Z" />
                                                 <path d="M11.9999 11.9999V4.47046L8.79199 7.64693V11.9999H11.9999Z" />
                                             </svg>
-                                            <?php echo esc_html($settings['matrik_service_genaral_subtitle']); ?>
+                                            <?php echo wp_kses_post($settings['matrik_service_genaral_subtitle']); ?>
                                         </span>
                                     <?php endif; ?>
                                     <?php if (!empty($settings['matrik_service_genaral_title'])) : ?>
-                                        <h2><?php echo esc_html($settings['matrik_service_genaral_title']); ?></h2>
+                                        <h2><?php echo wp_kses_post($settings['matrik_service_genaral_title']); ?></h2>
                                     <?php endif; ?>
                                 </div>
                             </div>
                             <?php if (!empty($settings['matrik_service_genaral_header_button'])) : ?>
                                 <div class="col-lg-3 d-flex justify-content-lg-end">
                                     <a class="primary-btn5 btn-hover" href="<?php echo esc_url($settings['matrik_service_genaral_header_button_url']['url']); ?>">
-                                        <?php echo esc_html($settings['matrik_service_genaral_header_button']); ?>
+                                        <?php echo wp_kses_post($settings['matrik_service_genaral_header_button']); ?>
                                         <svg class="arrow" width="23" height="23" viewBox="0 0 23 23" xmlns="http://www.w3.org/2000/svg">
                                             <g>
                                                 <path d="M0.113861 0H22.9999V4.28425L4.32671 22.9997L0 18.7154L12.7524 6.08815L0.113861 6.20089V0Z"></path>
@@ -3834,7 +3834,7 @@ class Matrik_Service_Widget extends Widget_Base
                                 <?php foreach ($settings['matrik_feature_five_genaral_content_list'] as $index => $data) : ?>
                                     <?php if (!empty($data['matrik_service_five_genaral_content_title'])) : ?>
                                         <li class="<?php echo $index === 0 ? 'active' : ''; ?> wow animate fadeInLeft" data-wow-delay="200ms" data-wow-duration="1500ms">
-                                            <span><?php echo esc_html($data['matrik_service_five_genaral_content_title']); ?></span>
+                                            <span><?php echo wp_kses_post($data['matrik_service_five_genaral_content_title']); ?></span>
                                             <svg width="136" height="16" viewBox="0 0 136 16" xmlns="http://www.w3.org/2000/svg">
                                                 <path
                                                     d="M0.333333 9.60199C0.333333 11.0747 1.52724 12.2687 3 12.2687C4.47276 12.2687 5.66667 11.0747 5.66667 9.60199C5.66667 8.12923 4.47276 6.93532 3 6.93532C1.52724 6.93532 0.333333 8.12923 0.333333 9.60199ZM60.7859 9.60199L60.6342 9.12557L60.7859 9.60199ZM135.231 10.0455C135.476 9.9181 135.571 9.61619 135.444 9.37122L133.367 5.37919C133.239 5.13422 132.937 5.03895 132.692 5.16641C132.447 5.29386 132.352 5.59577 132.479 5.84074L134.326 9.3892L130.777 11.2354C130.532 11.3628 130.437 11.6647 130.564 11.9097C130.692 12.1547 130.994 12.25 131.239 12.1225L135.231 10.0455ZM2.78333 10.0526C3.78362 10.5336 4.9232 11.0367 6.20513 11.5346L6.56716 10.6024C5.31082 10.1145 4.19502 9.62181 3.21667 9.15138L2.78333 10.0526ZM13.3261 13.7387C15.5326 14.2635 17.9758 14.71 20.6619 15.0221L20.7773 14.0288C18.1309 13.7213 15.7265 13.2817 13.5575 12.7658L13.3261 13.7387ZM28.0868 15.493C30.4253 15.5242 32.9041 15.4522 35.526 15.253L35.4502 14.2559C32.8577 14.4528 30.4086 14.5239 28.1002 14.4931L28.0868 15.493ZM42.9002 14.3974C45.2364 14.036 47.6682 13.577 50.197 13.0077L49.9773 12.0321C47.4702 12.5966 45.0607 13.0513 42.7474 13.4091L42.9002 14.3974ZM57.3797 11.159C58.5473 10.8218 59.7333 10.462 60.9377 10.0784L60.6342 9.12557C59.4384 9.50641 58.2611 9.86364 57.1022 10.1983L57.3797 11.159ZM60.9377 10.0784C62.192 9.67895 63.4072 9.29423 64.5857 8.92408L64.2861 7.97003C63.106 8.34065 61.8895 8.72578 60.6342 9.12557L60.9377 10.0784ZM71.9052 6.67673C74.5403 5.8913 76.9683 5.19956 79.2301 4.59854L78.9733 3.63208C76.6994 4.23631 74.2615 4.93094 71.6196 5.7184L71.9052 6.67673ZM86.6465 2.83756C89.3421 2.29154 91.8029 1.91748 94.1409 1.70664L94.0511 0.710683C91.6701 0.925399 89.1725 1.3056 86.448 1.85746L86.6465 2.83756ZM101.702 1.60101C104.141 1.76092 106.589 2.10952 109.198 2.63843L109.396 1.65837C106.752 1.12213 104.258 0.766481 101.767 0.603153L101.702 1.60101ZM116.592 4.45696C118.845 5.08626 121.26 5.81185 123.902 6.63013L124.197 5.67489C121.551 4.85532 119.126 4.1267 116.861 3.49384L116.592 4.45696ZM131.19 8.92166C132.368 9.29443 133.586 9.68025 134.85 10.0788L135.15 9.12517C133.888 8.72677 132.67 8.34109 131.492 7.96829L131.19 8.92166Z" />
@@ -3852,11 +3852,11 @@ class Matrik_Service_Widget extends Widget_Base
                                             <img src="<?php echo esc_url($data['matrik_service_five_genaral_banner_image']['url']); ?>" alt="<?php echo esc_attr__('banner-image', 'matrik-core'); ?>">
                                             <div class="service-content">
                                                 <?php if (!empty($data['matrik_service_five_genaral_content_description'])) : ?>
-                                                    <p><?php echo esc_html($data['matrik_service_five_genaral_content_description']); ?></p>
+                                                    <p><?php echo wp_kses_post($data['matrik_service_five_genaral_content_description']); ?></p>
                                                 <?php endif; ?>
                                                 <?php if (!empty($data['matrik_service_five_genaral_content_button_text'])) : ?>
                                                     <a class="primary-btn5 two btn-hover" href="<?php echo esc_url($data['matrik_service_five_genaral_content_button_text_url']['url']); ?>">
-                                                        <?php echo esc_html($data['matrik_service_five_genaral_content_button_text']); ?>
+                                                        <?php echo wp_kses_post($data['matrik_service_five_genaral_content_button_text']); ?>
                                                         <svg class="arrow" width="17" height="17" viewBox="0 0 17 17" xmlns="http://www.w3.org/2000/svg">
                                                             <g>
                                                                 <path d="M0.0841592 0H17.0002V3.16667L3.19805 17L0 13.8333L9.42583 4.5L0.0841592 4.58333V0Z" />
@@ -3885,13 +3885,13 @@ class Matrik_Service_Widget extends Widget_Base
                         <div class="col-lg-7">
                             <div class="section-title five white">
                                 <?php if (!empty($settings['matrik_service_genaral_subtitle'])) : ?>
-                                    <span><?php echo esc_html($settings['matrik_service_genaral_subtitle']); ?></span>
+                                    <span><?php echo wp_kses_post($settings['matrik_service_genaral_subtitle']); ?></span>
                                 <?php endif; ?>
                                 <?php if (!empty($settings['matrik_service_genaral_title'])) : ?>
-                                    <h2><?php echo esc_html($settings['matrik_service_genaral_title']); ?></h2>
+                                    <h2><?php echo wp_kses_post($settings['matrik_service_genaral_title']); ?></h2>
                                 <?php endif; ?>
                                 <?php if (!empty($settings['matrik_service_genaral_desc'])) : ?>
-                                    <p><?php echo esc_html($settings['matrik_service_genaral_desc']); ?></p>
+                                    <p><?php echo wp_kses_post($settings['matrik_service_genaral_desc']); ?></p>
                                 <?php endif; ?>
                             </div>
                         </div>
@@ -3922,7 +3922,7 @@ class Matrik_Service_Widget extends Widget_Base
                                                 <?php endif; ?>
                                                 <div class="service-content">
                                                     <h4><a href="<?php echo esc_url($item['matrik_service_genaral_baner_six_content_url']['url']); ?>"><?php echo wp_kses($item['matrik_service_genaral_baner_six_content_title'], wp_kses_allowed_html('post')); ?></a></h4>
-                                                    <a class="details-btn" href="<?php echo esc_url($item['matrik_service_genaral_baner_six_button_text_url']['url']); ?>"><?php echo esc_html($item['matrik_service_genaral_baner_six_button_text']); ?>
+                                                    <a class="details-btn" href="<?php echo esc_url($item['matrik_service_genaral_baner_six_button_text_url']['url']); ?>"><?php echo wp_kses_post($item['matrik_service_genaral_baner_six_button_text']); ?>
                                                         <svg class="arrow" width="17" height="17" viewBox="0 0 17 17" xmlns="http://www.w3.org/2000/svg">
                                                             <g>
                                                                 <path d="M0.0841592 0H17.0002V3.16667L3.19805 17L0 13.8333L9.42583 4.5L0.0841592 4.58333V0Z"></path>
@@ -3943,7 +3943,7 @@ class Matrik_Service_Widget extends Widget_Base
                     <?php if (!empty($settings['matrik_service_genaral_header_button'])) : ?>
                         <div class="btn-area d-flex justify-content-center bounce_up" style="translate: none; rotate: none; scale: none; transform: translate(0px); opacity: 1;">
                             <a class="primary-btn6 white-bg" href="<?php echo esc_url($settings['matrik_service_genaral_header_button_url']['url']); ?>">
-                                <?php echo esc_html($settings['matrik_service_genaral_header_button']); ?>
+                                <?php echo wp_kses_post($settings['matrik_service_genaral_header_button']); ?>
                                 <svg width="28" height="28" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg">
                                     <g>
                                         <path d="M14.1952 0.936056L27.5226 14.2634L25.0277 16.7583L3.25495 16.7829L3.23022 11.7684L18.0098 11.8413L10.5842 4.54707L14.1952 0.936056Z"></path>

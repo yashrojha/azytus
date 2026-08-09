@@ -848,7 +848,7 @@ class Matrik_Video_Widget extends Widget_Base
                         <?php if (!empty($settings['matrik_video_genaral_video_circular_text'])) : ?>
                             <div class="text">
                                 <span>
-                                    <?php echo esc_html($settings['matrik_video_genaral_video_circular_text']); ?>
+                                    <?php echo wp_kses_post($settings['matrik_video_genaral_video_circular_text']); ?>
                                 </span>
                             </div>
                         <?php endif; ?>
@@ -858,7 +858,7 @@ class Matrik_Video_Widget extends Widget_Base
                             <div class="logo-wrap">
                                 <?php if (!empty($settings['matrik_video_genaral_video_area_partner_logo_title'])) : ?>
                                     <div class="logo-title">
-                                        <h6><?php echo esc_html($settings['matrik_video_genaral_video_area_partner_logo_title']); ?></h6>
+                                        <h6><?php echo wp_kses_post($settings['matrik_video_genaral_video_area_partner_logo_title']); ?></h6>
                                     </div>
                                 <?php endif; ?>
                                 <div class="marquee">
@@ -894,10 +894,10 @@ class Matrik_Video_Widget extends Widget_Base
                     <div class="video-content-btn-area">
                         <div class="content">
                             <?php if (!empty($settings['matrik_video_genaral_video_three_title_one'])) : ?>
-                                <h2><?php echo esc_html($settings['matrik_video_genaral_video_three_title_one']); ?></h2>
+                                <h2><?php echo wp_kses_post($settings['matrik_video_genaral_video_three_title_one']); ?></h2>
                             <?php endif; ?>
                             <?php if (!empty($settings['matrik_video_genaral_video_three_title_two'])) : ?>
-                                <h2><?php echo esc_html($settings['matrik_video_genaral_video_three_title_two']); ?></h2>
+                                <h2><?php echo wp_kses_post($settings['matrik_video_genaral_video_three_title_two']); ?></h2>
                             <?php endif; ?>
                         </div>
                         <div class="circular-text2">
@@ -915,7 +915,7 @@ class Matrik_Video_Widget extends Widget_Base
                             <?php if (!empty($settings['matrik_video_genaral_video_circular_text'])) : ?>
                                 <div class="text">
                                     <span>
-                                        <?php echo esc_html($settings['matrik_video_genaral_video_circular_text']); ?>
+                                        <?php echo wp_kses_post($settings['matrik_video_genaral_video_circular_text']); ?>
                                     </span>
                                 </div>
                             <?php endif; ?>
@@ -945,7 +945,7 @@ class Matrik_Video_Widget extends Widget_Base
                             <?php if (!empty($settings['matrik_video_genaral_video_circular_text'])) : ?>
                                 <div class="text">
                                     <span>
-                                        <?php echo esc_html($settings['matrik_video_genaral_video_circular_text']); ?>
+                                        <?php echo wp_kses_post($settings['matrik_video_genaral_video_circular_text']); ?>
                                     </span>
                                 </div>
                             <?php endif; ?>
@@ -963,7 +963,7 @@ class Matrik_Video_Widget extends Widget_Base
                                         </div>
                                     <?php endif; ?>
                                     <?php if (!empty($settings['matrik_video_four_video_content_area_description'])) : ?>
-                                        <p><?php echo esc_html($settings['matrik_video_four_video_content_area_description']); ?></p>
+                                        <p><?php echo wp_kses_post($settings['matrik_video_four_video_content_area_description']); ?></p>
                                     <?php endif; ?>
                                     <svg class="quote" width="68" height="69" viewBox="0 0 68 69" xmlns="http://www.w3.org/2000/svg">
                                         <g>

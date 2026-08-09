@@ -575,7 +575,7 @@ class Matrik_Hero_Banner_Six_Social_Widget extends Widget_Base
                 <?php if (!empty($settings['matrik_home_six_hero_social_area_circular_text'])) : ?>
                     <div class="text">
                         <span>
-                            <?php echo esc_html($settings['matrik_home_six_hero_social_area_circular_text']); ?>
+                            <?php echo wp_kses_post($settings['matrik_home_six_hero_social_area_circular_text']); ?>
                         </span>
                     </div>
                 <?php endif; ?>

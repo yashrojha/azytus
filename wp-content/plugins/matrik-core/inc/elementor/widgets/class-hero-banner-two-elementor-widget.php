@@ -546,7 +546,7 @@ class Matrik_Hero_Banner_Two_Widget extends Widget_Base
                         <?php if (!empty($settings['matrik_hero_banner_two_genaral_circular_button_text'])) : ?>
                             <div class="text">
                                 <span>
-                                    <?php echo esc_html($settings['matrik_hero_banner_two_genaral_circular_button_text']); ?>
+                                    <?php echo wp_kses_post($settings['matrik_hero_banner_two_genaral_circular_button_text']); ?>
                                 </span>
                             </div>
                         <?php endif; ?>
@@ -560,15 +560,15 @@ class Matrik_Hero_Banner_Two_Widget extends Widget_Base
                     <?php endif; ?>
                     <?php if (!empty($settings['matrik_hero_banner_two_genaral_description'])) : ?>
                         <div class="content">
-                            <p><?php echo esc_html($settings['matrik_hero_banner_two_genaral_description']); ?></p>
+                            <p><?php echo wp_kses_post($settings['matrik_hero_banner_two_genaral_description']); ?></p>
                         </div>
                     <?php endif; ?>
                     <div class="btn-and-people-area">
                         <?php if (!empty($settings['matrik_hero_banner_two_genaral_button_text'])) : ?>
                             <a class="primary-btn3 black-bg" href="<?php echo esc_url($settings['matrik_hero_banner_two_genaral_button_text_url']['url']); ?>">
-                                <span><?php echo esc_html($settings['matrik_hero_banner_two_genaral_button_text']); ?>
+                                <span><?php echo wp_kses_post($settings['matrik_hero_banner_two_genaral_button_text']); ?>
                                 </span>
-                                <span><?php echo esc_html($settings['matrik_hero_banner_two_genaral_button_text']); ?>
+                                <span><?php echo wp_kses_post($settings['matrik_hero_banner_two_genaral_button_text']); ?>
                                 </span>
                                 <svg class="arrow" width="23" height="23" viewBox="0 0 23 23" xmlns="http://www.w3.org/2000/svg">
                                     <g>
@@ -594,7 +594,7 @@ class Matrik_Hero_Banner_Two_Widget extends Widget_Base
                                     href="<?php echo esc_url($settings['matrik_hero_banner_two_genaral_button_two_text_url']['url']); ?>"
                                     <?php if (!empty($settings['matrik_hero_banner_two_genaral_button_two_text_url']['is_external'])) echo 'target="_blank"'; ?>
                                     <?php if (!empty($settings['matrik_hero_banner_two_genaral_button_two_text_url']['nofollow'])) echo 'rel="nofollow"'; ?>>
-                                    <?php echo esc_html($settings['matrik_hero_banner_two_genaral_button_two_text']); ?>
+                                    <?php echo wp_kses_post($settings['matrik_hero_banner_two_genaral_button_two_text']); ?>
                                 </a>
                             <?php endif; ?>
                         </div>

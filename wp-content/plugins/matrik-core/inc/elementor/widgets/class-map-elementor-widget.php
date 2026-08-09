@@ -387,7 +387,7 @@ class Matrik_Map_Widget extends Widget_Base
         <div class="home1-map-section">
             <div class="address-wrapper">
                 <?php if (!empty($settings['matrik_map_genaral_title'])) : ?>
-                    <h2><?php echo esc_html($settings['matrik_map_genaral_title']); ?></h2>
+                    <h2><?php echo wp_kses_post($settings['matrik_map_genaral_title']); ?></h2>
                 <?php endif; ?>
                 <div class="address-area">
                     <ul class="address-list">
@@ -395,10 +395,10 @@ class Matrik_Map_Widget extends Widget_Base
                             <li class="single-address">
                                 <div class="content">
                                     <?php if (!empty($data['matrik_map_genaral_location_title'])) : ?>
-                                        <span><?php echo esc_html($data['matrik_map_genaral_location_title']); ?></span>
+                                        <span><?php echo wp_kses_post($data['matrik_map_genaral_location_title']); ?></span>
                                     <?php endif; ?>
                                     <?php if (!empty($data['matrik_map_genaral_location'])) : ?>
-                                        <a href="<?php echo esc_url($data['matrik_map_genaral_location_link']['url']); ?>"><?php echo esc_html($data['matrik_map_genaral_location']); ?></a>
+                                        <a href="<?php echo esc_url($data['matrik_map_genaral_location_link']['url']); ?>"><?php echo wp_kses_post($data['matrik_map_genaral_location']); ?></a>
                                     <?php endif; ?>
                                 </div>
                                 <svg class="vector" width="96" height="21" viewBox="0 0 96 21" xmlns="http://www.w3.org/2000/svg">
@@ -409,7 +409,7 @@ class Matrik_Map_Widget extends Widget_Base
                         <?php endforeach; ?>
                     </ul>
                     <?php if (!empty($settings['matrik_map_genaral_button'])) : ?>
-                        <a href="<?php echo esc_url($settings['matrik_map_genaral_button_url']['url']); ?>" class="location-btn"><?php echo esc_html($settings['matrik_map_genaral_button']); ?></a>
+                        <a href="<?php echo esc_url($settings['matrik_map_genaral_button_url']['url']); ?>" class="location-btn"><?php echo wp_kses_post($settings['matrik_map_genaral_button']); ?></a>
                     <?php endif; ?>
                 </div>
             </div>

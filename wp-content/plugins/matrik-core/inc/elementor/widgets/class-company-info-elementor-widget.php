@@ -413,10 +413,10 @@ class Matrik_Company_Info_Widget extends Widget_Base
                             <div class="countdown-area">
                                 <div class="number">
                                     <?php if (!empty($settings['matrik_company_info_genaral_counter_number'])) : ?>
-                                        <h3 class="counter"><?php echo esc_html($settings['matrik_company_info_genaral_counter_number']); ?></h3>
+                                        <h3 class="counter"><?php echo wp_kses_post($settings['matrik_company_info_genaral_counter_number']); ?></h3>
                                     <?php endif; ?>
                                     <?php if (!empty($settings['matrik_company_info_genaral_counter_sign'])) : ?>
-                                        <span><?php echo esc_html($settings['matrik_company_info_genaral_counter_sign']); ?></span>
+                                        <span><?php echo wp_kses_post($settings['matrik_company_info_genaral_counter_sign']); ?></span>
                                     <?php endif; ?>
                                 </div>
                                 <?php if (!empty($settings['matrik_company_info_genaral_counter_title'])) : ?>
@@ -428,14 +428,14 @@ class Matrik_Company_Info_Widget extends Widget_Base
                     <div class="col-lg-6 wow animate fadeInRight" data-wow-delay="200ms" data-wow-duration="1500ms">
                         <div class="company-info-content">
                             <?php if (!empty($settings['matrik_company_info_genaral_title'])) : ?>
-                                <h2><?php echo esc_html($settings['matrik_company_info_genaral_title']); ?></h2>
+                                <h2><?php echo wp_kses_post($settings['matrik_company_info_genaral_title']); ?></h2>
                             <?php endif; ?>
                             <?php if (!empty($settings['matrik_company_info_genaral_description'])) : ?>
-                                <p><?php echo esc_html($settings['matrik_company_info_genaral_description']); ?></p>
+                                <p><?php echo wp_kses_post($settings['matrik_company_info_genaral_description']); ?></p>
                             <?php endif; ?>
                             <?php if (!empty($settings['matrik_company_info_genaral_button_text'])) : ?>
                                 <a class="primary-btn2 two" href="<?php echo esc_url($settings['matrik_company_info_genaral_button_text_url']['url']); ?>">
-                                    <span><?php echo esc_html($settings['matrik_company_info_genaral_button_text']); ?></span>
+                                    <span><?php echo wp_kses_post($settings['matrik_company_info_genaral_button_text']); ?></span>
                                     <svg class="arrow" width="23" height="23" viewBox="0 0 23 23" xmlns="http://www.w3.org/2000/svg">
                                         <g>
                                             <path d="M0.113861 0H22.9999V4.28425L4.32671 22.9997L0 18.7154L12.7524 6.08815L0.113861 6.20089V0Z"></path>

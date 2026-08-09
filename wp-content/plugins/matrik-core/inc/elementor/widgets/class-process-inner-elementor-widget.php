@@ -323,17 +323,17 @@ class Matrik_Process_Inner_Widget extends Widget_Base
                                             </div>
                                         <?php endif; ?>
                                         <?php if (!empty($data['matrik_process_inner_genaral_step_count'])) : ?>
-                                            <span><?php echo esc_html($data['matrik_process_inner_genaral_step_count']); ?></span>
+                                            <span><?php echo wp_kses_post($data['matrik_process_inner_genaral_step_count']); ?></span>
                                         <?php endif; ?>
                                         <svg class="arrow" width="8" height="204" viewBox="0 0 8 204" xmlns="http://www.w3.org/2000/svg">
                                             <path
                                                 d="M1.33333 3C1.33333 4.47276 2.52724 5.66667 4 5.66667C5.47276 5.66667 6.66667 4.47276 6.66667 3C6.66667 1.52724 5.47276 0.333333 4 0.333333C2.52724 0.333333 1.33333 1.52724 1.33333 3ZM3.64645 203.354C3.84171 203.549 4.15829 203.549 4.35355 203.354L7.53553 200.172C7.7308 199.976 7.7308 199.66 7.53553 199.464C7.34027 199.269 7.02369 199.269 6.82843 199.464L4 202.293L1.17157 199.464C0.976311 199.269 0.659728 199.269 0.464466 199.464C0.269204 199.66 0.269204 199.976 0.464466 200.172L3.64645 203.354ZM3.5 3V203H4.5V3H3.5Z" />
                                         </svg>
                                         <?php if (!empty($data['matrik_process_inner_genaral_title'])) : ?>
-                                            <h2><?php echo esc_html($data['matrik_process_inner_genaral_title']); ?></h2>
+                                            <h2><?php echo wp_kses_post($data['matrik_process_inner_genaral_title']); ?></h2>
                                         <?php endif; ?>
                                         <?php if (!empty($data['matrik_process_inner_genaral_description'])) : ?>
-                                            <p><?php echo esc_html($data['matrik_process_inner_genaral_description']); ?></p>
+                                            <p><?php echo wp_kses_post($data['matrik_process_inner_genaral_description']); ?></p>
                                         <?php endif; ?>
                                         <?php if (!empty($data['matrik_process_inner_genaral_vector_image']['url'])) : ?>
                                             <img src="<?php echo esc_url($data['matrik_process_inner_genaral_vector_image']['url']); ?>" alt="<?php echo esc_attr__('vector-image', 'matrik-core'); ?>" class="vector">

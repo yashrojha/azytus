@@ -481,16 +481,16 @@ class Matrik_Hero_Banner_One_Widget extends Widget_Base
                     <div class="banner-content-wrap">
                         <div class="banner-content wow animate fadeInLeft" data-wow-delay="200ms" data-wow-duration="1500ms">
                             <?php if (!empty($settings['matrik_hero_banner_one_genaral_title'])) : ?>
-                                <h1><?php echo esc_html($settings['matrik_hero_banner_one_genaral_title']); ?></h1>
+                                <h1><?php echo wp_kses_post($settings['matrik_hero_banner_one_genaral_title']); ?></h1>
                             <?php endif; ?>
 
                             <div class="btn-grp">
                                 <?php foreach ($settings['matrik_hero_banner_one_genaral_button_list'] as $data) : ?>
                                     <?php if ($data['matrik_hero_banner_one_genaral_button_style'] == 'style_one') : ?>
                                         <a class="primary-btn1" href="<?php echo esc_url($data['matrik_hero_banner_one_genaral_button_text_url']['url']); ?>">
-                                            <span><?php echo esc_html($data['matrik_hero_banner_one_genaral_button_text']); ?>
+                                            <span><?php echo wp_kses_post($data['matrik_hero_banner_one_genaral_button_text']); ?>
                                             </span>
-                                            <span><?php echo esc_html($data['matrik_hero_banner_one_genaral_button_text']); ?>
+                                            <span><?php echo wp_kses_post($data['matrik_hero_banner_one_genaral_button_text']); ?>
                                             </span>
                                             <svg class="arrow" width="23" height="23" viewBox="0 0 23 23" xmlns="http://www.w3.org/2000/svg">
                                                 <g>
@@ -501,7 +501,7 @@ class Matrik_Hero_Banner_One_Widget extends Widget_Base
                                         </a>
                                     <?php elseif ($data['matrik_hero_banner_one_genaral_button_style'] == 'style_two') : ?>
                                         <a class="discuss-btn" href="<?php echo esc_url($data['matrik_hero_banner_one_genaral_button_text_url']['url']); ?>">
-                                            <?php echo esc_html($data['matrik_hero_banner_one_genaral_button_text']); ?>
+                                            <?php echo wp_kses_post($data['matrik_hero_banner_one_genaral_button_text']); ?>
                                             <svg width="9" height="9" viewBox="0 0 9 9" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M0.0445549 0H9.00008V1.67647L1.69308 9L0 7.32353L4.99014 2.38235L0.0445549 2.42647V0Z" />
                                                 <path d="M9.0002 8.99999V3.35294L6.59424 5.73529V8.99999H9.0002Z" />
@@ -521,7 +521,7 @@ class Matrik_Hero_Banner_One_Widget extends Widget_Base
                                 </a>
                                 <div class="text">
                                     <span>
-                                        <?php echo esc_html($settings['matrik_hero_banner_one_genaral_circular_button_text']); ?>
+                                        <?php echo wp_kses_post($settings['matrik_hero_banner_one_genaral_circular_button_text']); ?>
                                     </span>
                                 </div>
                             </div>

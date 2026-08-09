@@ -1273,10 +1273,10 @@ class Matrik_FAQ_Widget extends Widget_Base
                             <div class="col-lg-6 wow animate fadeInLeft" data-wow-delay="200ms" data-wow-duration="1500ms">
                                 <div class="section-title">
                                     <?php if (!empty($settings['matrik_faq_genaral_subtitle'])) : ?>
-                                        <span><?php echo esc_html($settings['matrik_faq_genaral_subtitle']); ?></span>
+                                        <span><?php echo wp_kses_post($settings['matrik_faq_genaral_subtitle']); ?></span>
                                     <?php endif; ?>
                                     <?php if (!empty($settings['matrik_faq_genaral_title'])) : ?>
-                                        <h2><?php echo esc_html($settings['matrik_faq_genaral_title']); ?></h2>
+                                        <h2><?php echo wp_kses_post($settings['matrik_faq_genaral_title']); ?></h2>
                                     <?php endif; ?>
                                 </div>
                             </div>
@@ -1284,9 +1284,9 @@ class Matrik_FAQ_Widget extends Widget_Base
                             <?php if (!empty($settings['matrik_faq_genaral_header_button'])) : ?>
                                 <div class="col-lg-3 d-flex justify-content-lg-end btn_wrapper">
                                     <a class="primary-btn1 transparent" href="<?php echo esc_url($settings['matrik_faq_genaral_header_button_url']['url']); ?>">
-                                        <span><?php echo esc_html($settings['matrik_faq_genaral_header_button']); ?>
+                                        <span><?php echo wp_kses_post($settings['matrik_faq_genaral_header_button']); ?>
                                         </span>
-                                        <span><?php echo esc_html($settings['matrik_faq_genaral_header_button']); ?>
+                                        <span><?php echo wp_kses_post($settings['matrik_faq_genaral_header_button']); ?>
                                         </span>
                                         <svg class="arrow" width="23" height="23" viewBox="0 0 23 23" xmlns="http://www.w3.org/2000/svg">
                                             <g>
@@ -1314,13 +1314,13 @@ class Matrik_FAQ_Widget extends Widget_Base
                                         <div class="accordion-item wow animate fadeInDown" data-wow-delay="200ms" data-wow-duration="1500ms">
                                             <h2 class="accordion-header" id="flush-heading-<?php echo esc_attr($index); ?>">
                                                 <button class="accordion-button <?php echo ($index == 0) ? '' : 'collapsed'; ?>" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse-<?php echo esc_attr($index); ?>" aria-expanded="<?php echo ($index == 0) ? 'true' : 'false'; ?>" aria-controls="flush-collapse-<?php echo esc_attr($index); ?>">
-                                                    <?php echo esc_html($faq['matrik_faq_genaral_accordion_area_question']); ?>
+                                                    <?php echo wp_kses_post($faq['matrik_faq_genaral_accordion_area_question']); ?>
                                                 </button>
                                             </h2>
                                             <div id="flush-collapse-<?php echo esc_attr($index); ?>" class="accordion-collapse collapse <?php echo ($index == 0) ? 'show' : ''; ?>" aria-labelledby="flush-heading-<?php echo esc_attr($index); ?>" data-bs-parent="#accordionExample">
                                                 <?php if (!empty($faq['matrik_faq_genaral_accordion_area_answer'])) : ?>
                                                     <div class="accordion-body">
-                                                        <?php echo esc_html($faq['matrik_faq_genaral_accordion_area_answer']); ?>
+                                                        <?php echo wp_kses_post($faq['matrik_faq_genaral_accordion_area_answer']); ?>
                                                     </div>
                                                 <?php endif; ?>
                                             </div>
@@ -1343,13 +1343,13 @@ class Matrik_FAQ_Widget extends Widget_Base
                             <div class="col-xl-8 col-lg-10">
                                 <div class="section-title five text-center">
                                     <?php if (!empty($settings['matrik_faq_genaral_title'])): ?>
-                                        <span><?php echo esc_html($settings['matrik_faq_genaral_subtitle']); ?></span>
+                                        <span><?php echo wp_kses_post($settings['matrik_faq_genaral_subtitle']); ?></span>
                                     <?php endif; ?>
                                     <?php if (!empty($settings['matrik_faq_genaral_title'])): ?>
-                                        <h2><?php echo esc_html($settings['matrik_faq_genaral_title']); ?></h2>
+                                        <h2><?php echo wp_kses_post($settings['matrik_faq_genaral_title']); ?></h2>
                                     <?php endif; ?>
                                     <?php if (!empty($settings['matrik_faq_genaral_description'])): ?>
-                                        <p><?php echo esc_html($settings['matrik_faq_genaral_description']); ?></p>
+                                        <p><?php echo wp_kses_post($settings['matrik_faq_genaral_description']); ?></p>
                                     <?php endif; ?>
                                 </div>
                             </div>
@@ -1364,7 +1364,7 @@ class Matrik_FAQ_Widget extends Widget_Base
                                         $is_first = $index === 0;
                                     ?>
                                         <li class="nav-item" role="presentation">
-                                            <button class="nav-link <?php echo esc_attr(($is_first ? 'active' : '')); ?>" id="pills-<?php echo esc_attr(strtolower($tab['matrik_faq_general_accordion_tab_nav_text'])); ?>-tab" data-bs-toggle="pill" data-bs-target="#pills-<?php echo esc_attr(strtolower($tab['matrik_faq_general_accordion_tab_nav_text'])); ?>" type="button" role="tab" aria-controls="pills-<?php echo esc_attr(strtolower($tab['matrik_faq_general_accordion_tab_nav_text'])); ?>" aria-selected="true"><?php echo esc_html($tab['matrik_faq_general_accordion_tab_nav_text']) ?></button>
+                                            <button class="nav-link <?php echo esc_attr(($is_first ? 'active' : '')); ?>" id="pills-<?php echo esc_attr(strtolower($tab['matrik_faq_general_accordion_tab_nav_text'])); ?>-tab" data-bs-toggle="pill" data-bs-target="#pills-<?php echo esc_attr(strtolower($tab['matrik_faq_general_accordion_tab_nav_text'])); ?>" type="button" role="tab" aria-controls="pills-<?php echo esc_attr(strtolower($tab['matrik_faq_general_accordion_tab_nav_text'])); ?>" aria-selected="true"><?php echo wp_kses_post($tab['matrik_faq_general_accordion_tab_nav_text']) ?></button>
                                         </li>
                                     <?php endforeach; ?>
                                 </ul>
@@ -1376,7 +1376,7 @@ class Matrik_FAQ_Widget extends Widget_Base
                                             <div class="accordion" id="accordionExample">
                                                 <?php
                                                 foreach ($faq_list as $index => $faq) :
-                                                    $question = esc_html($faq['matrik_faq_genaral_accordion_area_question']);
+                                                    $question = wp_kses_post($faq['matrik_faq_genaral_accordion_area_question']);
                                                     $answer = wp_kses_post($faq['matrik_faq_genaral_accordion_area_answer']);
 
                                                     $word = $this->number_to_word($index);
@@ -1418,12 +1418,12 @@ class Matrik_FAQ_Widget extends Widget_Base
                                                     <div class="accordion-item">
                                                         <h2 class="accordion-header" id="payment<?php echo esc_attr($heading_id2); ?>">
                                                             <button class="accordion-button <?php echo ($is_first ? '' : 'collapsed') ?>" type="button" data-bs-toggle="collapse" data-bs-target="#payment<?php echo esc_attr($collapse_id2); ?>" aria-expanded="<?php echo esc_attr(($is_first ? 'true' : 'false')); ?>" aria-controls="payment<?php echo esc_attr($collapse_id2); ?>">
-                                                                <?php echo esc_html($faqTwo['matrik_faq_genaral_accordion_area_two_question']); ?>
+                                                                <?php echo wp_kses_post($faqTwo['matrik_faq_genaral_accordion_area_two_question']); ?>
                                                             </button>
                                                         </h2>
                                                         <div id="payment<?php echo esc_attr($collapse_id2); ?>" class="accordion-collapse collapse <?php echo ($is_first ? 'show' : ''); ?>" aria-labelledby="payment<?php echo esc_attr($heading_id2); ?>" data-bs-parent="#accordionPayment">
                                                             <div class="accordion-body">
-                                                                <?php echo esc_html($faqTwo['matrik_faq_genaral_accordion_area_two_answer']); ?>
+                                                                <?php echo wp_kses_post($faqTwo['matrik_faq_genaral_accordion_area_two_answer']); ?>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1447,12 +1447,12 @@ class Matrik_FAQ_Widget extends Widget_Base
                                                     <div class="accordion-item">
                                                         <h2 class="accordion-header" id="support<?php echo esc_attr($heading_id3); ?>">
                                                             <button class="accordion-button <?php echo ($is_first ? '' : 'collapsed') ?>" type="button" data-bs-toggle="collapse" data-bs-target="#support<?php echo esc_attr($collapse_id3); ?>" aria-expanded="<?php echo esc_attr(($is_first ? 'true' : 'false')); ?>" aria-controls="support<?php echo esc_attr($collapse_id3); ?>">
-                                                                <?php echo esc_html($faqThree['matrik_faq_genaral_accordion_area_three_question']); ?>
+                                                                <?php echo wp_kses_post($faqThree['matrik_faq_genaral_accordion_area_three_question']); ?>
                                                             </button>
                                                         </h2>
                                                         <div id="support<?php echo esc_attr($collapse_id3); ?>" class="accordion-collapse collapse <?php echo ($is_first ? 'show' : ''); ?>" aria-labelledby="support<?php echo esc_attr($heading_id3); ?>" data-bs-parent="#accordionSupport">
                                                             <div class="accordion-body">
-                                                                <?php echo esc_html($faqThree['matrik_faq_genaral_accordion_area_three_answer']); ?>
+                                                                <?php echo wp_kses_post($faqThree['matrik_faq_genaral_accordion_area_three_answer']); ?>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1483,7 +1483,7 @@ class Matrik_FAQ_Widget extends Widget_Base
                             <div class="col-lg-6">
                                 <div class="faq-content-area">
                                     <?php if (!empty($settings['matrik_faq_genaral_title'])) : ?>
-                                        <h2><?php echo esc_html($settings['matrik_faq_genaral_title']); ?></h2>
+                                        <h2><?php echo wp_kses_post($settings['matrik_faq_genaral_title']); ?></h2>
                                     <?php endif; ?>
                                     <div class="faq-wrap">
                                         <div class="accordion" id="accordionExample">
@@ -1499,12 +1499,12 @@ class Matrik_FAQ_Widget extends Widget_Base
                                                     <h2 class="accordion-header" id="heading<?php echo esc_attr($heading_id7); ?>">
                                                         <button class="accordion-button <?php echo ($is_first ? '' : 'collapsed') ?>" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<?php echo esc_attr($collapse_id7); ?>"
                                                             aria-expanded="true" aria-controls="collapse<?php echo esc_attr($collapse_id7); ?>">
-                                                            <?php echo esc_html($faqSeven['matrik_faq_genaral_accordion_area_question']); ?>
+                                                            <?php echo wp_kses_post($faqSeven['matrik_faq_genaral_accordion_area_question']); ?>
                                                         </button>
                                                     </h2>
                                                     <div id="collapse<?php echo esc_attr($collapse_id7); ?>" class="accordion-collapse collapse <?php echo ($is_first ? 'show' : ''); ?>" aria-labelledby="heading<?php echo esc_attr($heading_id7); ?>" data-bs-parent="#accordionExample">
                                                         <div class="accordion-body">
-                                                            <?php echo esc_html($faqSeven['matrik_faq_genaral_accordion_area_answer']); ?>
+                                                            <?php echo wp_kses_post($faqSeven['matrik_faq_genaral_accordion_area_answer']); ?>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1516,9 +1516,9 @@ class Matrik_FAQ_Widget extends Widget_Base
                         </div>
                         <?php if (! empty($settings['matrik_faq_genaral_header_button'])): ?>
                             <a class="primary-btn1 black-bg" href="<?php echo esc_url($settings['matrik_faq_genaral_header_button_url']['url']); ?>">
-                                <span><?php echo esc_html($settings['matrik_faq_genaral_header_button']); ?>
+                                <span><?php echo wp_kses_post($settings['matrik_faq_genaral_header_button']); ?>
                                 </span>
-                                <span><?php echo esc_html($settings['matrik_faq_genaral_header_button']); ?>
+                                <span><?php echo wp_kses_post($settings['matrik_faq_genaral_header_button']); ?>
                                 </span>
                                 <svg class="arrow" width="23" height="23" viewBox="0 0 23 23" xmlns="http://www.w3.org/2000/svg">
                                     <g>

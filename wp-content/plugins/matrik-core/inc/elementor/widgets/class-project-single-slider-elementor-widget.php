@@ -407,7 +407,7 @@ class Matrik_Project_Single_Slider_Widget extends Widget_Base
                                     <span><?php
                                             $data = Egns_Helper::egns_project_value('project_info_list');
                                             if (!empty($data) && isset($data[0]['project_label_text']) && isset($data[0]['project_content_text'])) { ?>
-                                            <?php echo esc_html($data[0]['project_label_text']); ?> <?php echo esc_html($data[0]['project_content_text']); ?>
+                                            <?php echo wp_kses_post($data[0]['project_label_text']); ?> <?php echo wp_kses_post($data[0]['project_content_text']); ?>
                                         <?php }
                                         ?></span>
                                     <h1><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h1>

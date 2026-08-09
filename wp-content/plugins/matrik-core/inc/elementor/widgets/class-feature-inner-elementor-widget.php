@@ -704,10 +704,10 @@ class Matrik_Feature_Inner_Widget extends Widget_Base
                             <div class="col-xl-7 col-lg-8 wow animate fadeInDown" data-wow-delay="200ms" data-wow-duration="1500ms">
                                 <div class="section-title text-center">
                                     <?php if (!empty($settings['matrik_feature_inner_genaral_header_subtitle'])) : ?>
-                                        <span><?php echo esc_html($settings['matrik_feature_inner_genaral_header_subtitle']); ?></span>
+                                        <span><?php echo wp_kses_post($settings['matrik_feature_inner_genaral_header_subtitle']); ?></span>
                                     <?php endif; ?>
                                     <?php if (!empty($settings['matrik_feature_inner_genaral_header_title'])) : ?>
-                                        <h2><?php echo esc_html($settings['matrik_feature_inner_genaral_header_title']); ?></h2>
+                                        <h2><?php echo wp_kses_post($settings['matrik_feature_inner_genaral_header_title']); ?></h2>
                                     <?php endif; ?>
                                 </div>
                             </div>
@@ -726,7 +726,7 @@ class Matrik_Feature_Inner_Widget extends Widget_Base
                                                 <h5><?php echo wp_kses($data['matrik_feature_inner_genaral_title'], wp_kses_allowed_html('post')); ?></h5>
                                             <?php endif; ?>
                                             <?php if (!empty($data['matrik_feature_inner_genaral_description'])) : ?>
-                                                <p><?php echo esc_html($data['matrik_feature_inner_genaral_description']); ?></p>
+                                                <p><?php echo wp_kses_post($data['matrik_feature_inner_genaral_description']); ?></p>
                                             <?php endif; ?>
                                         </div>
                                     </div>
@@ -745,10 +745,10 @@ class Matrik_Feature_Inner_Widget extends Widget_Base
                         <div class="col-xl-6 col-lg-8 wow animate fadeInLeft" data-wow-delay="200ms" data-wow-duration="1500ms">
                             <div class="section-title">
                                 <?php if (!empty($settings['matrik_matrik_feature_genaral_header_subtitle'])) : ?>
-                                    <span><?php echo esc_html($settings['matrik_matrik_feature_genaral_header_subtitle']); ?></span>
+                                    <span><?php echo wp_kses_post($settings['matrik_matrik_feature_genaral_header_subtitle']); ?></span>
                                 <?php endif; ?>
                                 <?php if (!empty($settings['matrik_material_feature_genaral_header_title'])) : ?>
-                                    <h2><?php echo esc_html($settings['matrik_material_feature_genaral_header_title']); ?></h2>
+                                    <h2><?php echo wp_kses_post($settings['matrik_material_feature_genaral_header_title']); ?></h2>
                                 <?php endif; ?>
                             </div>
                         </div>

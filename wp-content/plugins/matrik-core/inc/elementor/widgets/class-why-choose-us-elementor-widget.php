@@ -509,10 +509,10 @@ class Matrik_Why_Choose_Us_Widget extends Widget_Base
                         <div class="col-xl-6 col-lg-8 wow animate fadeInLeft" data-wow-delay="200ms" data-wow-duration="1500ms">
                             <div class="section-title two">
                                 <?php if (!empty($settings['matrik_why_choose_us_genaral_subtitle'])) : ?>
-                                    <span><?php echo esc_html($settings['matrik_why_choose_us_genaral_subtitle']); ?></span>
+                                    <span><?php echo wp_kses_post($settings['matrik_why_choose_us_genaral_subtitle']); ?></span>
                                 <?php endif; ?>
                                 <?php if (!empty($settings['matrik_why_choose_us_genaral_title'])) : ?>
-                                    <h2><?php echo esc_html($settings['matrik_why_choose_us_genaral_title']); ?></h2>
+                                    <h2><?php echo wp_kses_post($settings['matrik_why_choose_us_genaral_title']); ?></h2>
                                 <?php endif; ?>
                             </div>
                         </div>
@@ -520,7 +520,7 @@ class Matrik_Why_Choose_Us_Widget extends Widget_Base
                             <div class="col-lg-3 d-flex justify-content-lg-end btn_wrapper">
                                 <a href="<?php echo esc_url($settings['matrik_why_choose_us_genaral_header_button_url']['url']); ?>" class="contact-btn">
                                     <div class="primary-btn2 two">
-                                        <span><?php echo esc_html($settings['matrik_why_choose_us_genaral_header_button']); ?></span>
+                                        <span><?php echo wp_kses_post($settings['matrik_why_choose_us_genaral_header_button']); ?></span>
                                         <svg class="arrow" width="23" height="23" viewBox="0 0 23 23" xmlns="http://www.w3.org/2000/svg">
                                             <g>
                                                 <path d="M0.113861 0H22.9999V4.28425L4.32671 22.9997L0 18.7154L12.7524 6.08815L0.113861 6.20089V0Z" />
@@ -553,11 +553,11 @@ class Matrik_Why_Choose_Us_Widget extends Widget_Base
                                                 aria-controls="<?php echo esc_attr($collapse_id); ?>">
 
                                                 <?php if (!empty($data['matrik_why_choose_us_genaral_content_step_count'])) : ?>
-                                                    <span><?php echo esc_html($data['matrik_why_choose_us_genaral_content_step_count']); ?></span>
+                                                    <span><?php echo wp_kses_post($data['matrik_why_choose_us_genaral_content_step_count']); ?></span>
                                                 <?php endif; ?>
 
                                                 <?php if (!empty($data['matrik_why_choose_us_genaral_content_title'])) : ?>
-                                                    <?php echo esc_html($data['matrik_why_choose_us_genaral_content_title']); ?>
+                                                    <?php echo wp_kses_post($data['matrik_why_choose_us_genaral_content_title']); ?>
                                                 <?php endif; ?>
                                             </button>
                                         </h2>
@@ -572,7 +572,7 @@ class Matrik_Why_Choose_Us_Widget extends Widget_Base
                                                 <?php endif; ?>
 
                                                 <?php if (!empty($data['matrik_why_choose_us_genaral_content_description'])) : ?>
-                                                    <?php echo esc_html($data['matrik_why_choose_us_genaral_content_description']); ?>
+                                                    <?php echo wp_kses_post($data['matrik_why_choose_us_genaral_content_description']); ?>
                                                 <?php endif; ?>
                                             </div>
                                         </div>

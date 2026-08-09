@@ -248,7 +248,7 @@ class Matrik_Client_Widget extends Widget_Base
             <div class="container-fluid">
                 <?php if (!empty($settings['matrik_client_genaral_header_title'])) : ?>
                     <div class="section-title two text-center mb-80">
-                        <h2><?php echo esc_html($settings['matrik_client_genaral_header_title']); ?></h2>
+                        <h2><?php echo wp_kses_post($settings['matrik_client_genaral_header_title']); ?></h2>
                     </div>
                 <?php endif; ?>
                 <div class="row g-xl-4 g-lg-3 g-4">
@@ -268,7 +268,7 @@ class Matrik_Client_Widget extends Widget_Base
                                             <img src="<?php echo esc_url($client_data['matrik_client_genaral_partner_logo']['url']); ?>" alt="<?php echo esc_attr__('partner-logo', 'matrik-core'); ?>">
                                         <?php endif; ?>
                                         <?php if (!empty($client_data['matrik_client_genaral_content_title'])) : ?>
-                                            <span><?php echo esc_html($client_data['matrik_client_genaral_content_title']); ?></span>
+                                            <span><?php echo wp_kses_post($client_data['matrik_client_genaral_content_title']); ?></span>
                                         <?php endif; ?>
                                         <svg width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M0.173267 0H34.9999V6.51953L6.58414 34.9996L0 28.4801L19.4059 9.2646L0.173267 9.43616V0Z" />

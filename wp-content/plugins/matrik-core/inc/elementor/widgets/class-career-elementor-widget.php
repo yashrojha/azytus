@@ -1266,7 +1266,7 @@ class Matrik_Career_Widget extends Widget_Base
                         <div class="row justify-content-center mb-70 wow animate fadeInDown" data-wow-delay="200ms" data-wow-duration="1500ms">
                             <div class="col-lg-5">
                                 <div class="section-title two white text-center">
-                                    <h2><?php echo esc_html($settings['matrik_career_genaral_header_title']); ?></h2>
+                                    <h2><?php echo wp_kses_post($settings['matrik_career_genaral_header_title']); ?></h2>
                                 </div>
                             </div>
                         </div>
@@ -1312,7 +1312,7 @@ class Matrik_Career_Widget extends Widget_Base
                                 <?php endif; ?>
                                 <?php if (!empty($settings['matrik_career_genaral_button_text'])) : ?>
                                     <a href="<?php the_permalink(); ?>" class="details-btn">
-                                        <span><?php echo esc_html($settings['matrik_career_genaral_button_text']); ?></span>
+                                        <span><?php echo wp_kses_post($settings['matrik_career_genaral_button_text']); ?></span>
                                         <div class="icon">
                                             <svg width="24" height="23" viewBox="0 0 24 23" xmlns="http://www.w3.org/2000/svg">
                                                 <g>
@@ -1341,17 +1341,17 @@ class Matrik_Career_Widget extends Widget_Base
                             <div class="career-opportunity-title-area">
                                 <div class="section-title two">
                                     <?php if (!empty($settings['matrik_career_genaral_header_title'])) : ?>
-                                        <h2><?php echo esc_html($settings['matrik_career_genaral_header_title']); ?></h2>
+                                        <h2><?php echo wp_kses_post($settings['matrik_career_genaral_header_title']); ?></h2>
                                     <?php endif; ?>
                                     <?php if (!empty($settings['matrik_career_genaral_header_description'])) : ?>
-                                        <p><?php echo esc_html($settings['matrik_career_genaral_header_description']); ?></p>
+                                        <p><?php echo wp_kses_post($settings['matrik_career_genaral_header_description']); ?></p>
                                     <?php endif; ?>
                                 </div>
                                 <?php if (!empty($settings['matrik_career_genaral_button_content_two_text'])) : ?>
                                     <a class="primary-btn3 transparent" href="<?php echo esc_url($settings['matrik_career_genaral_button_content_two_text_url']['url']); ?>">
-                                        <span><?php echo esc_html($settings['matrik_career_genaral_button_content_two_text']); ?>
+                                        <span><?php echo wp_kses_post($settings['matrik_career_genaral_button_content_two_text']); ?>
                                         </span>
-                                        <span><?php echo esc_html($settings['matrik_career_genaral_button_content_two_text']); ?>
+                                        <span><?php echo wp_kses_post($settings['matrik_career_genaral_button_content_two_text']); ?>
                                         </span>
                                         <svg class="arrow" width="23" height="23" viewBox="0 0 23 23" xmlns="http://www.w3.org/2000/svg">
                                             <g>
@@ -1384,7 +1384,7 @@ class Matrik_Career_Widget extends Widget_Base
                                                         <p><?php echo esc_html(get_the_excerpt()); ?></p>
                                                         <?php if (!empty($settings['matrik_career_genaral_button_text'])) : ?>
                                                             <a href="<?php the_permalink(); ?>">
-                                                                <span><?php echo esc_html($settings['matrik_career_genaral_button_text']); ?></span>
+                                                                <span><?php echo wp_kses_post($settings['matrik_career_genaral_button_text']); ?></span>
                                                                 <svg width="9" height="9" viewBox="0 0 9 9" xmlns="http://www.w3.org/2000/svg">
                                                                     <path d="M0.0445549 0H9.00008V1.67647L1.69308 9L0 7.32353L4.99014 2.38235L0.0445549 2.42647V0Z" />
                                                                     <path d="M8.99971 9.00058V3.35352L6.59375 5.73587V9.00058H8.99971Z" />
@@ -1420,7 +1420,7 @@ class Matrik_Career_Widget extends Widget_Base
                         <div class="career-content-wrap">
                             <?php if (!empty($settings['matrik_career_genaral_header_title'])) : ?>
                                 <div class="section-title three white text-center mb-50 wow animate fadeInDown" data-wow-delay="200ms" data-wow-duration="1500ms">
-                                    <h2><?php echo esc_html($settings['matrik_career_genaral_header_title']); ?></h2>
+                                    <h2><?php echo wp_kses_post($settings['matrik_career_genaral_header_title']); ?></h2>
                                 </div>
                             <?php endif; ?>
                             <ul class="career-list">
@@ -1444,10 +1444,10 @@ class Matrik_Career_Widget extends Widget_Base
                                                 ?>
                                                         <li>
                                                             <?php if (!empty($career_data['career_label_text'])) : ?>
-                                                                <span><?php echo esc_html($career_data['career_label_text']); ?></span>
+                                                                <span><?php echo wp_kses_post($career_data['career_label_text']); ?></span>
                                                             <?php endif; ?>
                                                             <?php if (!empty($career_data['career_content_text'])) : ?>
-                                                                <?php echo esc_html($career_data['career_content_text']); ?>
+                                                                <?php echo wp_kses_post($career_data['career_content_text']); ?>
                                                             <?php endif; ?>
                                                         </li>
                                                 <?php
@@ -1457,7 +1457,7 @@ class Matrik_Career_Widget extends Widget_Base
                                             </ul>
                                             <?php if (!empty($settings['matrik_career_genaral_button_text'])) : ?>
                                                 <a href="<?php the_permalink(); ?>" class="apply-btn">
-                                                    <span><?php echo esc_html($settings['matrik_career_genaral_button_text']); ?></span>
+                                                    <span><?php echo wp_kses_post($settings['matrik_career_genaral_button_text']); ?></span>
                                                     <div class="icon">
                                                         <svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
                                                             <g>
@@ -1477,7 +1477,7 @@ class Matrik_Career_Widget extends Widget_Base
                                 <div class="row bounce_up">
                                     <div class="col-lg-12 d-flex justify-content-center">
                                         <a class="primary-btn2 two white" href="<?php echo esc_url($settings['matrik_career_genaral_bottom_button_content_two_text_url']['url']); ?>">
-                                            <span><?php echo esc_html($settings['matrik_career_genaral_bottom_button_text']); ?></span>
+                                            <span><?php echo wp_kses_post($settings['matrik_career_genaral_bottom_button_text']); ?></span>
                                             <svg class="arrow" width="23" height="23" viewBox="0 0 23 23" xmlns="http://www.w3.org/2000/svg">
                                                 <g>
                                                     <path d="M0.113861 0H22.9999V4.28425L4.32671 22.9997L0 18.7154L12.7524 6.08815L0.113861 6.20089V0Z" />
