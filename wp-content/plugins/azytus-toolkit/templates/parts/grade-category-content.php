@@ -47,7 +47,8 @@ $columns = 2;
 
     <div class="azytus-gc-content">
         <div class="azytus-gc-features">
-            <h2><?php esc_html_e('Product Feature :', 'azytus-toolkit'); ?></h2>
+            <span class="azytus-gc-eyebrow"><?php esc_html_e('Overview', 'azytus-toolkit'); ?></span>
+            <h2><?php esc_html_e('Product Features', 'azytus-toolkit'); ?></h2>
             <div class="entry-content">
                 <?php if (!empty($content)) : ?>
                     <?php echo apply_filters('the_content', $content); ?>
