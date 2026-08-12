@@ -1250,8 +1250,8 @@ body.azytus-search-open {
 }
 
 /* ==========================================================================
-   Single Product Page
-   ========================================================================== */
+    Single Product Page
+========================================================================== */
 
 .azytus-pp {
     --azytus-blue: #14749B;
@@ -1263,10 +1263,7 @@ body.azytus-search-open {
     --azytus-cream: #f7f6f1;
     padding: 70px 0 100px;
     color: var(--azytus-ink);
-    background:
-        radial-gradient(ellipse 80% 50% at 0% 0%, rgba(20, 116, 155, 0.06), transparent 55%),
-        radial-gradient(ellipse 60% 40% at 100% 10%, rgba(92, 149, 65, 0.07), transparent 50%),
-        #fff;
+    background: radial-gradient(ellipse 80% 50% at 0% 0%, rgba(20, 116, 155, 0.06), transparent 55%), radial-gradient(ellipse 60% 40% at 100% 10%, rgba(92, 149, 65, 0.07), transparent 50%), #fff;
     font-family: var(--font-manrope, "Manrope", sans-serif);
 
     .container {
